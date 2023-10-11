@@ -1,5 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { flexworkSlice } from './flexwork/flexworkSlice';
+import { authSlice } from './auth/authSlice';
+import { projectSlice } from './project/projectSlice';
+
+// import { composeWithDevTools } from 'redux-devtools-extension'; // Importa la función composeWithDevTools
+
 
 // import { authSlice } from './auth';
 // import { uiSlice } from './ui';
@@ -7,11 +11,12 @@ import { flexworkSlice } from './flexwork/flexworkSlice';
 
 export const store = configureStore({
     reducer: {
-        // auth: authSlice.reducer,
-        flexwork: flexworkSlice.reducer,
+        auth: authSlice.reducer,
+        project: projectSlice.reducer,
         // ui: uiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
     }),
+    // enhancers: [composeWithDevTools()], // Agrega la función composeWithDevTools como un enhancer
 });

@@ -1,0 +1,20 @@
+
+{   
+    "id": 1,
+    "razon_Social": "Empresa ABC S.A.",
+    "tipo_Actividad": "Tecnología",
+    "fecha_Inicio": "2022-01-15",
+    "domicilio_Fiscal": "123 Calle Principal, Ciudad XYZ",
+    "representante_Legal": "John Doe",
+    "data": {
+      "nombre": "Contacto de la empresa",
+      "telefono": 1234567890,
+      "email": "contacto@empresaabc.com",
+      "nacionalidad": 1,
+      "idioma": [2, 3],
+      "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+      "contacto": "Persona de contacto en la empresa"
+    },
+    "cuenta_Banco": 50000.0,
+    "state": true
+}
