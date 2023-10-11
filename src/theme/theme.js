@@ -47,12 +47,6 @@ export const theme = createTheme({
             dark: '#388e3c',
             contrastText: 'rgba(0, 0, 0, 0.87)'
         },
-        text: {
-            primary: 'rgba(0, 0, 0, 0.87)',
-            secondary: 'rgba(0, 0, 0, 0.54)',
-            disabled: 'rgba(0, 0, 0, 0.38)',
-            hint: 'rgba(0, 0, 0, 0.38)'
-        },
         background: {
             default: '#fff',
             paper: '#fff'
