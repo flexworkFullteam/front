@@ -17,9 +17,6 @@ a{
 
 .buttonsContainer Button{
     color: #0541c9;
+    font-family: "nunito sans";
     
-}
-
-.buttonsContainer Button:hover{
-    filter: saturate(150%);
 }
