@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { HomePage } from "../pages/HomePage";
+import { HomePage } from "../project/pages/HomePage";
 import { Nav } from "../components/Nav/Nav";
 
 export const AppRouter = () => {
