@@ -1,0 +1,33 @@
+
+{
+  "id": 1,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": [2, 3],
+  "nationality": 5,
+  "development_skills": [6, 7],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+}

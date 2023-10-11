@@ -1,0 +1,332 @@
+[
+    {
+        "titulo": "Desarrollo de Aplicación Web",
+        "descripcion": "Desarrollar una aplicación web moderna con funcionalidades avanzadas.",
+        "tipo": 1,
+        "ubicacion": 3,
+        "sueldo": 45000.0,
+        "exp_reque": "Experiencia en desarrollo web y tecnologías relacionadas.",
+        "lapso": 90,
+        "conocimientos_informaticos": [2, 4, 7],
+        "idiomas": [1, 3],
+        "postulantes": [5, 8, 12],
+        "ganadores": [],
+        "perdedores": [],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "COA.SA",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "titulo": "Desarrollo de Aplicación Móvil",
+        "descripcion": "Crear una aplicación móvil para iOS y Android con características innovadoras.",
+        "tipo": 2,
+        "ubicacion": 2,
+        "sueldo": 55000.0,
+        "exp_reque": "Experiencia en desarrollo de aplicaciones móviles y UI/UX.",
+        "lapso": 60,
+        "conocimientos_informaticos": [3, 6, 8],
+        "idiomas": [2, 4],
+        "postulantes": [6, 9, 14],
+        "ganadores": [],
+        "perdedores": [],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "CORSISA",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "titulo": "Desarrollo de Software Empresarial",
+        "descripcion": "Desarrollar un software empresarial a medida para una empresa cliente.",
+        "tipo": 3,
+        "ubicacion": 1,
+        "sueldo": 60000.0,
+        "exp_reque": "Experiencia en desarrollo de software empresarial y soluciones personalizadas.",
+        "lapso": 120,
+        "conocimientos_informaticos": [1, 5, 9],
+        "idiomas": [1, 3, 4],
+        "postulantes": [3, 7, 11],
+        "ganadores": [11],
+        "perdedores": [3, 7],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "CORSISA",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "titulo": "Diseño de Interfaz de Usuario",
+        "descripcion": "Diseñar una interfaz de usuario atractiva y funcional para una aplicación existente.",
+        "tipo": 4,
+        "ubicacion": 4,
+        "sueldo": 35000.0,
+        "exp_reque": "Experiencia en diseño de UI/UX y conocimientos de herramientas de diseño.",
+        "lapso": 45,
+        "conocimientos_informaticos": [6, 7, 10],
+        "idiomas": [1, 2, 3],
+        "postulantes": [2, 5, 10],
+        "ganadores": [5],
+        "perdedores": [2, 10],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "CORSISA",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "titulo": "Gestión de Proyectos de TI",
+        "descripcion": "Coordinar y gestionar proyectos de tecnología de la información para múltiples clientes.",
+        "tipo": 5,
+        "ubicacion": 3,
+        "sueldo": 70000.0,
+        "exp_reque": "Experiencia en gestión de proyectos de TI y certificaciones relacionadas.",
+        "lapso": 90,
+        "conocimientos_informaticos": [4, 8, 11],
+        "idiomas": [1, 4],
+        "postulantes": [1, 4, 8],
+        "ganadores": [],
+        "perdedores": [],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "CORSISA",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "id": 6,
+        "titulo": "Desarrollo de Aplicación de Comercio Electrónico",
+        "descripcion": "Crear una plataforma de comercio electrónico para una tienda en línea.",
+        "tipo": 2,
+        "ubicacion": 4,
+        "sueldo": 50000.0,
+        "exp_reque": "Experiencia en desarrollo de aplicaciones de comercio electrónico y sistemas de pago.",
+        "lapso": 90,
+        "conocimientos_informaticos": [3, 5, 7],
+        "idiomas": [1, 2, 4],
+        "postulantes": [2, 6, 12],
+        "ganadores": [],
+        "perdedores": [],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "WALMART",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "id": 7,
+        "titulo": "Diseño de Logotipo y Branding",
+        "descripcion": "Diseñar un logotipo y una identidad de marca para una nueva empresa.",
+        "tipo": 4,
+        "ubicacion": 1,
+        "sueldo": 30000.0,
+        "exp_reque": "Experiencia en diseño de logotipos y branding.",
+        "lapso": 30,
+        "conocimientos_informaticos": [6, 8, 10],
+        "idiomas": [1, 3],
+        "postulantes": [4, 7, 11],
+        "ganadores": [],
+        "perdedores": [],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "CORSISA",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "id": 8,
+        "titulo": "Desarrollo de Juegos Móviles",
+        "descripcion": "Crear un juego móvil adictivo para plataformas iOS y Android.",
+        "tipo": 1,
+        "ubicacion": 2,
+        "sueldo": 55000.0,
+        "exp_reque": "Experiencia en desarrollo de juegos móviles y gráficos 3D.",
+        "lapso": 75,
+        "conocimientos_informaticos": [2, 4, 6],
+        "idiomas": [2, 3],
+        "postulantes": [3, 8, 14],
+        "ganadores": [],
+        "perdedores": [],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "ACCENTURE",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "id": 9,
+        "titulo": "Diseño de Páginas Web Responsivas",
+        "descripcion": "Diseñar sitios web modernos y responsivos para múltiples clientes.",
+        "tipo": 3,
+        "ubicacion": 3,
+        "sueldo": 45000.0,
+        "exp_reque": "Experiencia en diseño web y conocimientos de UX/UI.",
+        "lapso": 60,
+        "conocimientos_informaticos": [1, 7, 9],
+        "idiomas": [1, 4],
+        "postulantes": [1, 5, 10],
+        "ganadores": [1],
+        "perdedores": [5],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "CORSISA",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "id": 10,
+        "titulo": "Desarrollo de Aplicación de Reservas",
+        "descripcion": "Desarrollar una aplicación de reservas en línea para hoteles y restaurantes.",
+        "tipo": 2,
+        "ubicacion": 4,
+        "sueldo": 60000.0,
+        "exp_reque": "Experiencia en desarrollo de aplicaciones de reserva y sistemas de gestión.",
+        "lapso": 90,
+        "conocimientos_informaticos": [3, 5, 8],
+        "idiomas": [1, 2, 4],
+        "postulantes": [6, 9, 15],
+        "ganadores": [],
+        "perdedores": [],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "CORSISA",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "id": 11,
+        "titulo": "Diseño de Interfaces de Usuario para Aplicaciones Móviles",
+        "descripcion": "Diseñar interfaces de usuario intuitivas y atractivas para aplicaciones móviles.",
+        "tipo": 4,
+        "ubicacion": 2,
+        "sueldo": 40000.0,
+        "exp_reque": "Experiencia en diseño de interfaces móviles y prototipado.",
+        "lapso": 45,
+        "conocimientos_informaticos": [6, 7, 10],
+        "idiomas": [2, 3],
+        "postulantes": [2, 7, 12],
+        "ganadores": [],
+        "perdedores": [],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "GLOBANT",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    },
+    {
+        "id": 12,
+        "titulo": "Desarrollo de Software de Gestión de Proyectos",
+        "descripcion": "Desarrollar un software de gestión de proyectos personalizado para una empresa.",
+        "tipo": 3,
+        "ubicacion": 1,
+        "sueldo": 65000.0,
+        "exp_reque": "Experiencia en desarrollo de software empresarial y gestión de proyectos.",
+        "lapso": 120,
+        "conocimientos_informaticos": [1, 5, 9],
+        "idiomas": [1, 3, 4],
+        "postulantes": [4, 8, 13],
+        "ganadores": [],
+        "perdedores": [],
+        "tipo_Actividad": "Tecnología",
+        "state": true,
+        "company": {
+            "nombre": "CORSISA",
+            "telefono": 1234567890,
+            "email": "contacto@empresaabc.com",
+            "nacionalidad": 1,
+            "idioma": [2, 3],
+            "horario": "Lunes a Viernes, 9:00 AM - 5:00 PM",
+            "contacto": "Persona de contacto en la empresa"
+        }
+
+    }
+      
+      
+      
+      
+      
+      
+            
+      
+      
+      
+      
+]
