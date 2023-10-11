@@ -14,22 +14,24 @@ export const Nav = () => {
           <img src={logo} alt="flexwork logo" className={styles.logoImage} />{" "}
         </Link>
         <div className={styles.buttonsContainer}>
-          <Button
-            component={Link}
-            to={"/create"}
-            variant="contained"
-            color="aliceBlue"
-            className={styles.createAccountButton}
-          >
-            Crear cuenta
-          </Button>
-          <Button
-            variant="contained"
-            color="pear"
-            className={styles.ingresarButton}
-          >
-            Ingresar
-          </Button>
+          <Link>
+            <Button
+              variant="contained"
+              color="aliceBlue"
+              className={styles.createAccountButton}
+            >
+              Crear cuenta
+            </Button>
+          </Link>
+          <Link to="">
+            <Button
+              variant="contained"
+              color="pear"
+              className={styles.ingresarButton}
+            >
+              Ingresar
+            </Button>
+          </Link>
         </div>
       </Toolbar>
     </AppBar>

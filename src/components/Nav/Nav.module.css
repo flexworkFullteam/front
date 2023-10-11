@@ -11,8 +11,13 @@
   width: 20%;
 }
 
+a{
+    text-decoration: none;
+}
+
 .buttonsContainer Button{
     color: #0541c9;
+    
 }
 
 .buttonsContainer Button:hover{
