@@ -1,0 +1,16 @@
+.hero{
+    background-color: #45b3ba;
+    color: #f0f5ff;
+}
+
+.heroContainer{
+    display: flex;
+    width: 75%;
+    margin: auto;
+    padding: 3% 0 3% 0;
+    gap: 10%;
+}
+
+.flexChild{
+    width: 50%;
+}

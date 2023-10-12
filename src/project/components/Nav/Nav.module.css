@@ -8,6 +8,7 @@
 }
 
 .logoImage {
+
   width: 20%;
 }
 
@@ -15,8 +16,11 @@ a{
     text-decoration: none;
 }
 
+.buttonsContainer{
+    display: flex;
+    gap: 10px;
+}
+
 .buttonsContainer Button{
-    color: #0541c9;
-    font-family: "nunito sans";
-    
+    color: #0541c9; 
 }
