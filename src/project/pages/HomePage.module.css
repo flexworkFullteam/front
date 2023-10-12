@@ -1,6 +1,20 @@
+body{
+  background-image: url(../../assets/Recurso1.png);
+  background-size: 20%;
+}
+
 .hero{
     background-color: #45b3ba;
     color: #f0f5ff;
+    box-shadow: 0px 10px 15px rgb(100, 100, 100);
+}
+
+.hero2{
+    margin-top: 5%;
+    background-color:#0541c9 ;
+    color: #f0f5ff;
+    box-shadow: 0px 10px 15px rgb(100, 100, 100);
+    margin-bottom: 5%; 
 }
 
 .heroContainer{
@@ -13,4 +27,15 @@
 
 .flexChild{
     width: 50%;
+}
+
+.flexChild button{
+    text-transform: capitalize;
+}
+
+.flexChild img{
+    width: 70%;
+    min-width: 243.5px;
+    min-height: 186.797px;
+    transform: translateX(25%);
 }
