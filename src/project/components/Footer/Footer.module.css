@@ -1,11 +1,10 @@
 .footer {
   color: #0541c9;
-  padding: 20px 0;
   width: 100%;
-  position: fixed;
   bottom: 0;
   text-align: center;
 }
+
 
 .footerContainer {
     display: flex;
@@ -34,9 +33,14 @@
   justify-content: center;
   flex-wrap: wrap;
   margin: 20px 0;
-  gap: 1%;
+  gap: 0.5%;
 }
 
 .links a{
     color: #0541c9;
+     transition: 0.2s ease-in-out;
+}
+
+.links a:hover{
+    filter: saturate(150%)
 }

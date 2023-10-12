@@ -5,13 +5,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import logo from "../../../assets/logo.png";
 import styles from "./Nav.module.css";
+import { Typography } from "@mui/material";
 
 export const Nav = () => {
   return (
     <AppBar position="static" color="persianBlue">
       <Toolbar className={styles.navContainer}>
         <Link to="/">
-          <img src={logo} alt="flexwork logo" className={styles.logoImage} />{" "}
+          <img src={logo} alt="flexwork logo" className={styles.logoImage} />
         </Link>
         <div className={styles.buttonsContainer}>
           <Link>
@@ -20,7 +21,9 @@ export const Nav = () => {
               color="aliceBlue"
               className={styles.createAccountButton}
             >
-              Crear cuenta
+              <Typography fontFamily="Nunito Sans" fontWeight="400">
+                Crear cuenta
+              </Typography>
             </Button>
           </Link>
           <Link to="">
@@ -29,7 +32,9 @@ export const Nav = () => {
               color="pear"
               className={styles.ingresarButton}
             >
-              Ingresar
+              <Typography fontFamily="Nunito Sans" fontWeight="400">
+                Ingresar
+              </Typography>
             </Button>
           </Link>
         </div>
