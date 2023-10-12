@@ -8,13 +8,19 @@
 }
 
 .logoImage {
+
   width: 20%;
 }
 
-.buttonsContainer Button{
-    color: #0541c9;
+a{
+    text-decoration: none;
 }
 
-.buttonsContainer Button:hover{
-    filter: saturate(150%);
+.buttonsContainer{
+    display: flex;
+    gap: 10px;
+}
+
+.buttonsContainer Button{
+    color: #0541c9; 
 }
