@@ -8,8 +8,14 @@
 }
 
 .logoImage {
+  max-width: 10%;
+  min-width: 120px;
+  min-height: 62px;
+  transition: 0.2s ease-in-out;
+}
 
-  width: 20%;
+.logoImage:hover{
+  cursor: pointer;
 }
 
 a{
