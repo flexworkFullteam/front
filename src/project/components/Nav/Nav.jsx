@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
@@ -8,12 +8,21 @@ import styles from "./Nav.module.css";
 import { Typography } from "@mui/material";
 
 export const Nav = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/");
+  };
+
   return (
     <AppBar position="static" color="persianBlue">
       <Toolbar className={styles.navContainer}>
-        <Link to="/">
-          <img src={logo} alt="flexwork logo" className={styles.logoImage} />
-        </Link>
+        <img
+          onClick={handleClick}
+          src={logo}
+          alt="flexwork logo"
+          className={styles.logoImage}
+        />
         <div className={styles.buttonsContainer}>
           <Link>
             <Button
