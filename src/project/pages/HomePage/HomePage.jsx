@@ -1,9 +1,8 @@
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Footer } from "../components/Footer/Footer";
-import { SearchBar } from "../components/Searchbar/Searchbar";
+import { SearchBar } from "../../components/Searchbar/Searchbar";
 import styles from "./HomePage.module.css";
-import recurso3 from "../../assets/Recurso3.png";
+import recurso3 from "../../../assets/Recurso3.png";
 
 export const HomePage = () => {
   return (
@@ -92,7 +91,7 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
