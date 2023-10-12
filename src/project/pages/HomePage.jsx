@@ -1,7 +1,7 @@
 import styles from "./HomePage.module.css";
 import Typography from "@mui/material/Typography";
-
-import SearchBar from "../components/Searchbar/Searchbar";
+import { Footer } from "../components/Footer/Footer";
+import { SearchBar } from "../components/Searchbar/Searchbar";
 
 export const HomePage = () => {
   return (
@@ -25,6 +25,7 @@ export const HomePage = () => {
             </Typography>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );
