@@ -32,14 +32,14 @@ export const Footer = () => {
             </div>
           </a>
         </div>
-        <Typography fontFamily="Nunito Sans" fontWeight="400">
-          <div className={styles.links}>
+        <div className={styles.links}>
+          <Typography fontFamily="Nunito Sans" fontWeight="400">
             <a href="/terminos">Terminos y Condiciones</a> -
             <a href="/privacidad">Política de Privacidad</a> -
             <a href="/faq">Preguntas Frecuentes</a> -
             <a href="/empleo">Ofertas de Empleo</a>
-          </div>
-        </Typography>
+          </Typography>
+        </div>
       </div>
     </footer>
   );
