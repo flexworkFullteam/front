@@ -1,15 +1,22 @@
 import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
-import IconButton from "@mui/material/IconButton";
+import { TextField, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import styles from "./SearchBar.module.css";
-import { Typography } from "@mui/material";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleSearch = () => {
-    console.log("Texto de búsqueda:", searchText);
+    navigate("/search/" + searchText);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -17,11 +24,14 @@ export const SearchBar = () => {
       <TextField
         fullWidth
         type="search"
-        className={styles.SearchBar}
+        className={
+          pathname.startsWith("/search") ? styles.searchPage : styles.home
+        }
         placeholder="Busca tu proyecto o empresa"
         color="pear"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
+        onKeyUp={handleKeyPress}
         InputProps={{
           startAdornment: (
             <IconButton onClick={handleSearch}>

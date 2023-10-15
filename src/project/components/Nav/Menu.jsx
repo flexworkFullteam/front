@@ -1,10 +1,12 @@
 import * as React from "react";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Grow from "@mui/material/Grow";
-import Paper from "@mui/material/Paper";
-import Popper from "@mui/material/Popper";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
+import {
+  Grow,
+  Paper,
+  Popper,
+  MenuItem,
+  MenuList,
+  ClickAwayListener,
+} from "@mui/material/";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import styles from "./Nav.module.css";
 
@@ -44,9 +46,8 @@ export const Menu = () => {
 
   return (
     <div>
-      <div className={styles.iconCircle}>
+      <div className={styles.iconCircle} onClick={handleToggle}>
         <AccountCircleOutlinedIcon
-          onClick={handleToggle}
           className={styles.iconButton}
           color="persianBlue"
           ref={anchorRef}

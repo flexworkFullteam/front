@@ -4,7 +4,7 @@ import profesionalData from "../../utils/profesionals.json";
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    status: "authenticated", // checking, not-authenticated
+    status: "not-authenticated", // checking, not-authenticated
     user: profesionalData, //{},
     errorMessage: undefined,
   },
