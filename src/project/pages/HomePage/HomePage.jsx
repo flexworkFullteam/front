@@ -1,10 +1,11 @@
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Typography, Button } from "@mui/material";
 import { SearchBar } from "../../components/Searchbar/Searchbar";
 import styles from "./HomePage.module.css";
 import recurso3 from "../../../assets/Recurso3.png";
+import { useNavigate } from "react-router-dom";
 
 export const HomePage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className={styles.hero}>
@@ -17,8 +18,13 @@ export const HomePage = () => {
             >
               EL NUEVO MARKETPLACE PARA BUSCAR PROYECTOS
             </Typography>
-            <Typography fontFamily="Nunito Sans" fontWeight="400" variant="h4">
-              Empeza ya!
+            <Typography
+              fontFamily="Nunito Sans"
+              fontWeight="400"
+              variant="h5"
+              sx={{ mb: 2.5 }}
+            >
+              Empieza ya!
             </Typography>
             <SearchBar />
           </div>
@@ -30,7 +36,7 @@ export const HomePage = () => {
             >
               ENCUENTRA EL PROYECTO QUE NECESITAS
             </Typography>
-            <Typography fontFamily="Nunito Sans" fontWeight="400" variant="h4">
+            <Typography fontFamily="Nunito Sans" fontWeight="400" variant="h5">
               Conectamos a profesionales y empresas, permitiendo una gestión de
               proyectos más ágil y eficiente
             </Typography>
@@ -45,7 +51,7 @@ export const HomePage = () => {
               fontWeight="600"
               variant="h4"
             >
-              Create una cuenta y encontrá el trabajo que buscás
+              Crea una cuenta y encuentra el trabajo que buscas
             </Typography>
             <Typography
               fontFamily="Nunito Sans"
@@ -54,20 +60,20 @@ export const HomePage = () => {
             >
               <ul>
                 <li>
-                  Ingresá en la opción Crear cuenta, escribí tus datos y
+                  Ingresa en la opción Crear cuenta, escribe tus datos y
                   confirmalos.
                 </li>
                 <li>
-                  Completá la información principal de tu perfil a través de las
+                  Completa la información principal de tu perfil a través de las
                   preguntas por pasos que te haremos Inmediatamente después de
                   que te registres.
                 </li>
                 <li>
-                  Postulate a los trabajos que más te interesen y seguí el
+                  Postulate a los trabajos que más te interesen y sigue el
                   proceso de tus postulaciones.
                 </li>
                 <li>
-                  Recordá mantener tu información actualizada desde la sección
+                  Recuerda mantener tu información actualizada desde la sección
                   de tu perfil.
                 </li>
               </ul>
@@ -76,6 +82,7 @@ export const HomePage = () => {
               variant="contained"
               color="verdigris"
               className={styles.ingresarButton}
+              onClick={() => navigate("/registerProf")}
             >
               <Typography
                 color="aliceblue"

@@ -1,12 +1,11 @@
-import React from 'react'
-import { Container,Typography } from '@mui/material'
-import RegisterProfesional from '../components/formProfesional/RegisterProfesional'
-
+import React from "react";
+import { Container } from "@mui/material";
+import RegisterProfesional from "../components/formProfesional/RegisterProfesional";
 
 export const RegisterProfePage = () => {
   return (
     <Container>
-        <RegisterProfesional/>
+      <RegisterProfesional />
     </Container>
-  )
-}
+  );
+};
