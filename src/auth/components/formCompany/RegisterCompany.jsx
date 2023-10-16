@@ -74,14 +74,14 @@ const RegisterCompany = () => {
                   pattern: {
                     value: /^(?!\s)[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]+/,
 
-                    message: "El nombre no es válido",
-                  },
-                })}
-              />
-              {/* {errors.nombre && <Typography variant='body' color='pear' mb={4}>{errors.nombre.message}</Typography>} */}
-              {errors.nombreRepre && (
-                <p className={style.errors}>{errors.nombreRepre.message}</p>
-              )}
+                                        message: 'El nombre no es válido'
+                                    },
+                                })}
+                            />
+    
+                            {errors.nombreRepre && <p className={style.errors}>{errors.nombreRepre.message}</p>}
+
+
 
               <InputLabel>Apellido(s)</InputLabel>
               <TextField
@@ -128,48 +128,42 @@ const RegisterCompany = () => {
                 <p className={style.errors}>{errors.correoRepre.message}</p>
               )}
 
-              <InputLabel>Contraseña</InputLabel>
-              <TextField
-                id="contraseñaComp"
-                sx={{ width: "375px" }}
-                placeholder="Contraseña"
-                variant="outlined"
-                type={showPassword ? "text" : "password"}
-                {...register("contraseñaComp", {
-                  required: {
-                    value: true,
-                    message: "Es un campo obligatorio",
-                  },
-                  pattern: {
-                    value: /^(?=\S{6,}$)/,
-                    message:
-                      "La contraseña debe contener al menos 6 carácteres, sin espacios en blanco",
-                  },
-                })}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Button
-                        variant="text"
-                        color="persianBlue"
-                        size="small"
-                        onClick={togglePasswordVisibility}
-                      >
-                        {showPassword ? (
-                          <VisibilityOffIcon />
-                        ) : (
-                          <VisibilityIcon />
-                        )}
-                      </Button>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {errors.contraseñaComp && (
-                <p className={style.errors}>{errors.contraseñaComp.message}</p>
-              )}
-            </Grid>
-          </Grid>
+                            <InputLabel>Contraseña</InputLabel>
+                            <TextField
+                                id='contraseñaComp'
+                                fullWidth
+                                placeholder='Contraseña'
+                                variant="outlined"
+                                type={showPassword ? 'text' : 'password'}
+                                {...register('contraseñaComp', {
+                                    required: {
+                                        value: true,
+                                        message: 'Es un campo obligatorio',
+                                    },
+                                    pattern: {
+                                        value: /^(?=\S{6,}$)/,
+                                        message: 'La contraseña debe contener al menos 6 carácteres, sin espacios en blanco',
+                                    },
+                                })}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <Button
+                                                variant="text"
+                                                color="persianBlue"
+                                                size="small"
+                                                onClick={togglePasswordVisibility}
+                                            >
+                                                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                                            </Button>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            {errors.contraseñaComp && <p className={style.errors}>{errors.contraseñaComp.message}</p>}
+
+                        </Grid>
+                    </Grid>
 
           <Typography
             variant="h6"
@@ -297,26 +291,23 @@ const RegisterCompany = () => {
                 <p className={style.errors}>{errors.documento.message}</p>
               )}
 
-              <InputLabel>Teléfono</InputLabel>
-              <TextField
-                placeholder="Teléfono"
-                id="telefono"
-                type="number"
-                fullWidth
-                {...register("telefono", {
-                  required: {
-                    value: true,
-                    message: "Este campo es requerido",
-                  },
-                  pattern: {
-                    value: /^\d+$/,
-                    message: "Ingresa solo números",
-                  },
-                })}
-              />
-              {errors.telefono && (
-                <p className={style.errors}>{errors.telefono.message}</p>
-              )}
+                            <InputLabel>Teléfono</InputLabel>
+                            <TextField
+                                placeholder='Teléfono'
+                                id='telefono'
+                                type="text" fullWidth
+                                {...register("telefono", {
+                                    required: {
+                                        value: true,
+                                        message: "Este campo es requerido"
+                                    },
+                                    pattern: {
+                                        value: /^\d+$/,
+                                        message: "Ingresa solo números"
+                                    }
+                                })}
+                            />
+                            {errors.telefono && <p className={style.errors}>{errors.telefono.message}</p>}
 
               <InputLabel>Cantidad de empleados</InputLabel>
               <TextField

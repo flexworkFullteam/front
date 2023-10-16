@@ -103,7 +103,7 @@ const RegisterProfesional = () => {
                             <TextField
                                 placeholder='Número de documento'
                                 id='documentNumber'
-                                type="number" fullWidth
+                                type="text" fullWidth
                                 {...register("documentNumber", {
                                     required: {
                                         value: true,
@@ -126,7 +126,7 @@ const RegisterProfesional = () => {
                             <TextField
                                 placeholder='Teléfono celular'
                                 id='telefono'
-                                type="number" fullWidth
+                                type="text" fullWidth
                                 {...register("telefono", {
                                     required: {
                                         value: true,
