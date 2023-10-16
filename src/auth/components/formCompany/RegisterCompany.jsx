@@ -49,7 +49,6 @@ const RegisterCompany = () => {
                                     },
                                 })}
                             />
-                            {/* {errors.nombre && <Typography variant='body' color='pear' mb={4}>{errors.nombre.message}</Typography>} */}
                             {errors.nombreRepre && <p className={style.errors}>{errors.nombreRepre.message}</p>}
 
 
@@ -100,7 +99,7 @@ const RegisterCompany = () => {
                             <InputLabel>Contraseña</InputLabel>
                             <TextField
                                 id='contraseñaComp'
-                                sx={{ width: '375px' }}
+                                fullWidth
                                 placeholder='Contraseña'
                                 variant="outlined"
                                 type={showPassword ? 'text' : 'password'}
@@ -244,7 +243,7 @@ const RegisterCompany = () => {
                             <TextField
                                 placeholder='Teléfono'
                                 id='telefono'
-                                type="number" fullWidth
+                                type="text" fullWidth
                                 {...register("telefono", {
                                     required: {
                                         value: true,
