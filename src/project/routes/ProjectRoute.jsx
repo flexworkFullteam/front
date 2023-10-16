@@ -10,7 +10,7 @@ export const ProjectRoute = () => {
 
       <Route path="/search/:term?" element={<SearchPage />} />
 
-      <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
 
       <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>

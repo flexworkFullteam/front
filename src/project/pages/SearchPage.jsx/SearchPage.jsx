@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Card, CardContent, Button, Typography, Drawer, Divider, Grid, TextField, FormControl, InputLabel, Select, MenuItem, Checkbox, FormControlLabel, Box, IconButton, useMediaQuery, useTheme, styled, Pagination } from '@mui/material';
-import { Search as SearchIcon, FilterList as FilterListIcon, Close as CloseIcon } from '@mui/icons-material';
+import { useParams } from 'react-router-dom';
+import { Card, CardContent, Button, Typography, FormControl, 
+  InputLabel, Select, MenuItem,  Box, IconButton, useTheme, Pagination } from '@mui/material';
+import { Close as CloseIcon } from '@mui/icons-material';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 
 // Resto de tus importaciones y estilos
 
@@ -10,7 +12,6 @@ export const SearchPage = () => {
   const { term } = useParams();
   const { allProjects } = useSelector((state) => state.project);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [filters, setFilters] = useState({
     date: '',
     level: '',
@@ -34,29 +35,80 @@ export const SearchPage = () => {
   const visibleProjects = allProjects.slice(startIndex, endIndex);
 
   return (
-    <Box display="flex" flexDirection="row" minHeight="100vh" padding={'3em'}>
+    <Box display="flex" flexDirection="row" padding={'3em'}>
 
-<Box style={{ width: '30%', padding: theme.spacing(3) }}>
-        {/* Agrega tus selecciones (selects) y otros elementos en este espacio */}
-        <Typography variant="h5" component="h2">
-          Filtros
-        </Typography>
-        <Divider />
+      <Box sx={{ width: '30%', padding: theme.spacing(3), height: '100vh', borderRadius: '5px', backgroundColor: 'white', mt: 3, boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}  >
+
+        <Box sx={{ backgroundColor: 'blue', p: 1, borderRadius: 1, display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Typography >  
+            {term}
+            Marketing
+          </Typography>
+          <IconButton >
+            <CloseIcon />
+          </IconButton>
+        </Box>
+
         <Box mt={2}>
-          <FormControl fullWidth>
+          <FormControl fullWidth sx={{ mb: '1.5rem', mt: '1rem'}}  >
             <InputLabel id="date-label">Fecha</InputLabel>
-            <Select labelId="date-label" id="date" value={filters.date} onChange={(event) => setFilters({ ...filters, date: event.target.value })}>
+            <Select labelId="date-label" id="date" value={filters.date} onChange={(event) => setFilters({ ...filters, date: event.target.value })} sx={{ backgroundColor: 'lightgray'}} >
               <MenuItem value="">Todos</MenuItem>
               <MenuItem value="2021">2021</MenuItem>
               <MenuItem value="2020">2020</MenuItem>
             </Select>
           </FormControl>
+        
+          <FormControl fullWidth sx={{ mb: '1.5rem'}}  >
+            <InputLabel id="date-label">Fecha</InputLabel>
+            <Select labelId="date-label" id="date" value={filters.date} onChange={(event) => setFilters({ ...filters, date: event.target.value })} sx={{ backgroundColor: 'lightgray'}} >
+              <MenuItem value="">Todos</MenuItem>
+              <MenuItem value="2021">2021</MenuItem>
+              <MenuItem value="2020">2020</MenuItem>
+            </Select>
+          </FormControl>
+        
+          <FormControl fullWidth sx={{ mb: '1.5rem'}}  >
+            <InputLabel id="date-label">Fecha</InputLabel>
+            <Select labelId="date-label" id="date" value={filters.date} onChange={(event) => setFilters({ ...filters, date: event.target.value })} sx={{ backgroundColor: 'lightgray'}} >
+              <MenuItem value="">Todos</MenuItem>
+              <MenuItem value="2021">2021</MenuItem>
+              <MenuItem value="2020">2020</MenuItem>
+            </Select>
+          </FormControl>
+        
+          <FormControl fullWidth sx={{ mb: '1.5rem'}}  >
+            <InputLabel id="date-label">Fecha</InputLabel>
+            <Select labelId="date-label" id="date" value={filters.date} onChange={(event) => setFilters({ ...filters, date: event.target.value })} sx={{ backgroundColor: 'lightgray'}} >
+              <MenuItem value="">Todos</MenuItem>
+              <MenuItem value="2021">2021</MenuItem>
+              <MenuItem value="2020">2020</MenuItem>
+            </Select>
+          </FormControl>
+        
+          <FormControl fullWidth sx={{ mb: '1.5rem'}}  >
+            <InputLabel id="date-label">Fecha</InputLabel>
+            <Select labelId="date-label" id="date" value={filters.date} onChange={(event) => setFilters({ ...filters, date: event.target.value })} sx={{ backgroundColor: 'lightgray'}} >
+              <MenuItem value="">Todos</MenuItem>
+              <MenuItem value="2021">2021</MenuItem>
+              <MenuItem value="2020">2020</MenuItem>
+            </Select>
+          </FormControl>
+          
+          <Button variant="contained" onClick={() => setFilters({ date: '', level: '', workload: '' })}
+            color="error" fullWidth sx={{ mt: '2rem'}}
+          >
+            <DeleteOutlineRoundedIcon />
+          </Button>
           </ Box>
       </Box>
 
-      <Box style={{ width: '70%' }} padding={theme.spacing(3)}>
+      <Box style={{ width: '70%'}} padding={theme.spacing(3)}>
+        <Typography variant="h6" component="h1" sx={{ mb: '1rem'}}>
+          {allProjects.length} ofertas de proyectos para {term}
+        </Typography>
         {visibleProjects.map((project) => (
-          <Card key={project.id} style={{ marginBottom: '1rem' }}>
+          <Card key={project.id} sx={{ mb: '1rem'}} onClick={console.log(project.id)} >
             <CardContent>
               <Typography variant="h5" component="h2">
                 {project.titulo}
