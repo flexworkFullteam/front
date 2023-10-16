@@ -1,28 +1,18 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  Button,
-  Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Box,
-  IconButton,
-  useTheme,
-  Pagination,
+import { useNavigate, useParams } from "react-router-dom";
+import {  Card,  CardContent,  Button,  Typography,  FormControl,  InputLabel,  Select, 
+  MenuItem,  Box,  IconButton,  useTheme,  Pagination
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 
-// Resto de tus importaciones y estilos
+
 
 export const SearchPage = () => {
   const { term } = useParams();
   const { allProjects } = useSelector((state) => state.project);
+  const navigate = useNavigate();
   const theme = useTheme();
   const [filters, setFilters] = useState({
     date: "",
@@ -59,31 +49,34 @@ export const SearchPage = () => {
           boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)",
         }}
       >
-        <Box
-          sx={{
-            p: 1,
-            borderRadius: 1,
-            display: "flex",
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <div
-            style={{
-              color: "#f0f5ff",
-              backgroundColor: "blue",
+        {
+          term && (
+          <Box
+            sx={{
+              p: 1,
+              borderRadius: 1,
               display: "flex",
               alignItems: "center",
-              padding: "0 0 0 2%",
-              borderRadius: "4px",
+              flexWrap: "wrap",
             }}
           >
-            <Typography>{term}</Typography>
-            <IconButton>
-              <CloseIcon />
-            </IconButton>
-          </div>
-        </Box>
+            <div
+              style={{
+                color: "#f0f5ff",
+                backgroundColor: "blue",
+                display: "flex",
+                alignItems: "center",
+                padding: "0 0 0 2%",
+                borderRadius: "4px",
+              }}
+            >            
+              <Typography>{term}</Typography>
+              <IconButton>
+                <CloseIcon />
+              </IconButton>
+            </div>
+          </Box>
+        )}
 
         <Box mt={2}>
           <FormControl fullWidth sx={{ mb: "1.5rem", mt: "1rem" }}>
@@ -195,15 +188,15 @@ export const SearchPage = () => {
         </Box>
       </Box>
 
-      <Box style={{ width: "70%" }} padding={theme.spacing(3)}>
+      <Box sx={{ width: "70%" }} padding={theme.spacing(3)}>
         <Typography variant="h6" component="h1" sx={{ mb: "1rem" }}>
           {allProjects.length} ofertas de proyectos para {term}
         </Typography>
         {visibleProjects.map((project) => (
           <Card
             key={project.id}
-            sx={{ mb: "1rem", cursor: "pointer" }}
-            onClick={() => console.log(project.id)}
+            sx={{ mb: "1rem", ":hover": {cursor: "pointer"} }}
+            onClick={() => navigate(`/detail/${project.id}`)}
           >
             <CardContent>
               <Typography variant="h5" component="h2">
