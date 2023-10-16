@@ -1,19 +1,18 @@
-import { Navigate, Route, Routes } from "react-router-dom"
-import { HomePage } from "../pages/HomePage/HomePage"
-import { SearchPage } from "../pages/SearchPage.jsx/SearchPage"
-import { DetailPage } from "../pages/DetailPage/DetailPage"
-
+import { Navigate, Route, Routes } from "react-router-dom";
+import { HomePage } from "../pages/HomePage/HomePage";
+import { SearchPage } from "../pages/SearchPage.jsx/SearchPage";
+import { DetailPage } from "../pages/DetailPage/DetailPage";
 
 export const ProjectRoute = () => {
   return (
     <Routes>
-        <Route path="/home" element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
 
-        <Route path="/search" element={<SearchPage />} />
+      <Route path="/search/:term?" element={<SearchPage />} />
 
-        <Route path="/detail" element={<DetailPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
 
-        <Route path="/*" element={ <Navigate to="/home" /> } />
+      <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>
-  )
-}
+  );
+};

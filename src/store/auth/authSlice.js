@@ -12,22 +12,22 @@ export const authSlice = createSlice({
     onChecking: (state) => {
       state.status = "checking";
       state.user = {};
-      state.errorMessage = undefined;
+      // state.errorMessage = undefined;
     },
     onLogin: (state, { payload }) => {
       state.status = "authenticated";
       state.user = payload;
-      state.errorMessage = undefined;
+      // state.errorMessage = undefined;
     },
     onLogout: (state, { payload }) => {
       state.status = "not-authenticated";
       state.user = {};
-      state.errorMessage = payload;
+      // state.errorMessage = payload;
     },
     onRegister: (state, { payload }) => {
       state.status = "not-authenticated";
       state.user = payload;
-      state.errorMessage = undefined;
+      // state.errorMessage = undefined;
     },
   },
 });

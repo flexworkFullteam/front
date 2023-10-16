@@ -1,26 +1,30 @@
-import * as React from "react";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Grow from "@mui/material/Grow";
-import Paper from "@mui/material/Paper";
-import Popper from "@mui/material/Popper";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
+import { useState, useRef, useEffect } from "react";
+import {
+  Grow,
+  Paper,
+  Popper,
+  MenuItem,
+  MenuList,
+  ClickAwayListener,
+} from "@mui/material/";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import styles from "./Nav.module.css";
+import { useDispatch } from "react-redux";
+import { onLogout } from "../../../store/auth/authSlice";
 
 export const Menu = () => {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
+  const dispatch = useDispatch();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
+  const handleClose = (value) => {
+    if (value === "logout") {
+      dispatch(onLogout());
     }
-
     setOpen(false);
   };
 
@@ -33,8 +37,8 @@ export const Menu = () => {
     }
   }
 
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
+  const prevOpen = useRef(open);
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
@@ -44,9 +48,8 @@ export const Menu = () => {
 
   return (
     <div>
-      <div className={styles.iconCircle}>
+      <div className={styles.iconCircle} onClick={handleToggle}>
         <AccountCircleOutlinedIcon
-          onClick={handleToggle}
           className={styles.iconButton}
           color="persianBlue"
           ref={anchorRef}
@@ -82,7 +85,9 @@ export const Menu = () => {
                 >
                   <MenuItem onClick={handleClose}>Perfil</MenuItem>
                   <MenuItem onClick={handleClose}>Mi Cuenta</MenuItem>
-                  <MenuItem onClick={handleClose}>Cerrar Sesión</MenuItem>
+                  <MenuItem onClick={() => handleClose("logout")}>
+                    Cerrar Sesión
+                  </MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
