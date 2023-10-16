@@ -202,8 +202,8 @@ export const SearchPage = () => {
         {visibleProjects.map((project) => (
           <Card
             key={project.id}
-            sx={{ mb: "1rem" }}
-            onClick={console.log(project.id)}
+            sx={{ mb: "1rem", cursor: "pointer" }}
+            onClick={() => console.log(project.id)}
           >
             <CardContent>
               <Typography variant="h5" component="h2">

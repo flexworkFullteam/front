@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "titulo": "Desarrollo de Aplicación Web",
         "descripcion": "Desarrollar una aplicación web moderna con funcionalidades avanzadas.",
         "tipo": 1,
@@ -26,6 +27,7 @@
 
     },
     {
+        "id": 2,
         "titulo": "Desarrollo de Aplicación Móvil",
         "descripcion": "Crear una aplicación móvil para iOS y Android con características innovadoras.",
         "tipo": 2,
@@ -52,6 +54,7 @@
 
     },
     {
+        "id": 3,
         "titulo": "Desarrollo de Software Empresarial",
         "descripcion": "Desarrollar un software empresarial a medida para una empresa cliente.",
         "tipo": 3,
@@ -78,6 +81,7 @@
 
     },
     {
+        "id": 4,
         "titulo": "Diseño de Interfaz de Usuario",
         "descripcion": "Diseñar una interfaz de usuario atractiva y funcional para una aplicación existente.",
         "tipo": 4,
@@ -104,6 +108,7 @@
 
     },
     {
+        "id": 5,
         "titulo": "Gestión de Proyectos de TI",
         "descripcion": "Coordinar y gestionar proyectos de tecnología de la información para múltiples clientes.",
         "tipo": 5,
