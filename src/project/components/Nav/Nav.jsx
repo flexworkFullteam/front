@@ -26,24 +26,22 @@ export const Nav = () => {
         )}
         {status === "not-authenticated" && (
           <div className={styles.buttonsContainer}>
-            <Link>
+            <Link to={"auth/registerprof"}>
               <Button
                 variant="contained"
                 color="aliceBlue"
                 className={styles.createAccountButton}
-                onClick={() => navigate("auth/registerprof")}
               >
                 <Typography fontFamily="Nunito Sans" fontWeight="400">
                   Crear cuenta
                 </Typography>
               </Button>
             </Link>
-            <Link to="">
+            <Link to={"auth/loginprof"}>
               <Button
                 variant="contained"
                 color="pear"
                 className={styles.ingresarButton}
-                onClick={() => navigate("auth/loginprof")}
               >
                 <Typography fontFamily="Nunito Sans" fontWeight="400">
                   Ingresar
