@@ -1,13 +1,27 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {  Card,  CardContent,  Button,  Typography,  FormControl,  InputLabel,  Select, 
-  MenuItem,  Box,  IconButton,  useTheme,  Pagination
+import {
+  Card,
+  CardContent,
+  Button,
+  Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Box,
+  IconButton,
+  useTheme,
+  Pagination,
 } from "@mui/material";
-import { Close as CloseIcon } from "@mui/icons-material";
+import {
+  Close as CloseIcon,
+  Place as PlaceIcon,
+  Business as BusinessIcon,
+} from "@mui/icons-material";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
-
-
+import styles from "./SearchPage.module.css";
 
 export const SearchPage = () => {
   const { term } = useParams();
@@ -49,8 +63,7 @@ export const SearchPage = () => {
           boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)",
         }}
       >
-        {
-          term && (
+        {term && (
           <Box
             sx={{
               p: 1,
@@ -69,7 +82,7 @@ export const SearchPage = () => {
                 padding: "0 0 0 2%",
                 borderRadius: "4px",
               }}
-            >            
+            >
               <Typography>{term}</Typography>
               <IconButton>
                 <CloseIcon />
@@ -195,19 +208,68 @@ export const SearchPage = () => {
         {visibleProjects.map((project) => (
           <Card
             key={project.id}
-            sx={{ mb: "1rem", ":hover": {cursor: "pointer"} }}
+            sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }}
             onClick={() => navigate(`/detail/${project.id}`)}
           >
-            <CardContent>
-              <Typography variant="h5" component="h2">
-                {project.titulo}
-              </Typography>
-              <Typography color="textSecondary">
-                {project.date} - {project.level} - {project.workload}
-              </Typography>
-              <Typography variant="body2" component="p">
-                {project.descripcion}
-              </Typography>
+            <CardContent sx={{ display: "flex", alignItems: "center" }}>
+              <div className={styles.cardLeft}>
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  fontFamily="Nunito Sans"
+                  fontWeight="400"
+                >
+                  {project.titulo}
+                </Typography>
+                <Typography color="textSecondary">
+                  {project.date} - {project.level} - {project.workload}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  component="p"
+                  fontFamily="Nunito Sans"
+                  fontWeight="400"
+                >
+                  {project.descripcion}
+                </Typography>
+              </div>
+
+              <div className={styles.cardRight}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "30%",
+                  }}
+                >
+                  <BusinessIcon style={{ marginRight: "10px" }} />
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily="Nunito Sans"
+                    fontWeight="600"
+                  >
+                    {project.tipo}
+                  </Typography>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "30%",
+                  }}
+                >
+                  <PlaceIcon style={{ marginRight: "10px" }} />
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily="Nunito Sans"
+                    fontWeight="600"
+                  >
+                    {project.ubicacion}
+                  </Typography>
+                </div>
+              </div>
             </CardContent>
           </Card>
         ))}

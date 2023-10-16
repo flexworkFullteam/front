@@ -1,0 +1,30 @@
+.infoCompany {
+    display: flex;
+    width: 75%;
+    padding: 1.2% 0 1.2% 0;
+    margin: 2% auto !important;
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.infoContainer {
+    display: flex;
+    width: 75%;
+    gap: 2%;
+    margin: 0 auto 4%;
+    justify-content: space-around;
+}
+
+.companyLogo{
+    height: 40%;
+    margin-right: 2%;
+    max-width: 142px;
+    align-self: center;
+}
+
+.titleCompanyContainer{
+    display: flex;
+    width: 500px;
+    flex-direction: column;
+}

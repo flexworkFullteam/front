@@ -105,8 +105,8 @@ export const theme = createTheme({
     },
     button: {
       fontSize: "0.875rem",
-      textTransform: "uppercase",
-      fontWeight: 500,
+      textTransform: "capitalize",
+      fontWeight: 400,
       letterSpacing: "0.02857em",
     },
     caption: {
