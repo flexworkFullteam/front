@@ -2,7 +2,7 @@ import { Typography, Button } from "@mui/material";
 import { SearchBar } from "../../components/Searchbar/Searchbar";
 import styles from "./HomePage.module.css";
 import recurso3 from "../../../assets/Recurso3.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export const HomePage = () => {
   const navigate = useNavigate();
@@ -78,20 +78,22 @@ export const HomePage = () => {
                 </li>
               </ul>
             </Typography>
-            <Button
-              variant="contained"
-              color="verdigris"
-              className={styles.ingresarButton}
-              onClick={() => navigate("/registerProf")}
-            >
-              <Typography
-                color="aliceblue"
-                fontFamily="Nunito Sans"
-                fontWeight="400"
+            <Link to="/auth/registerprof">
+              <Button
+                variant="contained"
+                color="verdigris"
+                className={styles.ingresarButton}
+                onClick={() => navigate("/registerProf")}
               >
-                Crear cuenta
-              </Typography>
-            </Button>
+                <Typography
+                  color="aliceblue"
+                  fontFamily="Nunito Sans"
+                  fontWeight="400"
+                >
+                  Crear cuenta
+                </Typography>
+              </Button>
+            </Link>
           </div>
           <div className={styles.flexChild}>
             <img src={recurso3} alt="recurso 3" />
