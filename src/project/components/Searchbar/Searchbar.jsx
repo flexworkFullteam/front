@@ -25,7 +25,9 @@ export const SearchBar = () => {
         fullWidth
         type="search"
         className={
-          pathname.startsWith("/search") ? styles.searchPage : styles.home
+          pathname.startsWith("/search") || pathname.startsWith("/detail")
+            ? styles.searchPage
+            : styles.home
         }
         placeholder="Busca tu proyecto o empresa"
         color="pear"
