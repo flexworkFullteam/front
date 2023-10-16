@@ -1,9 +1,6 @@
 import styles from "./Footer.module.css";
 import React from "react";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import InstagramIcon from "@mui/icons-material/Instagram";
+import { Instagram, LinkedIn, Twitter, Facebook } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 
 export const Footer = () => {
@@ -13,22 +10,22 @@ export const Footer = () => {
         <div className={styles.footerContainer}>
           <a href="https://www.facebook.com">
             <div className={styles.iconCircle}>
-              <FacebookIcon className={styles.iconButton} color="aliceBlue" />
+              <Facebook className={styles.iconButton} color="aliceBlue" />
             </div>
           </a>
           <a href="https://www.twitter.com">
             <div className={styles.iconCircle}>
-              <TwitterIcon className={styles.iconButton} color="aliceBlue" />
+              <Twitter className={styles.iconButton} color="aliceBlue" />
             </div>
           </a>
           <a href="https://www.linkedin.com">
             <div className={styles.iconCircle}>
-              <LinkedInIcon className={styles.iconButton} color="aliceBlue" />
+              <LinkedIn className={styles.iconButton} color="aliceBlue" />
             </div>
           </a>
           <a href="https://www.instagram.com">
             <div className={styles.iconCircle}>
-              <InstagramIcon className={styles.iconButton} color="aliceBlue" />
+              <Instagram className={styles.iconButton} color="aliceBlue" />
             </div>
           </a>
         </div>

@@ -1,0 +1,14 @@
+.home{
+    border-radius: 4px;
+    background-color: #f0f5ff;
+}
+
+.searchPage{
+    border-radius: 4px;
+    background-color: #f0f5ff;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200% !important;
+    min-width: 100% !important;
+}
