@@ -78,12 +78,12 @@ export const HomePage = () => {
                 </li>
               </ul>
             </Typography>
-            <Link to="/auth/registerprof">
+            <Link to="/auth/registerUser">
               <Button
                 variant="contained"
                 color="verdigris"
                 className={styles.ingresarButton}
-                onClick={() => navigate("/registerProf")}
+                onClick={() => navigate("/registerUser")}
               >
                 <Typography
                   color="aliceblue"

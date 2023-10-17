@@ -11,11 +11,13 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import styles from "./Nav.module.css";
 import { useDispatch } from "react-redux";
 import { onLogout } from "../../../store/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 export const Menu = () => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -84,7 +86,9 @@ export const Menu = () => {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem onClick={handleClose}>Perfil</MenuItem>
-                  <MenuItem onClick={handleClose}>Mi Cuenta</MenuItem>
+                  <MenuItem onClick={() => navigate("/myaccount")}>
+                    Mi Cuenta
+                  </MenuItem>
                   <MenuItem onClick={() => handleClose("logout")}>
                     Cerrar Sesión
                   </MenuItem>
