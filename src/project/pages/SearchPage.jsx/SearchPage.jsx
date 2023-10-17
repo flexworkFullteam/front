@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Card,
   CardContent,
-  Button,
   Typography,
   FormControl,
   InputLabel,
@@ -22,10 +21,21 @@ import {
 } from "@mui/icons-material";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import styles from "./SearchPage.module.css";
+import {
+  onOrderProjectsByLapse,
+  onOrderProjectsBySalary,
+  onDeleteFilters,
+  onFilterProjectsByField,
+  onFilterProjectsByExp,
+  onFilterProjectsByType,
+  onFilterProjectsByTerm,
+} from "../../../store/project/projectSlice";
+import { useEffect } from "react";
 
 export const SearchPage = () => {
+  const dispatch = useDispatch();
   const { term } = useParams();
-  const { allProjects } = useSelector((state) => state.project);
+  const { projects } = useSelector((state) => state.project);
   const navigate = useNavigate();
   const theme = useTheme();
   const [filters, setFilters] = useState({
@@ -45,10 +55,22 @@ export const SearchPage = () => {
     setPage(1);
   };
 
-  const pageCount = Math.ceil(allProjects.length / perPage);
+  const handleDelete = () => {
+    dispatch(onDeleteFilters());
+    navigate("/search");
+  };
+
+  const pageCount = Math.ceil(projects.length / perPage);
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
-  const visibleProjects = allProjects.slice(startIndex, endIndex);
+  const visibleProjects = projects.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    console.log(!term);
+    if (!term === false) {
+      dispatch(onFilterProjectsByTerm(term));
+    }
+  }, [term]);
 
   return (
     <Box display="flex" flexDirection="row" padding={"3em"}>
@@ -84,7 +106,7 @@ export const SearchPage = () => {
               }}
             >
               <Typography>{term}</Typography>
-              <IconButton>
+              <IconButton onClick={handleDelete}>
                 <CloseIcon />
               </IconButton>
             </div>
@@ -93,87 +115,100 @@ export const SearchPage = () => {
 
         <Box mt={2}>
           <FormControl fullWidth sx={{ mb: "1.5rem", mt: "1rem" }}>
-            <InputLabel id="date-label">Fecha</InputLabel>
+            <InputLabel id="field-label">Área</InputLabel>
             <Select
-              labelId="date-label"
-              id="date"
-              value={filters.date}
+              labelId="field-label"
+              id="field"
+              name="field"
+              value={filters.field}
               onChange={(event) =>
-                setFilters({ ...filters, date: event.target.value })
+                dispatch(onFilterProjectsByField(event.target.value))
               }
               sx={{ backgroundColor: "lightgray" }}
             >
               <MenuItem value="">Todos</MenuItem>
-              <MenuItem value="2021">2021</MenuItem>
-              <MenuItem value="2020">2020</MenuItem>
+              <MenuItem value="marketing">Marketing</MenuItem>
+              <MenuItem value="recursos humanos">Recursos humanos</MenuItem>
+              <MenuItem value="contabilidad">Contabilidad</MenuItem>
+              <MenuItem value="administracion">Administracion</MenuItem>
+              <MenuItem value="it">IT</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id="date-label">Fecha</InputLabel>
+            <InputLabel id="lapse-label">Duracion</InputLabel>
             <Select
-              labelId="date-label"
-              id="date"
-              value={filters.date}
+              labelId="lapse-label"
+              id="lapse"
+              value={filters.lapse}
               onChange={(event) =>
-                setFilters({ ...filters, date: event.target.value })
+                dispatch(onOrderProjectsByLapse(event.target.value))
               }
               sx={{ backgroundColor: "lightgray" }}
             >
-              <MenuItem value="">Todos</MenuItem>
-              <MenuItem value="2021">2021</MenuItem>
-              <MenuItem value="2020">2020</MenuItem>
+              <MenuItem value=""> - </MenuItem>
+              <MenuItem value="asc">Ascendente</MenuItem>
+              <MenuItem value="desc">Descendente</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id="date-label">Fecha</InputLabel>
+            <InputLabel id="exp_req-label">Experiencia</InputLabel>
             <Select
-              labelId="date-label"
-              id="date"
-              value={filters.date}
+              labelId="exp_req-label"
+              id="exp_req"
+              value={filters.exp_req}
               onChange={(event) =>
-                setFilters({ ...filters, date: event.target.value })
+                dispatch(onFilterProjectsByExp(event.target.value))
               }
               sx={{ backgroundColor: "lightgray" }}
             >
               <MenuItem value="">Todos</MenuItem>
-              <MenuItem value="2021">2021</MenuItem>
-              <MenuItem value="2020">2020</MenuItem>
+              <MenuItem value="junior">Junior</MenuItem>
+              <MenuItem value="semi-Senior">Semi-Senior</MenuItem>
+              <MenuItem value="senior">Senior</MenuItem>
+              <MenuItem value="tech-lead">Tech-Lead</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id="date-label">Fecha</InputLabel>
+            <InputLabel id="salary-label">Salario</InputLabel>
             <Select
-              labelId="date-label"
-              id="date"
-              value={filters.date}
+              labelId="salary-label"
+              id="salary"
+              value={filters.salary}
               onChange={(event) =>
-                setFilters({ ...filters, date: event.target.value })
+                dispatch(onOrderProjectsBySalary(event.target.value))
               }
               sx={{ backgroundColor: "lightgray" }}
             >
-              <MenuItem value="">Todos</MenuItem>
-              <MenuItem value="2021">2021</MenuItem>
-              <MenuItem value="2020">2020</MenuItem>
+              <MenuItem value=""> - </MenuItem>
+              <MenuItem value="asc">Ascendente</MenuItem>
+              <MenuItem value="desc">Descendente</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id="date-label">Fecha</InputLabel>
+            <InputLabel id="project_type-label">Cargo</InputLabel>
             <Select
-              labelId="date-label"
-              id="date"
-              value={filters.date}
+              labelId="project_type-label"
+              id="project_type"
+              value={filters.project_type}
               onChange={(event) =>
-                setFilters({ ...filters, date: event.target.value })
+                dispatch(onFilterProjectsByType(event.target.value))
               }
               sx={{ backgroundColor: "lightgray" }}
             >
               <MenuItem value="">Todos</MenuItem>
-              <MenuItem value="2021">2021</MenuItem>
-              <MenuItem value="2020">2020</MenuItem>
+              <MenuItem value="software engineer">Software engineer</MenuItem>
+              <MenuItem value="full-stack developer">
+                Full-stack developer
+              </MenuItem>
+              <MenuItem value="tech manager">Tech manager</MenuItem>
+              <MenuItem value="contador">Contador</MenuItem>
+              <MenuItem value="vendedor">Vendedor</MenuItem>
+              <MenuItem value="gerente">Gerente</MenuItem>
+              <MenuItem value="abogado">Abogado</MenuItem>
             </Select>
           </FormControl>
           <Box
@@ -194,7 +229,7 @@ export const SearchPage = () => {
           >
             <DeleteOutlineRoundedIcon
               variant="contained"
-              onClick={() => setFilters({ date: "", level: "", workload: "" })}
+              onClick={() => dispatch(onDeleteFilters())}
               color="aliceBlue"
             />
           </Box>
@@ -203,7 +238,7 @@ export const SearchPage = () => {
 
       <Box sx={{ width: "70%" }} padding={theme.spacing(3)}>
         <Typography variant="h6" component="h1" sx={{ mb: "1rem" }}>
-          {allProjects.length} ofertas de proyectos para {term}
+          {projects.length} ofertas de proyectos para {term}
         </Typography>
         {visibleProjects.map((project) => (
           <Card
@@ -219,18 +254,19 @@ export const SearchPage = () => {
                   fontFamily="Nunito Sans"
                   fontWeight="400"
                 >
-                  {project.titulo}
+                  {project.title}
                 </Typography>
-                <Typography color="textSecondary">
-                  {project.date} - {project.level} - {project.workload}
-                </Typography>
+                <Typography
+                  color="textSecondary"
+                  sx={{ textTransform: "capitalize" }}
+                ></Typography>
                 <Typography
                   variant="body2"
                   component="p"
                   fontFamily="Nunito Sans"
                   fontWeight="400"
                 >
-                  {project.descripcion}
+                  {project.description}
                 </Typography>
               </div>
 
@@ -248,8 +284,9 @@ export const SearchPage = () => {
                     component="p"
                     fontFamily="Nunito Sans"
                     fontWeight="600"
+                    style={{ textTransform: "capitalize" }}
                   >
-                    {project.tipo}
+                    {project.exp_req}
                   </Typography>
                 </div>
                 <div
@@ -266,7 +303,7 @@ export const SearchPage = () => {
                     fontFamily="Nunito Sans"
                     fontWeight="600"
                   >
-                    {project.ubicacion}
+                    {project.location}
                   </Typography>
                 </div>
               </div>
