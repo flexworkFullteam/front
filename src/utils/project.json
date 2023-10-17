@@ -2,7 +2,7 @@
     {
         "id": 1,
         "titulo": "Desarrollo de Aplicación Web",
-        "descripcion": "Desarrollar una aplicación web moderna con funcionalidades avanzadas.",
+        "descripcion": "En Acciona IT estamos en búsqueda de perfiles trainee para incorporarse a trabajar para importante laboratorio multinacional. Si estás buscando dar tus primeros pasos en el mundo IT, ¡esta propuesta es para vos! ¿Qué buscamos? Trainees con comprobado interés en tecnología o desarrollo de aplicaciones. Interés en trabajar con ServiceNow Poca o ninguna experiencia profesional (remunerada) en IT. Estudiante: Universitario, Terciario en sistemas. Inglés avanzado/bilingüe (Excluyente) Residir en zona Norte o aledaños Modalidad: Presencial (Munro - Puerto Madero) ¡Esperamos tu postulación!",
         "tipo": 1,
         "ubicacion": 3,
         "sueldo": 45000.0,
@@ -14,6 +14,7 @@
         "ganadores": [],
         "perdedores": [],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "COA.SA",
@@ -41,6 +42,7 @@
         "ganadores": [],
         "perdedores": [],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "CORSISA",
@@ -68,6 +70,7 @@
         "ganadores": [11],
         "perdedores": [3, 7],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "CORSISA",
@@ -95,6 +98,7 @@
         "ganadores": [5],
         "perdedores": [2, 10],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "CORSISA",
@@ -122,6 +126,7 @@
         "ganadores": [],
         "perdedores": [],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "CORSISA",
@@ -149,6 +154,7 @@
         "ganadores": [],
         "perdedores": [],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "WALMART",
@@ -176,6 +182,7 @@
         "ganadores": [],
         "perdedores": [],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "CORSISA",
@@ -203,6 +210,7 @@
         "ganadores": [],
         "perdedores": [],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "ACCENTURE",
@@ -230,6 +238,7 @@
         "ganadores": [1],
         "perdedores": [5],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "CORSISA",
@@ -257,6 +266,7 @@
         "ganadores": [],
         "perdedores": [],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "CORSISA",
@@ -284,6 +294,7 @@
         "ganadores": [],
         "perdedores": [],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "GLOBANT",
@@ -311,6 +322,7 @@
         "ganadores": [],
         "perdedores": [],
         "tipo_Actividad": "Tecnología",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/512px-Accenture.svg.png",
         "state": true,
         "company": {
             "nombre": "CORSISA",
