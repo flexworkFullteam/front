@@ -27,7 +27,7 @@ export const LoginProfePage = () => {
       <LoginUser />
       <h4>
         ¿No tienes cuenta?{" "}
-        {<Link to="/auth/registerProf">Registrate como profesional</Link>}
+        {<Link to="/auth/registerUser">Registrate como profesional</Link>}
       </h4>
     </Container>
   );
