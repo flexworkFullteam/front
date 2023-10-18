@@ -38,7 +38,7 @@ export const DetailPage = () => {
         <Box display="flex" sx={{ ml: "2% ", flexDirection: "row" }}>
           <img
             className={styles.companyLogo}
-            src={filteredProject.imagen}
+            src={filteredProject.image}
             alt={filteredProject.company.nombre}
           />
           <div className={styles.titleCompanyContainer}>
@@ -48,7 +48,7 @@ export const DetailPage = () => {
               color="persianBlue.main"
               fontSize="1.25rem"
             >
-              {filteredProject.titulo}
+              {filteredProject.title}
             </Typography>
             <Link>
               <Typography
@@ -96,8 +96,8 @@ export const DetailPage = () => {
               fontFamily="Nunito Sans"
               fontWeight="400"
             >
-              Duración: {filteredProject.lapso} dias - Área:{" "}
-              {filteredProject.tipo_Actividad}
+              Duración: {filteredProject.lapse} dias - Área:{" "}
+              {filteredProject.field}
             </Typography>
             <Typography
               variant="body2"
@@ -106,7 +106,7 @@ export const DetailPage = () => {
               fontFamily="Nunito Sans"
               fontWeight="400"
             >
-              {filteredProject.descripcion}
+              {filteredProject.description}
             </Typography>
           </CardContent>
         </Card>
