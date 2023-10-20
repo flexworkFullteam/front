@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { authSlice } from './auth/authSlice';
 import { projectSlice } from './project/projectSlice';
+import { uiSlice } from './ui/uiSlice';
 
 // import { composeWithDevTools } from 'redux-devtools-extension'; // Importa la función composeWithDevTools
 
@@ -13,7 +14,7 @@ export const store = configureStore({
     reducer: {
         auth: authSlice.reducer,
         project: projectSlice.reducer,
-        // ui: uiSlice.reducer,
+        ui: uiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
