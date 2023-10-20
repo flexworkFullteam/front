@@ -1,14 +1,65 @@
 import { projectAPI } from "../api/projectAPI";
 import { useDispatch, useSelector } from "react-redux";
-import {} from "../store/auth/authSlice";
+import { onChecking, onClearEvents, onLogin, onLogout, onRegister } from "../store/auth/authSlice";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
-  const { auth, onChecking, onLogin, onLogout, onRegister } = useSelector(
-    (state) => state.auth
-  );
+  const { user, status, errorMessage } = useSelector((state) => state.auth);
+  
+    const startLogin = async ({email, password}) => {
+      try {
+          dispatch(onChecking());
+          const {data} = await projectAPI.post("/user/login", { email, password});
+          localStorage.setItem("token", data.token);
+
+          const {user} = data;
+
+          if(user) {
+            dispatch(onLogin(user))
+          }else{
+            dispatch(onLogout())
+          }
+
+      } catch (error) {
+        alert(error.errorMessage)
+        dispatch(onLogout('Error al iniciar sesión'))
+      }
+    }
+    
+
+
+    const startRegister = async ({email, password, name, type}) => {
+      try {
+          dispatch(onChecking());
+          const {data} = await projectAPI.post("/user", {email,  password,  name,  type})
+
+          if(data.id) {
+            dispatch(onRegister(data))
+          }
+          
+
+      } catch (error) {
+        alert(error.errorMessage)
+        dispatch(onLogout('Error al registrar usuario'))
+      }
+    }
+
+    const startLogout = async () => {
+      localStorage.clear();
+      dispatch(onClearEvents())
+      dispatch(onLogout());
+    }
+
+  
   return {
     //propiedades
+    user,
+    status,
+    errorMessage,
     //metodos
+    startLogin,
+    startRegister,
+    startLogout,
   };
 };
+

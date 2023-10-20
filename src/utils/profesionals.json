@@ -1,7 +1,7 @@
 
 {
   "id": 1,
-  "type": 2,
+  "type": 3,
   "data": {
     "name": "Alice",
     "lastname": "Johnson",
@@ -24,9 +24,9 @@
       "institution": "Universidad ABC"
     }
   ],
-  "languages": [2, 3],
-  "nationality": 5,
-  "development_skills": [6, 7],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
   "extra_information": "Experiencia en proyectos de comercio electrónico",
   "briefcase": "Cartera123",
   "cci": 54321,
