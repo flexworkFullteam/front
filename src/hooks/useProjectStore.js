@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onLoadingProjects, onGetAllProjects} from "../store/project/projectSlice";
+import { onLoadingProjects, onGetAllProjects, onAddProject} from "../store/project/projectSlice";
 import { projectAPI } from "../api/projectAPI";
 
 export const useProjectStore = () => {
@@ -16,7 +16,16 @@ export const useProjectStore = () => {
     }
   };
 
-  
+  const startAddProject = async (project) => {    
+    try {
+      dispatch(onLoadingProjects());
+      const { data } = await projectAPI.post(`/project`, project);
+      dispatch(onAddProject(data));
+
+    } catch (error) {
+      alert(error.message);
+    }  
+  }
 
   return {
     //propiedades
@@ -26,5 +35,6 @@ export const useProjectStore = () => {
 
     //metodos
     startLoadingProject,
+    startAddProject,
   };
 };
