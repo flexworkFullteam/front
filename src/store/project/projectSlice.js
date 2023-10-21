@@ -4,8 +4,8 @@ import projectData from "../../utils/project.json";
 export const projectSlice = createSlice({
   name: "project",
   initialState: {
-    projects: projectData, //[],
-    allProjects: projectData, //[],
+    projects: [], //[], projectData
+    allProjects: [], //[], projectData
     activeEvent: null,
     isLoadingProjects: false,
   },
