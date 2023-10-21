@@ -5,6 +5,7 @@ import { onChecking, onClearEvents, onLogin, onLogout, onRegister } from "../sto
 export const useAuthStore = () => {
   const dispatch = useDispatch();
   const { user, status, errorMessage } = useSelector((state) => state.auth);
+  const { loadingAccount } = useSelector((state) => state.ui);
   
     const startLogin = async ({email, password}) => {
       try {
@@ -53,8 +54,9 @@ export const useAuthStore = () => {
     const startCreateProfessional = async (professional) => {
       try {
         // dispatch(onChecking());
-        const {data} = await projectAPI.post("/user/professional", professional);
-        // dispatch(onRegister(data)); // TODO: revisar
+        dispatch(setLoadingAccount(true))
+        const {data} = await projectAPI.post("/professional", professional);
+        dispatch(setLoadingAccount(false))
       } catch (error) {
         alert(error.errorMessage)
         dispatch(onLogout('Error al crear profesional'))
@@ -64,8 +66,9 @@ export const useAuthStore = () => {
     const startCreateCompany = async (company) => {
       try {
         // dispatch(onChecking());
-        const {data} = await projectAPI.post("/user/company", company);
-        // dispatch(onRegister(data)); // TODO: revisar
+        dispatch(setLoadingAccount(true))
+        const {data} = await projectAPI.post("/company", company);
+        dispatch(setLoadingAccount(false))
       } catch (error) {
         alert(error.errorMessage)
         dispatch(onLogout('Error al crear empresa'))
@@ -77,6 +80,7 @@ export const useAuthStore = () => {
     user,
     status,
     errorMessage,
+    loadingAccount,
     //metodos
     startLogin,
     startRegister,
