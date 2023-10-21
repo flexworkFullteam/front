@@ -6,11 +6,13 @@ import {
 import candidateJSON from "../../../utils/candidates.json";
 import styles from "./Candidates.module.css";
 import { useState, useEffect } from "react";
-import { getCandidateById } from "../../../helpers/candidatesAsync";
+import {
+  getCandidateById,
+  acceptCandidate,
+  refuseCandidate,
+} from "../../../helpers/candidatesAsync";
 
 export const Candidates = ({ handleClose, id }) => {
-  const allCandidates = candidateJSON;
-
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(7);
   const [candidates, setCandidates] = useState();
@@ -36,9 +38,17 @@ export const Candidates = ({ handleClose, id }) => {
   const visibleCandidates = candidates?.slice(startIndex, endIndex);
   console.log("page count " + pageCount);
 
+  const accept = (candidateId) => {
+    acceptCandidate(id, candidateId);
+  };
+
+  const reject = (candidateId) => {
+    rejectCandidate(id, candidateId);
+  };
+
   useEffect(() => {
     callCandidates();
-  }, []);
+  }, [accept, reject]);
 
   return (
     <div className={styles.candidatesContainer}>
@@ -83,8 +93,8 @@ export const Candidates = ({ handleClose, id }) => {
               </div>
 
               <div className={styles.cardRight}>
-                <CloseRoundedIcon />
-                <CheckRoundedIcon />
+                <CloseRoundedIcon onClick={() => accept(candidate.id)} />
+                <CheckRoundedIcon onClick={() => reject(candidate.id)} />
               </div>
             </CardContent>
           </Card>
