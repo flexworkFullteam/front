@@ -28,10 +28,10 @@ export const useAuthStore = () => {
     
 
 
-    const startRegister = async ({email, password, name, type}) => {
+    const startRegister = async ({email, password, username, type}) => {
       try {
           dispatch(onChecking());
-          const {data} = await projectAPI.post("/user", {email,  password,  name,  type})
+          const {data} = await projectAPI.post("/user", {email,  password,  username,  type})
 
           if(data.id) {
             dispatch(onRegister(data))
@@ -39,6 +39,7 @@ export const useAuthStore = () => {
           
 
       } catch (error) {
+        console.error("Error en el registro:", error);
         alert(error.errorMessage)
         dispatch(onLogout('Error al registrar usuario'))
       }
