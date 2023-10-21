@@ -1,0 +1,38 @@
+.candidatesContainer{
+    margin: 1% auto;
+    width: 75%;
+    padding: 25px 10px 25px 10px;
+    background-color: aliceblue;
+    border-radius: 8px;
+}
+
+
+.topContainer{
+    display: flex;
+    flex-direction: row;
+}
+.cardLeft{
+    width: 85%;
+    
+    padding-right: 2%;
+}
+
+.cardRight{
+    display: flex;
+    flex-direction: row;
+    margin-left: 2%;
+    justify-content: flex-start;
+    border-left: 1px solid black;
+    padding-left: 2%;
+}
+
+.closeButton{
+    cursor: pointer;
+    position: relative;
+    left: 96%;
+    transition: 0.12s ease-in-out !important;
+}
+
+.closeButton:hover{
+    transform: rotate(90deg) scale(1.3);
+}

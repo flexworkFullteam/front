@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import profesionalData from "../../utils/profesionals.json";
+import companyData from "../../utils/company.json";
 
 export const authSlice = createSlice({
   name: "auth",
@@ -33,9 +34,10 @@ export const authSlice = createSlice({
       state.status = "not-authenticated";
       state.user = {};
       // state.errorMessage = undefined;
-    }
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { onChecking, onLogin, onLogout, onRegister, onClearEvents } = authSlice.actions;
+export const { onChecking, onLogin, onLogout, onRegister, onClearEvents } =
+  authSlice.actions;
