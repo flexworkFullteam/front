@@ -18,12 +18,16 @@ export const Projects = () => {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
+  const [id, setId] = useState(1);
 
-  const { allProjects } = useProjectStore();
+  const { projects } = useProjectStore();
 
   const navigate = useNavigate();
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = (id) => {
+    setId(id);
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   const handlePageChange = (event, value) => {
@@ -35,18 +39,20 @@ export const Projects = () => {
     setPage(1);
   };
 
-  const pageCount = Math.ceil(allProjects.length / perPage);
+  const pageCount = Math.ceil(projects.length / perPage);
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
-  const visibleProjects = allProjects.slice(startIndex, endIndex);
+  const visibleProjects = projects.slice(startIndex, endIndex);
 
   return (
     <div>
-      <Modal open={open} onClose={handleClose}>
-        <div>
-          <Candidates handleClose={handleClose} />
-        </div>
-      </Modal>
+      {setOpen && (
+        <Modal open={open} onClose={handleClose}>
+          <div>
+            <Candidates handleClose={handleClose} id={id} />
+          </div>
+        </Modal>
+      )}
       <div
         style={{
           display: "flex",
@@ -106,7 +112,9 @@ export const Projects = () => {
             </div>
 
             <div className={styles.cardRight}>
-              <Button onClick={handleOpen}>Ver postulantes</Button>
+              <Button onClick={() => handleOpen(project.id)}>
+                Ver postulantes
+              </Button>
 
               <DeleteIcon />
             </div>

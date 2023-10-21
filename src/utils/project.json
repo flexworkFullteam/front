@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": 3,
         "field": "marketing",
         "title": "Desarrollo de Aplicación Web",
         "description": "En Acciona IT estamos en búsqueda de perfiles trainee para incorporarse a trabajar para importante laboratorio multinacional. Si estás buscando dar tus primeros pasos en el mundo IT, ¡esta propuesta es para vos! ¿Qué buscamos? Trainees con comprobado interés en tecnología o desarrollo de aplicaciones. Interés en trabajar con ServiceNow Poca o ninguna experiencia profesional (remunerada) en IT. Estudiante: Universitario, Terciario en sistemas. Inglés avanzado/bilingüe (Excluyente) Residir en zona Norte o aledaños Modalidad: Presencial (Munro - Puerto Madero) ¡Esperamos tu postulación!",
@@ -27,7 +27,7 @@
 
     },
     {
-        "id": 2,
+        "id": 4,
         "field": "recursos humanos",
         "title": "Desarrollo de Aplicación Móvil",
         "description": "Crear una aplicación móvil para iOS y Android con características innovadoras.",
@@ -54,7 +54,7 @@
 
     },
     {
-        "id": 3,
+        "id": 5,
         "field": "contabilidad",
         "title": "Desarrollo de Software Empresarial",
         "description": "Desarrollar un software empresarial a medida para una empresa cliente.",
@@ -81,7 +81,7 @@
 
     },
     {
-        "id": 4,
+        "id": 6,
         "field": "administracion",
         "title": "Diseño de Interfaz de Usuario",
         "description": "Diseñar una interfaz de usuario atractiva y funcional para una aplicación existente.",
@@ -108,7 +108,7 @@
 
     },
     {
-        "id": 5,
+        "id": 7,
         "field": "it",
         "title": "Gestión de Proyectos de TI",
         "description": "Coordinar y gestionar proyectos de tecnología de la información para múltiples clientes.",
@@ -135,7 +135,7 @@
 
     },
     {
-        "id": 6,
+        "id": 8,
         "field": "it",
         "title": "Desarrollo de Aplicación de Comercio Electrónico",
         "description": "Crear una plataforma de comercio electrónico para una tienda en línea.",
@@ -162,7 +162,7 @@
 
     },
     {
-        "id": 7,
+        "id": 20,
         "field": "it",
         "title": "Diseño de Logotype y Branding",
         "description": "Diseñar un logotype y una identidad de marca para una nueva empresa.",
@@ -189,7 +189,7 @@
 
     },
     {
-        "id": 8,
+        "id": 21,
         "field": "it",
         "title": "Desarrollo de Juegos Móviles",
         "description": "Crear un juego móvil adictivo para plataformas iOS y Android.",
