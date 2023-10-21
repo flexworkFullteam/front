@@ -13,10 +13,13 @@ export const useAuthStore = () => {
           const {data} = await projectAPI.post("/user/login", { email, password});
           localStorage.setItem("token", data.token);
 
-          const {user} = data;
+          console.log(data)
+          const {userMapped} = data;
 
-          if(user) {
-            dispatch(onLogin(user))
+          if(userMapped) {
+            dispatch(onLogin(userMapped))
+            alert("Bienvenido")
+            //! navigate("/home")
           }else{
             dispatch(onLogout())
           }
@@ -30,18 +33,19 @@ export const useAuthStore = () => {
 
 
     const startRegister = async ({email, password, username, type}) => {
+      console.log({email, password, username, type})
       try {
           dispatch(onChecking());
           const {data} = await projectAPI.post("/user", {email,  password,  username,  type})
-
+          // console.log(data)
           if(data.id) {
             dispatch(onRegister(data))
+            alert("Usuario registrado")
+            //! navigate("/login")
           }
-          
-
       } catch (error) {
         console.error("Error en el registro:", error);
-        alert(error.errorMessage)
+        alert(error.message)
         dispatch(onLogout('Error al registrar usuario'))
       }
     }
@@ -75,7 +79,7 @@ export const useAuthStore = () => {
         dispatch(onLogout('Error al crear empresa'))
       }
     }
-  
+    
   return {
     //propiedades
     user,

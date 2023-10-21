@@ -16,11 +16,11 @@ const RegisterUser = () => {
 
     
     const onSubmit = handleSubmit(async (data) => {
-        console.log(data);
+        // console.log(data);
         const { email, contraseña, username, type } = data;
     
         // Llama a la función de inicio de sesión del custom hook
-        await startRegister({ email, password: contraseña, username, type });
+        await startRegister({ email, password: contraseña, username, type: +type });
     
         reset();
       });

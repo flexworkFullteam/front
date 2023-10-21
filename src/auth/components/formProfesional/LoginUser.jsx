@@ -21,8 +21,8 @@ const LoginUser = () => {
     // Llama a la función de inicio de sesión del custom hook
     await startLogin({ email, password: contraseña });
 
-    console.log(user);
-    console.log(status);
+    // console.log(user);
+    // console.log(status);
     // console.log(errorMessage);
 
     reset();
