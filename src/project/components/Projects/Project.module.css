@@ -1,0 +1,14 @@
+.cardLeft{
+    width: 85%;
+    
+    padding-right: 2%;
+}
+
+.cardRight{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+    justify-content: flex-start;
+    border-left: 1px solid black;
+    padding-left: 2%;
+}
