@@ -5,13 +5,17 @@ import {
 } from "@mui/icons-material/";
 import candidateJSON from "../../../utils/candidates.json";
 import styles from "./Candidates.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {
+  getCandidateById,
+  acceptCandidate,
+  refuseCandidate,
+} from "../../../helpers/candidatesAsync";
 
-export const Candidates = ({ handleClose }) => {
-  const allCandidates = candidateJSON;
-
+export const Candidates = ({ handleClose, id }) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(7);
+  const [candidates, setCandidates] = useState();
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -22,10 +26,29 @@ export const Candidates = ({ handleClose }) => {
     setPage(1);
   };
 
-  const pageCount = Math.ceil(allCandidates.length / perPage);
+  const callCandidates = async () => {
+    const data = await getCandidateById(id);
+    setCandidates(data);
+  };
+  console.log(candidates);
+
+  const pageCount = Math.ceil(candidates?.length / perPage);
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
-  const visibleCandidates = allCandidates.slice(startIndex, endIndex);
+  const visibleCandidates = candidates?.slice(startIndex, endIndex);
+  console.log("page count " + pageCount);
+
+  const accept = (candidateId) => {
+    acceptCandidate(id, candidateId);
+  };
+
+  const reject = (candidateId) => {
+    rejectCandidate(id, candidateId);
+  };
+
+  useEffect(() => {
+    callCandidates();
+  }, [accept, reject]);
 
   return (
     <div className={styles.candidatesContainer}>
@@ -38,44 +61,47 @@ export const Candidates = ({ handleClose }) => {
           Postulantes
         </Typography>
       </div>
+      {candidates ? (
+        visibleCandidates.map((candidate) => (
+          <Card
+            key={candidate.id}
+            sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }}
+          >
+            {/*onClick */}
+            <CardContent sx={{ display: "flex", alignItems: "center" }}>
+              <div className={styles.cardLeft}>
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  fontFamily="Nunito Sans"
+                  fontWeight="400"
+                >
+                  {`${candidate.data.name} ${candidate.data.lastname}`}
+                </Typography>
+                <Typography
+                  color="textSecondary"
+                  sx={{ textTransform: "capitalize" }}
+                ></Typography>
+                <Typography
+                  variant="body2"
+                  component="p"
+                  fontFamily="Nunito Sans"
+                  fontWeight="400"
+                >
+                  {candidate.experience[0].description}
+                </Typography>
+              </div>
 
-      {visibleCandidates.map((candidate) => (
-        <Card
-          key={candidate.id}
-          sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }}
-        >
-          {/*onClick */}
-          <CardContent sx={{ display: "flex", alignItems: "center" }}>
-            <div className={styles.cardLeft}>
-              <Typography
-                variant="h5"
-                component="h2"
-                fontFamily="Nunito Sans"
-                fontWeight="400"
-              >
-                {`${candidate.data.name} ${candidate.data.lastname}`}
-              </Typography>
-              <Typography
-                color="textSecondary"
-                sx={{ textTransform: "capitalize" }}
-              ></Typography>
-              <Typography
-                variant="body2"
-                component="p"
-                fontFamily="Nunito Sans"
-                fontWeight="400"
-              >
-                {candidate.experience[0].description}
-              </Typography>
-            </div>
-
-            <div className={styles.cardRight}>
-              <CloseRoundedIcon />
-              <CheckRoundedIcon />
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+              <div className={styles.cardRight}>
+                <CloseRoundedIcon onClick={() => accept(candidate.id)} />
+                <CheckRoundedIcon onClick={() => reject(candidate.id)} />
+              </div>
+            </CardContent>
+          </Card>
+        ))
+      ) : (
+        <p>Cargando candidatos...</p>
+      )}
       <Box mt={0.5} mb={0.5} display="flex" justifyContent="center">
         <Pagination count={pageCount} page={page} onChange={handlePageChange} />
       </Box>

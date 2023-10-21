@@ -1,6 +1,7 @@
 
 {   
     "id": 1,
+    "company_id": 1, 
     "razon_Social": "Empresa ABC S.A.",
     "tipo_Actividad": "Tecnología",
     "fecha_Inicio": "2022-01-15",
