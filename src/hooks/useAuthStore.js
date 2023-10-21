@@ -50,6 +50,27 @@ export const useAuthStore = () => {
       dispatch(onLogout());
     }
 
+    const startCreateProfessional = async (professional) => {
+      try {
+        // dispatch(onChecking());
+        const {data} = await projectAPI.post("/user/professional", professional);
+        // dispatch(onRegister(data)); // TODO: revisar
+      } catch (error) {
+        alert(error.errorMessage)
+        dispatch(onLogout('Error al crear profesional'))
+      }
+    }
+
+    const startCreateCompany = async (company) => {
+      try {
+        // dispatch(onChecking());
+        const {data} = await projectAPI.post("/user/company", company);
+        // dispatch(onRegister(data)); // TODO: revisar
+      } catch (error) {
+        alert(error.errorMessage)
+        dispatch(onLogout('Error al crear empresa'))
+      }
+    }
   
   return {
     //propiedades
