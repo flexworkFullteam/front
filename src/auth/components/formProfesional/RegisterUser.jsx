@@ -6,16 +6,24 @@ import { Google, LinkedIn } from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import style from './StylesProfesional.module.css';
+import {useAuthStore} from '../../../hooks/useAuthStore'
 
 const RegisterUser = () => {
 
+    const { startRegister} = useAuthStore();
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
-    const onSubmit = handleSubmit(data => {
+    
+    const onSubmit = handleSubmit(async (data) => {
         console.log(data);
+        const { email, contraseña, username, type } = data;
+    
+        // Llama a la función de inicio de sesión del custom hook
+        await startRegister({ email, password: contraseña, username, type });
+    
         reset();
-    });
+      });
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
