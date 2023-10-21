@@ -1,0 +1,530 @@
+[
+{
+  "id": 1,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+} ,
+{
+  "id": 2,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 3,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 4,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 16,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 6,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 7,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 8,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 9,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 10,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 11,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 12,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 13,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 14,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 15,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+},
+{
+  "id": 5,
+  "type": 3,
+  "data": {
+    "name": "Alice",
+    "lastname": "Johnson",
+    "age": 28,
+    "dni": 98765432
+  },
+  "experience": [
+    {
+      "date_start": "2019-02-01",
+      "date_end": "2020-11-30",
+      "company": "Tech Solutions Inc.",
+      "description": "Desarrollador web"
+    }
+  ],
+  "education": [
+    {
+      "year_start": "2014-09-01",
+      "year_end": "2018-06-30",
+      "degree": "Licenciatura en Informática",
+      "institution": "Universidad ABC"
+    }
+  ],
+  "languages": ["Spanish", "English"],
+  "nationality": "Peru",
+  "development_skills": ["Docker", "React"],
+  "extra_information": "Experiencia en proyectos de comercio electrónico",
+  "briefcase": "Cartera123",
+  "cci": 54321,
+  "state": true
+}
+]

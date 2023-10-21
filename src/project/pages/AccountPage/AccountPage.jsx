@@ -1,18 +1,16 @@
-import {useSelector} from 'react-redux'
-import ProffessionalComponent from '../../components/Account/ProffessionalComponent'
-import CompanyComponent from '../../components/Account/CompanyComponent'
+import { useSelector } from "react-redux";
+import ProfessionalComponent from "../../components/Account/ProfessionalComponent";
+import { CompanyPage } from "../../pages/CompanyPage/CompanyPage";
 
 export const AccountPage = () => {
-
-  const {user} = useSelector( state => state.auth)
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <div>
-      {/* <ProffessionalComponent/> */}
+      {/* <ProfessionalComponent/> */}
       {/* <CompanyComponent/> */}
-      
-      { user.type === 2 ? <ProffessionalComponent/> : <CompanyComponent /> }
-      
-      </div>
-  )
-}
+
+      {user.type === 3 ? <ProfessionalComponent /> : <CompanyPage />}
+    </div>
+  );
+};
