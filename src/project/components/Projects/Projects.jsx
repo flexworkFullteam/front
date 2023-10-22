@@ -77,7 +77,7 @@ export const Projects = () => {
         <Button
           variant="contained"
           color="persianBlue"
-          onClick={() => navigate()}
+          onClick={() => navigate("/createProject")}
         >
           <Typography
             fontFamily="Nunito Sans"
