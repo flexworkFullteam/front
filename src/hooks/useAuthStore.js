@@ -62,6 +62,7 @@ export const useAuthStore = () => {
         dispatch(setLoadingAccount(true))
         const {data} = await projectAPI.post("/professional", professional);
         dispatch(setLoadingAccount(false))
+        alert("Datos personales guardados")
       } catch (error) {
         alert(error.errorMessage)
         dispatch(onLogout('Error al crear profesional'))
@@ -74,6 +75,7 @@ export const useAuthStore = () => {
         dispatch(setLoadingAccount(true))
         const {data} = await projectAPI.post("/company", company);
         dispatch(setLoadingAccount(false))
+        alert("Datos de empresa guardados")
       } catch (error) {
         alert(error.errorMessage)
         dispatch(onLogout('Error al crear empresa'))
@@ -90,6 +92,8 @@ export const useAuthStore = () => {
     startLogin,
     startRegister,
     startLogout,
+    startCreateProfessional,
+    startCreateCompany
   };
 };
 
