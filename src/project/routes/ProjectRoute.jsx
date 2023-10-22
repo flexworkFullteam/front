@@ -3,11 +3,14 @@ import { HomePage } from "../pages/HomePage/HomePage";
 import { SearchPage } from "../pages/SearchPage.jsx/SearchPage";
 import { DetailPage } from "../pages/DetailPage/DetailPage";
 import { AccountPage } from "../pages/AccountPage/AccountPage";
+import { CreateProject } from "../components/CreateProject/CreateProject";
 
 export const ProjectRoute = () => {
   return (
     <Routes>
       <Route path="/home" element={<HomePage />} />
+
+      <Route path="/createProject" element={<CreateProject />} />
 
       <Route path="/search/:term?" element={<SearchPage />} />
 
