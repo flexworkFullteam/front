@@ -1,245 +1,263 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import {
-  Grid,
-  Typography,
-  Button,
-  Container,
-  Stack,
-  TextField,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Checkbox,
-  FormControlLabel,
-} from "@mui/material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useForm } from 'react-hook-form';
+import {Grid, Typography, Button, Container, Stack, TextField, 
+  InputLabel, MenuItem, Checkbox, FormControlLabel, FormControl, Select} from '@mui/material';
 import style from "./generalStyles.module.css";
+import { useAuthStore } from '../../../hooks/useAuthStore';
 
 const ProfessionalComponent = () => {
+
+  const { startCreateProfessional } = useAuthStore();
+
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
-  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    reset();
+    console.log(data); // Aquí puedes manejar los datos del formulario.
+    startCreateProfessional(data);
+     reset(); //! Esto limpia el formulario (opcional).
   });
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
-    <Container
-      sx={{
-        backgroundColor: "white",
-        borderRadius: "8px",
-        padding: "2.5% 0 2.5% 0",
-        mt: "5%",
-        mb: "2%",
-        boxShadow: "5px 5px 10px #000",
-      }}
-    >
-      <Typography
-        variant="h4"
-        sx={{ mb: 5 }}
-        fontWeight="semi bold"
-        color="pear.main"
-      >
-        {" "}
-        Mi cuenta profesional
+    <Container sx={{ mt: 5 }}>
+      <Typography variant="h4" sx={{ mb: 4 }} fontWeight="semi bold" color="persianBlue.main">
+        Información Profesional
       </Typography>
 
       <form onSubmit={onSubmit}>
-        <Stack spacing={3}>
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <InputLabel>Nombre(s)</InputLabel>
-              <TextField
-                placeholder="Nombre"
-                id="nombre"
-                type="text"
-                fullWidth
-                {...register("nombre", {
-                  required: {
-                    value: true,
-                    message: "Este campo es requerido",
-                  },
-                  pattern: {
-                    value: /^(?!\s)[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]+/,
+        <Stack spacing={4}>
+        <Grid container spacing={2}>
+          <Grid item xs={5}>
+            <InputLabel>Nombre</InputLabel>
+            <TextField
+              placeholder="Nombre"
+              id="name"
+              type="text"
+              fullWidth
+              {...register('name', {
+                required: 'Este campo es requerido',
+              })}
+            />
+            {errors.name && <p className={style.errors}>{errors.name.message}</p>}
 
-                    message: "El nombre no es válido",
-                  },
+            <InputLabel>Apellido</InputLabel>
+            <TextField
+              placeholder="Apellido"
+              id="lastname"
+              type="text"
+              fullWidth
+              {...register('lastname', {
+                required: 'Este campo es requerido',
+              })}
+            />
+            {errors.lastname && <p className={style.errors}>{errors.lastname.message}</p>}
+
+            <InputLabel>Edad</InputLabel>
+            <TextField
+              placeholder="Edad"
+              id="age"
+              type="number"
+              fullWidth
+              {...register('age', {
+                required: 'Este campo es requerido',
+              })}
+            />
+            {errors.age && <p className={style.errors}>{errors.age.message}</p>}
+
+            <InputLabel>DNI</InputLabel>
+            <TextField
+              placeholder="DNI"
+              id="dni"
+              type="number"
+              fullWidth
+              {...register('dni', {
+                required: 'Este campo es requerido',
+              })}
+            />
+            {errors.dni && <p className={style.errors}>{errors.dni.message}</p>}
+
+            <InputLabel>Fecha de inicio</InputLabel>
+            <TextField
+              placeholder="Fecha de inicio"
+              id="date_start"
+              type="date"
+              fullWidth
+              {...register('experience.0.date_start', {
+                required: 'Este campo es requerido',
+              })}
+            />
+            {errors.experience?.[0]?.date_start && <p className={style.errors}>{errors.experience?.[0]?.date_start.message}</p>}
+
+            <InputLabel>Fecha de fin</InputLabel>
+            <TextField
+              placeholder="Fecha de fin"
+              id="date_end"
+              type="date"
+              fullWidth
+              {...register('experience.0.date_end', {
+                required: 'Este campo es requerido',
+              })}
+            />
+            {errors.experience?.[0]?.date_end && <p className={style.errors}>{errors.experience?.[0]?.date_end.message}</p>}
+
+            <InputLabel>Empresa</InputLabel>
+            <TextField
+              placeholder="Empresa"
+              id="company"
+              type="text"
+              fullWidth
+              {...register('experience.0.company', {
+                required: 'Este campo es requerido',
+              })}
+            />
+            {errors.experience?.[0]?.company && <p className={style.errors}>{errors.experience?.[0]?.company.message}</p>}
+
+            <InputLabel>Descripción</InputLabel>
+            <TextField
+              placeholder="Descripción"
+              id="description"
+              type="text"
+              fullWidth
+              {...register('experience.0.description', {
+                required: 'Este campo es requerido',
+              })}
+            />
+            {errors.experience?.[0]?.description && <p className={style.errors}>{errors.experience?.[0]?.description.message}</p>}
+
+            <InputLabel>Educacion</InputLabel>
+            <TextField
+              placeholder='Año de Fin'
+              id='year_end'
+              type="date" fullWidth
+              {...register("education.0.year_end", {
+                required: {
+                  value: true,
+                  message: "Este campo es requerido"
+                },
+                pattern: {
+                  value: /^(?!\s)[0-9\s]+/,
+                  message: 'El año no es válido'
+                }
+              })}
+            />
+
+            <InputLabel>Titulo</InputLabel>
+            <TextField
+              placeholder='Titulo'
+              id='degree'
+              type="text" fullWidth
+              {...register("education.0.degree", {
+                required: {
+                  value: true,
+                  message: "Este campo es requerido"
+                },
+                pattern: {
+                  value: /^(?!\s)[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]+/,
+                  message: 'El Degree no es válido'
+                }
+              })}
+            />
+
+            <InputLabel>Institucion</InputLabel>
+            <TextField
+              placeholder='Institucion'
+              id='institution'
+              type="text" fullWidth
+              {...register("education.0.institution", {
+                required: {
+                  value: true,
+                  message: "Este campo es requerido"
+                },
+                pattern: {
+                  value: /^(?!\s)[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]+/,
+                  message: 'La institucion no es válido'
+                }
+              })}
+            />
+
+            <InputLabel>Nacionalidad</InputLabel>
+            <FormControl fullWidth>
+              <Select
+                {...register('id_nationality', {
+                  required: 'Este campo es requerido',
                 })}
-              />
-              {errors.nombre && (
-                <p className={style.errorsP}>{errors.nombre.message}</p>
-              )}
-
-              <InputLabel>Apellido(s)</InputLabel>
-              <TextField
-                placeholder="Apellido"
-                id="apellido"
-                type="text"
-                fullWidth
-                {...register("apellido", {
-                  required: {
-                    value: true,
-                    message: "Este campo es requerido",
-                  },
-                  pattern: {
-                    value: /^(?!\s)[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]+/,
-
-                    message: "El apellido no es válido",
-                  },
-                })}
-              />
-              {errors.apellido && (
-                <p className={style.errorsP}>{errors.apellido.message}</p>
-              )}
-
-              <InputLabel>Tipo de documento</InputLabel>
-              <TextField
-                select
-                id="documento"
-                fullWidth
-                name="documento"
-                defaultValue="ine"
-                {...register("documento")}
+                error={errors.id_nationality}
               >
-                <MenuItem value="pasaporte">Pasaporte</MenuItem>
-                <MenuItem value="licencia">Licencia de conducir</MenuItem>
-                <MenuItem value="rfc">R.F.C</MenuItem>
-                <MenuItem value="ine">Credencial de Elector</MenuItem>
-              </TextField>
+                <MenuItem value={1}>Argentina</MenuItem>
+                <MenuItem value={2}>Brasil</MenuItem>
+                <MenuItem value={3}>Chile</MenuItem>
+              </Select>
+              {errors.id_nationality && <p className={style.errors}>{errors.id_nationality.message}</p>}
+            </FormControl>
 
-              <InputLabel>Número de documento</InputLabel>
-              <TextField
-                placeholder="Número de documento"
-                id="documentNumber"
-                type="text"
-                fullWidth
-                {...register("documentNumber", {
-                  required: {
-                    value: true,
-                    message: "Es un campo obligatorio",
-                  },
-                  pattern: {
-                    value: /^\d+$/,
-                    message: "Debe introducir solo números",
-                  },
+            <InputLabel>Idiomas</InputLabel>
+            <FormControl fullWidth>
+              <Select
+                {...register('languages.0', {
+                  required: 'Este campo es requerido',
                 })}
-              />
-              {errors.documentNumber && (
-                <p className={style.errorsP}>{errors.documentNumber.message}</p>
-              )}
-            </Grid>
+                error={errors.languages?.[0]}
+              >
+                <MenuItem value={1}>Español</MenuItem>
+                <MenuItem value={2}>Inglés</MenuItem>
+                <MenuItem value={3}>Portugués</MenuItem>
+              </Select>
+              {errors.languages?.[0] && <p className={style.errors}>{errors.languages?.[0].message}</p>}
+            </FormControl>
 
-            <Grid item xs={4}>
-              <InputLabel>Teléfono celular</InputLabel>
-              <TextField
-                placeholder="Teléfono celular"
-                id="telefono"
-                type="text"
-                fullWidth
-                {...register("telefono", {
-                  required: {
-                    value: true,
-                    message: "Es un campo obligatorio",
-                  },
-                  pattern: {
-                    value: /^\d+$/,
-                    message: "Debe introducir solo números",
-                  },
+            <InputLabel>Habilidades de desarrollo</InputLabel>
+            <FormControl fullWidth>
+              <Select
+                {...register('itskills.0', {
+                  required: 'Este campo es requerido',
                 })}
-              />
-              {errors.telefono && (
-                <p className={style.errorsP}>{errors.telefono.message}</p>
-              )}
+                error={errors.itskills?.[0]}
+              >
+                <MenuItem value={1}>React</MenuItem>
+                <MenuItem value={2}>Node.js</MenuItem>
+                <MenuItem value={3}>Express</MenuItem>
+              </Select>
+              {errors.itskills?.[0] && <p className={style.errors}>{errors.itskills?.[0].message}</p>}
+            </FormControl>
 
-              <InputLabel>Email</InputLabel>
-              <TextField
-                placeholder="Email"
-                id="correo"
-                type="email"
-                fullWidth
-                {...register("correo", {
-                  required: {
-                    value: true,
-                    message: "Es un campo obligatorio",
-                  },
-                  pattern: {
-                    value: /^[\w\.-]+@[\w\.-]+\.\w+$/,
-                    message: "Email no válido",
-                  },
-                })}
-              />
-              {errors.correo && (
-                <p className={style.errorsP}>{errors.correo.message}</p>
-              )}
+            <InputLabel>Información adicional</InputLabel>
+            <TextField
+              placeholder="Información adicional"
+              id="extra_information"
+              type="text"
+              fullWidth
+              {...register('extra_information')}
+            />
 
-              <InputLabel>Contraseña</InputLabel>
-              <TextField
-                id="contraseña"
-                sx={{ width: "360px" }}
-                placeholder="Contraseña"
-                variant="outlined"
-                type={showPassword ? "text" : "password"}
-                {...register("contraseña", {
-                  required: {
-                    value: true,
-                    message: "Es un campo obligatorio",
-                  },
-                  pattern: {
-                    value: /^(?=\S{6,}$)/,
-                    message:
-                      "La contraseña debe contener al menos 6 carácteres, sin espacios en blanco",
-                  },
-                })}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Button
-                        variant="text"
-                        color="persianBlue"
-                        size="small"
-                        onClick={togglePasswordVisibility}
-                      >
-                        {showPassword ? (
-                          <VisibilityOffIcon />
-                        ) : (
-                          <VisibilityIcon />
-                        )}
-                      </Button>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {errors.contraseña && (
-                <p className={style.errorsP}>{errors.contraseña.message}</p>
-              )}
-            </Grid>
+            <InputLabel>Portfolio</InputLabel>
+            <TextField
+              placeholder="Portfolio"
+              id="portfolio"
+              type="text"
+              fullWidth
+              {...register('portfolio')}
+            />
+
+            <InputLabel>CCI</InputLabel>
+            <TextField
+              placeholder="CCI"
+              id="cci"
+              type="text"
+              fullWidth
+              {...register('cci')}
+            />
           </Grid>
+        </Grid>
+
+          {/* Añade otros campos, como experiencia, educación, idiomas, habilidades, etc. */}
         </Stack>
 
-        <Button
-          variant="contained"
-          color="pear"
-          type="submit"
-          sx={{ margin: 2 }}
-        >
-          <Typography
-            fontFamily="Nunito Sans"
-            fontWeight="bold"
-            color="persianBlue.main"
-          >
-            Guardar cambios
+        <Button variant="contained" color="pear" type="submit" sx={{ margin: 2 }}>
+          <Typography fontFamily="Nunito Sans" fontWeight="bold" color="persianBlue.main">
+            Enviar
           </Typography>
         </Button>
       </form>

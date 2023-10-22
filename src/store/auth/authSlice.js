@@ -6,7 +6,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     status: "not-authenticated", // checking, authenticated
-    user: {}, //{}, profesionalData, companyData
+    user: {}, //{}, profesionalData
     errorMessage: undefined,
   },
   reducers: {
