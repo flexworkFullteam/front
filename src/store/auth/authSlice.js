@@ -5,8 +5,8 @@ import companyData from "../../utils/company.json";
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    status: "authenticated", // checking, authenticated
-    user: companyData, //{}, profesionalData
+    status: "not-authenticated", // checking, authenticated
+    user: {}, //{}, profesionalData, companyData
     errorMessage: undefined,
   },
   reducers: {

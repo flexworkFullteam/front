@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./auth/authSlice";
 import { projectSlice } from "./project/projectSlice";
 import { uiSlice } from "./ui/uiSlice";
-import { dbTableSlice } from "./dbtable/dbtableSlice";
+import { dbTableSlice } from "./dbTable/dbTableSlice";
 
 // import { composeWithDevTools } from 'redux-devtools-extension'; // Importa la función composeWithDevTools
 
