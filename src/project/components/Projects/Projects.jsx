@@ -11,13 +11,14 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Candidates } from "../Candidates/Candidates";
-import { useProjectStore } from "../../../hooks/useProjectStore";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import styles from "./Project.module.css";
 import { getCompanyProjects } from "../../../helpers/getCompanyProjects";
+import { CreateProject } from "../CreateProject/CreateProject";
 
 export const Projects = () => {
   const [open, setOpen] = useState(false);
+  const [createOpen, setCreateOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [id, setId] = useState(1);
@@ -31,7 +32,10 @@ export const Projects = () => {
     setId(id);
     setOpen(true);
   };
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setCreateOpen(false);
+  };
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -64,6 +68,14 @@ export const Projects = () => {
           </div>
         </Modal>
       )}
+
+      {setOpen && (
+        <Modal open={createOpen} onClose={() => setCreateOpen(false)}>
+          <div>
+            <CreateProject handleClose={handleClose} />
+          </div>
+        </Modal>
+      )}
       <div
         style={{
           display: "flex",
@@ -77,7 +89,7 @@ export const Projects = () => {
         <Button
           variant="contained"
           color="persianBlue"
-          onClick={() => navigate("/createProject")}
+          onClick={() => setCreateOpen(true)}
         >
           <Typography
             fontFamily="Nunito Sans"

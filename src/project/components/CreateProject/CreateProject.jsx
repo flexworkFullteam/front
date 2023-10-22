@@ -10,11 +10,12 @@ import {
   InputLabel,
   MenuItem,
 } from "@mui/material";
+import { CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { postProject } from "../../../helpers/postProject";
-import style from "./CreateProject.module.css";
+import styles from "./CreateProject.module.css";
 
-export const CreateProject = () => {
+export const CreateProject = ({ handleClose }) => {
   const {
     register,
     reset,
@@ -42,6 +43,12 @@ export const CreateProject = () => {
         boxShadow: "5px 5px 10px #000",
       }}
     >
+      <div className={styles.topContainer}>
+        <CloseRoundedIcon
+          className={styles.closeButton}
+          onClick={handleClose}
+        />
+      </div>
       <Typography
         variant="h4"
         sx={{ mb: 4 }}
@@ -75,7 +82,7 @@ export const CreateProject = () => {
                 })}
               />
               {errors.title && (
-                <p className={style.errors}>{errors.title.message}</p>
+                <p className={styles.errors}>{errors.title.message}</p>
               )}
 
               <InputLabel>Descripción</InputLabel>
@@ -94,7 +101,7 @@ export const CreateProject = () => {
                 })}
               />
               {errors.description && (
-                <p className={style.errors}>{errors.description.message}</p>
+                <p className={styles.errors}>{errors.description.message}</p>
               )}
 
               <InputLabel>Campo</InputLabel>
@@ -154,7 +161,7 @@ export const CreateProject = () => {
                 })}
               />
               {errors.salary && (
-                <p className={style.errors}>{errors.salary.message}</p>
+                <p className={styles.errors}>{errors.salary.message}</p>
               )}
 
               <InputLabel>Experiencia requerida</InputLabel>
@@ -187,7 +194,7 @@ export const CreateProject = () => {
                 })}
               />
               {errors.lapse && (
-                <p className={style.errors}>{errors.lapse.message}</p>
+                <p className={styles.errors}>{errors.lapse.message}</p>
               )}
             </Grid>
           </Grid>
