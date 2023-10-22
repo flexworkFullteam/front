@@ -10,8 +10,6 @@ export const ProjectRoute = () => {
     <Routes>
       <Route path="/home" element={<HomePage />} />
 
-      <Route path="/createProject" element={<CreateProject />} />
-
       <Route path="/search/:term?" element={<SearchPage />} />
 
       <Route path="/detail/:id" element={<DetailPage />} />
