@@ -11,13 +11,16 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Candidates } from "../Candidates/Candidates";
-import { useProjectStore } from "../../../hooks/useProjectStore";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import styles from "./Project.module.css";
 import { getCompanyProjects } from "../../../helpers/getCompanyProjects";
+import { CreateProject } from "../CreateProject/CreateProject";
+import { useProjectStore } from "../../../hooks/useProjectStore";
 
 export const Projects = () => {
+  const { deleteProject } = useProjectStore();
   const [open, setOpen] = useState(false);
+  const [createOpen, setCreateOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [id, setId] = useState(1);
@@ -31,7 +34,15 @@ export const Projects = () => {
     setId(id);
     setOpen(true);
   };
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setCreateOpen(false);
+  };
+
+  const handleDelete = (id) => {
+    deleteProject(id);
+    callProjects();
+  };
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -48,12 +59,14 @@ export const Projects = () => {
   const visibleProjects = companyProjects?.slice(startIndex, endIndex);
 
   const callProjects = async () => {
-    const data = await getCompanyProjects(user.id);
+    const data = await getCompanyProjects(user.company_id);
     setCompanyProjects(data);
   };
   useEffect(() => {
-    callProjects();
-  }, []);
+    if (user && user.company_id) {
+      callProjects();
+    }
+  }, [user]);
 
   return (
     <div>
@@ -61,6 +74,17 @@ export const Projects = () => {
         <Modal open={open} onClose={handleClose}>
           <div>
             <Candidates handleClose={handleClose} id={id} />
+          </div>
+        </Modal>
+      )}
+
+      {setOpen && (
+        <Modal open={createOpen} onClose={() => setCreateOpen(false)}>
+          <div>
+            <CreateProject
+              handleClose={handleClose}
+              callProjects={callProjects}
+            />
           </div>
         </Modal>
       )}
@@ -77,7 +101,7 @@ export const Projects = () => {
         <Button
           variant="contained"
           color="persianBlue"
-          onClick={() => navigate()}
+          onClick={() => setCreateOpen(true)}
         >
           <Typography
             fontFamily="Nunito Sans"
@@ -98,7 +122,6 @@ export const Projects = () => {
               ":hover": { cursor: "pointer" },
             }}
           >
-            {/*onClick */}
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
               <div
                 className={styles.cardLeft}
@@ -131,7 +154,7 @@ export const Projects = () => {
                   Ver postulantes
                 </Button>
 
-                <DeleteIcon />
+                <DeleteIcon onClick={() => handleDelete(project.id)} />
               </div>
             </CardContent>
           </Card>

@@ -30,7 +30,6 @@ export const Candidates = ({ handleClose, id }) => {
     const data = await getCandidateById(id);
     setCandidates(data);
   };
-  console.log(candidates);
 
   const pageCount = Math.ceil(candidates?.length / perPage);
   const startIndex = (page - 1) * perPage;

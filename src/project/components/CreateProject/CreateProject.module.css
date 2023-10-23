@@ -7,3 +7,19 @@
 button p{
     text-transform: capitalize;
 }
+
+.topContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.closeButton{
+    cursor: pointer;
+    position: relative;
+    left: 96%;
+    transition: 0.12s ease-in-out !important;
+}
+
+.closeButton:hover{
+    transform: rotate(90deg) scale(1.3);
+}

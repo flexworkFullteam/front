@@ -6,13 +6,15 @@ import { Footer } from "../project/components/Footer/Footer";
 import { AuthRoute } from "../auth/routes/AuthRoute";
 import { ProjectRoute } from "../project/routes/ProjectRoute";
 import { useProjectStore } from "../hooks/useProjectStore";
+import { useAuthStore } from "../hooks/useAuthStore";
 
 export const AppRouter = () => {
-  const { status } = useSelector((state) => state.auth);
   const { projects, startLoadingProject } = useProjectStore();
+  const { status, startLoginWithToken } = useAuthStore();
 
   useEffect(() => {
     startLoadingProject();
+    startLoginWithToken();
   }, []);
 
   return (

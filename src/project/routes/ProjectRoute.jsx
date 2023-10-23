@@ -3,7 +3,7 @@ import { HomePage } from "../pages/HomePage/HomePage";
 import { SearchPage } from "../pages/SearchPage.jsx/SearchPage";
 import { DetailPage } from "../pages/DetailPage/DetailPage";
 import { AccountPage } from "../pages/AccountPage/AccountPage";
-import CompanyComponent from "../components/Account/CompanyComponent";
+import { CreateProject } from "../components/CreateProject/CreateProject";
 
 export const ProjectRoute = () => {
   return (
