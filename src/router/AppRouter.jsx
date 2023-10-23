@@ -23,13 +23,14 @@ export const AppRouter = () => {
 
       <Routes>
         <Route path="/*" element={<ProjectRoute status={status} />} />
-
-        {/* {status === "not-auhenticated" &&  */}
+        
+        {status === 'not-authenticated' && (
+          <>
             <Route path="/auth/*" element={<AuthRoute />} />
+            <Route path="/*" element={<Navigate to="/auth/login" />} />         
+          </>
+        )}
 
-        {/* {status === "not-auhenticated" &&  */}
-            <Route path="/*" element={<Navigate to="/auth/login" />} />
-          
       </Routes>
 
       <Footer />
