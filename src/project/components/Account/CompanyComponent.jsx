@@ -1,40 +1,22 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Grid,
-  Typography,
-  Button,
-  Container,
-  Stack,
-  TextField,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Checkbox,
-  FormControlLabel,
-} from "@mui/material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, Select } from "@mui/material";
 import style from "./generalStyles.module.css";
+import dayjs from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+
+
 
 export const CompanyComponent = () => {
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const [showPassword, setShowPassword] = useState(false);
+  const { register, reset, watch, handleSubmit, formState: { errors } } = useForm();
+  console.log(errors);
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    console.log(data)
     reset();
   });
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
 
   return (
     <Container
@@ -56,15 +38,92 @@ export const CompanyComponent = () => {
 
       <form onSubmit={onSubmit}>
         <Stack spacing={3}>
+
+          <Typography
+            variant="h6"
+            fontFamily="Nunito Sans"
+            fontWeight="bold"
+            color="persianBlue.main"
+          >
+            Completa los datos de la empresa
+          </Typography>
           <Grid container spacing={2}>
             <Grid item xs={4}>
-              <InputLabel>Nombre(s)</InputLabel>
+              <InputLabel>Nombre de la empresa</InputLabel>
               <TextField
-                placeholder="Nombre"
-                id="nombreRepre"
+                placeholder="Nombre de la empresa"
+                id="businessName"
                 type="text"
                 fullWidth
-                {...register("nombreRepre", {
+                {...register("businessName", {
+                  required: {
+                    value: true,
+                    message: "Este campo es requerido",
+                  },
+                  pattern: {
+                    value: /^(?!\s).*/,
+                    message: "Este campo es requerido",
+                  },
+                })}
+              />
+              {errors.businessName && (<p className={style.errors}>{errors.businessName.message}</p>)}
+
+              <InputLabel>Industria</InputLabel>
+              <TextField
+                select
+                id="activityType"
+                fullWidth
+                name="activityType"
+                defaultValue="1"
+                {...register("activityType")}
+              >
+                <MenuItem value="1"> Servicios</MenuItem>
+              </TextField>
+
+              <InputLabel>Fecha de inicio</InputLabel>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DesktopDatePicker
+                  label="Date desktop"
+                  inputFormat="MM/DD/YYYY"
+                  value={watch('date')}
+                  {...register('date', { required: true })} // Utiliza register para la fecha
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+              {/* <TextField
+                placeholder="Fecha de inicio"
+                id="startDate"
+                fullWidth
+                {...register("startDate")}
+                defaultValue="2023-10-19"
+              /> */}
+
+              <InputLabel>Dirección Fiscal</InputLabel>
+              <TextField
+                placeholder="fiscalAddress"
+                id="fiscalAddress"
+                type="text"
+                fullWidth
+                {...register("fiscalAddress", {
+                  required: {
+                    value: true,
+                    message: "Este campo es requerido",
+                  },
+                  pattern: {
+                    value: /^(?!\s).*/,
+                    message: "Este campo es requerido",
+                  },
+                })}
+              />
+              {errors.fiscalAddress && (<p className={style.errors}>{errors.fiscalAddress.message}</p>)}
+
+              <InputLabel>Representante Legal</InputLabel>
+              <TextField
+                placeholder="Representante Legal"
+                id="legalRepresentative"
+                type="text"
+                fullWidth
+                {...register("legalRepresentative", {
                   required: {
                     value: true,
                     message: "Este campo es requerido",
@@ -77,17 +136,64 @@ export const CompanyComponent = () => {
                 })}
               />
 
-              {errors.nombreRepre && (
-                <p className={style.errors}>{errors.nombreRepre.message}</p>
+              {errors.legalRepresentative && (
+                <p className={style.errors}>{errors.legalRepresentative.message}</p>
               )}
 
-              <InputLabel>Apellido(s)</InputLabel>
+              <InputLabel>Cuenta de banco</InputLabel>
               <TextField
-                placeholder="Apellido"
-                id="apellidoRepre"
+                placeholder="Cuenta de banco"
+                id="bankAccount"
                 type="text"
                 fullWidth
-                {...register("apellidoRepre", {
+                {...register("bankAccount", {
+                  required: {
+                    value: true,
+                    message: "Este campo es requerido",
+                  },
+                  pattern: {
+                    value: /^\d+$/,
+                    message: "Ingresa solo números",
+                  },
+                })}
+              />
+              {errors.bankAccount && (
+                <p className={style.errors}>{errors.bankAccount.message}</p>
+              )}
+
+              <InputLabel>Nacionalidad</InputLabel>
+              <TextField
+                select
+                id="nationality"
+                fullWidth
+                name="nationality"
+                defaultValue="1"
+                {...register("nationality")}
+              >
+                <MenuItem value="1"> Mexicana</MenuItem>
+              </TextField>
+
+              <InputLabel>Idiomas</InputLabel>
+              <Select
+                fullWidth
+                {...register("languages")}
+                multiple
+                defaultValue={[1]}
+              >
+                <MenuItem value={1}>Español</MenuItem>
+                <MenuItem value={2}>Inglés</MenuItem>
+                <MenuItem value={3}>Aleman</MenuItem>
+              </Select>
+            </Grid>
+
+            <Grid item xs={4}>
+
+              <InputLabel>Nombre</InputLabel>
+              <TextField
+                placeholder="Nombre"
+                type="text"
+                fullWidth
+                {...register("data.nombre", {
                   required: {
                     value: true,
                     message: "Este campo es requerido",
@@ -95,23 +201,38 @@ export const CompanyComponent = () => {
                   pattern: {
                     value: /^(?!\s)[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]+/,
 
-                    message: "El apellido no es válido",
+                    message: "El nombre no es válido",
                   },
                 })}
               />
-              {errors.apellidoRepre && (
-                <p className={style.errors}>{errors.apellidoRepre.message}</p>
-              )}
-            </Grid>
+              {/* {errors.data[nombre] && (<p className={style.errors}>{errors.data[nombre].message}</p>)} */}
 
-            <Grid item xs={4}>
+              <InputLabel>Teléfono</InputLabel>
+              <TextField
+                placeholder="Teléfono"
+                id="telefono"
+                type="text"
+                fullWidth
+                {...register("data.telefono", {
+                  required: {
+                    value: true,
+                    message: "Este campo es requerido",
+                  },
+                  pattern: {
+                    value: /^\d+$/,
+                    message: "Ingresa solo números",
+                  },
+                })}
+              />
+              {/* {errors.data.telefono && (<p className={style.errors}>{errors.data.telefono.message}</p>)} */}
+
               <InputLabel>Email</InputLabel>
               <TextField
                 placeholder="Email"
-                id="correoRepre"
+                id="email"
                 type="email"
                 fullWidth
-                {...register("correoRepre", {
+                {...register("data.email", {
                   required: {
                     value: true,
                     message: "Es un campo obligatorio",
@@ -122,218 +243,32 @@ export const CompanyComponent = () => {
                   },
                 })}
               />
-              {errors.correoRepre && (
-                <p className={style.errors}>{errors.correoRepre.message}</p>
-              )}
+              {/* {errors.data.email && ( <p className={style.errors}>{errors.data.email.message}</p>)} */}
 
-              <InputLabel>Contraseña</InputLabel>
+              <InputLabel>Horario</InputLabel>
               <TextField
-                id="contraseñaComp"
+                placeholder="Horario"
+                id="horario"
+                type="text"
                 fullWidth
-                placeholder="Contraseña"
-                variant="outlined"
-                type={showPassword ? "text" : "password"}
-                {...register("contraseñaComp", {
+                {...register("data.horario")}
+                defaultValue="9-6pm"
+              />
+
+              <InputLabel>Contacto</InputLabel>
+              <TextField
+                placeholder="Contacto"
+                id="contacto"
+                type="text"
+                fullWidth
+                {...register("data.contacto", {
                   required: {
                     value: true,
                     message: "Es un campo obligatorio",
-                  },
-                  pattern: {
-                    value: /^(?=\S{6,}$)/,
-                    message:
-                      "La contraseña debe contener al menos 6 carácteres, sin espacios en blanco",
-                  },
-                })}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Button
-                        variant="text"
-                        color="persianBlue"
-                        size="small"
-                        onClick={togglePasswordVisibility}
-                      >
-                        {showPassword ? (
-                          <VisibilityOffIcon />
-                        ) : (
-                          <VisibilityIcon />
-                        )}
-                      </Button>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {errors.contraseñaComp && (
-                <p className={style.errors}>{errors.contraseñaComp.message}</p>
-              )}
-            </Grid>
-          </Grid>
-
-          <Typography
-            variant="h6"
-            fontFamily="Nunito Sans"
-            fontWeight="bold"
-            color="persianBlue.main"
-          >
-            Ingresa datos de la empresa
-          </Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <InputLabel>Nombre de la empresa</InputLabel>
-              <TextField
-                placeholder="Nombre de la empresa"
-                id="nombreEmpresa"
-                type="text"
-                fullWidth
-                {...register("nombreEmpresa", {
-                  required: {
-                    value: true,
-                    message: "Este campo es requerido",
-                  },
-                  pattern: {
-                    value: /^(?!\s).*/,
-                    message: "Este campo es requerido",
-                  },
+                  }
                 })}
               />
-              {errors.nombreEmpresa && (
-                <p className={style.errors}>{errors.nombreEmpresa.message}</p>
-              )}
-
-              <InputLabel>Condición fiscal</InputLabel>
-              <TextField
-                select
-                id="condicion"
-                fullWidth
-                name="condicion"
-                defaultValue="rfcMoral"
-                {...register("condicion")}
-              >
-                <MenuItem value="rfcGeneral">
-                  RFC Genérico Público General
-                </MenuItem>
-                <MenuItem value="rfcMoral">RFC Persona Moral</MenuItem>
-                <MenuItem value="rfcFisica">RFC Persona Física</MenuItem>
-              </TextField>
-
-              <InputLabel>Calle</InputLabel>
-              <TextField
-                placeholder="Calle"
-                id="calle"
-                type="text"
-                fullWidth
-                {...register("calle", {
-                  required: {
-                    value: true,
-                    message: "Este campo es requerido",
-                  },
-                  pattern: {
-                    value: /^(?!\s).*/,
-                    message: "Este campo es requerido",
-                  },
-                })}
-              />
-              {errors.calle && (
-                <p className={style.errors}>{errors.calle.message}</p>
-              )}
-
-              <InputLabel>Industria</InputLabel>
-              <TextField
-                select
-                id="industria"
-                fullWidth
-                name="industria"
-                defaultValue="rfcGeneral"
-                {...register("industria")}
-              >
-                <MenuItem value="rfcGeneral">
-                  RFC Genérico Público General
-                </MenuItem>
-              </TextField>
-            </Grid>
-
-            <Grid item xs={4}>
-              <InputLabel>Razón Social</InputLabel>
-              <TextField
-                placeholder="Razón Social"
-                id="razon"
-                type="text"
-                fullWidth
-                {...register("razon", {
-                  required: {
-                    value: true,
-                    message: "Este campo es requerido",
-                  },
-                  pattern: {
-                    value: /^(?!\s).*/,
-                    message: "Este campo es requerido",
-                  },
-                })}
-              />
-              {errors.razon && (
-                <p className={style.errors}>{errors.razon.message}</p>
-              )}
-
-              <InputLabel>N°.Documento</InputLabel>
-              <TextField
-                placeholder="Documento"
-                id="documento"
-                type="text"
-                fullWidth
-                {...register("documento", {
-                  required: {
-                    value: true,
-                    message: "Este campo es requerido",
-                  },
-                  pattern: {
-                    value: /^\d+$/,
-                    message: "Ingresa solo números",
-                  },
-                })}
-              />
-              {errors.documento && (
-                <p className={style.errors}>{errors.documento.message}</p>
-              )}
-
-              <InputLabel>Teléfono</InputLabel>
-              <TextField
-                placeholder="Teléfono"
-                id="telefono"
-                type="text"
-                fullWidth
-                {...register("telefono", {
-                  required: {
-                    value: true,
-                    message: "Este campo es requerido",
-                  },
-                  pattern: {
-                    value: /^\d+$/,
-                    message: "Ingresa solo números",
-                  },
-                })}
-              />
-              {errors.telefono && (
-                <p className={style.errors}>{errors.telefono.message}</p>
-              )}
-
-              <InputLabel>Cantidad de empleados</InputLabel>
-              <TextField
-                select
-                id="empleados"
-                fullWidth
-                name="empleados"
-                defaultValue="1+"
-                {...register("empleados")}
-              >
-                <MenuItem value="1+">Entre 1 y 10</MenuItem>
-                <MenuItem value="11+">Entre 11 y 50</MenuItem>
-                <MenuItem value="51+">Entre 51 y 150</MenuItem>
-                <MenuItem value="151+">Entre 151 y 300</MenuItem>
-                <MenuItem value="301+">Entre 301 y 500</MenuItem>
-                <MenuItem value="501+">Entre 501 y 1000</MenuItem>
-                <MenuItem value="1001+">Entre 1001 y 5000</MenuItem>
-                <MenuItem value="5001+">Más de 5001</MenuItem>
-              </TextField>
+              {/* {errors.data.contacto && (<p className={style.errors}>{errors.data.contacto.message}</p>)} */}
             </Grid>
           </Grid>
         </Stack>

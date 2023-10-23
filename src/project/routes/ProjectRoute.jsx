@@ -3,6 +3,7 @@ import { HomePage } from "../pages/HomePage/HomePage";
 import { SearchPage } from "../pages/SearchPage.jsx/SearchPage";
 import { DetailPage } from "../pages/DetailPage/DetailPage";
 import { AccountPage } from "../pages/AccountPage/AccountPage";
+import CompanyComponent from "../components/Account/CompanyComponent";
 
 export const ProjectRoute = () => {
   return (
@@ -14,6 +15,9 @@ export const ProjectRoute = () => {
       <Route path="/detail/:id" element={<DetailPage />} />
 
       <Route path="/myaccount" element={<AccountPage />} />
+
+      <Route path="/company" element={<CompanyComponent/>} />
+
 
       <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>
