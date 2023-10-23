@@ -60,13 +60,13 @@ export const SearchPage = () => {
     navigate("/search");
   };
 
-  const pageCount = Math.ceil(projects.length / perPage);
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
-  const visibleProjects = projects.slice(startIndex, endIndex);
+  const existingProjects = projects.filter((project) => project.state === true);
+  const pageCount = Math.ceil(existingProjects.length / perPage);
+  const visibleProjects = existingProjects.slice(startIndex, endIndex);
 
   useEffect(() => {
-    console.log(!term);
     if (!term === false) {
       dispatch(onFilterProjectsByTerm(term));
     }

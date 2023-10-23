@@ -15,8 +15,10 @@ import { useAuthStore } from "../../../hooks/useAuthStore";
 import styles from "./Project.module.css";
 import { getCompanyProjects } from "../../../helpers/getCompanyProjects";
 import { CreateProject } from "../CreateProject/CreateProject";
+import { useProjectStore } from "../../../hooks/useProjectStore";
 
 export const Projects = () => {
+  const { deleteProject } = useProjectStore();
   const [open, setOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
   const [page, setPage] = useState(1);
@@ -37,6 +39,11 @@ export const Projects = () => {
     setCreateOpen(false);
   };
 
+  const handleDelete = (id) => {
+    deleteProject(id);
+    callProjects();
+  };
+
   const handlePageChange = (event, value) => {
     setPage(value);
   };
@@ -52,12 +59,14 @@ export const Projects = () => {
   const visibleProjects = companyProjects?.slice(startIndex, endIndex);
 
   const callProjects = async () => {
-    const data = await getCompanyProjects(user.id);
+    const data = await getCompanyProjects(user.company_id);
     setCompanyProjects(data);
   };
   useEffect(() => {
-    callProjects();
-  }, []);
+    if (user && user.company_id) {
+      callProjects();
+    }
+  }, [user]);
 
   return (
     <div>
@@ -72,7 +81,10 @@ export const Projects = () => {
       {setOpen && (
         <Modal open={createOpen} onClose={() => setCreateOpen(false)}>
           <div>
-            <CreateProject handleClose={handleClose} />
+            <CreateProject
+              handleClose={handleClose}
+              callProjects={callProjects}
+            />
           </div>
         </Modal>
       )}
@@ -110,7 +122,6 @@ export const Projects = () => {
               ":hover": { cursor: "pointer" },
             }}
           >
-            {/*onClick */}
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
               <div
                 className={styles.cardLeft}
@@ -143,7 +154,7 @@ export const Projects = () => {
                   Ver postulantes
                 </Button>
 
-                <DeleteIcon />
+                <DeleteIcon onClick={() => handleDelete(project.id)} />
               </div>
             </CardContent>
           </Card>
