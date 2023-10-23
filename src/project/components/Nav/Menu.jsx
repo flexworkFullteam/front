@@ -26,7 +26,14 @@ export const Menu = () => {
   const handleClose = (value) => {
     if (value === "logout") {
       dispatch(onLogout());
+      localStorage.clear();
+      navigate("/home");
     }
+
+    if( value === "myaccount"){
+      navigate("/myaccount");
+    }
+
     setOpen(false);
   };
 
@@ -86,7 +93,7 @@ export const Menu = () => {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem onClick={handleClose}>Perfil</MenuItem>
-                  <MenuItem onClick={() => navigate("/myaccount")}>
+                  <MenuItem onClick={() => handleClose("myaccount")}>
                     Mi Cuenta
                   </MenuItem>
                   <MenuItem onClick={() => handleClose("logout")}>

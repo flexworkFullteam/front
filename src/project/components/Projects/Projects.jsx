@@ -59,12 +59,12 @@ export const Projects = () => {
   const visibleProjects = companyProjects?.slice(startIndex, endIndex);
 
   const callProjects = async () => {
-    const data = await getCompanyProjects(user.userMapped.company_id);
+    const data = await getCompanyProjects(user.company_id);
     setCompanyProjects(data);
   };
   useEffect(() => {
-    if (user && user.userMapped.company_id) {
-      console.log(user.userMapped.company_id);
+    if (user && user.company_id) {
+      console.log(user.company_id);
       callProjects();
     }
   }, [user]);

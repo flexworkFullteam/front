@@ -26,7 +26,7 @@ export const CreateProject = ({ handleClose, callProjects }) => {
   const { user } = useAuthStore();
 
   const onSubmit = handleSubmit((data) => {
-    const id = user.userMapped.company_id;
+    const id = user.company_id;
     const formData = { ...data, companyId: id };
     postProject(formData);
     callProjects();
