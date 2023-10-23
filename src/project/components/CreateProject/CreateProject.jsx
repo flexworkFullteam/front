@@ -15,7 +15,7 @@ import { useAuthStore } from "../../../hooks/useAuthStore";
 import { postProject } from "../../../helpers/postProject";
 import styles from "./CreateProject.module.css";
 
-export const CreateProject = ({ handleClose }) => {
+export const CreateProject = ({ handleClose, callProjects }) => {
   const {
     register,
     reset,
@@ -29,6 +29,7 @@ export const CreateProject = ({ handleClose }) => {
     const id = user.company_id;
     const formData = { ...data, companyId: id };
     postProject(formData);
+    callProjects();
     reset();
   });
 

@@ -1,10 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onLoadingProjects, onGetAllProjects, onAddProject} from "../store/project/projectSlice";
+import {
+  onLoadingProjects,
+  onGetAllProjects,
+  onAddProject,
+} from "../store/project/projectSlice";
 import { projectAPI } from "../api/projectAPI";
 
 export const useProjectStore = () => {
   const dispatch = useDispatch();
-  const { projects, allProjects, isLoading } = useSelector((state) => state.project);
+  const { projects, allProjects, isLoading } = useSelector(
+    (state) => state.project
+  );
 
   const startLoadingProject = async () => {
     try {
@@ -16,16 +22,23 @@ export const useProjectStore = () => {
     }
   };
 
-  const startAddProject = async (project) => {    
+  const startAddProject = async (project) => {
     try {
       dispatch(onLoadingProjects());
       const { data } = await projectAPI.post(`/project`, project);
       dispatch(onAddProject(data));
-
     } catch (error) {
       alert(error.message);
-    }  
-  }
+    }
+  };
+
+  const deleteProject = async (id) => {
+    try {
+      await projectAPI.delete(`/project/${id}`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return {
     //propiedades
@@ -36,5 +49,6 @@ export const useProjectStore = () => {
     //metodos
     startLoadingProject,
     startAddProject,
+    deleteProject,
   };
 };
