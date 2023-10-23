@@ -12,7 +12,8 @@ export const useProjectStore = () => {
       const { data } = await projectAPI(`/projects`);
       dispatch(onGetAllProjects(data));
     } catch (error) {
-      alert(error.message);
+      console.error(error);
+      // alert(error.message);
     }
   };
 
@@ -21,8 +22,9 @@ export const useProjectStore = () => {
       dispatch(onLoadingProjects());
       const { data } = await projectAPI.post(`/project`, project);
       dispatch(onAddProject(data));
-
+      alert("Proyecto creado");
     } catch (error) {
+      // console.error(error);
       alert(error.message);
     }  
   }

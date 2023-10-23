@@ -1,6 +1,7 @@
 import { projectAPI } from "../api/projectAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { onChecking, onClearEvents, onLogin, onLogout, onRegister } from "../store/auth/authSlice";
+import jwtDecode from "jwt-decode";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
@@ -82,6 +83,22 @@ export const useAuthStore = () => {
       }
     }
     
+    const startLoginWithToken = async () => {
+    
+      const token = localStorage.getItem("token");
+      try {
+        const {userId} = jwtDecode(token);
+        // console.log(userId)
+        const {data} = await projectAPI.get(`/user/${userId}`);
+        console.log(data)
+        dispatch(onLogin(data))
+
+      } catch (error) {
+        alert(error.errorMessage)
+      } 
+    
+    }
+
   return {
     //propiedades
     user,
@@ -93,7 +110,8 @@ export const useAuthStore = () => {
     startRegister,
     startLogout,
     startCreateProfessional,
-    startCreateCompany
+    startCreateCompany,
+    startLoginWithToken
   };
 };
 
