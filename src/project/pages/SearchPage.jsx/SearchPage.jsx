@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -30,7 +30,7 @@ import {
   onFilterProjectsByType,
   onFilterProjectsByTerm,
 } from "../../../store/project/projectSlice";
-import { useEffect } from "react";
+import { onSetActiveEvent } from "../../../store/project/projectSlice";
 
 export const SearchPage = () => {
   const dispatch = useDispatch();
@@ -58,6 +58,12 @@ export const SearchPage = () => {
   const handleDelete = () => {
     dispatch(onDeleteFilters());
     navigate("/search");
+  };
+
+  const handleDetail = (project) => {
+    dispatch(onSetActiveEvent(project));
+    localStorage.setItem("detail", JSON.stringify(project));
+    navigate(`/detail/${project.id}`);
   };
 
   const startIndex = (page - 1) * perPage;
@@ -244,7 +250,7 @@ export const SearchPage = () => {
           <Card
             key={project.id}
             sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }}
-            onClick={() => navigate(`/detail/${project.id}`)}
+            onClick={() => handleDetail(project)}
           >
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
               <div className={styles.cardLeft}>

@@ -3,12 +3,13 @@ import {
   onLoadingProjects,
   onGetAllProjects,
   onAddProject,
+  onSetActiveEvent,
 } from "../store/project/projectSlice";
 import { projectAPI } from "../api/projectAPI";
 
 export const useProjectStore = () => {
   const dispatch = useDispatch();
-  const { projects, allProjects, isLoading } = useSelector(
+  const { projects, allProjects, isLoading, activeEvent } = useSelector(
     (state) => state.project
   );
 
@@ -35,6 +36,15 @@ export const useProjectStore = () => {
     }
   };
 
+  const getProjectById = async (id) => {
+    try {
+      const { data } = await projectAPI(`/project/${id}`);
+      dispatch(onSetActiveEvent(data));
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   const deleteProject = async (id) => {
     try {
       await projectAPI.delete(`/project/${id}`);
@@ -48,10 +58,12 @@ export const useProjectStore = () => {
     projects,
     allProjects,
     isLoading,
+    activeEvent,
 
     //metodos
     startLoadingProject,
     startAddProject,
     deleteProject,
+    getProjectById,
   };
 };
