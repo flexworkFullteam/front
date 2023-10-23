@@ -37,7 +37,7 @@ const ProfessionalComponent = () => {
               id="name"
               type="text"
               fullWidth
-              {...register('name', {
+              {...register('data.name', {
                 required: 'Este campo es requerido',
               })}
             />
@@ -49,7 +49,7 @@ const ProfessionalComponent = () => {
               id="lastname"
               type="text"
               fullWidth
-              {...register('lastname', {
+              {...register('data.lastname', {
                 required: 'Este campo es requerido',
               })}
             />
@@ -61,7 +61,7 @@ const ProfessionalComponent = () => {
               id="age"
               type="number"
               fullWidth
-              {...register('age', {
+              {...register('data.age', {
                 required: 'Este campo es requerido',
               })}
             />
@@ -73,7 +73,7 @@ const ProfessionalComponent = () => {
               id="dni"
               type="number"
               fullWidth
-              {...register('dni', {
+              {...register('data.dni', {
                 required: 'Este campo es requerido',
               })}
             />
