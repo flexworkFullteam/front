@@ -2,12 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { projectAPI } from "../api/projectAPI";
-import { onChecking, onClearEvents, onLogin, onLogout, onRegister } from "../store/auth/authSlice";
+import {
+  onChecking,
+  onClearEvents,
+  onLogin,
+  onLogout,
+  onRegister,
+} from "../store/auth/authSlice";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
   const { user, status, errorMessage } = useSelector((state) => state.auth);
-  const { loadingAccount, setLoadingAccount } = useSelector((state) => state.ui);
+  const { loadingAccount, setLoadingAccount } = useSelector(
+    (state) => state.ui
+  );
   const navigate = useNavigate();
 
   const startLogin = async ({ email, password }) => {
@@ -69,15 +77,29 @@ export const useAuthStore = () => {
       // dispatch(onChecking());
       console.log(professional);
       // dispatch(setLoadingAccount(true));
-      const { data } = await projectAPI.post("/professional", professional);
+      const { data } = await projectAPI.post("/professional/", professional);
       console.log(data);
       // dispatch(setLoadingAccount(false));
       alert("Datos personales guardados");
     } catch (error) {
       console.log(error);
-      console.log("catch", professional)
+      console.log("catch", professional);
       // alert(error.errorMessage);
       // dispatch(onLogout("Error al crear profesional"));
+    }
+  };
+
+  const startUpdateProfessional = async (id, professional) => {
+    try {
+      const { data } = await projectAPI.put(
+        `/professional/${id}`,
+        professional
+      );
+      console.log(data);
+      console.log(id);
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
     }
   };
 
@@ -97,22 +119,18 @@ export const useAuthStore = () => {
     }
   };
 
-      
   const startLoginWithToken = async () => {
-    
     const token = localStorage.getItem("token");
     try {
-      const {userId} = jwtDecode(token);
+      const { userId } = jwtDecode(token);
       // console.log(userId)
-      const {data} = await projectAPI.get(`/user/${userId}`);
+      const { data } = await projectAPI.get(`/user/${userId}`);
       // console.log(data.userMapped)
-      dispatch(onLogin(data.userMapped))
-
+      dispatch(onLogin(data.userMapped));
     } catch (error) {
       // alert(error.errorMessage)
-    } 
-  
-  }
+    }
+  };
 
   return {
     //propiedades
@@ -125,7 +143,8 @@ export const useAuthStore = () => {
     startRegister,
     startLogout,
     startCreateProfessional,
+    startUpdateProfessional,
     startCreateCompany,
-    startLoginWithToken
+    startLoginWithToken,
   };
 };
