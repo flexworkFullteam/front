@@ -22,11 +22,15 @@ export const AppRouter = () => {
       <Nav />
 
       <Routes>
-        <Route path="/*" element={<ProjectRoute />} />
+        <Route path="/*" element={<ProjectRoute status={status} />} />
 
-        <Route path="/auth/*" element={<AuthRoute />} />
+        {status === "not-auhenticated" && 
+          <div>
+            <Route path="/auth/*" element={<AuthRoute />} />
 
-        <Route path="/*" element={<Navigate to="/auth/login" />} />
+            <Route path="/*" element={<Navigate to="/auth/login" />} />
+          </div>
+        }
       </Routes>
 
       <Footer />

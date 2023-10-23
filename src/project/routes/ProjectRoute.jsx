@@ -5,7 +5,7 @@ import { DetailPage } from "../pages/DetailPage/DetailPage";
 import { AccountPage } from "../pages/AccountPage/AccountPage";
 import { CreateProject } from "../components/CreateProject/CreateProject";
 
-export const ProjectRoute = () => {
+export const ProjectRoute = ({status}) => {
   return (
     <Routes>
       <Route path="/home" element={<HomePage />} />
@@ -14,8 +14,10 @@ export const ProjectRoute = () => {
 
       <Route path="/detail/:id" element={<DetailPage />} />
 
-      <Route path="/myaccount" element={<AccountPage />} />
-
+      {status === "authenticated" &&
+        <Route path="/myaccount" element={<AccountPage />} />
+      }
+      
       <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>
   );

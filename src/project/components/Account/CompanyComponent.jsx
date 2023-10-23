@@ -10,14 +10,14 @@ export const CompanyComponent = () => {
   
   const { register, reset, handleSubmit, formState: { errors } } = useForm({
     defaultValues:{
-      userId: user?.userMapped?.id
+      userId: user?.id
     }
   });
   // console.log(errors);
   // console.log(user);
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data)
+    // console.log(data)
     startCreateCompany(data);
     // reset();
   });

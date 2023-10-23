@@ -6,8 +6,8 @@ import { useAuthStore } from '../../../hooks/useAuthStore';
 
 const ProfessionalComponent = () => {
 
-  const { startCreateProfessional } = useAuthStore();
-
+  const { user, startCreateProfessional } = useAuthStore();
+  // console.log(user.id);
   const {
     register,
     handleSubmit,
@@ -16,9 +16,9 @@ const ProfessionalComponent = () => {
   } = useForm();
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data); // Aquí puedes manejar los datos del formulario.
-    startCreateProfessional(data);
-     reset(); //! Esto limpia el formulario (opcional).
+    // console.log(data); // Aquí puedes manejar los datos del formulario.
+    startCreateProfessional({...data, userId: user.id });
+    //  reset(); //! Esto limpia el formulario (opcional).
   });
 
   return (
@@ -186,9 +186,9 @@ const ProfessionalComponent = () => {
                 })}
                 error={errors.id_nationality}
               >
-                <MenuItem value={1}>Argentina</MenuItem>
+                <MenuItem value={1}>Peru</MenuItem>
                 <MenuItem value={2}>Brasil</MenuItem>
-                <MenuItem value={3}>Chile</MenuItem>
+                <MenuItem value={3}>Chile</MenuItem> 
               </Select>
               {errors.id_nationality && <p className={style.errors}>{errors.id_nationality.message}</p>}
             </FormControl>
