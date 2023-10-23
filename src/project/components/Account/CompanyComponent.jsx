@@ -201,7 +201,7 @@ export const CompanyComponent = () => {
                   },
                 })}
               />
-              {/* {errors.data[nombre] && (<p className={style.errors}>{errors.data[nombre].message}</p>)} */}
+              {/* {errors.data?.nombre && (<p className={style.errors}>{errors.data?.nombre.message}</p>)} */}
 
               <InputLabel>Teléfono</InputLabel>
               <TextField
@@ -220,7 +220,7 @@ export const CompanyComponent = () => {
                   },
                 })}
               />
-              {/* {errors.data.telefono && (<p className={style.errors}>{errors.data.telefono.message}</p>)} */}
+              {/* {errors.data?.telefono && (<p className={style.errors}>{errors.data?.telefono.message}</p>)} */}
 
               <InputLabel>Email</InputLabel>
               <TextField
@@ -239,7 +239,7 @@ export const CompanyComponent = () => {
                   },
                 })}
               />
-              {/* {errors.data.email && ( <p className={style.errors}>{errors.data.email.message}</p>)} */}
+              {/* {errors.data?.email && ( <p className={style.errors}>{errors.data?.email.message}</p>)} */}
 
               <InputLabel>Horario</InputLabel>
               <TextField
@@ -264,7 +264,7 @@ export const CompanyComponent = () => {
                   }
                 })}
               />
-              {/* {errors.data.contacto && (<p className={style.errors}>{errors.data.contacto.message}</p>)} */}
+              {/* {errors.data?.contacto && (<p className={style.errors}>{errors.data?.contacto.message}</p>)} */}
             </Grid>
           </Grid>
         </Stack>
