@@ -13,15 +13,20 @@ import styles from "./DetailPage.module.css";
 import { useProjectStore } from "../../../hooks/useProjectStore";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { onSetActiveEvent } from "../../../store/project/projectSlice";
+import { applyCandidate } from "../../../helpers/candidatesAsync";
 
 export const DetailPage = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const { status } = useAuthStore();
+  const { status, user } = useAuthStore();
   const { activeEvent } = useProjectStore();
   const [detail, setDetail] = useState(activeEvent);
+
+  const handleApply = () => {
+    applyCandidate(user.professional_id, id);
+  };
   useEffect(() => {
     const detail = JSON.parse(localStorage.getItem("detail"));
-    console.log(detail);
     setDetail(detail);
   }, []);
 
@@ -70,7 +75,7 @@ export const DetailPage = () => {
           sx={{ boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)", mr: "2% " }}
         >
           {status === "authenticated" && (
-            <Button variant="contained" color="pear">
+            <Button variant="contained" color="pear" onClick={handleApply}>
               <Typography
                 fontFamily="Nunito Sans"
                 fontWeight="400"

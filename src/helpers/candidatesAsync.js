@@ -24,3 +24,11 @@ export const refuseCandidate = async (projectID, professionalID) => {
     alert(error.message);
   }
 };
+
+export const applyCandidate = async (professionalID, projectID) => {
+  try {
+    await projectAPI.put(`/professional/${professionalID}/${projectID}`);
+  } catch (error) {
+    alert(error.message);
+  }
+};
