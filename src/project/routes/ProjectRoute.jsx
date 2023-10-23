@@ -16,9 +16,6 @@ export const ProjectRoute = () => {
 
       <Route path="/myaccount" element={<AccountPage />} />
 
-      <Route path="/company" element={<CompanyComponent/>} />
-
-
       <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>
   );

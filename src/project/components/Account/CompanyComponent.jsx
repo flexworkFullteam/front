@@ -1,21 +1,26 @@
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, Select } from "@mui/material";
 import style from "./generalStyles.module.css";
-import dayjs from 'dayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-
+import { useAuthStore } from '../../../hooks/useAuthStore';
 
 
 export const CompanyComponent = () => {
-  const { register, reset, watch, handleSubmit, formState: { errors } } = useForm();
-  console.log(errors);
+
+  const { startCreateCompany, user } = useAuthStore();
+  
+  const { register, reset, handleSubmit, formState: { errors } } = useForm({
+    defaultValues:{
+      userId: user.id
+    }
+  });
+  // console.log(errors);
+  console.log('userrrrrrr');
+  console.log(user);
 
   const onSubmit = handleSubmit((data) => {
     console.log(data)
-    reset();
+    startCreateCompany(data);
+    // reset();
   });
 
   return (
@@ -81,22 +86,14 @@ export const CompanyComponent = () => {
               </TextField>
 
               <InputLabel>Fecha de inicio</InputLabel>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DesktopDatePicker
-                  label="Date desktop"
-                  inputFormat="MM/DD/YYYY"
-                  value={watch('date')}
-                  {...register('date', { required: true })} // Utiliza register para la fecha
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
-              {/* <TextField
+              <TextField
                 placeholder="Fecha de inicio"
                 id="startDate"
                 fullWidth
+                type='date'
                 {...register("startDate")}
                 defaultValue="2023-10-19"
-              /> */}
+              />
 
               <InputLabel>Dirección Fiscal</InputLabel>
               <TextField
