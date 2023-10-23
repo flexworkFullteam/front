@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
   Box,
@@ -10,20 +10,19 @@ import {
   Typography,
 } from "@mui/material";
 import styles from "./DetailPage.module.css";
+import { useProjectStore } from "../../../hooks/useProjectStore";
+import { useAuthStore } from "../../../hooks/useAuthStore";
+import { onSetActiveEvent } from "../../../store/project/projectSlice";
 
 export const DetailPage = () => {
-  const { id } = useParams();
-  const { status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
-  const { allProjects } = useSelector((state) => state.project); //* Esto no deberia ir realmente
-
-  const filteredProject = allProjects.find((project) => project.id === +id);
-
-  console.log(filteredProject);
-
+  const { status } = useAuthStore();
+  const { activeEvent } = useProjectStore();
+  const [detail, setDetail] = useState(activeEvent);
   useEffect(() => {
-    // dispacth(getProjectById(id)) //! falta crear la accion
+    const detail = JSON.parse(localStorage.getItem("detail"));
+    console.log(detail);
+    setDetail(detail);
   }, []);
 
   return (
@@ -36,11 +35,13 @@ export const DetailPage = () => {
         sx={{}}
       >
         <Box display="flex" sx={{ ml: "2% ", flexDirection: "row" }}>
-          <img
-            className={styles.companyLogo}
-            src={filteredProject.image}
-            alt={filteredProject.company.nombre}
-          />
+          {detail?.image && (
+            <img
+              className={styles.companyLogo}
+              src={detail?.image}
+              alt={detail?.id_company}
+            />
+          )}
           <div className={styles.titleCompanyContainer}>
             <Typography
               fontFamily="Barlow Condensed"
@@ -48,7 +49,7 @@ export const DetailPage = () => {
               color="persianBlue.main"
               fontSize="1.25rem"
             >
-              {filteredProject.title}
+              {detail?.title}
             </Typography>
             <Link>
               <Typography
@@ -58,7 +59,7 @@ export const DetailPage = () => {
                 fontSize="1rem"
                 sx={{ textTransform: "lowercase" }}
               >
-                {filteredProject.company.nombre}
+                {detail?.id_company}
               </Typography>
             </Link>
           </div>
@@ -96,8 +97,7 @@ export const DetailPage = () => {
               fontFamily="Nunito Sans"
               fontWeight="400"
             >
-              Duración: {filteredProject.lapse} dias - Área:{" "}
-              {filteredProject.field}
+              Duración: {detail?.lapse} dias - Área: {detail?.field}
             </Typography>
             <Typography
               variant="body2"
@@ -106,7 +106,7 @@ export const DetailPage = () => {
               fontFamily="Nunito Sans"
               fontWeight="400"
             >
-              {filteredProject.description}
+              {detail?.description}
             </Typography>
           </CardContent>
         </Card>
@@ -121,14 +121,14 @@ export const DetailPage = () => {
               fontFamily="Nunito Sans"
               fontWeight="600"
             >
-              {filteredProject.company.nombre}
+              {detail?.id_company}
             </Typography>
             <Typography
               color="textSecondary"
               fontFamily="Nunito Sans"
               fontWeight="400"
             >
-              {filteredProject.company.email}
+              {/* {detail?.company.email}
             </Typography>
             <Typography
               variant="h5"
@@ -136,7 +136,7 @@ export const DetailPage = () => {
               sx={{ mt: "2%" }}
               fontFamily="Nunito Sans"
               fontWeight="600"
-            >
+            > */}
               Reseñas de la empresa
             </Typography>
           </CardContent>
