@@ -6,15 +6,21 @@ import { useAuthStore } from '../../../hooks/useAuthStore';
 
 export const CompanyComponent = () => {
 
-  const { startCreateCompany, user } = useAuthStore();
+  const {startUploadingFiles, startCreateCompany, user } = useAuthStore();
+
+  const [image, setImage] = React.useState(null);
   
   const { register, reset, handleSubmit, formState: { errors } } = useForm({
     defaultValues:{
       userId: user?.id
     }
   });
-  // console.log(errors);
-  // console.log(user);
+  
+  const onClick = async() => {
+    const resp = await startUploadingFiles(image);
+    console.log(resp);
+    setImage(resp);
+  }
 
   const onSubmit = handleSubmit((data) => {
     // console.log(data)
@@ -265,6 +271,25 @@ export const CompanyComponent = () => {
                 })}
               />
               {/* {errors.data?.contacto && (<p className={style.errors}>{errors.data?.contacto.message}</p>)} */}
+            </Grid>
+          </Grid>
+
+            
+          <Grid container spacing={2}>
+            <Grid item xs={5}>
+              <InputLabel>Imagen</InputLabel>
+              <TextField
+                placeholder="Imagen"
+                id="image"
+                type="file"
+                fullWidth
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+              <Button variant="contained" color="pear" type="button" sx={{ margin: 2 }} onClick={onClick}>
+                <Typography fontFamily="Nunito Sans" fontWeight="bold" color="persianBlue.main">
+                  Subir
+                </Typography>
+              </Button>
             </Grid>
           </Grid>
         </Stack>
