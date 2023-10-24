@@ -19,13 +19,14 @@ const ProfessionalComponent = () => {
     reset,
   } = useForm();
 
-  const onClick = () => {
-    const resp = startUploadingFiles(image);
+  const onClick = async() => {
+    const resp = await startUploadingFiles(image);
+    console.log(resp);
     setImage(resp);
   }
 
   const onSubmit = handleSubmit((data) => {
-    // console.log(data); // Aquí puedes manejar los datos del formulario.
+    // console.log({...data, userId: user.id, image: image }); // Aquí puedes manejar los datos del formulario.
     startCreateProfessional({...data, userId: user.id, image: image });
     //  reset(); //! Esto limpia el formulario (opcional).
   });
