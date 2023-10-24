@@ -9,6 +9,7 @@ import {
   onLogout,
   onRegister,
 } from "../store/auth/authSlice";
+import { fileUpload } from "../helpers/fileUpload";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
@@ -132,6 +133,13 @@ export const useAuthStore = () => {
     }
   };
 
+  const startUploadingFiles = async (files) => {
+    // dispatch(setSaving())
+    const {secure_url} = await fileUpload(files);
+
+    return secure_url;
+  }
+
   return {
     //propiedades
     user,
@@ -146,5 +154,6 @@ export const useAuthStore = () => {
     startUpdateProfessional,
     startCreateCompany,
     startLoginWithToken,
+    startUploadingFiles,
   };
 };
