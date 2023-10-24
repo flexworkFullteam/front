@@ -14,9 +14,9 @@ export const ProjectRoute = ({status}) => {
 
       <Route path="/detail/:id" element={<DetailPage />} />
 
-      {/* {status === "authenticated" && */}
+      {status === "authenticated" &&(
         <Route path="/myaccount" element={<AccountPage />} />
-      {/* } */}
+      )}
       
       <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>

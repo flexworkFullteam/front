@@ -13,11 +13,24 @@ const ProfessionalComponent = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues:{
+      // data:{
+      //   name: user.name,
+      //   lastname: user.lastname,
+      //   age: user.age,
+      //   dni: user.dni
+      // },
+      portfolio: 'github.com',
+      extra_information:'Hollaaaaaaaa como estas',
+      image:'https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg'
+    }
+  });
 
   const onSubmit = handleSubmit((data) => {
-    // console.log(data); // Aquí puedes manejar los datos del formulario.
+    console.log(data); // Aquí puedes manejar los datos del formulario.
     startCreateProfessional({...data, userId: user.id });
+    console.log(user);
     //  reset(); //! Esto limpia el formulario (opcional).
   });
 
@@ -186,7 +199,7 @@ const ProfessionalComponent = () => {
                 })}
                 error={errors.id_nationality}
               >
-                <MenuItem value={1}>Peru</MenuItem>
+                <MenuItem value={"abdd500f-43cb-4df4-9cd4-4360ae61a55e"}>Peru</MenuItem>
                 <MenuItem value={2}>Brasil</MenuItem>
                 <MenuItem value={3}>Chile</MenuItem> 
               </Select>
@@ -202,7 +215,7 @@ const ProfessionalComponent = () => {
                 error={errors.languages?.[0]}
               >
                 <MenuItem value={1}>Español</MenuItem>
-                <MenuItem value={2}>Inglés</MenuItem>
+                <MenuItem value={"0c68da66-b006-4048-98c6-2e302868220b"}>Inglés</MenuItem>
                 <MenuItem value={3}>Portugués</MenuItem>
               </Select>
               {errors.languages?.[0] && <p className={style.errors}>{errors.languages?.[0].message}</p>}
@@ -216,7 +229,7 @@ const ProfessionalComponent = () => {
                 })}
                 error={errors.itskills?.[0]}
               >
-                <MenuItem value={1}>React</MenuItem>
+                <MenuItem value={"08d2c44f-1235-4480-853a-a847cfd6d1b3"}>React</MenuItem>
                 <MenuItem value={2}>Node.js</MenuItem>
                 <MenuItem value={3}>Express</MenuItem>
               </Select>
