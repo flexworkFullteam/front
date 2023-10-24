@@ -10,7 +10,7 @@ export const AccountPage = () => {
       {/* <ProfessionalComponent/> */}
       {/* <CompanyComponent/> */}
 
-      {user.userMapped.type === 2 ? <ProfessionalComponent /> : <CompanyPage />}
+      {user.type === 2 ? <ProfessionalComponent /> : <CompanyPage />}
     </div>
   );
 };

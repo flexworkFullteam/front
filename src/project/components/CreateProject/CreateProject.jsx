@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Grid,
@@ -14,6 +14,7 @@ import { CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { postProject } from "../../../helpers/postProject";
 import styles from "./CreateProject.module.css";
+import { LocationInput } from "./LocationInput";
 
 export const CreateProject = ({ handleClose, callProjects }) => {
   const {
@@ -24,14 +25,22 @@ export const CreateProject = ({ handleClose, callProjects }) => {
   } = useForm();
 
   const { user } = useAuthStore();
+  const [Location, setLocation] = useState();
+  const [locationError, setLocationError] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
     const id = user.company_id;
-    const formData = { ...data, companyId: id };
+    const formData = { ...data, companyId: id, location: location };
     postProject(formData);
     callProjects();
     reset();
   });
+
+  const handleLocationChange = (value) => {
+    if (value && value.length > 0) {
+      setLocation(value[0].description);
+    }
+  };
 
   return (
     <Container
@@ -133,17 +142,8 @@ export const CreateProject = ({ handleClose, callProjects }) => {
 
             <Grid item xs={5}>
               <InputLabel>Localización</InputLabel>
-              <TextField
-                select
-                id="location"
-                fullWidth
-                name="location"
-                defaultValue="1"
-                {...register("location")}
-              >
-                <MenuItem value="1">México</MenuItem>
-              </TextField>
 
+              <LocationInput handleLocationChange={handleLocationChange} />
               <InputLabel>Salario</InputLabel>
               <TextField
                 placeholder="Salario"
