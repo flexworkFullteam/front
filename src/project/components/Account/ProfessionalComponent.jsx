@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {Grid, Typography, Button, Container, Stack, TextField, 
   InputLabel, MenuItem, Checkbox, FormControlLabel, FormControl, Select} from '@mui/material';
@@ -6,30 +7,27 @@ import { useAuthStore } from '../../../hooks/useAuthStore';
 
 const ProfessionalComponent = () => {
 
-  const { user, startCreateProfessional } = useAuthStore();
+  const { user, startCreateProfessional, startUploadingFiles } = useAuthStore();
   // console.log(user.id);
+
+  const [image, setImage] = useState(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    defaultValues:{
-      // data:{
-      //   name: user.name,
-      //   lastname: user.lastname,
-      //   age: user.age,
-      //   dni: user.dni
-      // },
-      portfolio: 'github.com',
-      extra_information:'Hollaaaaaaaa como estas',
-      image:'https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg'
-    }
-  });
+  } = useForm();
+
+  const onClick = async() => {
+    const resp = await startUploadingFiles(image);
+    console.log(resp);
+    setImage(resp);
+  }
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data); // Aquí puedes manejar los datos del formulario.
-    startCreateProfessional({...data, userId: user.id });
+    console.log({...data, userId: user.id, image: image }); // Aquí puedes manejar los datos del formulario.
+    startCreateProfessional({...data, userId: user.id, image: image });
     console.log(user);
     //  reset(); //! Esto limpia el formulario (opcional).
   });
@@ -262,6 +260,24 @@ const ProfessionalComponent = () => {
               fullWidth
               {...register('cci')}
             />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={5}>
+            <InputLabel>Imagen</InputLabel>
+            <TextField
+              placeholder="Imagen"
+              id="image"
+              type="file"
+              fullWidth
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+            <Button variant="contained" color="pear" type="button" sx={{ margin: 2 }} onClick={onClick}>
+              <Typography fontFamily="Nunito Sans" fontWeight="bold" color="persianBlue.main">
+                Subir
+              </Typography>
+            </Button>
           </Grid>
         </Grid>
 

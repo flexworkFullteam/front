@@ -9,6 +9,7 @@ import {
   onLogout,
   onRegister,
 } from "../store/auth/authSlice";
+import { fileUpload } from "../helpers/fileUpload";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
@@ -74,13 +75,13 @@ export const useAuthStore = () => {
 
   const startCreateProfessional = async (professional) => {
     try {
-      // dispatch(onChecking());
-      console.log(professional);
-      // dispatch(setLoadingAccount(true));
+      // console.log(professional);
+      dispatch(setLoadingAccount(true));
       const { data } = await projectAPI.post("/professional/", professional);
-      console.log(data);
-      // dispatch(setLoadingAccount(false));
+      // console.log(data);
+      dispatch(setLoadingAccount(false));
       alert("Datos personales guardados");
+
     } catch (error) {
       console.log(error);
       console.log("catch", professional);
@@ -105,13 +106,13 @@ export const useAuthStore = () => {
 
   const startCreateCompany = async (company) => {
     try {
-      // dispatch(onChecking());
-      // dispatch(setLoadingAccount(true));
-      console.log(company);
+      dispatch(setLoadingAccount(true));
+      // console.log(company);
       const { data } = await projectAPI.post("/company", company);
-      console.log(data);
-      // dispatch(setLoadingAccount(false));
+      // console.log(data);
+      dispatch(setLoadingAccount(false));
       alert("Datos de empresa guardados");
+
     } catch (error) {
       console.log(error);
       // alert(error.errorMessage);
@@ -132,6 +133,13 @@ export const useAuthStore = () => {
     }
   };
 
+  const startUploadingFiles = async (files) => {
+    // dispatch(setSaving())
+    const {secure_url} = await fileUpload(files);
+
+    return secure_url;
+  }
+
   return {
     //propiedades
     user,
@@ -146,5 +154,6 @@ export const useAuthStore = () => {
     startUpdateProfessional,
     startCreateCompany,
     startLoginWithToken,
+    startUploadingFiles,
   };
 };
