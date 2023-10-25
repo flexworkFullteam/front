@@ -24,6 +24,7 @@ const ProfessionalComponent = () => {
   const onClick = async() => {
     const cloudResp = await startUploadingFiles(image);
     setImage(cloudResp);
+    console.log(cloudResp);
   }
 
   const onSubmit = handleSubmit((data) => {

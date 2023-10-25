@@ -9,7 +9,6 @@ import {
   onLogin,
   onLogout,
   onRegister,
-  onAddPersonalData
 } from "../store/auth/authSlice";
 import { fileUpload } from "../helpers/fileUpload";
 
