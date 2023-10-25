@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { projectAPI } from "../api/projectAPI";
 import {
+  onAddPersonalData,
   onChecking,
   onClearEvents,
   onLogin,

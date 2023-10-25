@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  Grid, Typography, Button, Container, Stack, TextField,
-  InputLabel, MenuItem, Checkbox, FormControlLabel, FormControl, Select
-} from '@mui/material';
+import {Grid, Typography, Button, Container, Stack, TextField, 
+  InputLabel, MenuItem, Checkbox, FormControlLabel, FormControl, Select} from '@mui/material';
 import style from "./generalStyles.module.css";
-import { useAuthStore } from '../../../hooks/useAuthStore';
+import { useAuthStore } from "../../../hooks/useAuthStore";
+import { useDbTableStore } from "../../../hooks/useDbTableStore";
 
 const ProfessionalComponent = () => {
 
   const { user, startCreateProfessional, startUploadingFiles, startUpdateProfessional } = useAuthStore();
   const [image, setImage] = useState("https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg");
 
-  console.log("userinicio:", user);
+  const { nationality, language, itSkills } = useDbTableStore();
+  const { getExp_req, getNationality, getItSkills } = useDbTableStore();
 
   const {
     register,
@@ -21,10 +21,9 @@ const ProfessionalComponent = () => {
     reset,
   } = useForm();
 
-  const onClick = async () => {
-    const resp = await startUploadingFiles(image);
-    console.log("Respuesta", resp);
-    setImage(resp);
+  const onClick = async() => {
+    const cloudResp = await startUploadingFiles(image);
+    setImage(cloudResp);
   }
 
   const onSubmit = handleSubmit((data) => {
@@ -40,9 +39,22 @@ const ProfessionalComponent = () => {
     //  reset(); //! Esto limpia el formulario (opcional).
   });
 
+  if(image){console.log('image', image)}
+
+  useEffect(() => {
+    getNationality();
+    getItSkills();
+    getExp_req();
+  }, []);
+
   return (
     <Container sx={{ mt: 5 }}>
-      <Typography variant="h4" sx={{ mb: 4 }} fontWeight="semi bold" color="persianBlue.main">
+      <Typography
+        variant="h4"
+        sx={{ mb: 4 }}
+        fontWeight="semi bold"
+        color="persianBlue.main"
+      >
         Información Profesional
       </Typography>
 
@@ -215,49 +227,62 @@ const ProfessionalComponent = () => {
               <InputLabel>Nacionalidad</InputLabel>
               <FormControl fullWidth>
                 <Select
-                  {...register('nationality', {
-                    required: 'Este campo es requerido',
+                  {...register("id_nationality", {
+                    required: "Este campo es requerido",
                   })}
                   error={errors.id_nationality}
-                  defaultValue={user.id_nationality || user.nationality || ''}
                 >
-                  <MenuItem value={"68b5e79b-b57c-49ad-8d75-70be6ce616db"}>Peru</MenuItem>
-                  <MenuItem value={2}>Brasil</MenuItem>
-                  <MenuItem value={3}>Chile</MenuItem>
+                  {nationality.map((item) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.nationality}
+                    </MenuItem>
+                  ))}
                 </Select>
-                {errors.nationality && <p className={style.errors}>{errors.nationality.message}</p>}
+                {errors.id_nationality && (
+                  <p className={style.errors}>
+                    {errors.id_nationality.message}
+                  </p>
+                )}
               </FormControl>
 
               <InputLabel>Idiomas</InputLabel>
               <FormControl fullWidth>
                 <Select
-                  {...register('languages.0', {
-                    required: 'Este campo es requerido',
+                  {...register("languages.0", {
+                    required: "Este campo es requerido",
                   })}
                   error={errors.languages?.[0]}
-                  defaultValue={user.languages?.[0] || ''}
                 >
-                  <MenuItem value={"395e5136-497e-4f85-8b7d-6715aec3f933"}>Español</MenuItem>
-                  <MenuItem value={2}>Inglés</MenuItem>
-                  <MenuItem value={3}>Portugués</MenuItem>
+                  {language.map((item) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.language}
+                    </MenuItem>
+                  ))}
                 </Select>
-                {errors.languages?.[0] && <p className={style.errors}>{errors.languages?.[0].message}</p>}
+                {errors.languages?.[0] && (
+                  <p className={style.errors}>
+                    {errors.languages?.[0].message}
+                  </p>
+                )}
               </FormControl>
 
               <InputLabel>Habilidades de desarrollo</InputLabel>
               <FormControl fullWidth>
                 <Select
-                  {...register('itskill.0', {
-                    required: 'Este campo es requerido',
+                  {...register("itskills.0", {
+                    required: "Este campo es requerido",
                   })}
-                  error={errors.itskill?.[0]}
-                  defaultValue={user.itskills?.[0] || ''}
+                  error={errors.itskills?.[0]}
                 >
-                  <MenuItem value={"a3baae41-bb0d-4d37-9ad9-40524826a162"}>React</MenuItem>
-                  <MenuItem value={2}>Node.js</MenuItem>
-                  <MenuItem value={3}>Express</MenuItem>
+                  {itSkills.map((item) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.it_skill}
+                    </MenuItem>
+                  ))}
                 </Select>
-                {errors.itskill?.[0] && <p className={style.errors}>{errors.itskill?.[0].message}</p>}
+                {errors.itskills?.[0] && (
+                  <p className={style.errors}>{errors.itskills?.[0].message}</p>
+                )}
               </FormControl>
 
               <InputLabel>Información adicional</InputLabel>
@@ -292,29 +317,48 @@ const ProfessionalComponent = () => {
             </Grid>
           </Grid>
 
-          {/*         <Grid container spacing={2}>
-          <Grid item xs={5}>
-            <InputLabel>Imagen</InputLabel>
-            <TextField
-              placeholder="Imagen"
-              id="image"
-              type="file"
-              fullWidth
-              onChange={(e) => setImage(e.target.files[0])}
-            />
-            <Button variant="contained" color="pear" type="button" sx={{ margin: 2 }} onClick={onClick}>
-              <Typography fontFamily="Nunito Sans" fontWeight="bold" color="persianBlue.main">
-                Subir
-              </Typography>
-            </Button>
+          <Grid container spacing={2}>
+            <Grid item xs={5}>
+              <InputLabel>Imagen</InputLabel>
+              <TextField
+                placeholder="Imagen"
+                id="image"
+                type="file"
+                fullWidth
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+              <Button
+                variant="contained"
+                color="pear"
+                type="button"
+                sx={{ margin: 2 }}
+                onClick={onClick}
+              >
+                <Typography
+                  fontFamily="Nunito Sans"
+                  fontWeight="bold"
+                  color="persianBlue.main"
+                >
+                  Subir
+                </Typography>
+              </Button>
+            </Grid>
           </Grid>
-        </Grid> */}
 
           {/* Añade otros campos, como experiencia, educación, idiomas, habilidades, etc. */}
         </Stack>
 
-        <Button variant="contained" color="pear" type="submit" sx={{ margin: 2 }}>
-          <Typography fontFamily="Nunito Sans" fontWeight="bold" color="persianBlue.main">
+        <Button
+          variant="contained"
+          color="pear"
+          type="submit"
+          sx={{ margin: 2 }}
+        >
+          <Typography
+            fontFamily="Nunito Sans"
+            fontWeight="bold"
+            color="persianBlue.main"
+          >
             Enviar
           </Typography>
         </Button>

@@ -7,7 +7,7 @@ import candidateJSON from "../../../utils/candidates.json";
 import styles from "./Candidates.module.css";
 import { useState, useEffect } from "react";
 import {
-  getCandidateById,
+  getCandidateByProjectId,
   acceptCandidate,
   refuseCandidate,
 } from "../../../helpers/candidatesAsync";
@@ -27,27 +27,29 @@ export const Candidates = ({ handleClose, id }) => {
   };
 
   const callCandidates = async () => {
-    const data = await getCandidateById(id);
+    const data = await getCandidateByProjectId(id);
     setCandidates(data);
+    visibleCandidates = candidates?.slice(startIndex, endIndex);
   };
 
   const pageCount = Math.ceil(candidates?.length / perPage);
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
-  const visibleCandidates = candidates?.slice(startIndex, endIndex);
-  console.log("page count " + pageCount);
+  let visibleCandidates = candidates?.slice(startIndex, endIndex);
 
   const accept = (candidateId) => {
     acceptCandidate(id, candidateId);
+    callCandidates();
   };
 
   const reject = (candidateId) => {
-    rejectCandidate(id, candidateId);
+    refuseCandidate(id, candidateId);
+    callCandidates();
   };
 
   useEffect(() => {
     callCandidates();
-  }, [accept, reject]);
+  }, []);
 
   return (
     <div className={styles.candidatesContainer}>

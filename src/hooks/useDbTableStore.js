@@ -9,7 +9,7 @@ import {
   setItSkills,
 } from "../store/dbTable/dbTableSlice";
 
-export const useAuthStore = () => {
+export const useDbTableStore = () => {
   const dispatch = useDispatch();
   const { field, type, exp_req, nationality, language, itSkills } = useSelector(
     (state) => state.dbTable
@@ -17,8 +17,8 @@ export const useAuthStore = () => {
 
   const getField = async () => {
     try {
-      const { data } = await projectAPI.get("/projectfields");
-      dispatch(setField(data));
+      const { data } = await projectAPI.get("/projetfields");
+      dispatch(setField(data.response.flat()));
     } catch (error) {
       alert(error.message);
     }
@@ -27,7 +27,7 @@ export const useAuthStore = () => {
   const getType = async () => {
     try {
       const { data } = await projectAPI.get("/projettype");
-      dispatch(setType(data));
+      dispatch(setType(data.response.flat()));
     } catch (error) {
       alert(error.message);
     }
@@ -36,7 +36,7 @@ export const useAuthStore = () => {
   const getExp_req = async () => {
     try {
       const { data } = await projectAPI.get("/experiencelevel");
-      dispatch(setExp_req(data));
+      dispatch(setExp_req(data.response.flat()));
     } catch (error) {
       alert(error.message);
     }
@@ -45,7 +45,7 @@ export const useAuthStore = () => {
   const getNationality = async () => {
     try {
       const { data } = await projectAPI.get("/nationality");
-      dispatch(setNationality(data));
+      dispatch(setNationality(data.response.flat()));
     } catch (error) {
       alert(error.message);
     }
@@ -54,7 +54,7 @@ export const useAuthStore = () => {
   const getLanguage = async () => {
     try {
       const { data } = await projectAPI.get("/language");
-      dispatch(setLanguage(data));
+      dispatch(setLanguage(data.response.flat()));
     } catch (error) {
       alert(error.message);
     }
@@ -63,7 +63,7 @@ export const useAuthStore = () => {
   const getItSkills = async () => {
     try {
       const { data } = await projectAPI.get("/itskills");
-      dispatch(setItSkills(data));
+      dispatch(setItSkills(data.response.flat()));
     } catch (error) {
       alert(error.message);
     }
@@ -76,7 +76,6 @@ export const useAuthStore = () => {
     exp_req,
     nationality,
     language,
-    nationality,
     itSkills,
 
     //metodos
