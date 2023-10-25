@@ -24,6 +24,7 @@ export const DetailPage = () => {
 
   const handleApply = () => {
     applyCandidate(user.professional_id, id);
+    alert("tu postulacion ha sido enviada");
   };
   useEffect(() => {
     const detail = JSON.parse(localStorage.getItem("detail"));

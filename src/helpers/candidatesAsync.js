@@ -1,6 +1,6 @@
 import { projectAPI } from "../api/projectAPI";
 
-export const getCandidateById = async (id) => {
+export const getCandidateByProjectId = async (id) => {
   try {
     const { data } = await projectAPI.get(`/project/${id}/postulate`);
     return data;

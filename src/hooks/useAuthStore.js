@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { projectAPI } from "../api/projectAPI";
 import {
+  onAddPersonalData,
   onChecking,
   onClearEvents,
   onLogin,
   onLogout,
   onRegister,
+  onAddPersonalData
 } from "../store/auth/authSlice";
+import { fileUpload } from "../helpers/fileUpload";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
@@ -74,28 +77,26 @@ export const useAuthStore = () => {
 
   const startCreateProfessional = async (professional) => {
     try {
-      // dispatch(onChecking());
-      console.log(professional);
+      console.log("profesional:", professional);
       // dispatch(setLoadingAccount(true));
-      const { data } = await projectAPI.post("/professional/", professional);
-      console.log(data);
+      const { data } = await projectAPI.post("/professional", professional);
+      console.log("Creado", data);
+      dispatch(onAddPersonalData(data));
       // dispatch(setLoadingAccount(false));
       alert("Datos personales guardados");
+
     } catch (error) {
       console.log(error);
-      console.log("catch", professional);
+      // console.log("catch", professional);
       // alert(error.errorMessage);
       // dispatch(onLogout("Error al crear profesional"));
     }
   };
 
-  const startUpdateProfessional = async (id, professional) => {
+  const startUpdateProfessional = async (professional, id) => {
     try {
-      const { data } = await projectAPI.put(
-        `/professional/${id}`,
-        professional
-      );
-      console.log(data);
+      const { data } = await projectAPI.put(`/professional/${id}`, professional);
+      console.log("Actualizando", data);
       console.log(id);
     } catch (error) {
       console.log(error);
@@ -105,17 +106,31 @@ export const useAuthStore = () => {
 
   const startCreateCompany = async (company) => {
     try {
-      // dispatch(onChecking());
+      console.log("Company:", company);
       // dispatch(setLoadingAccount(true));
-      console.log(company);
+      // console.log(company);
       const { data } = await projectAPI.post("/company", company);
-      console.log(data);
+      console.log("Creado", data);
+      dispatch(onAddPersonalData(data));
       // dispatch(setLoadingAccount(false));
       alert("Datos de empresa guardados");
+
     } catch (error) {
       console.log(error);
       // alert(error.errorMessage);
       // dispatch(onLogout("Error al crear empresa"));
+    }
+  }
+
+  const startUpdateCompany = async (company) => {
+    try {
+      const id = user.company_id;
+      const { data } = await projectAPI.put(`/company/${id}`, company);
+      console.log("Actualizando", data);
+      console.log(id);
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
     }
   };
 
@@ -132,6 +147,13 @@ export const useAuthStore = () => {
     }
   };
 
+  const startUploadingFiles = async (files) => {
+    // dispatch(setSaving())
+    const { secure_url } = await fileUpload(files);
+
+    return secure_url;
+  }
+
   return {
     //propiedades
     user,
@@ -145,6 +167,8 @@ export const useAuthStore = () => {
     startCreateProfessional,
     startUpdateProfessional,
     startCreateCompany,
+    startUpdateCompany,
     startLoginWithToken,
+    startUploadingFiles,
   };
 };
