@@ -22,7 +22,7 @@ export const AppRouter = () => {
     <>
       <Nav />
       <Routes>
-        {user.type === 1 || user.type === 2 || user.type === 3 ? (
+        {user.type !== 4 ? (
           <Route path="/*" element={<ProjectRoute status={status} />} />
         ) : null}
         
