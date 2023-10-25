@@ -12,24 +12,24 @@ export const dbTableSlice = createSlice({
   },
   reducers: {
     setField: (state, { payload }) => {
-      state.field.push(payload);
+      state.field = payload.flat();
     },
 
     setType: (state, { payload }) => {
-      state.type.push(payload);
+      state.type = payload.flat();
     },
 
     setExp_req: (state, { payload }) => {
-      state.exp_req.push(payload);
+      state.exp_req = payload.flat();
     },
     setNationality: (state, { payload }) => {
-      state.nationality.push(payload);
+      state.nationality = payload.flat();
     },
     setLanguage: (state, { payload }) => {
-      state.language.push(payload);
+      state.language = payload.flat();
     },
     setItSkills: (state, { payload }) => {
-      state.itSkills.push(payload);
+      state.itSkills = payload.flat();
     },
   },
 });

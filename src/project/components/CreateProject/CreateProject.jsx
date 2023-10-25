@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Grid,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
 import { useAuthStore } from "../../../hooks/useAuthStore";
+import { useDbTableStore } from "../../../hooks/useDbTableStore";
 import { postProject } from "../../../helpers/postProject";
 import styles from "./CreateProject.module.css";
 import { LocationInput } from "./LocationInput";
@@ -24,16 +25,25 @@ export const CreateProject = ({ handleClose, callProjects }) => {
     formState: { errors },
   } = useForm();
 
+  const { getField, getType, getExp_req } = useDbTableStore();
+
   const { user } = useAuthStore();
+  const { field, type, exp_req } = useDbTableStore();
   const [Location, setLocation] = useState();
   const [locationError, setLocationError] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
     const id = user.company_id;
-    const formData = { ...data, companyId: id, location: location };
+    const formData = {
+      ...data,
+      companyId: id,
+      location: Location,
+      itskill: ["80128df2-a405-48a5-89e5-877351447168"],
+      languages: ["66c94561-aaf3-4cda-a1e3-b13a0e34d2b0"],
+    };
+    console.log(formData);
     postProject(formData);
     callProjects();
-    reset();
   });
 
   const handleLocationChange = (value) => {
@@ -41,6 +51,12 @@ export const CreateProject = ({ handleClose, callProjects }) => {
       setLocation(value[0].description);
     }
   };
+
+  useEffect(() => {
+    getField();
+    getType();
+    getExp_req();
+  }, []);
 
   return (
     <Container
@@ -123,7 +139,11 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                 defaultValue="1"
                 {...register("field")}
               >
-                <MenuItem value="1">Marketing</MenuItem>
+                {field.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>
+                    {item.project_fields}
+                  </MenuItem>
+                ))}
               </TextField>
 
               <InputLabel>Tipo</InputLabel>
@@ -135,7 +155,11 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                 defaultValue="1"
                 {...register("type")}
               >
-                <MenuItem value="1">software engineer</MenuItem>
+                {type.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>
+                    {item.project_type}
+                  </MenuItem>
+                ))}
               </TextField>
             </Grid>
             <Grid item xs={0.5}></Grid>
@@ -174,7 +198,11 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                 defaultValue="1"
                 {...register("exp_req")}
               >
-                <MenuItem value="1">Semi-senior</MenuItem>
+                {exp_req.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>
+                    {item.experienceLevel}
+                  </MenuItem>
+                ))}
               </TextField>
 
               <InputLabel>Lapso</InputLabel>
