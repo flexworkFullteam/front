@@ -6,21 +6,28 @@ import { useAuthStore } from '../../../hooks/useAuthStore';
 
 export const CompanyComponent = () => {
 
-  const { startCreateCompany, user } = useAuthStore();
+  const {startUploadingFiles, startCreateCompany, user } = useAuthStore();
+
+  const [image, setImage] = React.useState();
   
   const { register, reset, handleSubmit, formState: { errors } } = useForm({
     defaultValues:{
       userId: user?.id
     }
   });
-  // console.log(errors);
-  // console.log(user);
+  
+  const onClick = async() => {
+    const cloudResp = await startUploadingFiles(image);
+    setImage(cloudResp);
+  }
 
   const onSubmit = handleSubmit((data) => {
     // console.log(data)
-    startCreateCompany(data);
+    startCreateCompany({...data, image: image});
     // reset();
   });
+
+  if(image){console.log('image', image)}
 
   return (
     <Container
@@ -265,6 +272,25 @@ export const CompanyComponent = () => {
                 })}
               />
               {/* {errors.data?.contacto && (<p className={style.errors}>{errors.data?.contacto.message}</p>)} */}
+            </Grid>
+          </Grid>
+
+            
+          <Grid container spacing={2}>
+            <Grid item xs={5}>
+              <InputLabel>Imagen</InputLabel>
+              <TextField
+                placeholder="Imagen"
+                id="image"
+                type="file"
+                fullWidth
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+              <Button variant="contained" color="pear" type="button" sx={{ margin: 2 }} onClick={onClick}>
+                <Typography fontFamily="Nunito Sans" fontWeight="bold" color="persianBlue.main">
+                  Subir
+                </Typography>
+              </Button>
             </Grid>
           </Grid>
         </Stack>

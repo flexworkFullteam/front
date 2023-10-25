@@ -1,19 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Grid,
-  Typography,
-  Button,
-  Container,
-  Stack,
-  TextField,
-  InputLabel,
-  MenuItem,
-  Checkbox,
-  FormControlLabel,
-  FormControl,
-  Select,
-} from "@mui/material";
+import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, 
+  Checkbox, FormControlLabel, FormControl, Select} from "@mui/material";
 import style from "./generalStyles.module.css";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
@@ -22,7 +10,7 @@ const ProfessionalComponent = () => {
   const { user, startCreateProfessional, startUploadingFiles } = useAuthStore();
   // console.log(user.id);
 
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState();
   const { nationality, language, itSkills } = useDbTableStore();
   const { getExp_req, getNationality, getItSkills } = useDbTableStore();
 
@@ -33,17 +21,18 @@ const ProfessionalComponent = () => {
     reset,
   } = useForm();
 
-  const onClick = async () => {
-    const resp = await startUploadingFiles(image);
-    console.log(resp);
-    setImage(resp);
-  };
+  const onClick = async() => {
+    const cloudResp = await startUploadingFiles(image);
+    setImage(cloudResp);
+  }
 
   const onSubmit = handleSubmit((data) => {
     // console.log({...data, userId: user.id, image: image }); // Aquí puedes manejar los datos del formulario.
-    startCreateProfessional({ ...data, userId: user.id, image: image });
+    startCreateProfessional({...data, userId: user.id, image: image });
     //  reset(); //! Esto limpia el formulario (opcional).
   });
+
+  if(image){console.log('image', image)}
 
   useEffect(() => {
     getNationality();

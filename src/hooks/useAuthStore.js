@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { projectAPI } from "../api/projectAPI";
 import {
+  onAddPersonalData,
   onChecking,
   onClearEvents,
   onLogin,
@@ -79,6 +80,7 @@ export const useAuthStore = () => {
       dispatch(setLoadingAccount(true));
       const { data } = await projectAPI.post("/professional/", professional);
       // console.log(data);
+      dispatch(onAddPersonalData(data));
       dispatch(setLoadingAccount(false));
       alert("Datos personales guardados");
 
@@ -110,6 +112,7 @@ export const useAuthStore = () => {
       // console.log(company);
       const { data } = await projectAPI.post("/company", company);
       // console.log(data);
+      dispatch(onAddPersonalData(data));
       dispatch(setLoadingAccount(false));
       alert("Datos de empresa guardados");
 
