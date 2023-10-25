@@ -1,19 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Grid,
-  Typography,
-  Button,
-  Container,
-  Stack,
-  TextField,
-  InputLabel,
-  MenuItem,
-  Checkbox,
-  FormControlLabel,
-  FormControl,
-  Select,
-} from "@mui/material";
+import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, 
+  Checkbox, FormControlLabel, FormControl, Select} from "@mui/material";
 import style from "./generalStyles.module.css";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
@@ -43,6 +31,7 @@ const ProfessionalComponent = () => {
     startCreateProfessional({...data, userId: user.id, image: image });
     //  reset(); //! Esto limpia el formulario (opcional).
   });
+
   if(image){console.log('image', image)}
 
   useEffect(() => {
