@@ -8,7 +8,7 @@ export const CompanyComponent = () => {
 
   const {startUploadingFiles, startCreateCompany, user } = useAuthStore();
 
-  const [image, setImage] = React.useState(null);
+  const [image, setImage] = React.useState();
   
   const { register, reset, handleSubmit, formState: { errors } } = useForm({
     defaultValues:{
@@ -17,16 +17,17 @@ export const CompanyComponent = () => {
   });
   
   const onClick = async() => {
-    const resp = await startUploadingFiles(image);
-    console.log(resp);
-    setImage(resp);
+    const cloudResp = await startUploadingFiles(image);
+    setImage(cloudResp);
   }
 
   const onSubmit = handleSubmit((data) => {
     // console.log(data)
-    startCreateCompany(data);
+    startCreateCompany({...data, image: image});
     // reset();
   });
+
+  if(image){console.log('image', image)}
 
   return (
     <Container

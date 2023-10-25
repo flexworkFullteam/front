@@ -7,10 +7,11 @@ import { AuthRoute } from "../auth/routes/AuthRoute";
 import { ProjectRoute } from "../project/routes/ProjectRoute";
 import { useProjectStore } from "../hooks/useProjectStore";
 import { useAuthStore } from "../hooks/useAuthStore";
+import { AdminRoute } from "../admin/routes/AdminRoute";
 
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
-  const { status, startLoginWithToken } = useAuthStore();
+  const { user, status, startLoginWithToken } = useAuthStore();
 
   useEffect(() => {
     startLoadingProject();
@@ -20,19 +21,26 @@ export const AppRouter = () => {
   return (
     <>
       <Nav />
-
       <Routes>
-        <Route path="/*" element={<ProjectRoute status={status} />} />
+        {user.type === 1 || user.type === 2 || user.type === 3 ? (
+          <Route path="/*" element={<ProjectRoute status={status} />} />
+        ) : null}
         
         {status === 'not-authenticated' && (
           <>
             <Route path="/auth/*" element={<AuthRoute />} />
-            <Route path="/*" element={<Navigate to="/auth/login" />} />         
+            <Route path="/*" element={<Navigate to="/auth/login" />} />
           </>
         )}
 
-      </Routes>
+        {user.type === 1 && (
+          <Route path="/*" element={<AdminRoute />} />
+        )}
 
+        {user.type === 4 && (
+          <Route path="/*" element={<YourComponentForUserType4 />} />
+        )}
+      </Routes>
       <Footer />
     </>
   );

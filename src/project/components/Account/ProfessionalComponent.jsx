@@ -10,7 +10,7 @@ const ProfessionalComponent = () => {
   const { user, startCreateProfessional, startUploadingFiles } = useAuthStore();
   // console.log(user.id);
 
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState();
 
   const {
     register,
@@ -20,16 +20,21 @@ const ProfessionalComponent = () => {
   } = useForm();
 
   const onClick = async() => {
-    const resp = await startUploadingFiles(image);
-    console.log(resp);
-    setImage(resp);
+    const cloudResp = await startUploadingFiles(image);
+    setImage(cloudResp);
+
   }
 
   const onSubmit = handleSubmit((data) => {
     // console.log({...data, userId: user.id, image: image }); // Aquí puedes manejar los datos del formulario.
+    
     startCreateProfessional({...data, userId: user.id, image: image });
+
     //  reset(); //! Esto limpia el formulario (opcional).
   });
+
+  if(image){console.log('image', image)}
+
 
   return (
     <Container sx={{ mt: 5 }}>
