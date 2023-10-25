@@ -20,7 +20,8 @@ export const useDbTableStore = () => {
       const { data } = await projectAPI.get("/projetfields");
       dispatch(setField(data.response.flat()));
     } catch (error) {
-      alert(error.message);
+      console.log(error);
+      // alert(error.message);
     }
   };
 
@@ -29,7 +30,8 @@ export const useDbTableStore = () => {
       const { data } = await projectAPI.get("/projettype");
       dispatch(setType(data.response.flat()));
     } catch (error) {
-      alert(error.message);
+      console.log(error);
+      // alert(error.message);
     }
   };
 
@@ -38,7 +40,8 @@ export const useDbTableStore = () => {
       const { data } = await projectAPI.get("/experiencelevel");
       dispatch(setExp_req(data.response.flat()));
     } catch (error) {
-      alert(error.message);
+      console.log(error);
+      // alert(error.message);
     }
   };
 
@@ -47,7 +50,8 @@ export const useDbTableStore = () => {
       const { data } = await projectAPI.get("/nationality");
       dispatch(setNationality(data.response.flat()));
     } catch (error) {
-      alert(error.message);
+      console.log(error);
+      // alert(error.message);
     }
   };
 
@@ -56,7 +60,8 @@ export const useDbTableStore = () => {
       const { data } = await projectAPI.get("/language");
       dispatch(setLanguage(data.response.flat()));
     } catch (error) {
-      alert(error.message);
+      console.log(error);
+      // alert(error.message);
     }
   };
 
@@ -65,7 +70,8 @@ export const useDbTableStore = () => {
       const { data } = await projectAPI.get("/itskills");
       dispatch(setItSkills(data.response.flat()));
     } catch (error) {
-      alert(error.message);
+      console.log(error);
+      // alert(error.message);
     }
   };
 
