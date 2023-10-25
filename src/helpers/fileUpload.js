@@ -8,7 +8,7 @@ export const fileUpload = async (file) => {
     const cloudUrl = VITE_CLOUDINARY_URL;
     
     const formData = new FormData();
-    formData.append("upload_preset", "react-journal");
+    formData.append("upload_preset", "flexwork");
     formData.append("file", file);
     
     try {
