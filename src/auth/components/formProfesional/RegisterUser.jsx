@@ -1,12 +1,14 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 import { Button, Container, Stack, TextField, InputAdornment, Typography, InputLabel, MenuItem} from '@mui/material';
 import { Google, LinkedIn } from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import style from './StylesProfesional.module.css';
-import {useAuthStore} from '../../../hooks/useAuthStore'
+import { useAuthStore } from '../../../hooks/useAuthStore'
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
 const RegisterUser = () => {
 
@@ -29,17 +31,45 @@ const RegisterUser = () => {
         setShowPassword(!showPassword);
     };
 
+      // ---------- Auth0 --------------
+  
+    const {
+        loginWithPopup,
+        logout,
+        getAccessTokenSilently,
+        getIdTokenClaims
+    } = useAuth0();
+
+    const handleLoginSubmission = async () => {
+        try {
+            await loginWithPopup(); // This will open a popup for Auth0 login
+            const tokenClaims = await getIdTokenClaims(); // Get token claims after successful login
+            // Sending the tokenClaims object to the backend
+            const response = await axios.post(
+              'http://localhost:3001/user/auth0/loginOrSignup',
+              tokenClaims
+            );
+            console.log(response.data); // Logging the response from the backend
+        } catch (error) {
+            console.error("An error occurred during login:", error);
+        }
+    };
+
+  // -------------------------------
+
     return (
         <Container sx={{ pt: 4 }}>
-
-            <Stack spacing={2} >
-                <Button variant="contained" startIcon={<Google />} color="persianBlue" sx={{ width: '270px' }} >
-                    Ingresar con Google
+            
+            {/* --- Auth0 --- */}
+            <Stack spacing={2}>
+                <Button variant="contained" startIcon={<Google />} color="persianBlue" sx={{ width: '270px' }} onClick={handleLoginSubmission}>
+                  Ingresa con Google
                 </Button>
-                <Button variant="outlined" startIcon={<LinkedIn />} color="persianBlue" sx={{ width: '270px' }}>
-                    Ingresar con LinkedIn
+                <Button variant="contained" startIcon={<Google />} color="persianBlue" sx={{ width: '270px' }} onClick={() => logout()}>
+                  Log out
                 </Button>
             </Stack>
+            {/* ------------ */}
             <br />
 
 
