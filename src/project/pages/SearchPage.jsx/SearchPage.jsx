@@ -31,6 +31,7 @@ import {
   onFilterProjectsByTerm,
 } from "../../../store/project/projectSlice";
 import { onSetActiveEvent } from "../../../store/project/projectSlice";
+import { useProjectStore } from "../../../hooks/useProjectStore";
 
 export const SearchPage = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,8 @@ export const SearchPage = () => {
     level: "",
     workload: "",
   });
+
+  const { startLoadingProject } = useProjectStore();
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
 
@@ -77,6 +80,10 @@ export const SearchPage = () => {
       dispatch(onFilterProjectsByTerm(term));
     }
   }, [term]);
+
+  useEffect(() => {
+    startLoadingProject();
+  }, []);
 
   return (
     <Box display="flex" flexDirection="row" padding={"3em"}>

@@ -64,7 +64,6 @@ export const Projects = () => {
   };
   useEffect(() => {
     if (user && user.company_id) {
-      console.log(user.company_id);
       callProjects();
     }
   }, [user]);

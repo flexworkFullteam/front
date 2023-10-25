@@ -1,11 +1,37 @@
+import { useEffect } from "react";
 import { Typography, Button } from "@mui/material";
 import { SearchBar } from "../../components/Searchbar/Searchbar";
 import styles from "./HomePage.module.css";
 import recurso3 from "../../../assets/Recurso3.png";
 import { useNavigate, Link } from "react-router-dom";
+import { useProjectStore } from "../../../hooks/useProjectStore";
+import { useAuthStore } from "../../../hooks/useAuthStore";
+import { useDbTableStore } from "../../../hooks/useDbTableStore";
 
 export const HomePage = () => {
   const navigate = useNavigate();
+
+  const { startLoadingProject } = useProjectStore();
+  const { startLoginWithToken } = useAuthStore();
+  const {
+    getField,
+    getType,
+    getExp_req,
+    getNationality,
+    getLanguage,
+    getItSkills,
+  } = useDbTableStore();
+
+  useEffect(() => {
+    startLoadingProject();
+    startLoginWithToken();
+    getField();
+    getType();
+    getExp_req();
+    getNationality();
+    getLanguage();
+    getItSkills();
+  }, []);
   return (
     <>
       <div className={styles.hero}>
