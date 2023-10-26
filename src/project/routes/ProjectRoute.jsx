@@ -3,7 +3,7 @@ import { HomePage } from "../pages/HomePage/HomePage";
 import { SearchPage } from "../pages/SearchPage.jsx/SearchPage";
 import { DetailPage } from "../pages/DetailPage/DetailPage";
 import { AccountPage } from "../pages/AccountPage/AccountPage";
-import { CreateProject } from "../components/CreateProject/CreateProject";
+import { ProfessionalDetail } from "../components/ProfessionalDetail/ProfessionalDetail";
 
 export const ProjectRoute = ({ status }) => {
   return (
@@ -17,6 +17,7 @@ export const ProjectRoute = ({ status }) => {
       {status === "authenticated" && (
         <Route path="/myaccount" element={<AccountPage />} />
       )}
+      <Route path="/professional/:id" element={<ProfessionalDetail />} />
 
       <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>
