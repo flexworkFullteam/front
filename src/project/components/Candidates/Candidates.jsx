@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -10,9 +12,7 @@ import {
   CheckRounded as CheckRoundedIcon,
   CloseRounded as CloseRoundedIcon,
 } from "@mui/icons-material/";
-import candidateJSON from "../../../utils/candidates.json";
 import styles from "./Candidates.module.css";
-import { useState, useEffect } from "react";
 import {
   getCandidateByProjectId,
   acceptCandidate,
@@ -55,31 +55,36 @@ export const Candidates = ({ handleClose, id }) => {
   };
 
   const handleViewClick = (view) => {
-    let updatedCandidates = [];
     setPressedButton(view);
-    switch (pressedButton) {
-      case "accepted":
-        updatedCandidates = candidates.accepted;
-        console.log(updatedCandidates);
-
-        break;
-      case "rejected":
-        updatedCandidates = candidates.rejected;
-        console.log(updatedCandidates);
-        break;
-      case "postulate":
-        updatedCandidates = candidates.postulate;
-        console.log(updatedCandidates);
-        break;
-      default:
-        break;
-    }
-    setVisibleCandidates(updatedCandidates?.slice(startIndex, endIndex));
   };
+
+  // useEffect(() => {
+  //   callCandidates();
+  // }, [setVisibleCandidates]);
+
+  useEffect(() => {
+    if (candidates) {
+      switch (pressedButton) {
+        case "accepted":
+          setVisibleCandidates(candidates.accepted.slice(startIndex, endIndex));
+          break;
+        case "rejected":
+          setVisibleCandidates(candidates.rejected.slice(startIndex, endIndex));
+          break;
+        case "postulate":
+          setVisibleCandidates(
+            candidates.postulate.slice(startIndex, endIndex)
+          );
+          break;
+        default:
+          break;
+      }
+    }
+  }, [pressedButton, candidates, page, perPage]);
 
   useEffect(() => {
     callCandidates();
-  }, [setVisibleCandidates]);
+  }, []);
 
   return (
     <div className={styles.candidatesContainer}>
@@ -92,66 +97,91 @@ export const Candidates = ({ handleClose, id }) => {
           Postulantes
         </Typography>
 
-        <Button
-          variant="contained"
-          onClick={() => handleViewClick("postulate")}
-          sx={{
-            backgroundColor:
-              pressedButton === "postulate" ? "persianBlue.main" : "pear.main",
-            color:
-              pressedButton === "postulate" ? "aliceblue" : "persianBlue.main",
-          }}
-        >
-          <Typography>Postulados</Typography>
-        </Button>
+        <div className={styles.postulateButtons}>
+          <Button
+            variant="contained"
+            onClick={() => handleViewClick("postulate")}
+            sx={{
+              backgroundColor:
+                pressedButton === "postulate"
+                  ? "persianBlue.main"
+                  : "pear.main",
+              color:
+                pressedButton === "postulate"
+                  ? "aliceblue"
+                  : "persianBlue.main",
+            }}
+          >
+            <Typography
+              variant="body2"
+              fontFamily="Nunito Sans"
+              fontWeight="400"
+            >
+              Postulados
+            </Typography>
+          </Button>
 
-        <Button
-          variant="contained"
-          onClick={() => handleViewClick("accepted")}
-          sx={{
-            backgroundColor:
-              pressedButton === "accepted" ? "persianBlue.main" : "pear.main",
-            color:
-              pressedButton === "accepted" ? "aliceblue" : "persianBlue.main",
-          }}
-        >
-          <Typography>Aceptados</Typography>
-        </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleViewClick("accepted")}
+            sx={{
+              backgroundColor:
+                pressedButton === "accepted" ? "persianBlue.main" : "pear.main",
+              color:
+                pressedButton === "accepted" ? "aliceblue" : "persianBlue.main",
+            }}
+          >
+            <Typography
+              variant="body2"
+              fontFamily="Nunito Sans"
+              fontWeight="400"
+            >
+              Aceptados
+            </Typography>
+          </Button>
 
-        <Button
-          variant="contained"
-          onClick={() => handleViewClick("rejected")}
-          sx={{
-            backgroundColor:
-              pressedButton === "rejected" ? "persianBlue.main" : "pear.main",
-            color:
-              pressedButton === "rejected" ? "aliceblue" : "persianBlue.main",
-          }}
-        >
-          <Typography>Rechazados</Typography>
-        </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleViewClick("rejected")}
+            sx={{
+              backgroundColor:
+                pressedButton === "rejected" ? "persianBlue.main" : "pear.main",
+              color:
+                pressedButton === "rejected" ? "aliceblue" : "persianBlue.main",
+            }}
+          >
+            <Typography
+              variant="body2"
+              fontFamily="Nunito Sans"
+              fontWeight="400"
+            >
+              Rechazados
+            </Typography>
+          </Button>
+        </div>
       </div>
       {visibleCandidates && visibleCandidates.length > 0 ? (
-        visibleCandidates.map((candidate) => (
+        visibleCandidates?.map((candidate) => (
           <Card
             key={candidate.id}
-            sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }}
+            sx={{ mt: "1rem", mb: "1rem", ":hover": { cursor: "pointer" } }}
           >
-            {/*onClick */}
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
               <div className={styles.cardLeft}>
-                <Typography
-                  variant="h5"
-                  component="h2"
-                  fontFamily="Nunito Sans"
-                  fontWeight="400"
-                >
-                  {`${candidate.data.name} ${candidate.data.lastname}`}
-                </Typography>
-                <Typography
-                  color="textSecondary"
-                  sx={{ textTransform: "capitalize" }}
-                ></Typography>
+                <Link to={`/professional/${candidate.id}`}>
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    fontFamily="Nunito Sans"
+                    fontWeight="400"
+                  >
+                    {`${candidate.data.name} ${candidate.data.lastname}`}
+                  </Typography>
+                  <Typography
+                    color="textSecondary"
+                    sx={{ textTransform: "capitalize" }}
+                  ></Typography>
+                </Link>
               </div>
 
               <div className={styles.cardRight}>

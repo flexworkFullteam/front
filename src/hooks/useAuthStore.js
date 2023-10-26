@@ -76,7 +76,6 @@ export const useAuthStore = () => {
 
   const startCreateProfessional = async (professional) => {
     try {
-      console.log("profesional:", professional);
       // dispatch(setLoadingAccount(true));
       const { data } = await projectAPI.post("/professional", professional);
       console.log("Creado", data);
@@ -86,7 +85,6 @@ export const useAuthStore = () => {
 
     } catch (error) {
       console.log(error);
-      // console.log("catch", professional);
       // alert(error.errorMessage);
       // dispatch(onLogout("Error al crear profesional"));
     }
@@ -95,8 +93,9 @@ export const useAuthStore = () => {
   const startUpdateProfessional = async (professional, id) => {
     try {
       const { data } = await projectAPI.put(`/professional/${id}`, professional);
-      console.log("Actualizando", data);
+      console.log("Prof actualizado", data);
       console.log(id);
+      alert("Cambios guardados");
     } catch (error) {
       console.log(error);
       alert(error.message);
@@ -126,7 +125,7 @@ export const useAuthStore = () => {
       const id = user.company_id;
       const { data } = await projectAPI.put(`/company/${id}`, company);
       console.log("Actualizando", data);
-      console.log(id);
+      alert("Cambios guardados");
     } catch (error) {
       console.log(error);
       alert(error.message);

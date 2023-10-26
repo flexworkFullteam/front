@@ -24,6 +24,7 @@
     justify-content: flex-start;
     border-left: 1px solid black;
     padding-left: 2%;
+    gap: 1vw;
 }
 
 .closeButton{
@@ -35,4 +36,20 @@
 
 .closeButton:hover{
     transform: rotate(90deg) scale(1.3);
+}
+
+.postulateButtons{
+    display: flex;
+    margin-left: 1vw;
+    gap: 0.5vw;
+}
+
+.postulateButtons button{
+    height: min-content;
+    padding: 10px;
+}
+
+.postulateButtons button:hover{
+    background-color: #0541c9;
+    color:white;
 }

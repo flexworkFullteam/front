@@ -14,6 +14,8 @@ const ProfessionalComponent = () => {
   const { nationality, language, itSkills } = useDbTableStore();
   const { getExp_req, getNationality, getItSkills } = useDbTableStore();
 
+  console.log("inicio Profesional:", user);
+
   const {
     register,
     handleSubmit,
@@ -24,6 +26,7 @@ const ProfessionalComponent = () => {
   const onClick = async() => {
     const cloudResp = await startUploadingFiles(image);
     setImage(cloudResp);
+    console.log(cloudResp);
   }
 
   const onSubmit = handleSubmit((data) => {
@@ -40,6 +43,11 @@ const ProfessionalComponent = () => {
   });
 
   if(image){console.log('image', image)}
+  
+  let idSkills = itSkills?.filter((item) => item.it_skill == user.itskills);
+  let idNacionality = nationality?.filter((item) => item.nationality == user.nationality);
+  let idLenguages = language?.filter((item) => item.language == user.languages);
+  // console.log("mis lenguages:", idLenguages[0].id);
 
   useEffect(() => {
     getNationality();
@@ -227,10 +235,11 @@ const ProfessionalComponent = () => {
               <InputLabel>Nacionalidad</InputLabel>
               <FormControl fullWidth>
                 <Select
-                  {...register("id_nationality", {
+                  {...register("nationality", {
                     required: "Este campo es requerido",
                   })}
-                  error={errors.id_nationality}
+                  error={errors.nationality}
+                  defaultValue={idNacionality?.[0].id || ''}
                 >
                   {nationality.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -238,9 +247,9 @@ const ProfessionalComponent = () => {
                     </MenuItem>
                   ))}
                 </Select>
-                {errors.id_nationality && (
+                {errors.nationality && (
                   <p className={style.errors}>
-                    {errors.id_nationality.message}
+                    {errors.nationality.message}
                   </p>
                 )}
               </FormControl>
@@ -252,6 +261,7 @@ const ProfessionalComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.languages?.[0]}
+                  defaultValue={idLenguages?.[0].id || ''}
                 >
                   {language.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -269,10 +279,11 @@ const ProfessionalComponent = () => {
               <InputLabel>Habilidades de desarrollo</InputLabel>
               <FormControl fullWidth>
                 <Select
-                  {...register("itskills.0", {
+                  {...register("itskill.0", {
                     required: "Este campo es requerido",
                   })}
-                  error={errors.itskills?.[0]}
+                  error={errors.itskill?.[0]}
+                  defaultValue={idSkills?.[0].id || ''}
                 >
                   {itSkills.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -280,8 +291,8 @@ const ProfessionalComponent = () => {
                     </MenuItem>
                   ))}
                 </Select>
-                {errors.itskills?.[0] && (
-                  <p className={style.errors}>{errors.itskills?.[0].message}</p>
+                {errors.itskill?.[0] && (
+                  <p className={style.errors}>{errors.itskill?.[0].message}</p>
                 )}
               </FormControl>
 
