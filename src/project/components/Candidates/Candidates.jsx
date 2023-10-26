@@ -1,4 +1,11 @@
-import { Card, CardContent, Typography, Box, Pagination } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  Pagination,
+  Button,
+} from "@mui/material";
 import {
   CheckRounded as CheckRoundedIcon,
   CloseRounded as CloseRoundedIcon,
@@ -16,6 +23,8 @@ export const Candidates = ({ handleClose, id }) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(7);
   const [candidates, setCandidates] = useState();
+  const [visibleCandidates, setVisibleCandidates] = useState();
+  const [pressedButton, setPressedButton] = useState("postulate");
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -26,30 +35,51 @@ export const Candidates = ({ handleClose, id }) => {
     setPage(1);
   };
 
-  const callCandidates = async () => {
-    const data = await getCandidateByProjectId(id);
-    setCandidates(data);
-    visibleCandidates = candidates?.slice(startIndex, endIndex);
-  };
-
   const pageCount = Math.ceil(candidates?.length / perPage);
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
-  let visibleCandidates = candidates?.slice(startIndex, endIndex);
 
-  const accept = (candidateId) => {
-    acceptCandidate(id, candidateId);
+  const callCandidates = async () => {
+    const data = await getCandidateByProjectId(id);
+    setCandidates(data);
+  };
+
+  const accept = async (candidateId) => {
+    await acceptCandidate(id, candidateId);
     callCandidates();
   };
 
-  const reject = (candidateId) => {
-    refuseCandidate(id, candidateId);
+  const reject = async (candidateId) => {
+    await refuseCandidate(id, candidateId);
     callCandidates();
+  };
+
+  const handleViewClick = (view) => {
+    let updatedCandidates = [];
+    setPressedButton(view);
+    switch (pressedButton) {
+      case "accepted":
+        updatedCandidates = candidates.accepted;
+        console.log(updatedCandidates);
+
+        break;
+      case "rejected":
+        updatedCandidates = candidates.rejected;
+        console.log(updatedCandidates);
+        break;
+      case "postulate":
+        updatedCandidates = candidates.postulate;
+        console.log(updatedCandidates);
+        break;
+      default:
+        break;
+    }
+    setVisibleCandidates(updatedCandidates?.slice(startIndex, endIndex));
   };
 
   useEffect(() => {
     callCandidates();
-  }, []);
+  }, [setVisibleCandidates]);
 
   return (
     <div className={styles.candidatesContainer}>
@@ -61,8 +91,47 @@ export const Candidates = ({ handleClose, id }) => {
         <Typography variant="h4" sx={{ mb: "1rem", textAlign: "center" }}>
           Postulantes
         </Typography>
+
+        <Button
+          variant="contained"
+          onClick={() => handleViewClick("postulate")}
+          sx={{
+            backgroundColor:
+              pressedButton === "postulate" ? "persianBlue.main" : "pear.main",
+            color:
+              pressedButton === "postulate" ? "aliceblue" : "persianBlue.main",
+          }}
+        >
+          <Typography>Postulados</Typography>
+        </Button>
+
+        <Button
+          variant="contained"
+          onClick={() => handleViewClick("accepted")}
+          sx={{
+            backgroundColor:
+              pressedButton === "accepted" ? "persianBlue.main" : "pear.main",
+            color:
+              pressedButton === "accepted" ? "aliceblue" : "persianBlue.main",
+          }}
+        >
+          <Typography>Aceptados</Typography>
+        </Button>
+
+        <Button
+          variant="contained"
+          onClick={() => handleViewClick("rejected")}
+          sx={{
+            backgroundColor:
+              pressedButton === "rejected" ? "persianBlue.main" : "pear.main",
+            color:
+              pressedButton === "rejected" ? "aliceblue" : "persianBlue.main",
+          }}
+        >
+          <Typography>Rechazados</Typography>
+        </Button>
       </div>
-      {candidates ? (
+      {visibleCandidates && visibleCandidates.length > 0 ? (
         visibleCandidates.map((candidate) => (
           <Card
             key={candidate.id}
@@ -83,19 +152,11 @@ export const Candidates = ({ handleClose, id }) => {
                   color="textSecondary"
                   sx={{ textTransform: "capitalize" }}
                 ></Typography>
-                <Typography
-                  variant="body2"
-                  component="p"
-                  fontFamily="Nunito Sans"
-                  fontWeight="400"
-                >
-                  {candidate.experience[0].description}
-                </Typography>
               </div>
 
               <div className={styles.cardRight}>
-                <CloseRoundedIcon onClick={() => accept(candidate.id)} />
-                <CheckRoundedIcon onClick={() => reject(candidate.id)} />
+                <CloseRoundedIcon onClick={() => reject(candidate.id)} />
+                <CheckRoundedIcon onClick={() => accept(candidate.id)} />
               </div>
             </CardContent>
           </Card>
