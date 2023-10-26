@@ -24,6 +24,7 @@ export const Candidates = ({ handleClose, id }) => {
   const [perPage, setPerPage] = useState(7);
   const [candidates, setCandidates] = useState();
   const [visibleCandidates, setVisibleCandidates] = useState();
+  const [pressedButton, setPressedButton] = useState("postulate");
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -43,19 +44,20 @@ export const Candidates = ({ handleClose, id }) => {
     setCandidates(data);
   };
 
-  const accept = (candidateId) => {
-    acceptCandidate(id, candidateId);
+  const accept = async (candidateId) => {
+    await acceptCandidate(id, candidateId);
     callCandidates();
   };
 
-  const reject = (candidateId) => {
-    refuseCandidate(id, candidateId);
+  const reject = async (candidateId) => {
+    await refuseCandidate(id, candidateId);
     callCandidates();
   };
 
   const handleViewClick = (view) => {
     let updatedCandidates = [];
-    switch (view) {
+    setPressedButton(view);
+    switch (pressedButton) {
       case "accepted":
         updatedCandidates = candidates.accepted;
         console.log(updatedCandidates);
@@ -77,7 +79,7 @@ export const Candidates = ({ handleClose, id }) => {
 
   useEffect(() => {
     callCandidates();
-  }, []);
+  }, [setVisibleCandidates]);
 
   return (
     <div className={styles.candidatesContainer}>
@@ -90,15 +92,42 @@ export const Candidates = ({ handleClose, id }) => {
           Postulantes
         </Typography>
 
-        <Button onClick={() => handleViewClick("postulate")}>
+        <Button
+          variant="contained"
+          onClick={() => handleViewClick("postulate")}
+          sx={{
+            backgroundColor:
+              pressedButton === "postulate" ? "persianBlue.main" : "pear.main",
+            color:
+              pressedButton === "postulate" ? "aliceblue" : "persianBlue.main",
+          }}
+        >
           <Typography>Postulados</Typography>
         </Button>
 
-        <Button onClick={() => handleViewClick("accepted")}>
+        <Button
+          variant="contained"
+          onClick={() => handleViewClick("accepted")}
+          sx={{
+            backgroundColor:
+              pressedButton === "accepted" ? "persianBlue.main" : "pear.main",
+            color:
+              pressedButton === "accepted" ? "aliceblue" : "persianBlue.main",
+          }}
+        >
           <Typography>Aceptados</Typography>
         </Button>
 
-        <Button onClick={() => handleViewClick("rejected")}>
+        <Button
+          variant="contained"
+          onClick={() => handleViewClick("rejected")}
+          sx={{
+            backgroundColor:
+              pressedButton === "rejected" ? "persianBlue.main" : "pear.main",
+            color:
+              pressedButton === "rejected" ? "aliceblue" : "persianBlue.main",
+          }}
+        >
           <Typography>Rechazados</Typography>
         </Button>
       </div>
@@ -123,19 +152,11 @@ export const Candidates = ({ handleClose, id }) => {
                   color="textSecondary"
                   sx={{ textTransform: "capitalize" }}
                 ></Typography>
-                <Typography
-                  variant="body2"
-                  component="p"
-                  fontFamily="Nunito Sans"
-                  fontWeight="400"
-                >
-                  {candidate.experience[0].description}
-                </Typography>
               </div>
 
               <div className={styles.cardRight}>
-                <CloseRoundedIcon onClick={() => accept(candidate.id)} />
-                <CheckRoundedIcon onClick={() => reject(candidate.id)} />
+                <CloseRoundedIcon onClick={() => reject(candidate.id)} />
+                <CheckRoundedIcon onClick={() => accept(candidate.id)} />
               </div>
             </CardContent>
           </Card>

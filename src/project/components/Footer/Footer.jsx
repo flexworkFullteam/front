@@ -23,7 +23,7 @@ export const Footer = () => {
               <LinkedIn className={styles.iconButton} color="aliceBlue" />
             </div>
           </a>
-          <a href="https://www.instagram.com">
+          <a href="https://www.instagram.com/flexwork_latam/">
             <div className={styles.iconCircle}>
               <Instagram className={styles.iconButton} color="aliceBlue" />
             </div>

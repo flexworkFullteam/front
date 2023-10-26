@@ -103,7 +103,7 @@ export const DetailPage = () => {
               fontFamily="Nunito Sans"
               fontWeight="400"
             >
-              Duración: {detail?.lapse} dias - Área: {detail?.field}
+              Duración: {detail?.lapse} dias - Salario: ${detail?.salary}
             </Typography>
             <Typography
               variant="body2"
@@ -114,6 +114,37 @@ export const DetailPage = () => {
             >
               {detail?.description}
             </Typography>
+            <div className={styles.cardBottom}>
+              <Typography
+                variant="body2"
+                component="p"
+                sx={{ mt: "2%" }}
+                fontFamily="Nunito Sans"
+                fontWeight="600"
+              >
+                Experiencia: {detail?.exp_req}
+              </Typography>
+
+              <Typography
+                variant="body2"
+                component="p"
+                sx={{ mt: "2%" }}
+                fontFamily="Nunito Sans"
+                fontWeight="600"
+              >
+                Campo: {detail?.field}
+              </Typography>
+
+              <Typography
+                variant="body2"
+                component="p"
+                sx={{ mt: "2%" }}
+                fontFamily="Nunito Sans"
+                fontWeight="600"
+              >
+                Tipo: {detail?.type}
+              </Typography>
+            </div>
           </CardContent>
         </Card>
 
