@@ -8,7 +8,7 @@ import { useState } from "react";
 export const CompanyComponent = () => {
 
   const { startUploadingFiles,startUpdateCompany, startCreateCompany, user } = useAuthStore();
-  const [imagen, setImagen] = useState("https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg");
+  const [image, setImage] = useState("https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg");
 
   console.log("inicio:", user);
   console.log("user.languages", user.languages);
@@ -31,9 +31,9 @@ export const CompanyComponent = () => {
   const onSubmit = handleSubmit((data) => {
     // console.log("DataCompany", data)
     if (user.id && user.company_id) {
-      startUpdateCompany({ ...data, userId: user.company_id, imagen: imagen });
+      startUpdateCompany({ ...data, userId: user.company_id, imagen: image });
     } else {
-      startCreateCompany({ ...data, userId: user.id, imagen: imagen });
+      startCreateCompany({ ...data, userId: user.id, imagen: image });
     }
     // reset();
   });
