@@ -97,50 +97,74 @@ export const Candidates = ({ handleClose, id }) => {
           Postulantes
         </Typography>
 
-        <Button
-          variant="contained"
-          onClick={() => handleViewClick("postulate")}
-          sx={{
-            backgroundColor:
-              pressedButton === "postulate" ? "persianBlue.main" : "pear.main",
-            color:
-              pressedButton === "postulate" ? "aliceblue" : "persianBlue.main",
-          }}
-        >
-          <Typography>Postulados</Typography>
-        </Button>
+        <div className={styles.postulateButtons}>
+          <Button
+            variant="contained"
+            onClick={() => handleViewClick("postulate")}
+            sx={{
+              backgroundColor:
+                pressedButton === "postulate"
+                  ? "persianBlue.main"
+                  : "pear.main",
+              color:
+                pressedButton === "postulate"
+                  ? "aliceblue"
+                  : "persianBlue.main",
+            }}
+          >
+            <Typography
+              variant="body2"
+              fontFamily="Nunito Sans"
+              fontWeight="400"
+            >
+              Postulados
+            </Typography>
+          </Button>
 
-        <Button
-          variant="contained"
-          onClick={() => handleViewClick("accepted")}
-          sx={{
-            backgroundColor:
-              pressedButton === "accepted" ? "persianBlue.main" : "pear.main",
-            color:
-              pressedButton === "accepted" ? "aliceblue" : "persianBlue.main",
-          }}
-        >
-          <Typography>Aceptados</Typography>
-        </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleViewClick("accepted")}
+            sx={{
+              backgroundColor:
+                pressedButton === "accepted" ? "persianBlue.main" : "pear.main",
+              color:
+                pressedButton === "accepted" ? "aliceblue" : "persianBlue.main",
+            }}
+          >
+            <Typography
+              variant="body2"
+              fontFamily="Nunito Sans"
+              fontWeight="400"
+            >
+              Aceptados
+            </Typography>
+          </Button>
 
-        <Button
-          variant="contained"
-          onClick={() => handleViewClick("rejected")}
-          sx={{
-            backgroundColor:
-              pressedButton === "rejected" ? "persianBlue.main" : "pear.main",
-            color:
-              pressedButton === "rejected" ? "aliceblue" : "persianBlue.main",
-          }}
-        >
-          <Typography>Rechazados</Typography>
-        </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleViewClick("rejected")}
+            sx={{
+              backgroundColor:
+                pressedButton === "rejected" ? "persianBlue.main" : "pear.main",
+              color:
+                pressedButton === "rejected" ? "aliceblue" : "persianBlue.main",
+            }}
+          >
+            <Typography
+              variant="body2"
+              fontFamily="Nunito Sans"
+              fontWeight="400"
+            >
+              Rechazados
+            </Typography>
+          </Button>
+        </div>
       </div>
       {visibleCandidates && visibleCandidates.length > 0 ? (
         visibleCandidates?.map((candidate) => (
           <Card
             key={candidate.id}
-            sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }}
+            sx={{ mt: "1rem", mb: "1rem", ":hover": { cursor: "pointer" } }}
           >
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
               <div className={styles.cardLeft}>
