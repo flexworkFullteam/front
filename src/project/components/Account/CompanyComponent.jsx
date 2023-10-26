@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   Grid,
@@ -12,8 +13,9 @@ import {
   FormControl,
 } from "@mui/material";
 import style from "./generalStyles.module.css";
-import { useAuthStore } from "../../../hooks/useAuthStore";
-import { useState } from "react";
+import { useAuthStore } from '../../../hooks/useAuthStore';
+import { useDbTableStore } from "../../../hooks/useDbTableStore";
+
 
 export const CompanyComponent = () => {
   const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } =
@@ -23,9 +25,9 @@ export const CompanyComponent = () => {
   );
 
   console.log("inicio:", user);
-  console.log("user.languages", user.languages);
-  console.log("defaultValue", user.languages?.[0] || "");
-  console.log("user.languages", user.id_nationality);
+
+  const { nationality, language} = useDbTableStore();
+  const { getExp_req, getNationality } = useDbTableStore();
 
   const {
     register,
@@ -39,25 +41,32 @@ export const CompanyComponent = () => {
       },
     },
   });
-
-  const onClick = async () => {
-    const cloudResp = await startUploadingFiles(image);
-    setImage(cloudResp);
-  };
+  
+  const onClick = async() => {
+    const cloudResp = await startUploadingFiles(imagen);
+    setImagen(cloudResp);
+  }
 
   const onSubmit = handleSubmit((data) => {
-    // console.log("DataCompany", data)
+    console.log("DataCompany", data)
     if (user.id && user.company_id) {
-      startUpdateCompany({ ...data, userId: user.company_id, imagen: image });
+      startUpdateCompany({ ...data, userId: user.id, imagen: imagen });
     } else {
       startCreateCompany({ ...data, userId: user.id, imagen: image });
     }
     // reset();
   });
 
-  if (image) {
-    console.log("image", image);
-  }
+  if(imagen){console.log('imagen', imagen)}
+
+  let idNacionality = nationality?.filter((item) => item.nationality == user.id_nationality);
+  let idLenguages = language?.filter((item) => item.language == user.languages);
+  // console.log("mis lenguages:", idLenguages[0].id);
+
+  useEffect(() => {
+    getNationality();
+    getExp_req();
+  }, []);
 
   return (
     <Container
@@ -220,13 +229,13 @@ export const CompanyComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.id_nationality}
-                  defaultValue={user.id_nationality || ""}
+                  defaultValue={idNacionality?.[0].id || ''}
                 >
-                  <MenuItem value={"68b5e79b-b57c-49ad-8d75-70be6ce616db"}>
-                    Peru
-                  </MenuItem>
-                  <MenuItem value={2}>Brasil</MenuItem>
-                  <MenuItem value={3}>Chile</MenuItem>
+                  {nationality.map((item) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.nationality}
+                    </MenuItem>
+                  ))}
                 </Select>
                 {errors.nationalityId && (
                   <p className={style.errors}>{errors.nationalityId.message}</p>
@@ -240,13 +249,13 @@ export const CompanyComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.languages?.[0]}
-                  defaultValue={user.languages?.[0] || ""}
+                  defaultValue={idLenguages?.[0].id || ''}
                 >
-                  <MenuItem value={"395e5136-497e-4f85-8b7d-6715aec3f933"}>
-                    Español
-                  </MenuItem>
-                  <MenuItem value={2}>Inglés</MenuItem>
-                  <MenuItem value={3}>Portugués</MenuItem>
+                  {language.map((item) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.language}
+                    </MenuItem>
+                  ))}
                 </Select>
                 {errors.languages?.[0] && (
                   <p className={style.errors}>
