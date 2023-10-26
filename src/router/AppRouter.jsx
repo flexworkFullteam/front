@@ -8,6 +8,7 @@ import { ProjectRoute } from "../project/routes/ProjectRoute";
 import { useProjectStore } from "../hooks/useProjectStore";
 import { useAuthStore } from "../hooks/useAuthStore";
 import { AdminRoute } from "../admin/routes/AdminRoute";
+import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
 
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
@@ -38,7 +39,7 @@ export const AppRouter = () => {
         )}
 
         {user.type === 4 && (
-          <Route path="/*" element={<YourComponentForUserType4 />} />
+          <Route path="/*" element={<UpdateTypePage />} />
         )}
       </Routes>
       <Footer />
