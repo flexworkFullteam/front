@@ -19,6 +19,8 @@ export const AppRouter = () => {
     startLoginWithToken();
   }, []);
 
+  console.log(user);
+
   return (
     <>
       <Nav />

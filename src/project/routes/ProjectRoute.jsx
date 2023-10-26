@@ -20,18 +20,25 @@ export const ProjectRoute = ({ status }) => {
 
       {status === "authenticated" && (
         <>
-        <Route path="/myaccount" element={<AccountPage />} />
+          <Route path="/myaccount" element={<AccountPage />} />
 
-        <Route path='payment' element={<Payment/>} />
+          {/* <Route path='/payment' element={<Payment/>} />
 
-        <Route path='success/:id' element={<Success/>} />
+          <Route path='/success/:id' element={<Success/>} />
 
-        <Route path='pending' element={<Pending/>} />
+          <Route path='/pending' element={<Pending/>} />
 
-        <Route path='failure' element={<Failure/>} />
+          <Route path='/failure' element={<Failure/>} /> */}
         </>
       )}
+      
+      <Route path='/payment' element={<Payment/>} />
 
+      <Route path='/success/:id' element={<Success/>} />
+
+      <Route path='/pending' element={<Pending/>} />
+
+      <Route path='/failure' element={<Failure/>} />
 
       <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>
