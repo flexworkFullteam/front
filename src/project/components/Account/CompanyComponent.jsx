@@ -18,11 +18,9 @@ import { useDbTableStore } from "../../../hooks/useDbTableStore";
 
 
 export const CompanyComponent = () => {
-  const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } =
-    useAuthStore();
-  const [image, setImage] = useState(
-    "https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg"
-  );
+
+  const { startUploadingFiles,startUpdateCompany, startCreateCompany, user } = useAuthStore();
+  const [image, setImage] = useState("https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg");
 
   console.log("inicio:", user);
 
