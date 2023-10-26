@@ -36,10 +36,17 @@ export const authSlice = createSlice({
       // state.errorMessage = undefined;
     },
     onAddPersonalData: (state, { payload }) => {
-      state.user = {...state.user, ...payload};
-    }
+      state.user = { ...state.user, ...payload };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { onChecking, onLogin, onLogout, onRegister, onClearEvents, onAddPersonalData } = authSlice.actions;
+export const {
+  onChecking,
+  onLogin,
+  onLogout,
+  onRegister,
+  onClearEvents,
+  onAddPersonalData,
+} = authSlice.actions;

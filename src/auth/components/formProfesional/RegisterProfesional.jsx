@@ -6,6 +6,9 @@ import { Google, LinkedIn } from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import style from './StylesProfesional.module.css';
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
+
 
 const RegisterProfesional = () => {
 
@@ -21,20 +24,49 @@ const RegisterProfesional = () => {
         setShowPassword(!showPassword);
     };
 
+    // ---------- Auth0 --------------
+
+    const {
+        loginWithPopup,
+        logout,
+        getAccessTokenSilently,
+        getIdTokenClaims
+    } = useAuth0();
+
+    const handleLoginSubmission = async () => {
+        try {
+            await loginWithPopup(); // This will open a popup for Auth0 login
+            const tokenClaims = await getIdTokenClaims(); // Get token claims after successful login
+            // Sending the tokenClaims object to the backend
+            const response = await axios.post(
+              'http://localhost:3001/user/auth0/loginOrSignup',
+              tokenClaims
+            );
+            console.log(response.data); // Logging the response from the backend
+        } catch (error) {
+            console.error("An error occurred during login:", error);
+        }
+    };
+    
+    // -------------------------------
+
     return (
         <Container sx={{ mt: 5 }}>
 
             <Typography variant='h4' sx={{ mb: 5 }}
                 fontWeight="semi bold" color="pear.main"> Creá tu cuenta y encuentra el proyecto ideal</Typography>
 
-            <Stack spacing={3} sx={{ marginLeft: 2 }}>
-                <Button variant="contained" startIcon={<Google />} color="persianBlue" sx={{ width: '270px' }} >
-                    Ingresar con Google
+            {/* --- Auth0 --- */}
+            <Stack spacing={2}>
+                <Button variant="contained" startIcon={<Google />} color="persianBlue" sx={{ width: '270px' }} onClick={handleLoginSubmission}>
+                  Ingresa con Google
                 </Button>
-                <Button variant="outlined" startIcon={<LinkedIn />} color="persianBlue" sx={{ width: '270px' }}>
-                    Ingresar con LinkedIn
+                <Button variant="contained" startIcon={<Google />} color="persianBlue" sx={{ width: '270px' }} onClick={() => logout()}>
+                  Log out
                 </Button>
             </Stack>
+            {/* ------------ */}
+
             <br />
 
             <form onSubmit={onSubmit}>

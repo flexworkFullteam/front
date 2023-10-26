@@ -28,3 +28,10 @@
     width: 500px;
     flex-direction: column;
 }
+
+.cardBottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.274);
+    display: flex;
+    margin: 65% 0 0 0;
+    justify-content: space-evenly;
+}

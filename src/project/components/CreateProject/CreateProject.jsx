@@ -9,6 +9,7 @@ import {
   TextField,
   InputLabel,
   MenuItem,
+  Select,
 } from "@mui/material";
 import { CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
 import { useAuthStore } from "../../../hooks/useAuthStore";
@@ -25,12 +26,15 @@ export const CreateProject = ({ handleClose, callProjects }) => {
     formState: { errors },
   } = useForm();
 
-  const { getField, getType, getExp_req } = useDbTableStore();
+  const { getField, getType, getExp_req, getItSkills, getLanguage } =
+    useDbTableStore();
 
   const { user } = useAuthStore();
-  const { field, type, exp_req } = useDbTableStore();
+  const { field, type, exp_req, itSkills, language } = useDbTableStore();
   const [Location, setLocation] = useState();
   const [locationError, setLocationError] = useState(false);
+  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
 
   const onSubmit = handleSubmit((data) => {
     const id = user.company_id;
@@ -38,12 +42,13 @@ export const CreateProject = ({ handleClose, callProjects }) => {
       ...data,
       companyId: id,
       location: Location,
-      itskill: ["80128df2-a405-48a5-89e5-877351447168"],
-      languages: ["66c94561-aaf3-4cda-a1e3-b13a0e34d2b0"],
+      itskill: selectedSkills,
+      languages: selectedLanguages,
     };
     console.log(formData);
     postProject(formData);
     callProjects();
+    reset();
   });
 
   const handleLocationChange = (value) => {
@@ -56,6 +61,8 @@ export const CreateProject = ({ handleClose, callProjects }) => {
     getField();
     getType();
     getExp_req();
+    getItSkills();
+    getLanguage();
   }, []);
 
   return (
@@ -161,6 +168,29 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                   </MenuItem>
                 ))}
               </TextField>
+              <InputLabel>Idiomas</InputLabel>
+              <Select
+                id="languages"
+                multiple
+                value={selectedLanguages}
+                onChange={(event) => setSelectedLanguages(event.target.value)}
+                renderValue={(selected) =>
+                  selected
+                    .map((value) => {
+                      const languages = language.find(
+                        (item) => item.id === value
+                      );
+                      return languages ? languages.language : "";
+                    })
+                    .join(", ")
+                }
+              >
+                {language.map((languages) => (
+                  <MenuItem key={languages.id} value={languages.id}>
+                    {languages.language}
+                  </MenuItem>
+                ))}
+              </Select>
             </Grid>
             <Grid item xs={0.5}></Grid>
 
@@ -204,6 +234,28 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                   </MenuItem>
                 ))}
               </TextField>
+
+              <InputLabel>Habilidades</InputLabel>
+              <Select
+                id="itskill"
+                multiple
+                value={selectedSkills}
+                onChange={(event) => setSelectedSkills(event.target.value)}
+                renderValue={(selected) =>
+                  selected
+                    .map((value) => {
+                      const skill = itSkills.find((item) => item.id === value);
+                      return skill ? skill.it_skill : "";
+                    })
+                    .join(", ")
+                }
+              >
+                {itSkills.map((skill) => (
+                  <MenuItem key={skill.id} value={skill.id}>
+                    {skill.it_skill}
+                  </MenuItem>
+                ))}
+              </Select>
 
               <InputLabel>Lapso</InputLabel>
               <TextField

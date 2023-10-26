@@ -11,4 +11,5 @@
     justify-content: flex-start;
     border-left: 1px solid black;
     padding-left: 2%;
+    align-items: center;
 }
