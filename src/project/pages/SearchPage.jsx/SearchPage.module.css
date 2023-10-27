@@ -12,3 +12,9 @@
     border-left: 1px solid black;
     padding-left: 2%;
 }
+
+.cardFields{
+    display: flex;
+    margin: 20px auto;
+    gap: 0.4vw;
+}

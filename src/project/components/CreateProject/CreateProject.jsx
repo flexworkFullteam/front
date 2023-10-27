@@ -17,6 +17,7 @@ import { useDbTableStore } from "../../../hooks/useDbTableStore";
 import { postProject } from "../../../helpers/postProject";
 import styles from "./CreateProject.module.css";
 import { LocationInput } from "./LocationInput";
+import { useProjectStore } from "../../../hooks/useProjectStore";
 
 export const CreateProject = ({ handleClose, callProjects }) => {
   const {
@@ -28,6 +29,8 @@ export const CreateProject = ({ handleClose, callProjects }) => {
 
   const { getField, getType, getExp_req, getItSkills, getLanguage } =
     useDbTableStore();
+
+  const { startLoadingProject } = useProjectStore();
 
   const { user } = useAuthStore();
   const { field, type, exp_req, itSkills, language } = useDbTableStore();
@@ -49,6 +52,8 @@ export const CreateProject = ({ handleClose, callProjects }) => {
     postProject(formData);
     callProjects();
     reset();
+
+    startLoadingProject();
   });
 
   const handleLocationChange = (value) => {

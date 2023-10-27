@@ -1,15 +1,35 @@
-import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import {Grid, Typography, Button, Container, Stack, TextField, 
-  InputLabel, MenuItem, Checkbox, FormControlLabel, FormControl, Select} from '@mui/material';
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import {
+  Grid,
+  Typography,
+  Button,
+  Container,
+  Stack,
+  TextField,
+  InputLabel,
+  MenuItem,
+  Checkbox,
+  FormControlLabel,
+  FormControl,
+  Select,
+} from "@mui/material";
 import style from "./generalStyles.module.css";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { styled } from "@mui/material/styles";
 
 const ProfessionalComponent = () => {
-
-  const { user, startCreateProfessional, startUploadingFiles, startUpdateProfessional } = useAuthStore();
-  const [image, setImage] = useState("https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg");
+  const {
+    user,
+    startCreateProfessional,
+    startUploadingFiles,
+    startUpdateProfessional,
+  } = useAuthStore();
+  const [image, setImage] = useState(
+    "https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg"
+  );
 
   const { nationality, language, itSkills } = useDbTableStore();
   const { getExp_req, getNationality, getItSkills } = useDbTableStore();
@@ -23,31 +43,47 @@ const ProfessionalComponent = () => {
     reset,
   } = useForm();
 
-  const onClick = async() => {
+  const onClick = async () => {
     const cloudResp = await startUploadingFiles(image);
     setImage(cloudResp);
     console.log(cloudResp);
-  }
+  };
 
   const onSubmit = handleSubmit((data) => {
     console.log("Data", data);
     // console.log({...data, userId: user.id, image: image }); // Aquí puedes manejar los datos del formulario.
     if (user.id && (user.userId || user.professional_id)) {
       let id;
-      user.userId ? id= user.id : id = user.professional_id;
-      startUpdateProfessional({ ...data, user: user.id, image: image }, id)
+      user.userId ? (id = user.id) : (id = user.professional_id);
+      startUpdateProfessional({ ...data, user: user.id, image: image }, id);
     } else {
       startCreateProfessional({ ...data, user: user.id, image: image });
     }
     //  reset(); //! Esto limpia el formulario (opcional).
   });
 
-  if(image){console.log('image', image)}
-  
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
+
+  if (image) {
+    console.log("image", image);
+  }
+
   let idSkills = itSkills?.filter((item) => item.it_skill == user.itskills);
-  let idNacionality = nationality?.filter((item) => item.nationality == user.nationality);
+  let idNacionality = nationality?.filter(
+    (item) => item.nationality == user.nationality
+  );
   let idLenguages = language?.filter((item) => item.language == user.languages);
-  // console.log("mis lenguages:", idLenguages[0].id);
+  // console.log("mis lenguages:", idLenguages[0]?.id);
 
   useEffect(() => {
     getNationality();
@@ -76,12 +112,14 @@ const ProfessionalComponent = () => {
                 id="name"
                 type="text"
                 fullWidth
-                {...register('data.name', {
-                  required: 'Este campo es requerido',
+                {...register("data.name", {
+                  required: "Este campo es requerido",
                 })}
-                defaultValue={user.data ? user.data.name : ''}
+                defaultValue={user.data ? user.data.name : ""}
               />
-              {errors.name && <p className={style.errors}>{errors.name.message}</p>}
+              {errors.name && (
+                <p className={style.errors}>{errors.name.message}</p>
+              )}
 
               <InputLabel>Apellido</InputLabel>
               <TextField
@@ -89,12 +127,14 @@ const ProfessionalComponent = () => {
                 id="lastname"
                 type="text"
                 fullWidth
-                {...register('data.lastname', {
-                  required: 'Este campo es requerido',
+                {...register("data.lastname", {
+                  required: "Este campo es requerido",
                 })}
-                defaultValue={user.data ? user.data.lastname : ''}
+                defaultValue={user.data ? user.data.lastname : ""}
               />
-              {errors.lastname && <p className={style.errors}>{errors.lastname.message}</p>}
+              {errors.lastname && (
+                <p className={style.errors}>{errors.lastname.message}</p>
+              )}
 
               <InputLabel>Edad</InputLabel>
               <TextField
@@ -102,12 +142,14 @@ const ProfessionalComponent = () => {
                 id="age"
                 type="number"
                 fullWidth
-                {...register('data.age', {
-                  required: 'Este campo es requerido',
+                {...register("data.age", {
+                  required: "Este campo es requerido",
                 })}
-                defaultValue={user.data ? user.data.age : ''}
+                defaultValue={user.data ? user.data.age : ""}
               />
-              {errors.age && <p className={style.errors}>{errors.age.message}</p>}
+              {errors.age && (
+                <p className={style.errors}>{errors.age.message}</p>
+              )}
 
               <InputLabel>DNI</InputLabel>
               <TextField
@@ -115,12 +157,59 @@ const ProfessionalComponent = () => {
                 id="dni"
                 type="number"
                 fullWidth
-                {...register('data.dni', {
-                  required: 'Este campo es requerido',
+                {...register("data.dni", {
+                  required: "Este campo es requerido",
                 })}
-                defaultValue={user.data ? user.data.dni : ''}
+                defaultValue={user.data ? user.data.dni : ""}
               />
-              {errors.dni && <p className={style.errors}>{errors.dni.message}</p>}
+              {errors.dni && (
+                <p className={style.errors}>{errors.dni.message}</p>
+              )}
+
+              <InputLabel>CCI</InputLabel>
+              <TextField
+                placeholder="CCI"
+                id="cci"
+                type="text"
+                fullWidth
+                {...register("cci")}
+                defaultValue={user.cci || ""}
+              />
+              <Typography variant="h6" gutterBottom>
+                Experiencia previa
+              </Typography>
+              <InputLabel>Empresa</InputLabel>
+              <TextField
+                placeholder="Empresa"
+                id="company"
+                type="text"
+                fullWidth
+                {...register("experience.0.company", {
+                  required: "Este campo es requerido",
+                })}
+                defaultValue={user.experience?.[0]?.company || ""}
+              />
+              {errors.experience?.[0]?.company && (
+                <p className={style.errors}>
+                  {errors.experience?.[0]?.company.message}
+                </p>
+              )}
+              <InputLabel>Descripción</InputLabel>
+              <TextField
+                placeholder="Descripción"
+                id="description"
+                type="text"
+                fullWidth
+                {...register("experience.0.description", {
+                  required: "Este campo es requerido",
+                })}
+                defaultValue={user.experience?.[0]?.description || ""}
+              />
+              {errors.experience?.[0]?.description && (
+                <p className={style.errors}>
+                  {errors.experience?.[0]?.description.message}
+                </p>
+              )}
 
               <InputLabel>Fecha de inicio</InputLabel>
               <TextField
@@ -128,12 +217,16 @@ const ProfessionalComponent = () => {
                 id="date_start"
                 type="text"
                 fullWidth
-                {...register('experience.0.date_start', {
-                  required: 'Este campo es requerido',
+                {...register("experience.0.date_start", {
+                  required: "Este campo es requerido",
                 })}
-                defaultValue={user.experience?.[0]?.date_start || ''}
+                defaultValue={user.experience?.[0]?.date_start || ""}
               />
-              {errors.experience?.[0]?.date_start && <p className={style.errors}>{errors.experience?.[0]?.date_start.message}</p>}
+              {errors.experience?.[0]?.date_start && (
+                <p className={style.errors}>
+                  {errors.experience?.[0]?.date_start.message}
+                </p>
+              )}
 
               <InputLabel>Fecha de fin</InputLabel>
               <TextField
@@ -141,95 +234,74 @@ const ProfessionalComponent = () => {
                 id="date_end"
                 type="text"
                 fullWidth
-                {...register('experience.0.date_end', {
-                  required: 'Este campo es requerido',
+                {...register("experience.0.date_end", {
+                  required: "Este campo es requerido",
                 })}
-                defaultValue={user.experience?.[0]?.date_end || ''}
+                defaultValue={user.experience?.[0]?.date_end || ""}
               />
-              {errors.experience?.[0]?.date_end && <p className={style.errors}>{errors.experience?.[0]?.date_end.message}</p>}
-
-              <InputLabel>Empresa</InputLabel>
-              <TextField
-                placeholder="Empresa"
-                id="company"
-                type="text"
-                fullWidth
-                {...register('experience.0.company', {
-                  required: 'Este campo es requerido',
-                })}
-                defaultValue={user.experience?.[0]?.company || ''}
-              />
-              {errors.experience?.[0]?.company && <p className={style.errors}>{errors.experience?.[0]?.company.message}</p>}
-
-              <InputLabel>Descripción</InputLabel>
-              <TextField
-                placeholder="Descripción"
-                id="description"
-                type="text"
-                fullWidth
-                {...register('experience.0.description', {
-                  required: 'Este campo es requerido',
-                })}
-                defaultValue={user.experience?.[0]?.description || ''}
-              />
-              {errors.experience?.[0]?.description && <p className={style.errors}>{errors.experience?.[0]?.description.message}</p>}
-
+              {errors.experience?.[0]?.date_end && (
+                <p className={style.errors}>
+                  {errors.experience?.[0]?.date_end.message}
+                </p>
+              )}
             </Grid>
             <Grid item xs={1}></Grid>
 
             <Grid item xs={5}>
               <InputLabel>Educacion</InputLabel>
               <TextField
-                placeholder='Año de Fin'
-                id='year_end'
-                type="text" fullWidth
-                {...register("education.0.year_end", {
-                  required: {
-                    value: true,
-                    message: "Este campo es requerido"
-                  },
-                  pattern: {
-                    value: /^(?!\s)[0-9\s]+/,
-                    message: 'El año no es válido'
-                  }
-                })}
-                defaultValue={user.education?.[0]?.year_end || ''}
-              />
-
-              <InputLabel>Titulo</InputLabel>
-              <TextField
-                placeholder='Titulo'
-                id='degree'
-                type="text" fullWidth
+                placeholder="Titulo"
+                id="degree"
+                type="text"
+                fullWidth
                 {...register("education.0.degree", {
                   required: {
                     value: true,
-                    message: "Este campo es requerido"
+                    message: "Este campo es requerido",
                   },
                   pattern: {
                     value: /^(?!\s)[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]+/,
-                    message: 'El Degree no es válido'
-                  }
+                    message: "El Degree no es válido",
+                  },
                 })}
-                defaultValue={user.education?.[0]?.degree || ''}
+                defaultValue={user.education?.[0]?.degree || ""}
+              />
+              <InputLabel>Año de finalización</InputLabel>
+              <TextField
+                placeholder="Año de Fin"
+                id="year_end"
+                type="text"
+                fullWidth
+                {...register("education.0.year_end", {
+                  required: {
+                    value: true,
+                    message: "Este campo es requerido",
+                  },
+                  pattern: {
+                    value: /^(?!\s)[0-9\s]+/,
+                    message: "El año no es válido",
+                  },
+                })}
+                defaultValue={user.education?.[0]?.year_end || ""}
               />
 
               <InputLabel>Institucion</InputLabel>
               <TextField
-                placeholder='Institucion'
-                id='institution'
-                type="text" fullWidth
+                placeholder="Institucion"
+                id="institution"
+                type="text"
+                fullWidth
                 {...register("education.0.institution", {
                   required: {
                     value: true,
-                    message: "Este campo es requerido"
+                    message: "Este campo es requerido",
                   },
                   pattern: {
                     value: /^(?!\s)[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]+/,
-                    message: 'La institucion no es válido'
-                  }
+                    message: "La institucion no es válido",
+                  },
                 })}
-                defaultValue={user.education?.[0]?.institution || ''}
+                defaultValue={user.education?.[0]?.institution || ""}
               />
 
               <InputLabel>Nacionalidad</InputLabel>
@@ -239,7 +311,7 @@ const ProfessionalComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.nationality}
-                  defaultValue={idNacionality?.[0].id || ''}
+                  defaultValue={idNacionality?.[0]?.id || ""}
                 >
                   {nationality.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -248,9 +320,7 @@ const ProfessionalComponent = () => {
                   ))}
                 </Select>
                 {errors.nationality && (
-                  <p className={style.errors}>
-                    {errors.nationality.message}
-                  </p>
+                  <p className={style.errors}>{errors.nationality.message}</p>
                 )}
               </FormControl>
 
@@ -261,7 +331,7 @@ const ProfessionalComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.languages?.[0]}
-                  defaultValue={idLenguages?.[0].id || ''}
+                  defaultValue={idLenguages?.[0]?.id || ""}
                 >
                   {language.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -283,7 +353,7 @@ const ProfessionalComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.itskill?.[0]}
-                  defaultValue={idSkills?.[0].id || ''}
+                  defaultValue={idSkills?.[0]?.id || ""}
                 >
                   {itSkills.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -302,8 +372,8 @@ const ProfessionalComponent = () => {
                 id="extra_information"
                 type="text"
                 fullWidth
-                {...register('extra_information')}
-                defaultValue={user.extra_information || ''}
+                {...register("extra_information")}
+                defaultValue={user.extra_information || ""}
               />
 
               <InputLabel>Portfolio</InputLabel>
@@ -312,32 +382,32 @@ const ProfessionalComponent = () => {
                 id="portfolio"
                 type="text"
                 fullWidth
-                {...register('portfolio')}
-                defaultValue={user.portfolio || ''}
+                {...register("portfolio")}
+                defaultValue={user.portfolio || ""}
               />
 
-              <InputLabel>CCI</InputLabel>
-              <TextField
-                placeholder="CCI"
-                id="cci"
-                type="text"
-                fullWidth
-                {...register('cci')}
-                defaultValue={user.cci || ''}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={2}>
-            <Grid item xs={5}>
               <InputLabel>Imagen</InputLabel>
-              <TextField
-                placeholder="Imagen"
-                id="image"
-                type="file"
-                fullWidth
-                onChange={(e) => setImage(e.target.files[0])}
-              />
+
+              <Button
+                component="label"
+                variant="contained"
+                color="pear"
+                endIcon={<CloudUploadIcon />}
+              >
+                <Typography
+                  fontFamily="Nunito Sans"
+                  fontWeight="bold"
+                  color="persianBlue.main"
+                >
+                  Eliga una imagen
+                </Typography>
+                <VisuallyHiddenInput
+                  type="file"
+                  onChange={(e) => setImage(e.target.files[0])}
+                  placeholder="Imagen"
+                  id="image"
+                />
+              </Button>
               <Button
                 variant="contained"
                 color="pear"
@@ -363,7 +433,7 @@ const ProfessionalComponent = () => {
           variant="contained"
           color="pear"
           type="submit"
-          sx={{ margin: 2 }}
+          sx={{ ml: "1.5%", mt: "1%", mb: "4%" }}
         >
           <Typography
             fontFamily="Nunito Sans"
