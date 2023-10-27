@@ -362,7 +362,7 @@ const RegisterCompany = () => {
         </Button>
       </form>
 
-      <h4>¿Ya tienes cuenta? {<Link to="/auth/loginComp">Ingresa</Link>}</h4>
+      <h4>¿Ya tienes cuenta? {<Link to="/auth/login">Ingresa</Link>}</h4>
     </Container>
   );
 };
