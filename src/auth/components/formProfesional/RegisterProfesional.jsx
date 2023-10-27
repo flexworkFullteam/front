@@ -252,7 +252,7 @@ const RegisterProfesional = () => {
                 </Button>
             </form>
 
-            <h4>¿Ya tienes cuenta? {<Link to='/auth/loginProf'>Ingresa como profesional</Link>}</h4>
+            <h4>¿Ya tienes cuenta? {<Link to='/auth/login'>Ingresa como profesional</Link>}</h4>
 
         </Container>
     )

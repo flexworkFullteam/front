@@ -20,25 +20,14 @@ import { useDbTableStore } from "../../../hooks/useDbTableStore";
 export const CompanyComponent = () => {
 
   const { startUploadingFiles,startUpdateCompany, startCreateCompany, user } = useAuthStore();
-  const [image, setImage] = useState("https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg");
+  const [imagen, setImagen] = useState();
 
   console.log("inicio:", user);
 
   const { nationality, language} = useDbTableStore();
   const { getExp_req, getNationality } = useDbTableStore();
 
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      data: {
-        telefono: 995598899,
-      },
-    },
-  });
+  const { register, reset, handleSubmit, formState: { errors }} = useForm();
   
   const onClick = async() => {
     const cloudResp = await startUploadingFiles(imagen);
@@ -50,12 +39,12 @@ export const CompanyComponent = () => {
     if (user.id && user.company_id) {
       startUpdateCompany({ ...data, userId: user.id, imagen: imagen });
     } else {
-      startCreateCompany({ ...data, userId: user.id, imagen: image });
+      startCreateCompany({ ...data, userId: user.id, imagen: imagen });
     }
-    // reset();
+    reset();
   });
 
-  if(imagen){console.log('imagen', imagen)}
+  // if(imagen){console.log('imagen', imagen)}
 
   let idNacionality = nationality?.filter((item) => item.nationality == user.id_nationality);
   let idLenguages = language?.filter((item) => item.language == user.languages);
@@ -227,7 +216,7 @@ export const CompanyComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.id_nationality}
-                  defaultValue={idNacionality?.[0].id || ''}
+                  defaultValue={idNacionality?.[0]?.id || ''}
                 >
                   {nationality.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -247,7 +236,7 @@ export const CompanyComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.languages?.[0]}
-                  defaultValue={idLenguages?.[0].id || ''}
+                  defaultValue={idLenguages?.[0]?.id || ''}
                 >
                   {language.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -303,7 +292,7 @@ export const CompanyComponent = () => {
               <TextField
                 placeholder="Teléfono"
                 id="telefono"
-                type="text"
+                type="number" //! Tipo Number
                 fullWidth
                 {...register("data.telefono", {
                   required: {
@@ -374,10 +363,10 @@ export const CompanyComponent = () => {
               <InputLabel>Imagen</InputLabel>
               <TextField
                 placeholder="Imagen"
-                id="image"
+                id="imagen"
                 type="file"
                 fullWidth
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={(e) => setImagen(e.target.files[0])}
               />
               <Button
                 variant="contained"

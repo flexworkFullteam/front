@@ -162,7 +162,7 @@ const RegisterUser = () => {
                             {errors.contraseña && <p className={style.errorsP}>{errors.contraseña.message}</p>}
 
                             <Button variant="contained" color="pear" type="submit" sx={{ width: '140px'}}>
-                                <Typography fontFamily="Nunito Sans" fontWeight="bold" color='persianBlue.main'>Ingresar </Typography>
+                                <Typography fontFamily="Nunito Sans" fontWeight="bold" color='persianBlue.main'>Enviar </Typography>
                             </Button>
                 </Stack>
             </form>

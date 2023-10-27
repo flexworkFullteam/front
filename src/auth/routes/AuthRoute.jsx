@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes,Navigate } from "react-router-dom";
 import { LoginProfePage } from "../pages/LoginProfePage";
-import { LoginCompanyPage } from "../pages/LoginCompanyPage";
+// import { LoginCompanyPage } from "../pages/LoginCompanyPage";
 import { RegisterUserPage } from "../pages/RegisterUserPage";
 // import { RegisterProfePage } from "../pages/RegisterProfePage";
 // import { RegisterCompanyPage } from "../pages/RegisterCompanyPage";
@@ -8,14 +8,11 @@ import { RegisterUserPage } from "../pages/RegisterUserPage";
 export const AuthRoute = () => {
   return (
     <Routes>
-      <Route path="/loginProf" element={<LoginProfePage />} />
-      <Route path="/loginComp" element={<LoginCompanyPage />} />
-      {/* <Route path="login" element={<h1>LoginPage</h1> } /> */}
-      <Route path="/registerUser" element={<RegisterUserPage />} />
-      {/* <Route path="/registerProf" element={<RegisterProfePage />} />
-      <Route path="/registerComp" element={<RegisterCompanyPage />} /> */}
-      {/* <Route path="register" element={<h1>RegisterPage</h1>} /> */}
-      {/* <Route path="/*" element={<Navigate to="/auth/login" />} /> */}
+      <Route path="/login" element={<LoginProfePage />} />
+
+      <Route path="/register" element={<RegisterUserPage />} />
+
+      <Route path="/*" element={<Navigate to="/auth/login" />} />
     </Routes>
   );
 };

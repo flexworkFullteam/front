@@ -9,7 +9,7 @@ import { useDbTableStore } from "../../../hooks/useDbTableStore";
 const ProfessionalComponent = () => {
 
   const { user, startCreateProfessional, startUploadingFiles, startUpdateProfessional } = useAuthStore();
-  const [image, setImage] = useState("https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg");
+  const [image, setImage] = useState();
 
   const { nationality, language, itSkills } = useDbTableStore();
   const { getExp_req, getNationality, getItSkills } = useDbTableStore();
@@ -42,12 +42,12 @@ const ProfessionalComponent = () => {
     //  reset(); //! Esto limpia el formulario (opcional).
   });
 
-  if(image){console.log('image', image)}
+  // if(image){console.log('image', image)}
   
   let idSkills = itSkills?.filter((item) => item.it_skill == user.itskills);
   let idNacionality = nationality?.filter((item) => item.nationality == user.nationality);
   let idLenguages = language?.filter((item) => item.language == user.languages);
-  // console.log("mis lenguages:", idLenguages[0].id);
+  // console.log("mis lenguages:", idLenguages[0]?.id);
 
   useEffect(() => {
     getNationality();
@@ -239,7 +239,7 @@ const ProfessionalComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.nationality}
-                  defaultValue={idNacionality?.[0].id || ''}
+                  defaultValue={idNacionality?.[0]?.id || ''}
                 >
                   {nationality.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -261,7 +261,7 @@ const ProfessionalComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.languages?.[0]}
-                  defaultValue={idLenguages?.[0].id || ''}
+                  defaultValue={idLenguages?.[0]?.id || ''}
                 >
                   {language.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -283,7 +283,7 @@ const ProfessionalComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.itskill?.[0]}
-                  defaultValue={idSkills?.[0].id || ''}
+                  defaultValue={idSkills?.[0]?.id || ''}
                 >
                   {itSkills.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -333,7 +333,7 @@ const ProfessionalComponent = () => {
               <InputLabel>Imagen</InputLabel>
               <TextField
                 placeholder="Imagen"
-                id="image"
+                id="image  "
                 type="file"
                 fullWidth
                 onChange={(e) => setImage(e.target.files[0])}

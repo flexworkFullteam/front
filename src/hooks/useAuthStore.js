@@ -59,7 +59,7 @@ export const useAuthStore = () => {
       if (data.id) {
         dispatch(onRegister(data));
         alert("Usuario registrado");
-        //! navigate("/login")
+        navigate("/login")
       }
     } catch (error) {
       console.error("Error en el registro:", error);
