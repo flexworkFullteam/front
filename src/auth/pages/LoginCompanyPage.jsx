@@ -27,7 +27,7 @@ export const LoginCompanyPage = () => {
       <LoginUser />
       <h4>
         ¿No tienes cuenta?{" "}
-        {<Link to="/auth/registerUser">Registra tu empresa</Link>}
+        {<Link to="/auth/register">Registra tu empresa</Link>}
       </h4>
     </Container>
   );

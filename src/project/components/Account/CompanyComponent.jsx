@@ -65,7 +65,7 @@ export const CompanyComponent = () => {
     } else {
       startCreateCompany({ ...data, userId: user.id, imagen: imagen });
     }
-    // reset();
+    reset();
   });
 
   if (imagen) {
@@ -320,7 +320,7 @@ export const CompanyComponent = () => {
               <TextField
                 placeholder="Teléfono"
                 id="telefono"
-                type="text"
+                type="number" //! Tipo Number
                 fullWidth
                 {...register("data.telefono", {
                   required: {
