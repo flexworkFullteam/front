@@ -13,20 +13,19 @@ import {
   FormControl,
 } from "@mui/material";
 import style from "./generalStyles.module.css";
-import { useAuthStore } from '../../../hooks/useAuthStore';
+import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
-
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { styled } from "@mui/material/styles";
 
 export const CompanyComponent = () => {
   const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } =
     useAuthStore();
-  const [image, setImage] = useState(
-    "https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg"
-  );
+  const [imagen, setImagen] = useState();
 
   console.log("inicio:", user);
 
-  const { nationality, language} = useDbTableStore();
+  const { nationality, language } = useDbTableStore();
   const { getExp_req, getNationality } = useDbTableStore();
 
   const {
@@ -41,25 +40,41 @@ export const CompanyComponent = () => {
       },
     },
   });
-  
-  const onClick = async() => {
+
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
+
+  const onClick = async () => {
     const cloudResp = await startUploadingFiles(imagen);
     setImagen(cloudResp);
-  }
+  };
 
   const onSubmit = handleSubmit((data) => {
-    console.log("DataCompany", data)
+    console.log("DataCompany", data);
     if (user.id && user.company_id) {
       startUpdateCompany({ ...data, userId: user.id, imagen: imagen });
     } else {
-      startCreateCompany({ ...data, userId: user.id, imagen: image });
+      startCreateCompany({ ...data, userId: user.id, imagen: imagen });
     }
     // reset();
   });
 
-  if(imagen){console.log('imagen', imagen)}
+  if (imagen) {
+    console.log("imagen", imagen);
+  }
 
-  let idNacionality = nationality?.filter((item) => item.nationality == user.id_nationality);
+  let idNacionality = nationality?.filter(
+    (item) => item.nationality == user.id_nationality
+  );
   let idLenguages = language?.filter((item) => item.language == user.languages);
   // console.log("mis lenguages:", idLenguages[0].id);
 
@@ -229,7 +244,7 @@ export const CompanyComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.id_nationality}
-                  defaultValue={idNacionality?.[0].id || ''}
+                  defaultValue={idNacionality?.[0]?.id || ""}
                 >
                   {nationality.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -249,7 +264,7 @@ export const CompanyComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.languages?.[0]}
-                  defaultValue={idLenguages?.[0].id || ''}
+                  defaultValue={idLenguages?.[0]?.id || ""}
                 >
                   {language.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -368,19 +383,27 @@ export const CompanyComponent = () => {
                 defaultValue={user.contactData ? user.contactData.contacto : ""}
               />
               {/* {errors.data?.contacto && (<p className={style.errors}>{errors.data?.contacto.message}</p>)} */}
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={2}>
-            <Grid item xs={5}>
               <InputLabel>Imagen</InputLabel>
-              <TextField
-                placeholder="Imagen"
-                id="image"
-                type="file"
-                fullWidth
-                onChange={(e) => setImage(e.target.files[0])}
-              />
+              <Button
+                component="label"
+                variant="contained"
+                color="pear"
+                endIcon={<CloudUploadIcon />}
+              >
+                <Typography
+                  fontFamily="Nunito Sans"
+                  fontWeight="bold"
+                  color="persianBlue.main"
+                >
+                  Eliga una imagen
+                </Typography>
+                <VisuallyHiddenInput
+                  type="file"
+                  onChange={(e) => setImage(e.target.files[0])}
+                  placeholder="Imagen"
+                  id="image"
+                />
+              </Button>
               <Button
                 variant="contained"
                 color="pear"

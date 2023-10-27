@@ -9,6 +9,8 @@ import { useProjectStore } from "../hooks/useProjectStore";
 import { useAuthStore } from "../hooks/useAuthStore";
 import { AdminRoute } from "../admin/routes/AdminRoute";
 
+import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
+
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
   const { user, status, startLoginWithToken } = useAuthStore();
@@ -25,21 +27,17 @@ export const AppRouter = () => {
         {user.type !== 4 ? (
           <Route path="/*" element={<ProjectRoute status={status} />} />
         ) : null}
-        
-        {status === 'not-authenticated' && (
+
+        {status === "not-authenticated" && (
           <>
             <Route path="/auth/*" element={<AuthRoute />} />
             <Route path="/*" element={<Navigate to="/auth/login" />} />
           </>
         )}
 
-        {user.type === 1 && (
-          <Route path="/*" element={<AdminRoute />} />
-        )}
+        {user.type === 1 && <Route path="/*" element={<AdminRoute />} />}
 
-        {user.type === 4 && (
-          <Route path="/*" element={<YourComponentForUserType4 />} />
-        )}
+        {user.type === 4 && <Route path="/*" element={<UpdateTypePage />} />}
       </Routes>
       <Footer />
     </>

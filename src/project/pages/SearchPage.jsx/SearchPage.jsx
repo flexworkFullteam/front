@@ -32,6 +32,7 @@ import {
 } from "../../../store/project/projectSlice";
 import { onSetActiveEvent } from "../../../store/project/projectSlice";
 import { useProjectStore } from "../../../hooks/useProjectStore";
+import { useDbTableStore } from "../../../hooks/useDbTableStore";
 
 export const SearchPage = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,8 @@ export const SearchPage = () => {
     level: "",
     workload: "",
   });
+
+  const { field, type, exp_req } = useDbTableStore();
 
   const { startLoadingProject } = useProjectStore();
   const [page, setPage] = useState(1);
@@ -139,12 +142,11 @@ export const SearchPage = () => {
               }
               sx={{ backgroundColor: "lightgray" }}
             >
-              <MenuItem value="">Todos</MenuItem>
-              <MenuItem value="marketing">Marketing</MenuItem>
-              <MenuItem value="recursos humanos">Recursos humanos</MenuItem>
-              <MenuItem value="contabilidad">Contabilidad</MenuItem>
-              <MenuItem value="administracion">Administracion</MenuItem>
-              <MenuItem value="it">IT</MenuItem>
+              {field.map((fieldOption) => (
+                <MenuItem value={fieldOption.id} key={fieldOption.id}>
+                  {fieldOption.project_fields}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
@@ -177,10 +179,11 @@ export const SearchPage = () => {
               sx={{ backgroundColor: "lightgray" }}
             >
               <MenuItem value="">Todos</MenuItem>
-              <MenuItem value="junior">Junior</MenuItem>
-              <MenuItem value="semi-Senior">Semi-Senior</MenuItem>
-              <MenuItem value="senior">Senior</MenuItem>
-              <MenuItem value="tech-lead">Tech-Lead</MenuItem>
+              {exp_req.map((expOption) => (
+                <MenuItem value={expOption.id} key={expOption.id}>
+                  {expOption.experienceLevel}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
@@ -213,15 +216,11 @@ export const SearchPage = () => {
               sx={{ backgroundColor: "lightgray" }}
             >
               <MenuItem value="">Todos</MenuItem>
-              <MenuItem value="software engineer">Software engineer</MenuItem>
-              <MenuItem value="full-stack developer">
-                Full-stack developer
-              </MenuItem>
-              <MenuItem value="tech manager">Tech manager</MenuItem>
-              <MenuItem value="contador">Contador</MenuItem>
-              <MenuItem value="vendedor">Vendedor</MenuItem>
-              <MenuItem value="gerente">Gerente</MenuItem>
-              <MenuItem value="abogado">Abogado</MenuItem>
+              {type.map((typeOption) => (
+                <MenuItem value={typeOption.id} key={typeOption.id}>
+                  {typeOption.project_type}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <Box
@@ -251,7 +250,7 @@ export const SearchPage = () => {
 
       <Box sx={{ width: "70%" }} padding={theme.spacing(3)}>
         <Typography variant="h6" component="h1" sx={{ mb: "1rem" }}>
-          {projects.length} ofertas de proyectos para {term}
+          {existingProjects.length} ofertas de proyectos para {term}
         </Typography>
         {visibleProjects.map((project) => (
           <Card
@@ -281,6 +280,57 @@ export const SearchPage = () => {
                 >
                   {project.description}
                 </Typography>
+                <div className={styles.cardFields}>
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily="Nunito Sans"
+                    fontWeight="400"
+                    fontSize="0.8rem"
+                  >
+                    Salario: {project.salary}
+                  </Typography>
+
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily="Nunito Sans"
+                    fontWeight="400"
+                    fontSize="0.8rem"
+                  >
+                    Lapso: {project.lapse}
+                  </Typography>
+
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily="Nunito Sans"
+                    fontWeight="400"
+                    fontSize="0.8rem"
+                  >
+                    Experiencia: {project.exp_req}
+                  </Typography>
+
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily="Nunito Sans"
+                    fontWeight="400"
+                    fontSize="0.8rem"
+                  >
+                    Cargo: {project.type}
+                  </Typography>
+
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily="Nunito Sans"
+                    fontWeight="400"
+                    fontSize="0.8rem"
+                  >
+                    Area: {project.field}
+                  </Typography>
+                </div>
               </div>
 
               <div className={styles.cardRight}>
@@ -316,7 +366,7 @@ export const SearchPage = () => {
                     fontFamily="Nunito Sans"
                     fontWeight="600"
                   >
-                    {project.location}
+                    {project.nation_id}
                   </Typography>
                 </div>
               </div>

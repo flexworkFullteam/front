@@ -58,10 +58,6 @@ export const Candidates = ({ handleClose, id }) => {
     setPressedButton(view);
   };
 
-  // useEffect(() => {
-  //   callCandidates();
-  // }, [setVisibleCandidates]);
-
   useEffect(() => {
     if (candidates) {
       switch (pressedButton) {
