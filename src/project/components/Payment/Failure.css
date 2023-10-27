@@ -1,0 +1,22 @@
+.failure_cont{
+    background-color: #fffcfc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+}
+
+.failure_display{
+    display: flex;
+    background-color: #c45050;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    text-shadow: black 2px 2px 5px;
+    align-items: center;
+    border: 2px solid #c45050;
+    border-radius: 5px;
+    padding: 50px 40px;
+    box-shadow: 0 4px 8px black ;
+}
