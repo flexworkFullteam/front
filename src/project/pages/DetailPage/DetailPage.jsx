@@ -30,7 +30,7 @@ export const DetailPage = () => {
     const detail = JSON.parse(localStorage.getItem("detail"));
     setDetail(detail);
   }, []);
-
+  if (detail) console.log(detail);
   return (
     <Grid container>
       <Grid
@@ -76,7 +76,12 @@ export const DetailPage = () => {
           sx={{ boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)", mr: "2% " }}
         >
           {status === "authenticated" && (
-            <Button variant="contained" color="pear" onClick={handleApply}>
+            <Button
+              variant="contained"
+              color="pear"
+              onClick={handleApply}
+              disabled={!user.data}
+            >
               <Typography
                 fontFamily="Nunito Sans"
                 fontWeight="400"
@@ -103,7 +108,9 @@ export const DetailPage = () => {
               fontFamily="Nunito Sans"
               fontWeight="400"
             >
-              Duración: {detail?.lapse} dias - Salario: ${detail?.salary}
+              Ubicación: {detail?.nation_id}
+              {detail?.province_id && `, ${detail.province_id}`} - Duración:{" "}
+              {detail?.lapse} dias - Salario: ${detail?.salary}
             </Typography>
             <Typography
               variant="body2"

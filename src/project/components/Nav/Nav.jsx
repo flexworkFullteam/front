@@ -43,7 +43,7 @@ export const Nav = () => {
         )}
         {status === "not-authenticated" && (
           <div className={styles.buttonsContainer}>
-            <Link to={"auth/registerUser"}>
+            <Link to={"auth/register"}>
               <Button
                 variant="contained"
                 color="aliceBlue"
@@ -54,7 +54,7 @@ export const Nav = () => {
                 </Typography>
               </Button>
             </Link>
-            <Link to={"auth/loginProf"}>
+            <Link to={"auth/login"}>
               <Button
                 variant="contained"
                 color="pear"
@@ -77,7 +77,7 @@ export const Nav = () => {
             )} */}
 
             {pathname.endsWith("/loginComp") && (
-              <Link to="/auth/loginProf">
+              <Link to="/auth/login">
                 <Button variant="contained" sx={{ mr: -15 }} color="verdigris">
                   <Typography fontFamily="Nunito Sans" fontWeight="400">
                     Ingresar como profesional

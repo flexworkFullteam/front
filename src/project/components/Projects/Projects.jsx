@@ -10,6 +10,7 @@ import {
   Box,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 import { Candidates } from "../Candidates/Candidates";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import styles from "./Project.module.css";
@@ -37,10 +38,11 @@ export const Projects = () => {
   const handleClose = () => {
     setOpen(false);
     setCreateOpen(false);
+    callProjects();
   };
 
-  const handleDelete = (id) => {
-    deleteProject(id);
+  const handleDelete = async (id) => {
+    await deleteProject(id);
     callProjects();
   };
 
@@ -154,7 +156,11 @@ export const Projects = () => {
                   Ver postulantes
                 </Button>
 
-                <DeleteIcon onClick={() => handleDelete(project.id)} />
+                {project.state ? (
+                  <DeleteIcon onClick={() => handleDelete(project.id)} />
+                ) : (
+                  <ReplayRoundedIcon onClick={() => handleDelete(project.id)} />
+                )}
               </div>
             </CardContent>
           </Card>

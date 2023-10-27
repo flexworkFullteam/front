@@ -53,3 +53,7 @@ a{
   filter: saturate(150%);
   cursor: pointer;
 }
+
+.menu{
+  z-index: 1000;
+}
