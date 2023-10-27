@@ -20,7 +20,7 @@ import { useDbTableStore } from "../../../hooks/useDbTableStore";
 export const CompanyComponent = () => {
   const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } =
     useAuthStore();
-  const [image, setImage] = useState(
+  const [imagen, setImagen] = useState(
     "https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg"
   );
 
@@ -52,7 +52,7 @@ export const CompanyComponent = () => {
     if (user.id && user.company_id) {
       startUpdateCompany({ ...data, userId: user.id, imagen: imagen });
     } else {
-      startCreateCompany({ ...data, userId: user.id, imagen: image });
+      startCreateCompany({ ...data, userId: user.id, imagen: imagen });
     }
     // reset();
   });
@@ -229,7 +229,7 @@ export const CompanyComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.id_nationality}
-                  defaultValue={idNacionality?.[0].id || ''}
+                  defaultValue={idNacionality?.[0]?.id || ''}
                 >
                   {nationality.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -249,7 +249,7 @@ export const CompanyComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.languages?.[0]}
-                  defaultValue={idLenguages?.[0].id || ''}
+                  defaultValue={idLenguages?.[0]?.id || ''}
                 >
                   {language.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -376,10 +376,10 @@ export const CompanyComponent = () => {
               <InputLabel>Imagen</InputLabel>
               <TextField
                 placeholder="Imagen"
-                id="image"
+                id="imagen"
                 type="file"
                 fullWidth
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={(e) => setImagen(e.target.files[0])}
               />
               <Button
                 variant="contained"
