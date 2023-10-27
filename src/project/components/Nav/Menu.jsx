@@ -12,12 +12,14 @@ import styles from "./Nav.module.css";
 import { useDispatch } from "react-redux";
 import { onLogout } from "../../../store/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../../hooks/useAuthStore";
 
 export const Menu = () => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user } = useAuthStore();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -30,10 +32,15 @@ export const Menu = () => {
       navigate("/home");
     }
 
-    if( value === "myaccount"){
+    if (value === "myaccount") {
       navigate("/myaccount");
     }
 
+    if (value === "perfil") {
+      if (user.data) {
+        navigate(`/professional/${user.id}`);
+      }
+    }
     setOpen(false);
   };
 
@@ -56,7 +63,7 @@ export const Menu = () => {
   }, [open]);
 
   return (
-    <div>
+    <div className={styles.menu}>
       <div className={styles.iconCircle} onClick={handleToggle}>
         <AccountCircleOutlinedIcon
           className={styles.iconButton}
@@ -92,7 +99,9 @@ export const Menu = () => {
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>Perfil</MenuItem>
+                  <MenuItem onClick={() => handleClose("perfil")}>
+                    Perfil
+                  </MenuItem>
                   <MenuItem onClick={() => handleClose("myaccount")}>
                     Mi Cuenta
                   </MenuItem>
