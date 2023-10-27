@@ -13,6 +13,7 @@ export const UpdateTypePage = () => {
       const { data } = await projectAPI.put(`/user/${user.id}`, {
         type: selectedType,
       });
+      //desesctructurar del put el token y los datos para enviarlos al local storage y al login
       window.location.reload();
     } catch (error) {}
   };

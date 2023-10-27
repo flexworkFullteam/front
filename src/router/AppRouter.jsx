@@ -10,8 +10,6 @@ import { useAuthStore } from "../hooks/useAuthStore";
 import { AdminRoute } from "../admin/routes/AdminRoute";
 import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
 
-import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
-
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
   const { user, status, startLoginWithToken } = useAuthStore();
@@ -41,7 +39,6 @@ export const AppRouter = () => {
         {user.type === 1 && <Route path="/*" element={<AdminRoute />} />}
 
         {user.type === 4 && <Route path="/*" element={<UpdateTypePage />} />}
-
       </Routes>
       <Footer />
     </>

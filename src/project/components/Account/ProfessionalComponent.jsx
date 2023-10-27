@@ -27,9 +27,7 @@ const ProfessionalComponent = () => {
     startUploadingFiles,
     startUpdateProfessional,
   } = useAuthStore();
-  const [image, setImage] = useState(
-    "https://pbs.twimg.com/media/CsE52kDXYAAGsfy.jpg"
-  );
+  const [image, setImage] = useState();
 
   const { nationality, language, itSkills } = useDbTableStore();
   const { getExp_req, getNationality, getItSkills } = useDbTableStore();
