@@ -309,11 +309,7 @@ const ProfessionalComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.nationality}
-<<<<<<< HEAD
                   defaultValue={idNacionality?.[0]?.id || ''}
-=======
-                  defaultValue={idNacionality?.[0]?.id || ""}
->>>>>>> origin/dev
                 >
                   {nationality.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -333,11 +329,7 @@ const ProfessionalComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.languages?.[0]}
-<<<<<<< HEAD
                   defaultValue={idLenguages?.[0]?.id || ''}
-=======
-                  defaultValue={idLenguages?.[0]?.id || ""}
->>>>>>> origin/dev
                 >
                   {language.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -359,11 +351,7 @@ const ProfessionalComponent = () => {
                     required: "Este campo es requerido",
                   })}
                   error={errors.itskill?.[0]}
-<<<<<<< HEAD
                   defaultValue={idSkills?.[0]?.id || ''}
-=======
-                  defaultValue={idSkills?.[0]?.id || ""}
->>>>>>> origin/dev
                 >
                   {itSkills.map((item) => (
                     <MenuItem key={item.id} value={item.id}>
