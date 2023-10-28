@@ -13,6 +13,8 @@ export const UpdateTypePage = () => {
       const { data } = await projectAPI.put(`/user/${user.id}`, {
         type: selectedType,
       });
+      //localStorage.setItem("token", data.token);
+      // dispatch(onLogin(data.user))
       window.location.reload();
     } catch (error) {}
   };

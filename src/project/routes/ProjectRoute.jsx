@@ -6,9 +6,9 @@ import { AccountPage } from "../pages/AccountPage/AccountPage";
 import { CreateProject } from "../components/CreateProject/CreateProject";
 import { Payment } from "../components/Payment/Payment";
 import { Success } from "../components/Payment/Success";
-import { Pending } from "@mui/icons-material";
 import { Failure } from "../components/Payment/Failure";
 import { ProfessionalDetail } from "../components/ProfessionalDetail/ProfessionalDetail";
+import { Pending } from "../components/Payment/Pending";
 
 export const ProjectRoute = ({ status }) => {
   return (
