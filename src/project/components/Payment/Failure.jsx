@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import './Failure.css'
 
 export const Failure = () => {
-  const { navigate } = useNavigate();
+  const navigate  = useNavigate();
 
   const goHome = () => {
     navigate("/home")
