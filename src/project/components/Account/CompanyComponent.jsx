@@ -399,7 +399,7 @@ export const CompanyComponent = () => {
                 </Typography>
                 <VisuallyHiddenInput
                   type="file"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => setImagen(e.target.files[0])}
                   placeholder="Imagen"
                   id="image"
                 />

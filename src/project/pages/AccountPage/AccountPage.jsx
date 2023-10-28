@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
-import ProfessionalComponent from "../../components/Account/ProfessionalComponent";
-import { CompanyPage } from "../../pages/CompanyPage/CompanyPage";
+// import ProfessionalComponent from "../../components/Account/ProfessionalComponent";
+// import { CompanyPage } from "../../pages/CompanyPage/CompanyPage";
+import { NotVerified } from "../../components/VerifyAccount/NotVerified";
+import { Verified } from "../../components/VerifyAccount/Verified";
 
 export const AccountPage = () => {
   const { user } = useSelector((state) => state.auth);
@@ -10,7 +12,7 @@ export const AccountPage = () => {
       {/* <ProfessionalComponent/> */}
       {/* <CompanyComponent/> */}
 
-      {user.type === 2 ? <ProfessionalComponent /> : <CompanyPage />}
+      {user.valid === true ? <Verified user={user} /> : <NotVerified />}
     </div>
   );
 };
