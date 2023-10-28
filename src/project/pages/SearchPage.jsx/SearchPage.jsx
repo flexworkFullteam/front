@@ -143,7 +143,7 @@ export const SearchPage = () => {
               sx={{ backgroundColor: "lightgray" }}
             >
               {field.map((fieldOption) => (
-                <MenuItem value={fieldOption.id} key={fieldOption.id}>
+                <MenuItem value={fieldOption.project_fields} key={fieldOption.id}>
                   {fieldOption.project_fields}
                 </MenuItem>
               ))}
@@ -180,7 +180,7 @@ export const SearchPage = () => {
             >
               <MenuItem value="">Todos</MenuItem>
               {exp_req.map((expOption) => (
-                <MenuItem value={expOption.id} key={expOption.id}>
+                <MenuItem value={expOption.experienceLevel} key={expOption.id}>
                   {expOption.experienceLevel}
                 </MenuItem>
               ))}
@@ -217,7 +217,7 @@ export const SearchPage = () => {
             >
               <MenuItem value="">Todos</MenuItem>
               {type.map((typeOption) => (
-                <MenuItem value={typeOption.id} key={typeOption.id}>
+                <MenuItem value={typeOption.project_type} key={typeOption.id}>
                   {typeOption.project_type}
                 </MenuItem>
               ))}

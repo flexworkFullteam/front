@@ -2,19 +2,23 @@ import React, { useState } from "react";
 import { MenuItem, Select, Typography, Button } from "@mui/material";
 import { projectAPI } from "../../../api/projectAPI";
 import { useAuthStore } from "../../../hooks/useAuthStore";
+import { useDispatch } from "react-redux";
+import { onLogin } from "../../../store/auth/authSlice";
 
 export const UpdateTypePage = () => {
-  const [selectedType, setSelectedType] = useState();
+  const [selectedType, setSelectedType] = useState(2);  // Initialize with a valid value
   const { user } = useAuthStore();
+  const dispatch = useDispatch();
 
   const handleClick = async () => {
     console.log("Valor seleccionado:", selectedType);
     try {
-      const { data } = await projectAPI.put(`/user/${user.id}`, {
+      const { data } = await projectAPI.put(`/user/auth0/register`, {
+        userId: user.id,
         type: selectedType,
       });
-      //localStorage.setItem("token", data.token);
-      // dispatch(onLogin(data.user))
+      localStorage.setItem("token", data.token);
+      dispatch(onLogin(data.user))
       window.location.reload();
     } catch (error) {}
   };
@@ -31,11 +35,11 @@ export const UpdateTypePage = () => {
       <Typography variant="h6">¿Qué tipo de usuario eres?</Typography>
       <Select
         value={selectedType}
-        onChange={(e) => setSelectedType(e.target.value)}
+        onChange={(e) => setSelectedType(parseInt(e.target.value, 10))}
         sx={{ width: "200px", marginTop: "10px" }}
       >
-        <MenuItem value="2">Profesional</MenuItem>
-        <MenuItem value="3">Empresa</MenuItem>
+        <MenuItem value={2}>Profesional</MenuItem>
+        <MenuItem value={3}>Empresa</MenuItem>
       </Select>
       <Button
         variant="contained"
@@ -47,3 +51,4 @@ export const UpdateTypePage = () => {
     </div>
   );
 };
+
