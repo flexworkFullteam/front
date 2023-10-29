@@ -30,7 +30,7 @@ export const ProjectRoute = ({ status }) => {
 
       <Route path='/failure' element={<Failure />} />
 
-      <Route path='/*' element={<Navigate to='/home' />} />
+      {/* <Route path='/*' element={<Navigate to='/home' />} /> */}
     </Routes>
   );
 };
