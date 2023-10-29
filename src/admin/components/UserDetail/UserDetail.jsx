@@ -95,7 +95,7 @@ export const UserDetail = () => {
             {projects.projects.map((project) => (
               <Card sx={{ width: "100%", mb: "6px" }} key={project.id}>
                 <Link to={`/project/detail/${project.id}`}>
-                  <CardContent>
+                  <CardContent onClick={() => handleDetail(`/detail/${project.id}`)}>
                     <Typography variant='subtitle1' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main'>
                       {project.title}
                     </Typography>
