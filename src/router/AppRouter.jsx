@@ -20,14 +20,19 @@ export const AppRouter = () => {
 
   useEffect(() => {
     startLoginWithToken();
+  }, []);
+
+  useEffect(() => {
     startLoadingProject();
+  }, []);
+
+  useEffect(() => {
     getField();
     getType();
     getExp_req();
   }, []);
 
-  console.log(user);
-
+  // Aca deberia haber 
 
   if (status === 'checking') {
     return (
