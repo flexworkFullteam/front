@@ -1,5 +1,5 @@
 import { CompanyPage } from "../../pages/CompanyPage/CompanyPage"
-import ProfessionalComponent from "../Account/ProfessionalComponent"
+import { ProfessionalPage } from "../../pages/ProfessionalPage/ProfessionalPage"
 
 
 export const Verified = ({user}) => {
@@ -8,7 +8,7 @@ export const Verified = ({user}) => {
 
   return (
     <div>
-        {user.type === 2 ? <ProfessionalComponent /> : <CompanyPage />}
+        {user.type === 2 ? <ProfessionalPage /> : <CompanyPage />}
     </div>
   )
 }
