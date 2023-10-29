@@ -5,6 +5,6 @@ export const getProfessionalById = async (id) => {
     const { data } = await projectAPI.get(`/professional/${id}`);
     return data;
   } catch (error) {
-    alert(error.message);
+    console.error(error.message);
   }
 };
