@@ -1,17 +1,6 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Grid,
-  Typography,
-  Button,
-  Container,
-  Stack,
-  TextField,
-  InputLabel,
-  MenuItem,
-  Select,
-  FormControl,
-} from "@mui/material";
+import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, Select, FormControl } from "@mui/material";
 import style from "./generalStyles.module.css";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
@@ -19,8 +8,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
 
 export const CompanyComponent = () => {
-  const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } =
-    useAuthStore();
+  const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } = useAuthStore();
   const [imagen, setImagen] = useState();
 
   console.log("inicio:", user);
@@ -73,9 +61,7 @@ export const CompanyComponent = () => {
     console.log("imagen", imagen);
   }
 
-  let idNacionality = nationality?.filter(
-    (item) => item.nationality == user.id_nationality
-  );
+  let idNacionality = nationality?.filter((item) => item.nationality == user.id_nationality);
   let idLenguages = language?.filter((item) => item.language == user.languages);
   // console.log("mis lenguages:", idLenguages[0].id);
 
@@ -93,32 +79,22 @@ export const CompanyComponent = () => {
         boxShadow: "5px 5px 10px #000",
       }}
     >
-      <Typography
-        variant="h4"
-        sx={{ mb: 5, mt: 5 }}
-        fontWeight="semi bold"
-        color="pear.main"
-      >
+      <Typography variant='h4' sx={{ mb: 5, mt: 5 }} fontWeight='semi bold' color='pear.main'>
         Mi cuenta
       </Typography>
 
       <form onSubmit={onSubmit}>
         <Stack spacing={3}>
-          <Typography
-            variant="h6"
-            fontFamily="Nunito Sans"
-            fontWeight="bold"
-            color="persianBlue.main"
-          >
+          <Typography variant='h6' fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
             Completa los datos de la empresa
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={4}>
               <InputLabel>Nombre de la empresa</InputLabel>
               <TextField
-                placeholder="Nombre de la empresa"
-                id="businessName"
-                type="text"
+                placeholder='Nombre de la empresa'
+                id='businessName'
+                type='text'
                 fullWidth
                 {...register("businessName", {
                   required: {
@@ -132,15 +108,13 @@ export const CompanyComponent = () => {
                 })}
                 defaultValue={user.businessName || ""}
               />
-              {errors.businessName && (
-                <p className={style.errors}>{errors.businessName.message}</p>
-              )}
+              {errors.businessName && <p className={style.errors}>{errors.businessName.message}</p>}
 
               <InputLabel>Industria</InputLabel>
               <TextField
-                placeholder="Industria"
-                id="activityType"
-                type="text"
+                placeholder='Industria'
+                id='activityType'
+                type='text'
                 fullWidth
                 {...register("activityType", {
                   required: {
@@ -154,25 +128,16 @@ export const CompanyComponent = () => {
                 })}
                 defaultValue={user.activityType || ""}
               />
-              {errors.activityType && (
-                <p className={style.errors}>{errors.activityType.message}</p>
-              )}
+              {errors.activityType && <p className={style.errors}>{errors.activityType.message}</p>}
 
               <InputLabel>Fecha de inicio</InputLabel>
-              <TextField
-                placeholder="Fecha de inicio"
-                id="startDate"
-                fullWidth
-                type="text"
-                {...register("startDate")}
-                defaultValue={user.startDate || ""}
-              />
+              <TextField placeholder='Fecha de inicio' id='startDate' fullWidth type='text' {...register("startDate")} defaultValue={user.startDate || ""} />
 
               <InputLabel>Dirección Fiscal</InputLabel>
               <TextField
-                placeholder="fiscalAddress"
-                id="fiscalAddress"
-                type="text"
+                placeholder='fiscalAddress'
+                id='fiscalAddress'
+                type='text'
                 fullWidth
                 {...register("fiscalAddress", {
                   required: {
@@ -186,15 +151,13 @@ export const CompanyComponent = () => {
                 })}
                 defaultValue={user.fiscalAddress || ""}
               />
-              {errors.fiscalAddress && (
-                <p className={style.errors}>{errors.fiscalAddress.message}</p>
-              )}
+              {errors.fiscalAddress && <p className={style.errors}>{errors.fiscalAddress.message}</p>}
 
               <InputLabel>Representante Legal</InputLabel>
               <TextField
-                placeholder="Representante Legal"
-                id="legalRepresentative"
-                type="text"
+                placeholder='Representante Legal'
+                id='legalRepresentative'
+                type='text'
                 fullWidth
                 {...register("legalRepresentative", {
                   required: {
@@ -210,17 +173,13 @@ export const CompanyComponent = () => {
                 defaultValue={user.legalRepresentative || ""}
               />
 
-              {errors.legalRepresentative && (
-                <p className={style.errors}>
-                  {errors.legalRepresentative.message}
-                </p>
-              )}
+              {errors.legalRepresentative && <p className={style.errors}>{errors.legalRepresentative.message}</p>}
 
               <InputLabel>Cuenta de banco</InputLabel>
               <TextField
-                placeholder="Cuenta de banco"
-                id="bankAccount"
-                type="text"
+                placeholder='Cuenta de banco'
+                id='bankAccount'
+                type='text'
                 fullWidth
                 {...register("bankAccount", {
                   required: {
@@ -234,9 +193,7 @@ export const CompanyComponent = () => {
                 })}
                 defaultValue={user.bankAccount || ""}
               />
-              {errors.bankAccount && (
-                <p className={style.errors}>{errors.bankAccount.message}</p>
-              )}
+              {errors.bankAccount && <p className={style.errors}>{errors.bankAccount.message}</p>}
 
               <InputLabel>Nacionalidad</InputLabel>
               <FormControl fullWidth>
@@ -253,9 +210,7 @@ export const CompanyComponent = () => {
                     </MenuItem>
                   ))}
                 </Select>
-                {errors.nationalityId && (
-                  <p className={style.errors}>{errors.nationalityId.message}</p>
-                )}
+                {errors.nationalityId && <p className={style.errors}>{errors.nationalityId.message}</p>}
               </FormControl>
 
               <InputLabel>Idiomas</InputLabel>
@@ -273,34 +228,28 @@ export const CompanyComponent = () => {
                     </MenuItem>
                   ))}
                 </Select>
-                {errors.languages?.[0] && (
-                  <p className={style.errors}>
-                    {errors.languages?.[0].message}
-                  </p>
-                )}
+                {errors.languages?.[0] && <p className={style.errors}>{errors.languages?.[0].message}</p>}
               </FormControl>
 
               <InputLabel>RUC</InputLabel>
               <TextField
-                placeholder="RUC"
-                id="ruc"
-                type="number"
+                placeholder='RUC'
+                id='ruc'
+                type='number'
                 fullWidth
                 {...register("ruc", {
                   required: "Este campo es requerido",
                 })}
                 defaultValue={user.ruc || ""}
               />
-              {errors.ruc && (
-                <p className={style.errors}>{errors.ruc.message}</p>
-              )}
+              {errors.ruc && <p className={style.errors}>{errors.ruc.message}</p>}
             </Grid>
 
             <Grid item xs={4}>
               <InputLabel>Nombre</InputLabel>
               <TextField
-                placeholder="Nombre"
-                type="text"
+                placeholder='Nombre'
+                type='text'
                 fullWidth
                 {...register("data.nombre", {
                   required: {
@@ -319,9 +268,9 @@ export const CompanyComponent = () => {
 
               <InputLabel>Teléfono</InputLabel>
               <TextField
-                placeholder="Teléfono"
-                id="telefono"
-                type="number" //! Tipo Number
+                placeholder='Teléfono'
+                id='telefono'
+                type='number' //! Tipo Number
                 fullWidth
                 {...register("data.telefono", {
                   required: {
@@ -339,9 +288,9 @@ export const CompanyComponent = () => {
 
               <InputLabel>Email</InputLabel>
               <TextField
-                placeholder="Email"
-                id="email"
-                type="email"
+                placeholder='Email'
+                id='email'
+                type='email'
                 fullWidth
                 {...register("data.email", {
                   required: {
@@ -358,22 +307,13 @@ export const CompanyComponent = () => {
               {/* {errors.data?.email && ( <p className={style.errors}>{errors.data?.email.message}</p>)} */}
 
               <InputLabel>Horario</InputLabel>
-              <TextField
-                placeholder="Horario"
-                id="horario"
-                type="text"
-                fullWidth
-                {...register("data.horario")}
-                defaultValue={
-                  user.contactData ? user.contactData.horario : "9-6pm"
-                }
-              />
+              <TextField placeholder='Horario' id='horario' type='text' fullWidth {...register("data.horario")} defaultValue={user.contactData ? user.contactData.horario : "9-6pm"} />
 
               <InputLabel>Contacto</InputLabel>
               <TextField
-                placeholder="Contacto"
-                id="contacto"
-                type="text"
+                placeholder='Contacto'
+                id='contacto'
+                type='text'
                 fullWidth
                 {...register("data.contacto", {
                   required: {
@@ -385,38 +325,16 @@ export const CompanyComponent = () => {
               />
               {/* {errors.data?.contacto && (<p className={style.errors}>{errors.data?.contacto.message}</p>)} */}
               <InputLabel>Imagen</InputLabel>
-              <Button
-                component="label"
-                variant="contained"
-                color="pear"
-                endIcon={<CloudUploadIcon />}
-              >
-                <Typography
-                  fontFamily="Nunito Sans"
-                  fontWeight="bold"
-                  color="persianBlue.main"
-                >
+              <Button component='label' variant='contained' color='pear' endIcon={<CloudUploadIcon />}>
+                <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
                   Eliga una imagen
                 </Typography>
-                <VisuallyHiddenInput
-                  type="file"
-                  onChange={(e) => setImage(e.target.files[0])}
-                  placeholder="Imagen"
-                  id="image"
-                />
+
+                <VisuallyHiddenInput type='file' onChange={(e) => setImagen(e.target.files[0])} placeholder='Imagen' id='image' />
+
               </Button>
-              <Button
-                variant="contained"
-                color="pear"
-                type="button"
-                sx={{ margin: 2 }}
-                onClick={onClick}
-              >
-                <Typography
-                  fontFamily="Nunito Sans"
-                  fontWeight="bold"
-                  color="persianBlue.main"
-                >
+              <Button variant='contained' color='pear' type='button' sx={{ margin: 2 }} onClick={onClick}>
+                <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
                   Subir
                 </Typography>
               </Button>
@@ -424,17 +342,8 @@ export const CompanyComponent = () => {
           </Grid>
         </Stack>
 
-        <Button
-          variant="contained"
-          color="pear"
-          type="submit"
-          sx={{ margin: 2 }}
-        >
-          <Typography
-            fontFamily="Nunito Sans"
-            fontWeight="bold"
-            color="persianBlue.main"
-          >
+        <Button variant='contained' color='pear' type='submit' sx={{ margin: 2 }}>
+          <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
             Guardar cambios
           </Typography>
         </Button>
