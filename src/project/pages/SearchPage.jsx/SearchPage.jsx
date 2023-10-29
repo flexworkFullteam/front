@@ -17,9 +17,11 @@ export const SearchPage = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [filters, setFilters] = useState({
-    date: "",
-    level: "",
-    workload: "",
+    field: null,
+    lapse: null,
+    exp_req: null,
+    salary: null,
+    project_type: null,
   });
 
   const { field, type, exp_req, getField, getType, getExp_req } = useDbTableStore();
@@ -41,6 +43,24 @@ export const SearchPage = () => {
     dispatch(onDeleteFilters());
     navigate("/search");
   };
+
+  const handleDeleteFilters = () => {
+    dispatch(onDeleteFilters());
+    setFilters({
+      field: "",
+      lapse: "",
+      exp_req: "",
+      salary: "",
+      project_type: "",
+    })
+  };
+  const handleEvent = ({ target: { name, value } }) => {
+    setFilters({
+      ...filters,
+      [name]: value
+    });
+    //console.log(name, " : ", value);
+  }
 
   const handleDetail = (url) => {
     const newTab = window.open("", "_blank");
@@ -109,10 +129,21 @@ export const SearchPage = () => {
 
         <Box mt={2}>
           <FormControl fullWidth sx={{ mb: "1.5rem", mt: "1rem" }}>
-            <InputLabel id='field-label'>Área</InputLabel>
-            <Select labelId='field-label' id='field' name='field' value={filters.field} onChange={(event) => dispatch(onFilterProjectsByField(event.target.value))} sx={{ backgroundColor: "lightgray" }}>
+            <InputLabel id="field-label">Área</InputLabel>
+            <Select
+              labelId="field-label"
+              id="field"
+              name="field"
+              value={filters.field}
+              onChange={(event) => {
+                handleEvent(event);
+                dispatch(onFilterProjectsByField(event.target.value));
+              }}
+              sx={{ backgroundColor: "lightgray" }}
+            >
+
               {field.map((fieldOption) => (
-                <MenuItem value={fieldOption.id} key={fieldOption.id}>
+                <MenuItem value={fieldOption.project_fields} key={fieldOption.id}>
                   {fieldOption.project_fields}
                 </MenuItem>
               ))}
@@ -120,20 +151,40 @@ export const SearchPage = () => {
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id='lapse-label'>Duracion</InputLabel>
-            <Select labelId='lapse-label' id='lapse' value={filters.lapse} onChange={(event) => dispatch(onOrderProjectsByLapse(event.target.value))} sx={{ backgroundColor: "lightgray" }}>
-              <MenuItem value=''> - </MenuItem>
-              <MenuItem value='asc'>Ascendente</MenuItem>
-              <MenuItem value='desc'>Descendente</MenuItem>
+            <InputLabel id="lapse-label">Duracion</InputLabel>
+            <Select
+              labelId="lapse-label"
+              id="lapse"
+              name="lapse"
+              value={filters.lapse}
+              onChange={(event) => {
+                handleEvent(event);
+                dispatch(onOrderProjectsByLapse(event.target.value));
+              }}
+              sx={{ backgroundColor: "lightgray" }}
+            >
+              <MenuItem value=""> - </MenuItem>
+              <MenuItem value="asc">Ascendente</MenuItem>
+              <MenuItem value="desc">Descendente</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id='exp_req-label'>Experiencia</InputLabel>
-            <Select labelId='exp_req-label' id='exp_req' value={filters.exp_req} onChange={(event) => dispatch(onFilterProjectsByExp(event.target.value))} sx={{ backgroundColor: "lightgray" }}>
-              <MenuItem value=''>Todos</MenuItem>
+            <InputLabel id="exp_req-label">Experiencia</InputLabel>
+            <Select
+              labelId="exp_req-label"
+              id="exp_req"
+              name="exp_req"
+              value={filters.exp_req}
+              onChange={(event) => {
+                handleEvent(event);
+                dispatch(onFilterProjectsByExp(event.target.value));
+              }}
+              sx={{ backgroundColor: "lightgray" }}
+            >
+
               {exp_req.map((expOption) => (
-                <MenuItem value={expOption.id} key={expOption.id}>
+                <MenuItem value={expOption.experienceLevel} key={expOption.id}>
                   {expOption.experienceLevel}
                 </MenuItem>
               ))}
@@ -141,20 +192,40 @@ export const SearchPage = () => {
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id='salary-label'>Salario</InputLabel>
-            <Select labelId='salary-label' id='salary' value={filters.salary} onChange={(event) => dispatch(onOrderProjectsBySalary(event.target.value))} sx={{ backgroundColor: "lightgray" }}>
-              <MenuItem value=''> - </MenuItem>
-              <MenuItem value='asc'>Ascendente</MenuItem>
-              <MenuItem value='desc'>Descendente</MenuItem>
+            <InputLabel id="salary-label">Salario</InputLabel>
+            <Select
+              labelId="salary-label"
+              id="salary"
+              name="salary"
+              value={filters.salary}
+              onChange={(event) => {
+                handleEvent(event);
+                dispatch(onOrderProjectsBySalary(event.target.value));
+              }}
+              sx={{ backgroundColor: "lightgray" }}
+            >
+              <MenuItem value=""> - </MenuItem>
+              <MenuItem value="asc">Ascendente</MenuItem>
+              <MenuItem value="desc">Descendente</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id='project_type-label'>Cargo</InputLabel>
-            <Select labelId='project_type-label' id='project_type' value={filters.project_type} onChange={(event) => dispatch(onFilterProjectsByType(event.target.value))} sx={{ backgroundColor: "lightgray" }}>
-              <MenuItem value=''>Todos</MenuItem>
+            <InputLabel id="project_type-label">Cargo</InputLabel>
+            <Select
+              labelId="project_type-label"
+              id="project_type"
+              name="project_type"
+              value={filters.project_type}
+              onChange={(event) => {
+                handleEvent(event);
+                dispatch(onFilterProjectsByType(event.target.value));
+              }}
+              sx={{ backgroundColor: "lightgray" }}
+            >
+
               {type.map((typeOption) => (
-                <MenuItem value={typeOption.id} key={typeOption.id}>
+                <MenuItem value={typeOption.project_type} key={typeOption.id}>
                   {typeOption.project_type}
                 </MenuItem>
               ))}
@@ -176,7 +247,11 @@ export const SearchPage = () => {
               },
             }}
           >
-            <DeleteOutlineRoundedIcon variant='contained' onClick={() => dispatch(onDeleteFilters())} color='aliceBlue' />
+            <DeleteOutlineRoundedIcon
+              variant="contained"
+              onClick={() => handleDeleteFilters()}
+              color="aliceBlue"
+            />
           </Box>
         </Box>
       </Box>
@@ -253,6 +328,6 @@ export const SearchPage = () => {
           <Pagination count={pageCount} page={page} onChange={handlePageChange} />
         </Box>
       </Box>
-    </Box>
+    </Box >
   );
 };
