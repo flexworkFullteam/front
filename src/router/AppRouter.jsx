@@ -12,6 +12,7 @@ import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
 import { UserDetail } from "../admin/components/UserDetail/UserDetail";
 import { VerifyAccount } from "../project/components/VerifyAccount/VerifyAccount";
 import {LoadingComponent} from "../project/components/LoadingComponent/LoadingComponent";
+import { useDbTableStore } from "../hooks/useDbTableStore";
 
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
