@@ -59,12 +59,12 @@ export const SearchPage = () => {
     }
   }, [term]);
 
-  useEffect(() => {
-    startLoadingProject();
-    getField();
-    getType();
-    getExp_req();
-  }, []);
+  // useEffect(() => {
+  //   startLoadingProject();
+  //   getField();
+  //   getType();
+  //   getExp_req();
+  // }, []);
 
   return (
     <Box display='flex' flexDirection='row' padding={"3em"}>
