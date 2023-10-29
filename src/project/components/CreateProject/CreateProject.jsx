@@ -1,20 +1,10 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Grid,
-  Typography,
-  Button,
-  Container,
-  Stack,
-  TextField,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, Select } from "@mui/material";
 import { CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
-import { postProject } from "../../../helpers/postProject";
+import { postProject } from "../../../helpers/projectsAsync";
 import styles from "./CreateProject.module.css";
 import { LocationInput } from "./LocationInput";
 import { useProjectStore } from "../../../hooks/useProjectStore";
@@ -27,8 +17,7 @@ export const CreateProject = ({ handleClose, callProjects }) => {
     formState: { errors },
   } = useForm();
 
-  const { getField, getType, getExp_req, getItSkills, getLanguage } =
-    useDbTableStore();
+  const { getField, getType, getExp_req, getItSkills, getLanguage } = useDbTableStore();
 
   const { startLoadingProject } = useProjectStore();
 
@@ -40,7 +29,7 @@ export const CreateProject = ({ handleClose, callProjects }) => {
   const [selectedLanguages, setSelectedLanguages] = useState([]);
 
   const onSubmit = handleSubmit((data) => {
-    const id = user.company_id;
+    const id = user.company.id;
     const formData = {
       ...data,
       companyId: id,
@@ -82,17 +71,9 @@ export const CreateProject = ({ handleClose, callProjects }) => {
       }}
     >
       <div className={styles.topContainer}>
-        <CloseRoundedIcon
-          className={styles.closeButton}
-          onClick={handleClose}
-        />
+        <CloseRoundedIcon className={styles.closeButton} onClick={handleClose} />
       </div>
-      <Typography
-        variant="h4"
-        sx={{ mb: 4 }}
-        fontWeight="semi bold"
-        color="pear.main"
-      >
+      <Typography variant='h4' sx={{ mb: 4 }} fontWeight='semi bold' color='pear.main'>
         {" "}
         Crea tu proyecto
       </Typography>
@@ -103,9 +84,9 @@ export const CreateProject = ({ handleClose, callProjects }) => {
             <Grid item xs={5}>
               <InputLabel>Titulo</InputLabel>
               <TextField
-                placeholder="Titulo"
-                id="title"
-                type="text"
+                placeholder='Titulo'
+                id='title'
+                type='text'
                 fullWidth
                 {...register("title", {
                   required: {
@@ -119,17 +100,15 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                   },
                 })}
               />
-              {errors.title && (
-                <p className={styles.errors}>{errors.title.message}</p>
-              )}
+              {errors.title && <p className={styles.errors}>{errors.title.message}</p>}
 
               <InputLabel>Descripción</InputLabel>
               <TextField
-                placeholder="Descripción"
-                id="description"
+                placeholder='Descripción'
+                id='description'
                 multiline
                 rows={3} // Puedes ajustar el número de filas
-                type="text"
+                type='text'
                 fullWidth
                 {...register("description", {
                   required: {
@@ -138,19 +117,10 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                   },
                 })}
               />
-              {errors.description && (
-                <p className={styles.errors}>{errors.description.message}</p>
-              )}
+              {errors.description && <p className={styles.errors}>{errors.description.message}</p>}
 
               <InputLabel>Campo</InputLabel>
-              <TextField
-                select
-                id="field"
-                fullWidth
-                name="field"
-                defaultValue="1"
-                {...register("field")}
-              >
+              <TextField select id='field' fullWidth name='field' defaultValue='1' {...register("field")}>
                 {field.map((item) => (
                   <MenuItem key={item.id} value={item.id}>
                     {item.project_fields}
@@ -159,14 +129,7 @@ export const CreateProject = ({ handleClose, callProjects }) => {
               </TextField>
 
               <InputLabel>Tipo</InputLabel>
-              <TextField
-                select
-                id="type"
-                fullWidth
-                name="type"
-                defaultValue="1"
-                {...register("type")}
-              >
+              <TextField select id='type' fullWidth name='type' defaultValue='1' {...register("type")}>
                 {type.map((item) => (
                   <MenuItem key={item.id} value={item.id}>
                     {item.project_type}
@@ -175,16 +138,14 @@ export const CreateProject = ({ handleClose, callProjects }) => {
               </TextField>
               <InputLabel>Idiomas</InputLabel>
               <Select
-                id="languages"
+                id='languages'
                 multiple
                 value={selectedLanguages}
                 onChange={(event) => setSelectedLanguages(event.target.value)}
                 renderValue={(selected) =>
                   selected
                     .map((value) => {
-                      const languages = language.find(
-                        (item) => item.id === value
-                      );
+                      const languages = language.find((item) => item.id === value);
                       return languages ? languages.language : "";
                     })
                     .join(", ")
@@ -205,9 +166,9 @@ export const CreateProject = ({ handleClose, callProjects }) => {
               <LocationInput handleLocationChange={handleLocationChange} />
               <InputLabel>Salario</InputLabel>
               <TextField
-                placeholder="Salario"
-                id="salary"
-                type="text"
+                placeholder='Salario'
+                id='salary'
+                type='text'
                 fullWidth
                 {...register("salary", {
                   required: {
@@ -220,19 +181,10 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                   },
                 })}
               />
-              {errors.salary && (
-                <p className={styles.errors}>{errors.salary.message}</p>
-              )}
+              {errors.salary && <p className={styles.errors}>{errors.salary.message}</p>}
 
               <InputLabel>Experiencia requerida</InputLabel>
-              <TextField
-                select
-                id="exp_req"
-                fullWidth
-                name="exp_req"
-                defaultValue="1"
-                {...register("exp_req")}
-              >
+              <TextField select id='exp_req' fullWidth name='exp_req' defaultValue='1' {...register("exp_req")}>
                 {exp_req.map((item) => (
                   <MenuItem key={item.id} value={item.id}>
                     {item.experienceLevel}
@@ -242,7 +194,7 @@ export const CreateProject = ({ handleClose, callProjects }) => {
 
               <InputLabel>Habilidades</InputLabel>
               <Select
-                id="itskill"
+                id='itskill'
                 multiple
                 value={selectedSkills}
                 onChange={(event) => setSelectedSkills(event.target.value)}
@@ -264,9 +216,9 @@ export const CreateProject = ({ handleClose, callProjects }) => {
 
               <InputLabel>Lapso</InputLabel>
               <TextField
-                placeholder="Lapso"
-                id="lapse"
-                type="text"
+                placeholder='Lapso'
+                id='lapse'
+                type='text'
                 fullWidth
                 {...register("lapse", {
                   required: {
@@ -279,24 +231,13 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                   },
                 })}
               />
-              {errors.lapse && (
-                <p className={styles.errors}>{errors.lapse.message}</p>
-              )}
+              {errors.lapse && <p className={styles.errors}>{errors.lapse.message}</p>}
             </Grid>
           </Grid>
         </Stack>
 
-        <Button
-          variant="contained"
-          color="pear"
-          type="submit"
-          sx={{ margin: 2 }}
-        >
-          <Typography
-            fontFamily="Nunito Sans"
-            fontWeight="bold"
-            color="persianBlue.main"
-          >
+        <Button variant='contained' color='pear' type='submit' sx={{ margin: 2 }}>
+          <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
             Crear
           </Typography>
         </Button>

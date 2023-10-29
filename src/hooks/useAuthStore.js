@@ -59,7 +59,7 @@ export const useAuthStore = () => {
       if (data.id) {
         // dispatch(onRegister(data)); //Todo: Cambiar por un loading distinto, este te redirije al home
         alert("Usuario registrado");
-        navigate("/login")
+        navigate("/auth/login");
       }
     } catch (error) {
       console.error("Error en el registro:", error);
@@ -82,7 +82,6 @@ export const useAuthStore = () => {
       dispatch(onAddPersonalData(data));
       // dispatch(setLoadingAccount(false));
       alert("Datos personales guardados");
-
     } catch (error) {
       console.log(error);
       // alert(error.errorMessage);
@@ -92,7 +91,10 @@ export const useAuthStore = () => {
 
   const startUpdateProfessional = async (professional, id) => {
     try {
-      const { data } = await projectAPI.put(`/professional/${id}`, professional);
+      const { data } = await projectAPI.put(
+        `/professional/${id}`,
+        professional
+      );
       console.log("Prof actualizado", data);
       console.log(id);
       alert("Cambios guardados");
@@ -112,13 +114,12 @@ export const useAuthStore = () => {
       dispatch(onAddPersonalData(data));
       // dispatch(setLoadingAccount(false));
       alert("Datos de empresa guardados");
-
     } catch (error) {
       console.log(error);
       // alert(error.errorMessage);
       // dispatch(onLogout("Error al crear empresa"));
     }
-  }
+  };
 
   const startUpdateCompany = async (company) => {
     try {
@@ -150,7 +151,7 @@ export const useAuthStore = () => {
     const { secure_url } = await fileUpload(files);
 
     return secure_url;
-  }
+  };
 
   return {
     //propiedades

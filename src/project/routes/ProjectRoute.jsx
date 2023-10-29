@@ -3,7 +3,6 @@ import { HomePage } from "../pages/HomePage/HomePage";
 import { SearchPage } from "../pages/SearchPage.jsx/SearchPage";
 import { DetailPage } from "../pages/DetailPage/DetailPage";
 import { AccountPage } from "../pages/AccountPage/AccountPage";
-import { CreateProject } from "../components/CreateProject/CreateProject";
 import { Payment } from "../components/Payment/Payment";
 import { Success } from "../components/Payment/Success";
 import { Failure } from "../components/Payment/Failure";
@@ -13,28 +12,25 @@ import { Pending } from "../components/Payment/Pending";
 export const ProjectRoute = ({ status }) => {
   return (
     <Routes>
-      <Route path="/home" element={<HomePage />} />
+      <Route path='/home' element={<HomePage />} />
 
-      <Route path="/search/:term?" element={<SearchPage />} />
+      <Route path='/search/:term?' element={<SearchPage />} />
 
-      <Route path="/detail/:id" element={<DetailPage />} />
+      <Route path='/detail/:id' element={<DetailPage />} />
 
-      <Route path="/professional/:id" element={<ProfessionalDetail />} />
+      <Route path='/professional/:id' element={<ProfessionalDetail />} />
 
-      {status === "authenticated" && (
-        <Route path="/myaccount" element={<AccountPage />} />
-      )}
+      {status === "authenticated" && <Route path='/myaccount' element={<AccountPage />} />}
 
-      <Route path='/payment' element={<Payment/>} />
+      <Route path='/payment' element={<Payment />} />
 
-      <Route path='/success/:id' element={<Success/>} />
+      <Route path='/success/:id' element={<Success />} />
 
-      <Route path='/pending' element={<Pending/>} />
+      <Route path='/pending' element={<Pending />} />
 
-      <Route path='/failure' element={<Failure/>} />
+      <Route path='/failure' element={<Failure />} />
 
-
-      <Route path="/*" element={<Navigate to="/home" />} />
+      <Route path='/*' element={<Navigate to='/home' />} />
     </Routes>
   );
 };

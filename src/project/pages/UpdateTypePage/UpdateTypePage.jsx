@@ -17,8 +17,10 @@ export const UpdateTypePage = () => {
         userId: user.id,
         type: selectedType,
       });
+      
       localStorage.setItem("token", data.token);
       dispatch(onLogin(data.user))
+
       window.location.reload();
     } catch (error) {}
   };

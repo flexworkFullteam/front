@@ -46,7 +46,8 @@ export const SearchPage = () => {
     workload: "",
   });
 
-  const { field, type, exp_req } = useDbTableStore();
+  const { field, type, exp_req, getField, getType, getExp_req } =
+    useDbTableStore();
 
   const { startLoadingProject } = useProjectStore();
   const [page, setPage] = useState(1);
@@ -86,6 +87,9 @@ export const SearchPage = () => {
 
   useEffect(() => {
     startLoadingProject();
+    getField();
+    getType();
+    getExp_req();
   }, []);
 
   return (
