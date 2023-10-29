@@ -48,7 +48,7 @@ export const useAuthStore = () => {
   const startRegister = async ({ email, password, username, type }) => {
     console.log({ email, password, username, type });
     try {
-      dispatch(onChecking());
+      // dispatch(onChecking()); //Todo: Cambiar por un loading distinto, este te redirije al home
       const { data } = await projectAPI.post("/user", {
         email,
         password,
@@ -57,7 +57,7 @@ export const useAuthStore = () => {
       });
       // console.log(data)
       if (data.id) {
-        dispatch(onRegister(data));
+        // dispatch(onRegister(data)); //Todo: Cambiar por un loading distinto, este te redirije al home
         alert("Usuario registrado");
         navigate("/auth/login");
       }
