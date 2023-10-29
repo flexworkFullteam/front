@@ -1,24 +1,19 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  Grow,
-  Paper,
-  Popper,
-  MenuItem,
-  MenuList,
-  ClickAwayListener,
-} from "@mui/material/";
+import { Grow, Paper, Popper, MenuItem, MenuList, ClickAwayListener } from "@mui/material/";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import styles from "./Nav.module.css";
-import { useDispatch } from "react-redux";
 import { onLogout } from "../../../store/auth/authSlice";
-import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../hooks/useAuthStore";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const Menu = () => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { logout } = useAuth0();
   const { user } = useAuthStore();
 
   const handleToggle = () => {
@@ -27,6 +22,9 @@ export const Menu = () => {
 
   const handleClose = (value) => {
     if (value === "logout") {
+      if (user.auth0Id) {
+        logout();
+      }
       dispatch(onLogout());
       localStorage.clear();
       navigate("/home");
@@ -65,49 +63,22 @@ export const Menu = () => {
   return (
     <div className={styles.menu}>
       <div className={styles.iconCircle} onClick={handleToggle}>
-        <AccountCircleOutlinedIcon
-          className={styles.iconButton}
-          color="persianBlue"
-          ref={anchorRef}
-          id="composition-button"
-          aria-controls={open ? "composition-menu" : undefined}
-          aria-expanded={open ? "true" : undefined}
-          aria-haspopup="true"
-        />
+        <AccountCircleOutlinedIcon className={styles.iconButton} color='persianBlue' ref={anchorRef} id='composition-button' aria-controls={open ? "composition-menu" : undefined} aria-expanded={open ? "true" : undefined} aria-haspopup='true' />
       </div>
-      <Popper
-        open={open}
-        anchorEl={anchorRef.current}
-        role={undefined}
-        placement="bottom-start"
-        transition
-        disablePortal
-      >
+      <Popper open={open} anchorEl={anchorRef.current} role={undefined} placement='bottom-start' transition disablePortal>
         {({ TransitionProps, placement }) => (
           <Grow
             {...TransitionProps}
             style={{
-              transformOrigin:
-                placement === "bottom-start" ? "left top" : "left bottom",
+              transformOrigin: placement === "bottom-start" ? "left top" : "left bottom",
             }}
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList
-                  autoFocusItem={open}
-                  id="composition-menu"
-                  aria-labelledby="composition-button"
-                  onKeyDown={handleListKeyDown}
-                >
-                  <MenuItem onClick={() => handleClose("perfil")}>
-                    Perfil
-                  </MenuItem>
-                  <MenuItem onClick={() => handleClose("myaccount")}>
-                    Mi Cuenta
-                  </MenuItem>
-                  <MenuItem onClick={() => handleClose("logout")}>
-                    Cerrar Sesión
-                  </MenuItem>
+                <MenuList autoFocusItem={open} id='composition-menu' aria-labelledby='composition-button' onKeyDown={handleListKeyDown}>
+                  <MenuItem onClick={() => handleClose("perfil")}>Perfil</MenuItem>
+                  <MenuItem onClick={() => handleClose("myaccount")}>Mi Cuenta</MenuItem>
+                  <MenuItem onClick={() => handleClose("logout")}>Cerrar Sesión</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
