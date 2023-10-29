@@ -1,0 +1,7 @@
+.navContainer{
+    display: flex;
+    width: 75%;
+    margin: auto;
+    gap: 1%;
+    align-items: flex-start;
+}

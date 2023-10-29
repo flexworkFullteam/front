@@ -1,22 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Button,
-  Card,
-  CardContent,
-  Typography,
-  Modal,
-  Pagination,
-  Box,
-} from "@mui/material";
+import { Button, Card, CardContent, Typography, Modal, Pagination, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 import { Candidates } from "../Candidates/Candidates";
 import { useAuthStore } from "../../../hooks/useAuthStore";
-import styles from "./Project.module.css";
-import { getCompanyProjects } from "../../../helpers/getCompanyProjects";
-import { CreateProject } from "../CreateProject/CreateProject";
 import { useProjectStore } from "../../../hooks/useProjectStore";
+import { CreateProject } from "../CreateProject/CreateProject";
+import { getCompanyProjects } from "../../../helpers/projectsAsync";
+import styles from "./Project.module.css";
 
 export const Projects = () => {
   const { deleteProject } = useProjectStore();
@@ -44,6 +36,11 @@ export const Projects = () => {
   const handleDelete = async (id) => {
     await deleteProject(id);
     callProjects();
+  };
+
+  const handleDetail = (url) => {
+    const newTab = window.open("", "_blank");
+    newTab.location.href = url;
   };
 
   const handlePageChange = (event, value) => {
@@ -83,10 +80,7 @@ export const Projects = () => {
       {setOpen && (
         <Modal open={createOpen} onClose={() => setCreateOpen(false)}>
           <div>
-            <CreateProject
-              handleClose={handleClose}
-              callProjects={callProjects}
-            />
+            <CreateProject handleClose={handleClose} callProjects={callProjects} />
           </div>
         </Modal>
       )}
@@ -98,18 +92,10 @@ export const Projects = () => {
           margin: "1% auto",
         }}
       >
-        <Typography variant="h4">Proyectos</Typography>
+        <Typography variant='h4'>Proyectos</Typography>
 
-        <Button
-          variant="contained"
-          color="persianBlue"
-          onClick={() => setCreateOpen(true)}
-        >
-          <Typography
-            fontFamily="Nunito Sans"
-            fontWeight="400"
-            color="aliceblue"
-          >
+        <Button variant='contained' color='persianBlue' onClick={() => setCreateOpen(true)}>
+          <Typography fontFamily='Nunito Sans' fontWeight='400' color='aliceblue'>
             Crear proyectos
           </Typography>
         </Button>
@@ -125,42 +111,20 @@ export const Projects = () => {
             }}
           >
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
-              <div
-                className={styles.cardLeft}
-                onClick={() => navigate(`/detail/${project.id}`)}
-              >
-                <Typography
-                  variant="h5"
-                  component="h2"
-                  fontFamily="Nunito Sans"
-                  fontWeight="400"
-                >
+              <div className={styles.cardLeft} onClick={() => handleDetail(`/detail/${project.id}`)}>
+                <Typography variant='h5' component='h2' fontFamily='Nunito Sans' fontWeight='400'>
                   {project.title}
                 </Typography>
-                <Typography
-                  color="textSecondary"
-                  sx={{ textTransform: "capitalize" }}
-                ></Typography>
-                <Typography
-                  variant="body2"
-                  component="p"
-                  fontFamily="Nunito Sans"
-                  fontWeight="400"
-                >
+                <Typography color='textSecondary' sx={{ textTransform: "capitalize" }}></Typography>
+                <Typography variant='body2' component='p' fontFamily='Nunito Sans' fontWeight='400'>
                   {project.description}
                 </Typography>
               </div>
 
               <div className={styles.cardRight}>
-                <Button onClick={() => handleOpen(project.id)}>
-                  Ver postulantes
-                </Button>
+                <Button onClick={() => handleOpen(project.id)}>Ver postulantes</Button>
 
-                {project.state ? (
-                  <DeleteIcon onClick={() => handleDelete(project.id)} />
-                ) : (
-                  <ReplayRoundedIcon onClick={() => handleDelete(project.id)} />
-                )}
+                {project.state ? <DeleteIcon onClick={() => handleDelete(project.id)} /> : <ReplayRoundedIcon onClick={() => handleDelete(project.id)} />}
               </div>
             </CardContent>
           </Card>
@@ -168,7 +132,7 @@ export const Projects = () => {
       ) : (
         <p>Cargando candidatos...</p>
       )}
-      <Box mt={3} mb={3} display="flex" justifyContent="center">
+      <Box mt={3} mb={3} display='flex' justifyContent='center'>
         <Pagination count={pageCount} page={page} onChange={handlePageChange} />
       </Box>
     </div>

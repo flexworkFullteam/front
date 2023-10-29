@@ -1,35 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Box,
-  IconButton,
-  useTheme,
-  Pagination,
-} from "@mui/material";
-import {
-  Close as CloseIcon,
-  Place as PlaceIcon,
-  Business as BusinessIcon,
-} from "@mui/icons-material";
+import { Card, CardContent, Typography, FormControl, InputLabel, Select, MenuItem, Box, IconButton, useTheme, Pagination } from "@mui/material";
+import { Close as CloseIcon, Place as PlaceIcon, Business as BusinessIcon } from "@mui/icons-material";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import styles from "./SearchPage.module.css";
-import {
-  onOrderProjectsByLapse,
-  onOrderProjectsBySalary,
-  onDeleteFilters,
-  onFilterProjectsByField,
-  onFilterProjectsByExp,
-  onFilterProjectsByType,
-  onFilterProjectsByTerm,
-} from "../../../store/project/projectSlice";
+import { onOrderProjectsByLapse, onOrderProjectsBySalary, onDeleteFilters, onFilterProjectsByField, onFilterProjectsByExp, onFilterProjectsByType, onFilterProjectsByTerm } from "../../../store/project/projectSlice";
 import { onSetActiveEvent } from "../../../store/project/projectSlice";
 import { useProjectStore } from "../../../hooks/useProjectStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
@@ -48,7 +24,7 @@ export const SearchPage = () => {
     project_type: null,
   });
 
-  const { field, type, exp_req } = useDbTableStore();
+  const { field, type, exp_req, getField, getType, getExp_req } = useDbTableStore();
 
   const { startLoadingProject } = useProjectStore();
   const [page, setPage] = useState(1);
@@ -86,10 +62,9 @@ export const SearchPage = () => {
     //console.log(name, " : ", value);
   }
 
-  const handleDetail = (project) => {
-    dispatch(onSetActiveEvent(project));
-    localStorage.setItem("detail", JSON.stringify(project));
-    navigate(`/detail/${project.id}`);
+  const handleDetail = (url) => {
+    const newTab = window.open("", "_blank");
+    newTab.location.href = url;
   };
 
   const startIndex = (page - 1) * perPage;
@@ -104,12 +79,15 @@ export const SearchPage = () => {
     }
   }, [term]);
 
-  useEffect(() => {
-    //startLoadingProject();
-  }, []);
+  // useEffect(() => {
+  //   startLoadingProject();
+  //   getField();
+  //   getType();
+  //   getExp_req();
+  // }, []);
 
   return (
-    <Box display="flex" flexDirection="row" padding={"3em"}>
+    <Box display='flex' flexDirection='row' padding={"3em"}>
       <Box
         sx={{
           width: "30%",
@@ -279,85 +257,38 @@ export const SearchPage = () => {
       </Box>
 
       <Box sx={{ width: "70%" }} padding={theme.spacing(3)}>
-        <Typography variant="h6" component="h1" sx={{ mb: "1rem" }}>
+        <Typography variant='h6' component='h1' sx={{ mb: "1rem" }}>
           {existingProjects.length} ofertas de proyectos para {term}
         </Typography>
         {visibleProjects.map((project) => (
-          <Card
-            key={project.id}
-            sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }}
-            onClick={() => handleDetail(project)}
-          >
+          <Card key={project.id} sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }} onClick={() => handleDetail(`/detail/${project.id}`)}>
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
               <div className={styles.cardLeft}>
-                <Typography
-                  variant="h5"
-                  component="h2"
-                  fontFamily="Nunito Sans"
-                  fontWeight="400"
-                >
+                <Typography variant='h5' component='h2' fontFamily='Nunito Sans' fontWeight='400'>
                   {project.title}
                 </Typography>
-                <Typography
-                  color="textSecondary"
-                  sx={{ textTransform: "capitalize" }}
-                ></Typography>
-                <Typography
-                  variant="body2"
-                  component="p"
-                  fontFamily="Nunito Sans"
-                  fontWeight="400"
-                >
+                <Typography color='textSecondary' sx={{ textTransform: "capitalize" }}></Typography>
+                <Typography variant='body2' component='p' fontFamily='Nunito Sans' fontWeight='400'>
                   {project.description}
                 </Typography>
                 <div className={styles.cardFields}>
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily="Nunito Sans"
-                    fontWeight="400"
-                    fontSize="0.8rem"
-                  >
+                  <Typography variant='body2' component='p' fontFamily='Nunito Sans' fontWeight='400' fontSize='0.8rem'>
                     Salario: {project.salary}
                   </Typography>
 
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily="Nunito Sans"
-                    fontWeight="400"
-                    fontSize="0.8rem"
-                  >
+                  <Typography variant='body2' component='p' fontFamily='Nunito Sans' fontWeight='400' fontSize='0.8rem'>
                     Lapso: {project.lapse}
                   </Typography>
 
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily="Nunito Sans"
-                    fontWeight="400"
-                    fontSize="0.8rem"
-                  >
+                  <Typography variant='body2' component='p' fontFamily='Nunito Sans' fontWeight='400' fontSize='0.8rem'>
                     Experiencia: {project.exp_req}
                   </Typography>
 
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily="Nunito Sans"
-                    fontWeight="400"
-                    fontSize="0.8rem"
-                  >
+                  <Typography variant='body2' component='p' fontFamily='Nunito Sans' fontWeight='400' fontSize='0.8rem'>
                     Cargo: {project.type}
                   </Typography>
 
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily="Nunito Sans"
-                    fontWeight="400"
-                    fontSize="0.8rem"
-                  >
+                  <Typography variant='body2' component='p' fontFamily='Nunito Sans' fontWeight='400' fontSize='0.8rem'>
                     Area: {project.field}
                   </Typography>
                 </div>
@@ -372,13 +303,7 @@ export const SearchPage = () => {
                   }}
                 >
                   <BusinessIcon style={{ marginRight: "10px" }} />
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily="Nunito Sans"
-                    fontWeight="600"
-                    style={{ textTransform: "capitalize" }}
-                  >
+                  <Typography variant='body2' component='p' fontFamily='Nunito Sans' fontWeight='600' style={{ textTransform: "capitalize" }}>
                     {project.exp_req}
                   </Typography>
                 </div>
@@ -390,12 +315,7 @@ export const SearchPage = () => {
                   }}
                 >
                   <PlaceIcon style={{ marginRight: "10px" }} />
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily="Nunito Sans"
-                    fontWeight="600"
-                  >
+                  <Typography variant='body2' component='p' fontFamily='Nunito Sans' fontWeight='600'>
                     {project.nation_id}
                   </Typography>
                 </div>
@@ -404,12 +324,8 @@ export const SearchPage = () => {
           </Card>
         ))}
 
-        <Box mt={3} display="flex" justifyContent="center">
-          <Pagination
-            count={pageCount}
-            page={page}
-            onChange={handlePageChange}
-          />
+        <Box mt={3} display='flex' justifyContent='center'>
+          <Pagination count={pageCount} page={page} onChange={handlePageChange} />
         </Box>
       </Box>
     </Box >

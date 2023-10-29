@@ -48,5 +48,6 @@
     border-radius: 50%;
     width: 13vw;
     height: auto;
+    object-fit: cover;
 }
 
