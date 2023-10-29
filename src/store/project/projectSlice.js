@@ -40,22 +40,22 @@ export const projectSlice = createSlice({
     },
     onFilterProjectsByField: (state, { payload }) => {
       state.projects = state.projects.filter((project) =>
-        project.field.includes(payload.toLowerCase())
+        project.field.includes(payload)
       );
     },
     onFilterProjectsByExp: (state, { payload }) => {
       state.projects = state.projects.filter((project) =>
-        project.exp_req.includes(payload.toLowerCase())
+        project.exp_req.includes(payload)
       );
     },
     onFilterProjectsByType: (state, { payload }) => {
       state.projects = state.projects.filter((project) =>
-        project.project_type.includes(payload.toLowerCase())
+        project.type.includes(payload)
       );
     },
     onFilterProjectsByTerm: (state, { payload }) => {
-      state.projects = state.projects.filter((project) =>
-        project.title.includes(payload)
+      state.projects = state.allProjects.filter((project) =>
+        project.title.toLowerCase().includes(payload.toLowerCase())
       );
     },
     onOrderProjectsByLapse: (state, { payload }) => {

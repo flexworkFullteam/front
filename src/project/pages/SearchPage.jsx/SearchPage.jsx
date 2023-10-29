@@ -41,9 +41,11 @@ export const SearchPage = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [filters, setFilters] = useState({
-    date: "",
-    level: "",
-    workload: "",
+    field: null,
+    lapse: null,
+    exp_req: null,
+    salary: null,
+    project_type: null,
   });
 
   const { field, type, exp_req } = useDbTableStore();
@@ -66,6 +68,24 @@ export const SearchPage = () => {
     navigate("/search");
   };
 
+  const handleDeleteFilters = () => {
+    dispatch(onDeleteFilters());
+    setFilters({
+      field: "",
+      lapse: "",
+      exp_req: "",
+      salary: "",
+      project_type: "",
+    })
+  };
+  const handleEvent = ({ target: { name, value } }) => {
+    setFilters({
+      ...filters,
+      [name]: value
+    });
+    //console.log(name, " : ", value);
+  }
+
   const handleDetail = (project) => {
     dispatch(onSetActiveEvent(project));
     localStorage.setItem("detail", JSON.stringify(project));
@@ -85,7 +105,7 @@ export const SearchPage = () => {
   }, [term]);
 
   useEffect(() => {
-    startLoadingProject();
+    //startLoadingProject();
   }, []);
 
   return (
@@ -137,13 +157,15 @@ export const SearchPage = () => {
               id="field"
               name="field"
               value={filters.field}
-              onChange={(event) =>
-                dispatch(onFilterProjectsByField(event.target.value))
-              }
+              onChange={(event) => {
+                handleEvent(event);
+                dispatch(onFilterProjectsByField(event.target.value));
+              }}
               sx={{ backgroundColor: "lightgray" }}
             >
+
               {field.map((fieldOption) => (
-                <MenuItem value={fieldOption.id} key={fieldOption.id}>
+                <MenuItem value={fieldOption.project_fields} key={fieldOption.id}>
                   {fieldOption.project_fields}
                 </MenuItem>
               ))}
@@ -155,10 +177,12 @@ export const SearchPage = () => {
             <Select
               labelId="lapse-label"
               id="lapse"
+              name="lapse"
               value={filters.lapse}
-              onChange={(event) =>
-                dispatch(onOrderProjectsByLapse(event.target.value))
-              }
+              onChange={(event) => {
+                handleEvent(event);
+                dispatch(onOrderProjectsByLapse(event.target.value));
+              }}
               sx={{ backgroundColor: "lightgray" }}
             >
               <MenuItem value=""> - </MenuItem>
@@ -172,15 +196,17 @@ export const SearchPage = () => {
             <Select
               labelId="exp_req-label"
               id="exp_req"
+              name="exp_req"
               value={filters.exp_req}
-              onChange={(event) =>
-                dispatch(onFilterProjectsByExp(event.target.value))
-              }
+              onChange={(event) => {
+                handleEvent(event);
+                dispatch(onFilterProjectsByExp(event.target.value));
+              }}
               sx={{ backgroundColor: "lightgray" }}
             >
-              <MenuItem value="">Todos</MenuItem>
+
               {exp_req.map((expOption) => (
-                <MenuItem value={expOption.id} key={expOption.id}>
+                <MenuItem value={expOption.experienceLevel} key={expOption.id}>
                   {expOption.experienceLevel}
                 </MenuItem>
               ))}
@@ -192,10 +218,12 @@ export const SearchPage = () => {
             <Select
               labelId="salary-label"
               id="salary"
+              name="salary"
               value={filters.salary}
-              onChange={(event) =>
-                dispatch(onOrderProjectsBySalary(event.target.value))
-              }
+              onChange={(event) => {
+                handleEvent(event);
+                dispatch(onOrderProjectsBySalary(event.target.value));
+              }}
               sx={{ backgroundColor: "lightgray" }}
             >
               <MenuItem value=""> - </MenuItem>
@@ -209,15 +237,17 @@ export const SearchPage = () => {
             <Select
               labelId="project_type-label"
               id="project_type"
+              name="project_type"
               value={filters.project_type}
-              onChange={(event) =>
-                dispatch(onFilterProjectsByType(event.target.value))
-              }
+              onChange={(event) => {
+                handleEvent(event);
+                dispatch(onFilterProjectsByType(event.target.value));
+              }}
               sx={{ backgroundColor: "lightgray" }}
             >
-              <MenuItem value="">Todos</MenuItem>
+
               {type.map((typeOption) => (
-                <MenuItem value={typeOption.id} key={typeOption.id}>
+                <MenuItem value={typeOption.project_type} key={typeOption.id}>
                   {typeOption.project_type}
                 </MenuItem>
               ))}
@@ -241,7 +271,7 @@ export const SearchPage = () => {
           >
             <DeleteOutlineRoundedIcon
               variant="contained"
-              onClick={() => dispatch(onDeleteFilters())}
+              onClick={() => handleDeleteFilters()}
               color="aliceBlue"
             />
           </Box>
@@ -382,6 +412,6 @@ export const SearchPage = () => {
           />
         </Box>
       </Box>
-    </Box>
+    </Box >
   );
 };

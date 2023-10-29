@@ -10,7 +10,7 @@ import { useAuthStore } from "../hooks/useAuthStore";
 import { AdminRoute } from "../admin/routes/AdminRoute";
 import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
 
-import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
+//import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
 
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
