@@ -5,10 +5,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 import { Candidates } from "../Candidates/Candidates";
 import { useAuthStore } from "../../../hooks/useAuthStore";
-import styles from "./Project.module.css";
-import { getCompanyProjects } from "../../../helpers/projectsAsync";
-import { CreateProject } from "../CreateProject/CreateProject";
 import { useProjectStore } from "../../../hooks/useProjectStore";
+import { CreateProject } from "../CreateProject/CreateProject";
+import { getCompanyProjects } from "../../../helpers/projectsAsync";
+import styles from "./Project.module.css";
 
 export const Projects = () => {
   const { deleteProject } = useProjectStore();
@@ -36,6 +36,11 @@ export const Projects = () => {
   const handleDelete = async (id) => {
     await deleteProject(id);
     callProjects();
+  };
+
+  const handleDetail = (url) => {
+    const newTab = window.open("", "_blank");
+    newTab.location.href = url;
   };
 
   const handlePageChange = (event, value) => {
@@ -106,7 +111,7 @@ export const Projects = () => {
             }}
           >
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
-              <div className={styles.cardLeft} onClick={() => navigate(`/detail/${project.id}`)}>
+              <div className={styles.cardLeft} onClick={() => handleDetail(`/detail/${project.id}`)}>
                 <Typography variant='h5' component='h2' fontFamily='Nunito Sans' fontWeight='400'>
                   {project.title}
                 </Typography>

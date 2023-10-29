@@ -1,16 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Button,
-  Container,
-  Stack,
-  TextField,
-  InputAdornment,
-  Typography,
-  InputLabel,
-  MenuItem,
-} from "@mui/material";
+import { Button, Container, Stack, TextField, InputAdornment, Typography, InputLabel, MenuItem } from "@mui/material";
 import { Google, LinkedIn } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -48,18 +39,14 @@ const RegisterUser = () => {
 
   // ---------- Auth0 --------------
 
-  const { loginWithPopup, logout, getAccessTokenSilently, getIdTokenClaims } =
-    useAuth0();
+  const { loginWithPopup, logout, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
 
   const handleLoginSubmission = async () => {
     try {
       await loginWithPopup(); // This will open a popup for Auth0 login
       const tokenClaims = await getIdTokenClaims(); // Get token claims after successful login
       // Sending the tokenClaims object to the backend
-      const response = await axios.post(
-        "http://localhost:3001/user/auth0/loginOrSignup",
-        tokenClaims
-      );
+      const response = await axios.post("http://localhost:3001/user/auth0/loginOrSignup", tokenClaims);
       console.log(response.data.user);
       dispatch(onLogin(response.data.user));
       // Logging the response from the backend
@@ -71,39 +58,15 @@ const RegisterUser = () => {
   // -------------------------------
 
   return (
-    <Container sx={{ pt: 4 }}>
-      {/* --- Auth0 --- */}
-      <Stack spacing={2}>
-        <Button
-          variant="contained"
-          startIcon={<Google />}
-          color="persianBlue"
-          sx={{ width: "270px" }}
-          onClick={handleLoginSubmission}
-        >
-          Ingresa con Google
-        </Button>
-        <Button
-          variant="contained"
-          startIcon={<Google />}
-          color="persianBlue"
-          sx={{ width: "270px" }}
-          onClick={() => logout()}
-        >
-          Log out
-        </Button>
-      </Stack>
-      {/* ------------ */}
-      <br />
-
+    <Container sx={{ pt: 1 }}>
       <form onSubmit={onSubmit}>
-        <Stack spacing={2}>
-          <InputLabel>UserName</InputLabel>
+        <Stack spacing={0.5}>
+          <InputLabel>Nombre de usuario</InputLabel>
           <TextField
-            placeholder="UserName"
-            id="username"
-            type="text"
-            sx={{ width: "400px" }}
+            placeholder='Nombre de usuario'
+            id='username'
+            type='text'
+            sx={{ width: "35%" }}
             {...register("username", {
               required: {
                 value: true,
@@ -116,16 +79,14 @@ const RegisterUser = () => {
               },
             })}
           />
-          {errors.username && (
-            <p className={style.errorsP}>{errors.username.message}</p>
-          )}
+          {errors.username && <p className={style.errorsP}>{errors.username.message}</p>}
 
           <InputLabel>Email</InputLabel>
           <TextField
-            sx={{ width: "400px" }}
-            placeholder="Email"
-            variant="outlined"
-            type="email"
+            sx={{ width: "35%" }}
+            placeholder='Email'
+            variant='outlined'
+            type='email'
             {...register("email", {
               required: {
                 value: true,
@@ -137,28 +98,19 @@ const RegisterUser = () => {
               },
             })}
           />
-          {errors.email && (
-            <p className={style.errorsP}>{errors.email.message}</p>
-          )}
+          {errors.email && <p className={style.errorsP}>{errors.email.message}</p>}
 
           <InputLabel>Tipo de cuenta</InputLabel>
-          <TextField
-            sx={{ width: "400px" }}
-            select
-            id="type"
-            name="type"
-            defaultValue="2"
-            {...register("type")}
-          >
-            <MenuItem value="2">Profesional</MenuItem>
-            <MenuItem value="3">Empresa</MenuItem>
+          <TextField sx={{ width: "35%" }} select id='type' name='type' defaultValue='2' {...register("type")}>
+            <MenuItem value='2'>Profesional</MenuItem>
+            <MenuItem value='3'>Empresa</MenuItem>
           </TextField>
 
           <InputLabel>Contraseña</InputLabel>
           <TextField
-            sx={{ width: "400px" }}
-            placeholder="Contraseña"
-            variant="outlined"
+            sx={{ width: "35%" }}
+            placeholder='Contraseña'
+            variant='outlined'
             type={showPassword ? "text" : "password"}
             {...register("contraseña", {
               required: {
@@ -167,43 +119,31 @@ const RegisterUser = () => {
               },
               pattern: {
                 value: /^(?=\S{6,}$)/,
-                message:
-                  "La contraseña debe contener al menos 6 carácteres, sin espacios en blanco",
+                message: "La contraseña debe contener al menos 6 carácteres, sin espacios en blanco",
               },
             })}
             InputProps={{
               endAdornment: (
-                <InputAdornment position="end">
-                  <Button
-                    variant="text"
-                    color="persianBlue"
-                    size="small"
-                    onClick={togglePasswordVisibility}
-                  >
+                <InputAdornment position='end'>
+                  <Button variant='text' color='persianBlue' size='small' onClick={togglePasswordVisibility}>
                     {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                   </Button>
                 </InputAdornment>
               ),
             }}
           />
-          {errors.contraseña && (
-            <p className={style.errorsP}>{errors.contraseña.message}</p>
-          )}
+          {errors.contraseña && <p className={style.errorsP}>{errors.contraseña.message}</p>}
 
-          <Button
-            variant="contained"
-            color="pear"
-            type="submit"
-            sx={{ width: "140px" }}
-          >
-            <Typography
-              fontFamily="Nunito Sans"
-              fontWeight="bold"
-              color="persianBlue.main"
-            >
-              Ingresar{" "}
-            </Typography>
-          </Button>
+          <div style={{ display: "flex", gap: "1%", marginTop: "1.5%" }}>
+            <Button variant='contained' color='pear' type='submit' sx={{ width: "15%" }}>
+              <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
+                Ingresar
+              </Typography>
+            </Button>
+            <Button variant='contained' startIcon={<Google />} color='persianBlue' sx={{ width: "15%" }} onClick={handleLoginSubmission}>
+              Ingresa con Google
+            </Button>
+          </div>
         </Stack>
       </form>
     </Container>

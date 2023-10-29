@@ -1,15 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  TextField,
-  InputAdornment,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Stack, TextField, InputAdornment, Typography } from "@mui/material";
 import { Google, LinkedIn } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -52,8 +44,7 @@ const LoginUser = () => {
 
   // ---------- Auth0 --------------
 
-  const { loginWithPopup, logout, getAccessTokenSilently, getIdTokenClaims } =
-    useAuth0();
+  const { loginWithPopup, logout, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
 
   const handleLoginSubmission = async () => {
     try {
@@ -61,10 +52,7 @@ const LoginUser = () => {
       const tokenClaims = await getIdTokenClaims(); // Get token claims after successful login
 
       // Sending the tokenClaims object to the backend
-      const response = await axios.post(
-        "http://localhost:3001/user/auth0/loginOrSignup",
-        tokenClaims
-      );
+      const response = await axios.post("http://localhost:3001/user/auth0/loginOrSignup", tokenClaims);
 
       console.log(response.data);
       dispatch(onLogin(response.data.user)); // Logging the response from the backend
@@ -76,40 +64,15 @@ const LoginUser = () => {
   // -------------------------------
 
   return (
-    <Container sx={{ pt: 4 }}>
-      {/* --- Auth0 --- */}
-      <Stack spacing={2}>
-        <Button
-          variant="contained"
-          startIcon={<Google />}
-          color="persianBlue"
-          sx={{ width: "270px" }}
-          onClick={handleLoginSubmission}
-        >
-          Ingresa con Google
-        </Button>
-        <Button
-          variant="contained"
-          startIcon={<Google />}
-          color="persianBlue"
-          sx={{ width: "270px" }}
-          onClick={() => logout()}
-        >
-          Log out
-        </Button>
-      </Stack>
-      {/* ------------ */}
-
-      <br />
-
+    <Container sx={{ pt: 1 }}>
       <form onSubmit={onSubmit}>
-        <Stack spacing={2}>
+        <Stack spacing={0.5}>
           <label>Email</label>
           <TextField
-            sx={{ width: "400px" }}
-            placeholder="Email"
-            variant="outlined"
-            type="email"
+            sx={{ width: "35%" }}
+            placeholder='Email'
+            variant='outlined'
+            type='email'
             {...register("email", {
               required: {
                 value: true,
@@ -121,15 +84,13 @@ const LoginUser = () => {
               },
             })}
           />
-          {errors.email && (
-            <p className={style.errorsP}>{errors.email.message}</p>
-          )}
+          {errors.email && <p className={style.errorsP}>{errors.email.message}</p>}
 
           <label>Contraseña</label>
           <TextField
-            sx={{ width: "400px" }}
-            placeholder="Contraseña"
-            variant="outlined"
+            sx={{ width: "35%" }}
+            placeholder='Contraseña'
+            variant='outlined'
             type={showPassword ? "text" : "password"}
             {...register("contraseña", {
               required: {
@@ -139,37 +100,26 @@ const LoginUser = () => {
             })}
             InputProps={{
               endAdornment: (
-                <InputAdornment position="end">
-                  <Button
-                    variant="text"
-                    color="persianBlue"
-                    size="small"
-                    onClick={togglePasswordVisibility}
-                  >
+                <InputAdornment position='end'>
+                  <Button variant='text' color='persianBlue' size='small' onClick={togglePasswordVisibility}>
                     {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                   </Button>
                 </InputAdornment>
               ),
             }}
           />
-          {errors.contraseña && (
-            <p className={style.errorsP}>{errors.contraseña.message}</p>
-          )}
+          {errors.contraseña && <p className={style.errorsP}>{errors.contraseña.message}</p>}
 
-          <Button
-            variant="contained"
-            color="pear"
-            type="submit"
-            sx={{ width: "140px" }}
-          >
-            <Typography
-              fontFamily="Nunito Sans"
-              fontWeight="bold"
-              color="persianBlue.main"
-            >
-              Ingresar{" "}
-            </Typography>
-          </Button>
+          <div style={{ display: "flex", gap: "1%", marginTop: "1.5%" }}>
+            <Button variant='contained' color='pear' type='submit' sx={{ width: "15%" }}>
+              <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
+                Ingresar{" "}
+              </Typography>
+            </Button>
+            <Button variant='contained' startIcon={<Google />} color='persianBlue' sx={{ width: "15%" }} onClick={handleLoginSubmission}>
+              Ingresa con Google
+            </Button>
+          </div>
         </Stack>
       </form>
     </Container>
