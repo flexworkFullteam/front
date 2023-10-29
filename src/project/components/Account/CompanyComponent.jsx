@@ -328,7 +328,9 @@ export const CompanyComponent = () => {
                 <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
                   Eliga una imagen
                 </Typography>
+
                 <VisuallyHiddenInput type='file' onChange={(e) => setImagen(e.target.files[0])} placeholder='Imagen' id='image' />
+
               </Button>
               <Button variant='contained' color='pear' type='button' sx={{ margin: 2 }} onClick={onClick}>
                 <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
