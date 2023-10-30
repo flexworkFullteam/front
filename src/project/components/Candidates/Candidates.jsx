@@ -34,6 +34,14 @@ export const Candidates = ({ handleClose, id, title, salary,user }) => {
   };
 
   const accept = async (candidateId) => {
+    await startPayment({
+     title: title,
+     unit_price: salary,
+     currency_id: "PEN",
+     from: user.id,
+     to: candidateId,
+     project: id
+   });
     await acceptCandidate(id, candidateId);
     alert(candidateId);
     callCandidates();
