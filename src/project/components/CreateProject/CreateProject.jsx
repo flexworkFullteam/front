@@ -37,7 +37,6 @@ export const CreateProject = ({ handleClose, callProjects }) => {
       itskill: selectedSkills,
       languages: selectedLanguages,
     };
-    console.log(formData);
     postProject(formData);
     callProjects();
     reset();

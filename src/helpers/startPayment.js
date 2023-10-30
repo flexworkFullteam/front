@@ -1,13 +1,12 @@
 import { projectAPI } from "../api/projectAPI";
 
-
 export const startPayment = async (paymentData) => {
   try {
+    console.log("ProjectAPI: ",projectAPI);
     const { data } = await projectAPI.post("/solution/payment", paymentData);
     console.log("Pago realizado", data);
     window.location.href = data.link;
-    // alert("Pago realizado");
-
+    //alert("Pago realizado");
   } catch (error) {
     console.log(error);
     alert(error.message);
