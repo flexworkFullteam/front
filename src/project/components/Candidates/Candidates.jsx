@@ -1,23 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  Pagination,
-  Button,
-} from "@mui/material";
-import {
-  CheckRounded as CheckRoundedIcon,
-  CloseRounded as CloseRoundedIcon,
-} from "@mui/icons-material/";
+import { Card, CardContent, Typography, Box, Pagination, Button } from "@mui/material";
+import { CheckRounded as CheckRoundedIcon, CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
 import styles from "./Candidates.module.css";
-import {
-  getCandidateByProjectId,
-  acceptCandidate,
-  refuseCandidate,
-} from "../../../helpers/candidatesAsync";
+import { getCandidateByProjectId, acceptCandidate, refuseCandidate } from "../../../helpers/candidatesAsync";
 
 export const Candidates = ({ handleClose, id }) => {
   const [page, setPage] = useState(1);
@@ -58,6 +44,11 @@ export const Candidates = ({ handleClose, id }) => {
     setPressedButton(view);
   };
 
+  const handleDetail = (url) => {
+    const newTab = window.open("", "_blank");
+    newTab.location.href = url;
+  };
+
   useEffect(() => {
     if (candidates) {
       switch (pressedButton) {
@@ -68,9 +59,7 @@ export const Candidates = ({ handleClose, id }) => {
           setVisibleCandidates(candidates.rejected.slice(startIndex, endIndex));
           break;
         case "postulate":
-          setVisibleCandidates(
-            candidates.postulate.slice(startIndex, endIndex)
-          );
+          setVisibleCandidates(candidates.postulate.slice(startIndex, endIndex));
           break;
         default:
           break;
@@ -85,72 +74,47 @@ export const Candidates = ({ handleClose, id }) => {
   return (
     <div className={styles.candidatesContainer}>
       <div className={styles.topContainer}>
-        <CloseRoundedIcon
-          className={styles.closeButton}
-          onClick={handleClose}
-        />
-        <Typography variant="h4" sx={{ mb: "1rem", textAlign: "center" }}>
+        <CloseRoundedIcon className={styles.closeButton} onClick={handleClose} />
+        <Typography variant='h4' sx={{ mb: "1rem", textAlign: "center" }}>
           Postulantes
         </Typography>
 
         <div className={styles.postulateButtons}>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={() => handleViewClick("postulate")}
             sx={{
-              backgroundColor:
-                pressedButton === "postulate"
-                  ? "persianBlue.main"
-                  : "pear.main",
-              color:
-                pressedButton === "postulate"
-                  ? "aliceblue"
-                  : "persianBlue.main",
+              backgroundColor: pressedButton === "postulate" ? "persianBlue.main" : "pear.main",
+              color: pressedButton === "postulate" ? "aliceblue" : "persianBlue.main",
             }}
           >
-            <Typography
-              variant="body2"
-              fontFamily="Nunito Sans"
-              fontWeight="400"
-            >
+            <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Postulados
             </Typography>
           </Button>
 
           <Button
-            variant="contained"
+            variant='contained'
             onClick={() => handleViewClick("accepted")}
             sx={{
-              backgroundColor:
-                pressedButton === "accepted" ? "persianBlue.main" : "pear.main",
-              color:
-                pressedButton === "accepted" ? "aliceblue" : "persianBlue.main",
+              backgroundColor: pressedButton === "accepted" ? "persianBlue.main" : "pear.main",
+              color: pressedButton === "accepted" ? "aliceblue" : "persianBlue.main",
             }}
           >
-            <Typography
-              variant="body2"
-              fontFamily="Nunito Sans"
-              fontWeight="400"
-            >
+            <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Aceptados
             </Typography>
           </Button>
 
           <Button
-            variant="contained"
+            variant='contained'
             onClick={() => handleViewClick("rejected")}
             sx={{
-              backgroundColor:
-                pressedButton === "rejected" ? "persianBlue.main" : "pear.main",
-              color:
-                pressedButton === "rejected" ? "aliceblue" : "persianBlue.main",
+              backgroundColor: pressedButton === "rejected" ? "persianBlue.main" : "pear.main",
+              color: pressedButton === "rejected" ? "aliceblue" : "persianBlue.main",
             }}
           >
-            <Typography
-              variant="body2"
-              fontFamily="Nunito Sans"
-              fontWeight="400"
-            >
+            <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Rechazados
             </Typography>
           </Button>
@@ -158,31 +122,18 @@ export const Candidates = ({ handleClose, id }) => {
       </div>
       {visibleCandidates && visibleCandidates.length > 0 ? (
         visibleCandidates?.map((candidate) => (
-          <Card
-            key={candidate.id}
-            sx={{ mt: "1rem", mb: "1rem", ":hover": { cursor: "pointer" } }}
-          >
-            <CardContent sx={{ display: "flex", alignItems: "center" }}>
-              <div className={styles.cardLeft}>
-                <Link to={`/professional/${candidate.id}`}>
-                  <Typography
-                    variant="h5"
-                    component="h2"
-                    fontFamily="Nunito Sans"
-                    fontWeight="400"
-                  >
-                    {`${candidate.data.name} ${candidate.data.lastname}`}
-                  </Typography>
-                  <Typography
-                    color="textSecondary"
-                    sx={{ textTransform: "capitalize" }}
-                  ></Typography>
-                </Link>
+          <Card key={candidate.id} sx={{ mt: "1rem", mb: "1rem", ":hover": { cursor: "pointer" } }}>
+            <CardContent sx={{ display: "flex", alignItems: "center", cursor: "default" }}>
+              <div className={styles.cardLeft} onClick={() => handleDetail(`/professional/${candidate.id}`)}>
+                <Typography variant='h5' component='h2' fontFamily='Nunito Sans' fontWeight='400'>
+                  {`${candidate.data.name} ${candidate.data.lastname}`}
+                </Typography>
+                <Typography color='textSecondary' sx={{ textTransform: "capitalize" }}></Typography>
               </div>
 
               <div className={styles.cardRight}>
-                <CloseRoundedIcon onClick={() => reject(candidate.id)} />
-                <CheckRoundedIcon onClick={() => accept(candidate.id)} />
+                <CloseRoundedIcon sx={{ cursor: "pointer" }} onClick={() => reject(candidate.id)} />
+                <CheckRoundedIcon sx={{ cursor: "pointer" }} onClick={() => accept(candidate.id)} />
               </div>
             </CardContent>
           </Card>
@@ -190,7 +141,7 @@ export const Candidates = ({ handleClose, id }) => {
       ) : (
         <p>Cargando candidatos...</p>
       )}
-      <Box mt={0.5} mb={0.5} display="flex" justifyContent="center">
+      <Box mt={0.5} mb={0.5} display='flex' justifyContent='center'>
         <Pagination count={pageCount} page={page} onChange={handlePageChange} />
       </Box>
     </div>

@@ -1,15 +1,15 @@
 import { useSelector } from "react-redux";
-import { Projects } from "../../components/Projects/Projects";
-import { NavCompany } from "../../components/NavCompany.jsx/NavCompany";
-
+import { NavCompany } from "../../components/NavCompany/NavCompany";
+import { PostulatedProjects } from "../../components/Projects/PostulatedProjects";
+import ProfessionalComponent from "../../components/Account/ProfessionalComponent";
 export const ProfessionalPage = () => {
   const { isComponent } = useSelector((state) => state.ui);
   return (
     <>
-      {/* <NavProfessional />
+      <NavCompany />
       {
-        isComponent === "proyectos" ? <Projects /> : <ProfessionalComponent /> // otro mas para pasa de pagos?
-      } */}
+        isComponent === "proyectos" ? <PostulatedProjects /> : < ProfessionalComponent/> 
+      }
     </>
   );
 };

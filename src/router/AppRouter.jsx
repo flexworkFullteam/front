@@ -11,17 +11,35 @@ import { AdminRoute } from "../admin/routes/AdminRoute";
 import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
 import { UserDetail } from "../admin/components/UserDetail/UserDetail";
 import { VerifyAccount } from "../project/components/VerifyAccount/VerifyAccount";
+import {LoadingComponent} from "../project/components/LoadingComponent/LoadingComponent";
+import { useDbTableStore } from "../hooks/useDbTableStore";
 
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
   const { user, status, startLoginWithToken } = useAuthStore();
+  const { getField, getType, getExp_req } = useDbTableStore();
 
   useEffect(() => {
-    startLoadingProject();
     startLoginWithToken();
   }, []);
 
-  console.log(user);
+  useEffect(() => {
+    startLoadingProject();
+  }, []);
+
+  useEffect(() => {
+    getField();
+    getType();
+    getExp_req();
+  }, []);
+
+  // Aca deberia haber 
+
+  if (status === 'checking') {
+    return (
+      <LoadingComponent />
+      )
+    }
 
   return (
     <>
