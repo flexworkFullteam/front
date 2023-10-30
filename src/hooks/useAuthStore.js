@@ -34,7 +34,7 @@ export const useAuthStore = () => {
 
       if (userMapped) {
         dispatch(onLogin(userMapped));
-        alert("Bienvenido");
+        // alert("Bienvenido");
         navigate("/home");
       } else {
         dispatch(onLogout());
