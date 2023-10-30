@@ -6,7 +6,7 @@ import styles from "./Candidates.module.css";
 import { getCandidateByProjectId, acceptCandidate, refuseCandidate } from "../../../helpers/candidatesAsync";
 import { startPayment } from "../../../helpers/startPayment";
 
-export const Candidates = ({ handleClose, id, title, salary,user }) => {
+export const Candidates = ({ handleClose, id, title, salary, user, pagado }) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(7);
   const [candidates, setCandidates] = useState();
@@ -33,26 +33,20 @@ export const Candidates = ({ handleClose, id, title, salary,user }) => {
     setCandidates(data);
   };
 
-  const accept = async (candidateId) => {
-    await startPayment({
-     title: title,
-     unit_price: salary,
-     currency_id: "PEN",
-     from: user.id,
-     to: candidateId,
-     project: id
-   });
-    await acceptCandidate(id, candidateId);
-    alert(candidateId);
-    callCandidates();
+  const setPayment = async () => {
     await startPayment({
       title: title,
       unit_price: salary,
       currency_id: "PEN",
       from: user.id,
-      to: candidateId,
       project: id
     });
+  }
+
+  const accept = async (candidateId) => {
+    await acceptCandidate(id, candidateId);
+    // alert(candidateId);
+    callCandidates();
   };
 
   const reject = async (candidateId) => {
@@ -107,6 +101,7 @@ export const Candidates = ({ handleClose, id, title, salary,user }) => {
               backgroundColor: pressedButton === "postulate" ? "persianBlue.main" : "pear.main",
               color: pressedButton === "postulate" ? "aliceblue" : "persianBlue.main",
             }}
+            disabled={!pagado}
           >
             <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Postulados
@@ -120,6 +115,7 @@ export const Candidates = ({ handleClose, id, title, salary,user }) => {
               backgroundColor: pressedButton === "accepted" ? "persianBlue.main" : "pear.main",
               color: pressedButton === "accepted" ? "aliceblue" : "persianBlue.main",
             }}
+            disabled={!pagado}
           >
             <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Aceptados
@@ -133,9 +129,16 @@ export const Candidates = ({ handleClose, id, title, salary,user }) => {
               backgroundColor: pressedButton === "rejected" ? "persianBlue.main" : "pear.main",
               color: pressedButton === "rejected" ? "aliceblue" : "persianBlue.main",
             }}
+            disabled={!pagado}
           >
             <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Rechazados
+            </Typography>
+          </Button>
+          
+          <Button variant='contained' onClick={setPayment}>
+            <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
+              Realizar Pago
             </Typography>
           </Button>
         </div>
@@ -150,11 +153,17 @@ export const Candidates = ({ handleClose, id, title, salary,user }) => {
                 </Typography>
                 <Typography color='textSecondary' sx={{ textTransform: "capitalize" }}></Typography>
               </div>
-
+              { pagado ? (
               <div className={styles.cardRight}>
                 <CloseRoundedIcon sx={{ cursor: "pointer" }} onClick={() => reject(candidate.id)} />
                 <CheckRoundedIcon sx={{ cursor: "pointer" }} onClick={() => accept(candidate.id)} />
               </div>
+              ) : (
+                <div className={styles.cardRight}>
+                  <CloseRoundedIcon sx={{ cursor: "pointer" }} onClick={() => alert('Debe realizar el pago')} />
+                <CheckRoundedIcon sx={{ cursor: "pointer" }} onClick={() => alert('Debe realizar el pago')} />
+                </div>
+              )}
             </CardContent>
           </Card>
         ))
