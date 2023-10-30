@@ -4,6 +4,7 @@ import { getProfessionalById } from "../../../helpers/getProfessionalById";
 import { getProjectByProfessional } from "../../../helpers/projectsAsync";
 import { Card, CardContent, Paper, Typography, Pagination } from "@mui/material/";
 import styles from "./UserDetail.module.css";
+import { useAuthStore } from "../../../hooks/useAuthStore";
 
 export const UserDetail = () => {
   const { id } = useParams();
@@ -11,10 +12,16 @@ export const UserDetail = () => {
   const [projects, setProjects] = useState();
   const [page, setPage] = useState(1);
   const projectsPerPage = 6;
+  const { user } = useAuthStore();
 
   const callProfessional = async () => {
-    const professionalData = await getProfessionalById(id);
-    const projectsData = await getProjectByProfessional(id);
+    let userID = id;
+
+    if (!id) {
+      userID = user.id;
+    }
+    const professionalData = await getProfessionalById(userID);
+    const projectsData = await getProjectByProfessional(userID);
 
     setProfessional(professionalData);
     setProjects(projectsData);
@@ -22,6 +29,11 @@ export const UserDetail = () => {
 
   const handlePageChange = (event, value) => {
     setPage(value);
+  };
+
+  const handleDetail = (url) => {
+    const newTab = window.open("", "_blank");
+    newTab.location.href = url;
   };
 
   useEffect(() => {
@@ -94,19 +106,17 @@ export const UserDetail = () => {
             <Typography variant='h6'>Postulaciones a proyectos</Typography>
             {projects.projects.map((project) => (
               <Card sx={{ width: "100%", mb: "6px" }} key={project.id}>
-                <Link to={`/project/detail/${project.id}`}>
-                  <CardContent onClick={() => handleDetail(`/detail/${project.id}`)}>
-                    <Typography variant='subtitle1' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main'>
-                      {project.title}
-                    </Typography>
-                    <Typography variant='body2' fontWeight='400' fontFamily='Nunito Sans' color='persianBlue.main'>
-                      {project.company} - Estado: {project.state}
-                    </Typography>
-                    <Typography variant='body2' fontWeight='400' fontFamily='Nunito Sans' color='persianBlue.main'>
-                      {project.description}
-                    </Typography>
-                  </CardContent>
-                </Link>
+                <CardContent onClick={() => handleDetail(`/detail/${project.id}`)}>
+                  <Typography variant='subtitle1' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main'>
+                    {project.title}
+                  </Typography>
+                  <Typography variant='body2' fontWeight='400' fontFamily='Nunito Sans' color='persianBlue.main'>
+                    {project.company} - Estado: {project.state}
+                  </Typography>
+                  <Typography variant='body2' fontWeight='400' fontFamily='Nunito Sans' color='persianBlue.main'>
+                    {project.description}
+                  </Typography>
+                </CardContent>
               </Card>
             ))}
             <Pagination count={Math.ceil(projects.projects.length / projectsPerPage)} page={page} onChange={handlePageChange} className={styles.pagination} />
