@@ -2,27 +2,18 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { projectAPI } from "../api/projectAPI";
-import {
-  onAddPersonalData,
-  onChecking,
-  onClearEvents,
-  onLogin,
-  onLogout,
-  onRegister,
-} from "../store/auth/authSlice";
+import { onAddPersonalData, onChecking, onClearEvents, onLogin, onLogout, onRegister } from "../store/auth/authSlice";
 import { fileUpload } from "../helpers/fileUpload";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
   const { user, status, errorMessage } = useSelector((state) => state.auth);
-  const { loadingAccount, setLoadingAccount } = useSelector(
-    (state) => state.ui
-  );
+  const { loadingAccount, setLoadingAccount } = useSelector((state) => state.ui);
   const navigate = useNavigate();
 
   const startLogin = async ({ email, password }) => {
     try {
-      dispatch(onChecking());
+      // dispatch(onChecking());
       const { data } = await projectAPI.post("/user/login", {
         email,
         password,
@@ -33,8 +24,10 @@ export const useAuthStore = () => {
       const { userMapped } = data;
 
       if (userMapped) {
-        dispatch(onLogin(userMapped));
-        alert("Bienvenido");
+        setTimeout(() => {
+          dispatch(onLogin(userMapped));
+        }, 1000);
+
         navigate("/home");
       } else {
         dispatch(onLogout());
@@ -91,10 +84,7 @@ export const useAuthStore = () => {
 
   const startUpdateProfessional = async (professional, id) => {
     try {
-      const { data } = await projectAPI.put(
-        `/professional/${id}`,
-        professional
-      );
+      const { data } = await projectAPI.put(`/professional/${id}`, professional);
       console.log("Prof actualizado", data);
       console.log(id);
       alert("Cambios guardados");
@@ -136,6 +126,7 @@ export const useAuthStore = () => {
   const startLoginWithToken = async () => {
     const token = localStorage.getItem("token");
     try {
+      // dispatch(onChecking());
       const { userId } = jwtDecode(token);
       // console.log(userId)
       const { data } = await projectAPI.get(`/user/${userId}`);

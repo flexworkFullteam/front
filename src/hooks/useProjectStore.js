@@ -1,20 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  onLoadingProjects,
-  onGetAllProjects,
-  onAddProject,
-  onSetActiveEvent,
-} from "../store/project/projectSlice";
+import { onLoadingProjects, onGetAllProjects, onAddProject, onSetActiveEvent } from "../store/project/projectSlice";
 import { projectAPI } from "../api/projectAPI";
+import { onChecking } from "../store/auth/authSlice";
 
 export const useProjectStore = () => {
   const dispatch = useDispatch();
-  const { projects, allProjects, isLoading, activeEvent } = useSelector(
-    (state) => state.project
-  );
+  const { projects, allProjects, isLoading, activeEvent } = useSelector((state) => state.project);
 
   const startLoadingProject = async () => {
     try {
+      // dispatch(onChecking());
       dispatch(onLoadingProjects());
       const { data } = await projectAPI(`/projects`);
       dispatch(onGetAllProjects(data));
