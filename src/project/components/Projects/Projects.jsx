@@ -18,13 +18,18 @@ export const Projects = () => {
   const [perPage, setPerPage] = useState(10);
   const [id, setId] = useState(1);
   const [companyProjects, setCompanyProjects] = useState();
+  const [title, setTitle] = useState("");
+  const [salary, setSalary] = useState(0);
+
 
   const { user } = useAuthStore();
 
   const navigate = useNavigate();
 
-  const handleOpen = (id) => {
+  const handleOpen = (id, title, salary) => {
     setId(id);
+    setTitle(title);
+    setSalary(salary);
     setOpen(true);
   };
   const handleClose = () => {
@@ -72,7 +77,7 @@ export const Projects = () => {
       {setOpen && (
         <Modal open={open} onClose={handleClose}>
           <div>
-            <Candidates handleClose={handleClose} id={id} />
+            <Candidates handleClose={handleClose} id={id} title={title} salary={salary}  user={user} />
           </div>
         </Modal>
       )}
@@ -122,7 +127,7 @@ export const Projects = () => {
               </div>
 
               <div className={styles.cardRight}>
-                <Button onClick={() => handleOpen(project.id)}>Ver postulantes</Button>
+                <Button onClick={() => handleOpen(project.id, project.title, project.salary)}>Ver postulantes</Button>
 
                 {project.state ? <DeleteIcon onClick={() => handleDelete(project.id)} /> : <ReplayRoundedIcon onClick={() => handleDelete(project.id)} />}
               </div>

@@ -4,13 +4,16 @@ import { Card, CardContent, Typography, Box, Pagination, Button } from "@mui/mat
 import { CheckRounded as CheckRoundedIcon, CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
 import styles from "./Candidates.module.css";
 import { getCandidateByProjectId, acceptCandidate, refuseCandidate } from "../../../helpers/candidatesAsync";
+import { startPayment } from "../../../helpers/startPayment";
+// import { useAuthStore } from "../../../hooks/useAuthStore";
 
-export const Candidates = ({ handleClose, id }) => {
+export const Candidates = ({ handleClose, id, title, salary, user }) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(7);
   const [candidates, setCandidates] = useState();
   const [visibleCandidates, setVisibleCandidates] = useState();
   const [pressedButton, setPressedButton] = useState("postulate");
+  // const {user} = useAuthStore();
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -31,6 +34,14 @@ export const Candidates = ({ handleClose, id }) => {
   };
 
   const accept = async (candidateId) => {
+    await startPayment({
+     title: title,
+     unit_price: salary,
+     currency_id: "PEN",
+     from: user.id,
+     to: candidateId,
+     project: id
+   });
     await acceptCandidate(id, candidateId);
     callCandidates();
   };
