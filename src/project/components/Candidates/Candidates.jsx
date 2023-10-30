@@ -150,7 +150,7 @@ export const Candidates = ({ handleClose, id, title, salary, user, pagado }) => 
             </Typography>
           </Button>
           
-          <Button variant='contained' onClick={setPayment} >
+          <Button variant='contained' onClick={setPayment} disabled={pagado} >
             <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Realizar Pago
             </Typography>
