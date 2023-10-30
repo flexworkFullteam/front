@@ -7,9 +7,7 @@ export const ProfessionalPage = () => {
   return (
     <>
       <NavCompany />
-      {
-        isComponent === "proyectos" ? <PostulatedProjects /> : < ProfessionalComponent/> 
-      }
+      {isComponent === "proyectos" ? <PostulatedProjects /> : <ProfessionalComponent />}
     </>
   );
 };

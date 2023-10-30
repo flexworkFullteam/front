@@ -8,13 +8,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
 
 const ProfessionalComponent = () => {
-  const {
-    user,
-    startCreateProfessional,
-    startUploadingFiles,
-    startUpdateProfessional,
-  } = useAuthStore();
-
+  const { user, startCreateProfessional, startUploadingFiles, startUpdateProfessional } = useAuthStore();
   const [image, setImage] = useState();
 
   const { nationality, language, itSkills } = useDbTableStore();
@@ -425,38 +419,14 @@ const ProfessionalComponent = () => {
 
               <InputLabel sx={{ mt: 5 }}>Imagen</InputLabel>
 
-              <Button
-                component="label"
-                variant="contained"
-                color="pear"
-                endIcon={<CloudUploadIcon />}
-              >
-                <Typography
-                  fontFamily="Nunito Sans"
-                  fontWeight="bold"
-                  color="persianBlue.main"
-                >
+              <Button component='label' variant='contained' color='pear' endIcon={<CloudUploadIcon />}>
+                <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
                   Eliga una imagen
                 </Typography>
-                <VisuallyHiddenInput
-                  type="file"
-                  onChange={(e) => setImage(e.target.files[0])}
-                  placeholder="Imagen"
-                  id="image"
-                />
+                <VisuallyHiddenInput type='file' onChange={(e) => setImage(e.target.files[0])} placeholder='Imagen' id='image' />
               </Button>
-              <Button
-                variant="contained"
-                color="pear"
-                type="button"
-                sx={{ margin: 2 }}
-                onClick={onClick}
-              >
-                <Typography
-                  fontFamily="Nunito Sans"
-                  fontWeight="bold"
-                  color="persianBlue.main"
-                >
+              <Button variant='contained' color='pear' type='button' sx={{ margin: 2 }} onClick={onClick}>
+                <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
                   Subir
                 </Typography>
               </Button>

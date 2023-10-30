@@ -25,6 +25,11 @@ export const AdminComponent = () => {
     } catch (error) {}
   };
 
+  const handleDetail = (url) => {
+    const newTab = window.open("", "_blank");
+    newTab.location.href = url;
+  };
+
   useEffect(() => {
     callData();
   }, []);
@@ -44,26 +49,24 @@ export const AdminComponent = () => {
         professionals &&
         professionals.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((professional) => (
           <Card key={professional.id} className={styles.card}>
-            <Link to={`/user/detail/${professional.id}`} key={professional.id} className={styles.link}>
-              <CardContent>
-                <Grid container spacing={2}>
-                  <Grid item xs={8}>
-                    <Typography variant='h5' component='div'>
-                      {professional.data.name} {professional.data.lastname}
-                    </Typography>
-                    <Typography variant='body2' color='text.secondary'>
-                      {professional.extra_information}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4} container justifyContent='flex-end' alignItems='center'>
-                    <PlaceIcon sx={{ fontSize: 30, marginRight: 1 }} />
-                    <Typography variant='body2' color='text.secondary'>
-                      {professional.nationality}
-                    </Typography>
-                  </Grid>
+            <CardContent onClick={() => handleDetail(`/user/detail/${professional.id}`)} sx={{ cursor: "pointer" }}>
+              <Grid container spacing={2}>
+                <Grid item xs={8}>
+                  <Typography variant='h5' component='div'>
+                    {professional.data.name} {professional.data.lastname}
+                  </Typography>
+                  <Typography variant='body2' color='text.secondary'>
+                    {professional.extra_information}
+                  </Typography>
                 </Grid>
-              </CardContent>
-            </Link>
+                <Grid item xs={4} container justifyContent='flex-end' alignItems='center'>
+                  <PlaceIcon sx={{ fontSize: 30, marginRight: 1 }} />
+                  <Typography variant='body2' color='text.secondary'>
+                    {professional.nationality}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </CardContent>
           </Card>
         ))}
 
@@ -71,30 +74,28 @@ export const AdminComponent = () => {
         projects &&
         projects.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((project) => (
           <Card key={project.id} className={styles.card}>
-            <Link to={`/project/detail/${project.id}`} key={project.id} className={styles.link}>
-              <CardContent>
-                <Grid container spacing={2}>
-                  <Grid item xs={8}>
-                    <Typography variant='h5' component='div'>
-                      {project.title}
-                    </Typography>
-                    <Typography variant='body2' color='text.secondary'>
-                      {project.id_company}
-                    </Typography>
-                    <Typography variant='body2' color='text.secondary'>
-                      {project.description}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4} container justifyContent='flex-end' alignItems='center'>
-                    <PlaceIcon sx={{ fontSize: 30, marginRight: 1 }} />
-                    <Typography variant='body2' color='text.secondary'>
-                      {project.nation_id}
-                      {project.province_id && `, ${project.province_id}`}
-                    </Typography>
-                  </Grid>
+            <CardContent onClick={() => handleDetail(`/user/detail/${project.id}`)} sx={{ cursor: "pointer" }}>
+              <Grid container spacing={2}>
+                <Grid item xs={8}>
+                  <Typography variant='h5' component='div'>
+                    {project.title}
+                  </Typography>
+                  <Typography variant='body2' color='text.secondary'>
+                    {project.id_company}
+                  </Typography>
+                  <Typography variant='body2' color='text.secondary'>
+                    {project.description}
+                  </Typography>
                 </Grid>
-              </CardContent>
-            </Link>
+                <Grid item xs={4} container justifyContent='flex-end' alignItems='center'>
+                  <PlaceIcon sx={{ fontSize: 30, marginRight: 1 }} />
+                  <Typography variant='body2' color='text.secondary'>
+                    {project.nation_id}
+                    {project.province_id && `, ${project.province_id}`}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </CardContent>
           </Card>
         ))}
       <Pagination className={styles.pagination} count={Math.ceil((selectedOption === "projects" ? projects?.length : professionals?.length) / itemsPerPage)} page={page} onChange={handlePageChange} />

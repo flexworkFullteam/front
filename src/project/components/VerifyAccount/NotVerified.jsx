@@ -1,5 +1,4 @@
-import { Box, Typography } from "@mui/material"
-
+import { Typography, Box } from "@mui/material";
 
 export const NotVerified = () => {
   return (
