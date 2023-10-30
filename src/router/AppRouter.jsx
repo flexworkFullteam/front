@@ -5,7 +5,6 @@ import { Footer } from "../project/components/Footer/Footer";
 import { AuthRoute } from "../auth/routes/AuthRoute";
 import { ProjectRoute } from "../project/routes/ProjectRoute";
 import { useProjectStore } from "../hooks/useProjectStore";
-import { useDbTableStore } from "../hooks/useDbTableStore";
 import { useAuthStore } from "../hooks/useAuthStore";
 import { AdminRoute } from "../admin/routes/AdminRoute";
 import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";

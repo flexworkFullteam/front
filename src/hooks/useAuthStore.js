@@ -13,7 +13,7 @@ export const useAuthStore = () => {
 
   const startLogin = async ({ email, password }) => {
     try {
-      dispatch(onChecking());
+      // dispatch(onChecking());
       const { data } = await projectAPI.post("/user/login", {
         email,
         password,

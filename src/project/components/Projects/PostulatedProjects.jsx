@@ -1,17 +1,10 @@
-import { useEffect } from "react"
-
+import { useEffect } from "react";
+import { UserDetail } from "../../../admin/components/UserDetail/UserDetail";
 
 export const PostulatedProjects = () => {
-
-
-    // useEffect(() => {
-    //     getProjectByProfessional(id);
-    // }, [])
-
   return (
-    <div>
-         //todo: Copiarselo del UserDetail la logica de los proyectos postulados
-        Card de Proyectos postulados
-    </div>
-  )
-}
+    <>
+      <UserDetail />
+    </>
+  );
+};
