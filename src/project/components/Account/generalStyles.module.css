@@ -7,3 +7,25 @@
 button p{
     text-transform: capitalize;
 }
+.divExperiencia{
+    width: 38vw;
+    padding: 1em;
+    padding-bottom: 2em;
+    margin-top: 1em;
+    border-radius: 4px;
+    /* border: 1px solid rgba(0, 0, 0, 0.397); */
+    /* box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.30); */
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+    background-color: white;
+}
+.imgPerfil{
+    height: 8em;
+    width: 7em;
+    margin-left: 1em;
+    margin-bottom:0;
+    border-radius: 20px;
+}
+.divImg{
+    margin-left: 22vw;
+    margin-top: -6em;
+}
