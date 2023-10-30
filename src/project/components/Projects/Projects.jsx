@@ -77,7 +77,7 @@ export const Projects = () => {
       {setOpen && (
         <Modal open={open} onClose={handleClose}>
           <div>
-            <Candidates handleClose={handleClose} id={id} title={title} salary={salary} />
+            <Candidates handleClose={handleClose} id={id} title={title} salary={salary}  user={user} />
           </div>
         </Modal>
       )}
