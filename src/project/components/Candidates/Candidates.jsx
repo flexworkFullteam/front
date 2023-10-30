@@ -5,17 +5,17 @@ import { CheckRounded as CheckRoundedIcon, CloseRounded as CloseRoundedIcon } fr
 import styles from "./Candidates.module.css";
 import { getCandidateByProjectId, acceptCandidate, refuseCandidate } from "../../../helpers/candidatesAsync";
 import { startPayment } from "../../../helpers/startPayment";
-// import { useAuthStore } from "../../../hooks/useAuthStore";
 
-export const Candidates = ({ handleClose, id, title, salary, user }) => {
+export const Candidates = ({ handleClose, id, title, salary,user }) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(7);
   const [candidates, setCandidates] = useState();
   const [visibleCandidates, setVisibleCandidates] = useState();
   const [pressedButton, setPressedButton] = useState("postulate");
-  // const {user} = useAuthStore();
+  //const { user } = useAuthStore();
 
   const handlePageChange = (event, value) => {
+
     setPage(value);
   };
 
@@ -43,7 +43,16 @@ export const Candidates = ({ handleClose, id, title, salary, user }) => {
      project: id
    });
     await acceptCandidate(id, candidateId);
+    alert(candidateId);
     callCandidates();
+    await startPayment({
+      title: title,
+      unit_price: salary,
+      currency_id: "PEN",
+      from: user.id,
+      to: candidateId,
+      project: id
+    });
   };
 
   const reject = async (candidateId) => {
