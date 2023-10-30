@@ -29,7 +29,7 @@ export const CreateProject = ({ handleClose, callProjects }) => {
   const [selectedLanguages, setSelectedLanguages] = useState([]);
 
   const onSubmit = handleSubmit((data) => {
-    const id = user.company.id;
+    const id = user.company_id;
     const formData = {
       ...data,
       companyId: id,

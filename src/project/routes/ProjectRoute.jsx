@@ -24,7 +24,7 @@ export const ProjectRoute = ({ status }) => {
 
       <Route path='/payment' element={<Payment />} />
 
-      <Route path='/success/:id' element={<Success />} />
+      <Route path='/success/' element={<Success />} />
 
       <Route path='/pending' element={<Pending />} />
 
