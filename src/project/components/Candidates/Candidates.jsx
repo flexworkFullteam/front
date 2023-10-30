@@ -4,6 +4,8 @@ import { Card, CardContent, Typography, Box, Pagination, Button } from "@mui/mat
 import { CheckRounded as CheckRoundedIcon, CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
 import styles from "./Candidates.module.css";
 import { getCandidateByProjectId, acceptCandidate, refuseCandidate } from "../../../helpers/candidatesAsync";
+import { startPayment } from "../../../helpers/startPayment";
+import { useAuthStore } from "../../../hooks/useAuthStore";
 
 export const Candidates = ({ handleClose, id, title, salary }) => {
   const [page, setPage] = useState(1);
@@ -11,6 +13,7 @@ export const Candidates = ({ handleClose, id, title, salary }) => {
   const [candidates, setCandidates] = useState();
   const [visibleCandidates, setVisibleCandidates] = useState();
   const [pressedButton, setPressedButton] = useState("postulate");
+  const {user} = useAuthStore();
 
   const handlePageChange = (event, value) => {
     setPage(value);

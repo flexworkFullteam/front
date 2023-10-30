@@ -1,6 +1,6 @@
 
 
-const startPayment = async (paymentData) => {
+export const startPayment = async (paymentData) => {
   try {
     const { data } = await projectAPI.post("/solution/payment", paymentData);
     console.log("Pago realizado", data);
