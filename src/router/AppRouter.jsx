@@ -15,12 +15,15 @@ import { useDbTableStore } from "../hooks/useDbTableStore";
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
   const { user, status, startLoginWithToken } = useAuthStore();
-  const { getField, getType, getExp_req } = useDbTableStore();
+  const { getField, getType, getExp_req, getNationality, getLanguage, getItSkills } = useDbTableStore();
 
   const getFields = () => {
     getField();
     getType();
     getExp_req();
+    getNationality();
+    getLanguage();
+    getItSkills();
   };
 
   useEffect(() => {

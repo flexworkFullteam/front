@@ -17,7 +17,7 @@ export const DashboardPage = () => {
     <>
       <NavAdmin />
       {
-        isComponent === "usuarios" ? <AdminComponent /> : <UserDetail /> // otro mas para pasa de pagos?
+        isComponent === "usuarios" ? <AdminComponent /> : <AdminComponent /> // otro mas para pasa de pagos?
       }
     </>
   );
