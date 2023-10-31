@@ -52,15 +52,15 @@ export const SearchPage = () => {
       exp_req: "",
       salary: "",
       project_type: "",
-    })
+    });
   };
   const handleEvent = ({ target: { name, value } }) => {
     setFilters({
       ...filters,
-      [name]: value
+      [name]: value,
     });
     //console.log(name, " : ", value);
-  }
+  };
 
   const handleDetail = (url) => {
     const newTab = window.open("", "_blank");
@@ -79,24 +79,19 @@ export const SearchPage = () => {
     }
   }, [term]);
 
-  // useEffect(() => {
-  //   startLoadingProject();
-  //   getField();
-  //   getType();
-  //   getExp_req();
-  // }, []);
-
   return (
     <Box display='flex' flexDirection='row' padding={"3em"}>
       <Box
         sx={{
-          width: "30%",
+          position: "sticky",
+          top: "2%",
           padding: theme.spacing(3),
-          height: "100vh",
+          width: "30%",
+          height: "62vh",
           borderRadius: "5px",
           backgroundColor: "white",
           mt: 3,
-          boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)",
+          boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
         }}
       >
         {term && (
@@ -126,14 +121,14 @@ export const SearchPage = () => {
             </div>
           </Box>
         )}
-
+        Filtros
         <Box mt={2}>
-          <FormControl fullWidth sx={{ mb: "1.5rem", mt: "1rem" }}>
-            <InputLabel id="field-label">Área</InputLabel>
+          <FormControl fullWidth sx={{ mb: "1.5rem" }}>
+            <InputLabel id='field-label'>Área</InputLabel>
             <Select
-              labelId="field-label"
-              id="field"
-              name="field"
+              labelId='field-label'
+              id='field'
+              name='field'
               value={filters.field}
               onChange={(event) => {
                 handleEvent(event);
@@ -141,8 +136,8 @@ export const SearchPage = () => {
               }}
               sx={{ backgroundColor: "lightgray" }}
             >
+              {field?.map((fieldOption) => (
 
-              {field.map((fieldOption) => (
                 <MenuItem value={fieldOption.project_fields} key={fieldOption.id}>
                   {fieldOption.project_fields}
                 </MenuItem>
@@ -151,11 +146,11 @@ export const SearchPage = () => {
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id="lapse-label">Duracion</InputLabel>
+            <InputLabel id='lapse-label'>Duracion</InputLabel>
             <Select
-              labelId="lapse-label"
-              id="lapse"
-              name="lapse"
+              labelId='lapse-label'
+              id='lapse'
+              name='lapse'
               value={filters.lapse}
               onChange={(event) => {
                 handleEvent(event);
@@ -163,18 +158,18 @@ export const SearchPage = () => {
               }}
               sx={{ backgroundColor: "lightgray" }}
             >
-              <MenuItem value=""> - </MenuItem>
-              <MenuItem value="asc">Ascendente</MenuItem>
-              <MenuItem value="desc">Descendente</MenuItem>
+              <MenuItem value=''> - </MenuItem>
+              <MenuItem value='asc'>Ascendente</MenuItem>
+              <MenuItem value='desc'>Descendente</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id="exp_req-label">Experiencia</InputLabel>
+            <InputLabel id='exp_req-label'>Experiencia</InputLabel>
             <Select
-              labelId="exp_req-label"
-              id="exp_req"
-              name="exp_req"
+              labelId='exp_req-label'
+              id='exp_req'
+              name='exp_req'
               value={filters.exp_req}
               onChange={(event) => {
                 handleEvent(event);
@@ -182,8 +177,8 @@ export const SearchPage = () => {
               }}
               sx={{ backgroundColor: "lightgray" }}
             >
+              {exp_req?.map((expOption) => (
 
-              {exp_req.map((expOption) => (
                 <MenuItem value={expOption.experienceLevel} key={expOption.id}>
                   {expOption.experienceLevel}
                 </MenuItem>
@@ -192,11 +187,11 @@ export const SearchPage = () => {
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id="salary-label">Salario</InputLabel>
+            <InputLabel id='salary-label'>Salario</InputLabel>
             <Select
-              labelId="salary-label"
-              id="salary"
-              name="salary"
+              labelId='salary-label'
+              id='salary'
+              name='salary'
               value={filters.salary}
               onChange={(event) => {
                 handleEvent(event);
@@ -204,18 +199,18 @@ export const SearchPage = () => {
               }}
               sx={{ backgroundColor: "lightgray" }}
             >
-              <MenuItem value=""> - </MenuItem>
-              <MenuItem value="asc">Ascendente</MenuItem>
-              <MenuItem value="desc">Descendente</MenuItem>
+              <MenuItem value=''> - </MenuItem>
+              <MenuItem value='asc'>Ascendente</MenuItem>
+              <MenuItem value='desc'>Descendente</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl fullWidth sx={{ mb: "1.5rem" }}>
-            <InputLabel id="project_type-label">Cargo</InputLabel>
+            <InputLabel id='project_type-label'>Cargo</InputLabel>
             <Select
-              labelId="project_type-label"
-              id="project_type"
-              name="project_type"
+              labelId='project_type-label'
+              id='project_type'
+              name='project_type'
               value={filters.project_type}
               onChange={(event) => {
                 handleEvent(event);
@@ -223,8 +218,7 @@ export const SearchPage = () => {
               }}
               sx={{ backgroundColor: "lightgray" }}
             >
-
-              {type.map((typeOption) => (
+              {type?.map((typeOption) => (
                 <MenuItem value={typeOption.project_type} key={typeOption.id}>
                   {typeOption.project_type}
                 </MenuItem>
@@ -247,11 +241,7 @@ export const SearchPage = () => {
               },
             }}
           >
-            <DeleteOutlineRoundedIcon
-              variant="contained"
-              onClick={() => handleDeleteFilters()}
-              color="aliceBlue"
-            />
+            <DeleteOutlineRoundedIcon variant='contained' onClick={() => handleDeleteFilters()} color='aliceBlue' />
           </Box>
         </Box>
       </Box>
@@ -260,7 +250,7 @@ export const SearchPage = () => {
         <Typography variant='h6' component='h1' sx={{ mb: "1rem" }}>
           {existingProjects.length} ofertas de proyectos para {term}
         </Typography>
-        {visibleProjects.map((project) => (
+        {visibleProjects?.map((project) => (
           <Card key={project.id} sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }} onClick={() => handleDetail(`/detail/${project.id}`)}>
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
               <div className={styles.cardLeft}>
@@ -328,6 +318,6 @@ export const SearchPage = () => {
           <Pagination count={pageCount} page={page} onChange={handlePageChange} />
         </Box>
       </Box>
-    </Box >
+    </Box>
   );
 };

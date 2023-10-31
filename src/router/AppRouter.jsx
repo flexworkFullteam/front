@@ -17,7 +17,7 @@ import { Modal } from "@mui/material";
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
   const { user, status, startLoginWithToken } = useAuthStore();
-  const { getField, getType, getExp_req } = useDbTableStore();
+  const { getField, getType, getExp_req, getNationality, getLanguage, getItSkills } = useDbTableStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {pathname} = useLocation();
 
@@ -29,6 +29,9 @@ export const AppRouter = () => {
     getField();
     getType();
     getExp_req();
+    getNationality();
+    getLanguage();
+    getItSkills();
   };
 
   useEffect(() => {
