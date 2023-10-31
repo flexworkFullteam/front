@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import profesionalData from "../../utils/profesionals.json";
 import companyData from "../../utils/company.json";
+import adminData from "../../utils/admin.json";
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    status: "not-authenticated", // checking, authenticated
-    user: {}, //{}, profesionalData
+    status: "authenticated", // checking, authenticated
+    user: profesionalData, //{}, profesionalData
     errorMessage: undefined,
   },
   reducers: {
@@ -42,11 +43,4 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  onChecking,
-  onLogin,
-  onLogout,
-  onRegister,
-  onClearEvents,
-  onAddPersonalData,
-} = authSlice.actions;
+export const { onChecking, onLogin, onLogout, onRegister, onClearEvents, onAddPersonalData } = authSlice.actions;

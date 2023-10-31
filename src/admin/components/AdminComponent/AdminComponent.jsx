@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { GetAllProfessionals, GetAllProjects } from "../../../helpers/adminGetData";
 import { Select, MenuItem, Pagination, Card, CardContent, Grid, Typography } from "@mui/material";
 import PlaceIcon from "@mui/icons-material/Place";
-import { Link } from "react-router-dom";
 import styles from "./AdminComponent.module.css";
 
 export const AdminComponent = () => {
-  const [professionals, setProfessionals] = useState();
-  const [projects, setProjects] = useState();
+  const [professionals, setProfessionals] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [selectedOption, setSelectedOption] = useState("professionals");
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;

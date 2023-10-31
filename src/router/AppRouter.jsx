@@ -11,16 +11,20 @@ import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
 import { VerifyAccount } from "../project/components/VerifyAccount/VerifyAccount";
 import { LoadingComponent } from "../project/components/LoadingComponent/LoadingComponent";
 import { useDbTableStore } from "../hooks/useDbTableStore";
+import ProfessionalComponent from "../project/components/Account/ProfessionalComponent";
 
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
   const { user, status, startLoginWithToken } = useAuthStore();
-  const { getField, getType, getExp_req } = useDbTableStore();
+  const { getField, getType, getExp_req, getNationality, getLanguage, getItSkills } = useDbTableStore();
 
   const getFields = () => {
     getField();
     getType();
     getExp_req();
+    getNationality();
+    getLanguage();
+    getItSkills();
   };
 
   useEffect(() => {
