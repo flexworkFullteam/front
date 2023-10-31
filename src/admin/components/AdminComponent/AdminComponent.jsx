@@ -6,7 +6,7 @@ import styles from "./AdminComponent.module.css";
 
 export const AdminComponent = () => {
   const [professionals, setProfessionals] = useState([]);
-  const [projects, setProjects] = useState();
+  const [projects, setProjects] = useState([]);
   const [selectedOption, setSelectedOption] = useState("professionals");
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
