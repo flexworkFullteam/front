@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent, Typography, Box, Pagination, Button } from "@mui/material";
+import { Card, CardContent, Typography, Box, Pagination, Button, Modal } from "@mui/material";
 import { CheckRounded as CheckRoundedIcon, CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
 import styles from "./Candidates.module.css";
 import { getCandidateByProjectId, acceptCandidate, refuseCandidate } from "../../../helpers/candidatesAsync";
 import { startPayment } from "../../../helpers/startPayment";
+import { PaymentConfirmation } from "../Payment/PaymentConfirmation";
 
 export const Candidates = ({ handleClose, id, title, salary, user, pagado }) => {
   const [page, setPage] = useState(1);
@@ -12,7 +13,12 @@ export const Candidates = ({ handleClose, id, title, salary, user, pagado }) => 
   const [candidates, setCandidates] = useState();
   const [visibleCandidates, setVisibleCandidates] = useState();
   const [pressedButton, setPressedButton] = useState("postulate");
+  const [open, setOpen] = useState(false);
   //const { user } = useAuthStore();
+
+  const onClose = () => {
+    setOpen(false);
+  };
 
   const handlePageChange = (event, value) => {
 
@@ -34,13 +40,14 @@ export const Candidates = ({ handleClose, id, title, salary, user, pagado }) => 
   };
 
   const setPayment = async () => {
-    await startPayment({
-      title: title,
-      unit_price: salary,
-      currency_id: "PEN",
-      from: user.id,
-      project: id
-    });
+    setOpen(true);
+    // await startPayment({
+    //   title: title,
+    //   unit_price: salary,
+    //   currency_id: "PEN",
+    //   from: user.id,
+    //   project: id
+    // });
   }
 
   const accept = async (candidateId) => {
@@ -94,6 +101,13 @@ export const Candidates = ({ handleClose, id, title, salary, user, pagado }) => 
         </Typography>
 
         <div className={styles.postulateButtons}>
+          {setOpen && (
+            <Modal open={open} onClose={onClose}>
+              <div>
+                <PaymentConfirmation onClose={onClose} id={id} title={title} salary={salary} user={user} pagado={pagado}/>
+              </div>
+            </Modal>
+          )}
           <Button
             variant='contained'
             onClick={() => handleViewClick("postulate")}
@@ -136,7 +150,7 @@ export const Candidates = ({ handleClose, id, title, salary, user, pagado }) => 
             </Typography>
           </Button>
           
-          <Button variant='contained' onClick={setPayment}>
+          <Button variant='contained' onClick={setPayment} disabled={pagado} >
             <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Realizar Pago
             </Typography>
