@@ -101,7 +101,7 @@ export const Projects = () => {
       >
         <Typography variant='h4'>Proyectos</Typography>
 
-        <Button variant='contained' color='persianBlue' onClick={() => setCreateOpen(true)}>
+        <Button variant='contained' color='persianBlue' onClick={() => setCreateOpen(true)} disabled={!user.data}>
           <Typography fontFamily='Nunito Sans' fontWeight='400' color='aliceblue'>
             Crear proyectos
           </Typography>

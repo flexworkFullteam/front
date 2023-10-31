@@ -11,7 +11,7 @@ export const CompanyComponent = () => {
   const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } = useAuthStore();
   const [imagen, setImagen] = useState();
 
-  console.log("inicio:", user);
+  // console.log("inicio:", user);
 
   const { nationality, language } = useDbTableStore();
   const { getExp_req, getNationality } = useDbTableStore();
@@ -21,13 +21,7 @@ export const CompanyComponent = () => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      data: {
-        telefono: 995598899,
-      },
-    },
-  });
+  } = useForm({});
 
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -46,15 +40,17 @@ export const CompanyComponent = () => {
     setImagen(cloudResp);
   };
 
-  const onSubmit = handleSubmit((data) => {
-    console.log("DataCompany", data);
+  const onSubmit = handleSubmit(({ telefono, ...rest }) => {
+    // console.log("DataCompany", rest);
+    const parsedTelefono = parseInt(telefono, 10);
+  
     if (user.id && user.company_id) {
-      startUpdateCompany({ ...data, userId: user.id, imagen: imagen });
+      startUpdateCompany({ ...rest, telefono: parsedTelefono, userId: user.id, imagen: imagen });
     } else {
-      startCreateCompany({ ...data, userId: user.id, imagen: imagen });
-      startCreateCompany({ ...data, userId: user.id, imagen: imagen });
+      startCreateCompany({ ...rest, telefono: parsedTelefono, userId: user.id, imagen: imagen });
+      startCreateCompany({ ...rest, telefono: parsedTelefono, userId: user.id, imagen: imagen });
     }
-    reset();
+    // reset();
   });
   const isFormEmpty = Object.keys(errors).length >= 1;
 
