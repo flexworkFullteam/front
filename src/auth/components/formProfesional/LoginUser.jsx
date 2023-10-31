@@ -12,6 +12,7 @@ import { LoginButton } from "../auth0/logInOutAuth0";
 import { useDispatch } from "react-redux";
 import { onLogin } from "../../../store/auth/authSlice";
 import axios from "axios";
+import { projectAPI } from "../../../api/projectAPI";
 
 const LoginUser = () => {
   const { startLogin, user, status, errorMessage } = useAuthStore();
@@ -52,9 +53,9 @@ const LoginUser = () => {
       const tokenClaims = await getIdTokenClaims(); // Get token claims after successful login
 
       // Sending the tokenClaims object to the backend
-      const response = await axios.post("http://localhost:3001/user/auth0/loginOrSignup", tokenClaims);
+      const response = await projectAPI.post("/user/auth0/loginOrSignup", tokenClaims);
 
-      console.log(response.data);
+      // console.log(response.data);
       dispatch(onLogin(response.data.user)); // Logging the response from the backend
     } catch (error) {
       console.error("An error occurred during login:", error);

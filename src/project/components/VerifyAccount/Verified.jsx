@@ -4,7 +4,6 @@ import { ProfessionalPage } from "../../pages/ProfessionalPage/ProfessionalPage"
 
 export const Verified = ({user}) => {
 
-    //* Hay que cambiar el <ProfessionalComponent /> por el <ProfessionalPage />
 
   return (
     <div>

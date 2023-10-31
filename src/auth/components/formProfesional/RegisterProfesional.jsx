@@ -8,6 +8,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import style from './StylesProfesional.module.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
+import { projectAPI } from '../../../api/projectAPI';
 
 
 const RegisterProfesional = () => {
@@ -38,11 +39,10 @@ const RegisterProfesional = () => {
             await loginWithPopup(); // This will open a popup for Auth0 login
             const tokenClaims = await getIdTokenClaims(); // Get token claims after successful login
             // Sending the tokenClaims object to the backend
-            const response = await axios.post(
-              'http://localhost:3001/user/auth0/loginOrSignup',
+            const response = await projectAPI.post("/user/auth0/loginOrSignup",
               tokenClaims
             );
-            console.log(response.data); // Logging the response from the backend
+            // console.log(response.data); // Logging the response from the backend
         } catch (error) {
             console.error("An error occurred during login:", error);
         }
