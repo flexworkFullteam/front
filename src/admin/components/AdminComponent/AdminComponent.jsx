@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { GetAllProfessionals, GetAllProjects } from "../../../helpers/adminGetData";
 import { Select, MenuItem, Pagination, Card, CardContent, Grid, Typography } from "@mui/material";
 import PlaceIcon from "@mui/icons-material/Place";
-import { Link } from "react-router-dom";
 import styles from "./AdminComponent.module.css";
 
 export const AdminComponent = () => {
