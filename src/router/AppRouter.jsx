@@ -59,12 +59,13 @@ export const AppRouter = () => {
 
   return (
     <>
-      {user.type === 2 || user.type === 3 && 
+      {user.type === 2 || user.type === 3 ?
       <Modal open={isModalOpen} onClose={handleClose}>
         <div>
           <PopUpPersonalData handleClose={handleClose}/>
         </div>
       </Modal>
+      : null
       }
       <Nav />
       <Routes>
