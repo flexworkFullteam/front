@@ -23,36 +23,41 @@ export const PaymentConfirmation = ({onClose, id, title, salary, user }) => {
             alignItems: "center",
             justifyContent: "center",
             height: "100%",
+
         }}
     >
-        <div 
-        // className={styles.topContainer}
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100%",
+                width: "100%",
+                backgroundColor: "aliceblue",
+                borderRadius: "1rem",
+                padding: "1rem",
+            }}
         >
-            <CloseRoundedIcon  onClick={onClose} 
-            // className={styles.closeButton}
-            />
-            <Typography variant='h4' sx={{ mb: "1rem", textAlign: "center" }}>
-            Postulantes
+            <Typography>
+                    Queremos recordarle que al aceptar al profesional, se le cobrará el monto de la comisión por el servicio.
             </Typography>
-        </div>
-        <Typography>
-                Queremos recordarle que al aceptar al profesional, se le cobrará el monto de la comisión por el servicio.
-        </Typography>
 
-        <Typography>
-                Si acepta, el profesional recibirá un mail el link de calendly para agendar una reunion.
-        </Typography>
+            <Typography>
+                    Si acepta, el profesional recibirá un mail el link de calendly para agendar una reunion.
+            </Typography>
 
-        <Typography>
-                ¿Desea continuar?
-        </Typography>
+            <Typography>
+                    ¿Desea continuar?
+            </Typography>
 
-        <Button onClick={onClose}>
-            Cancelar
-        </Button>
-        <Button onClick={AcceptPayment}>
-            Aceptar
-        </Button>
+            <Button onClick={onClose}>
+                Cancelar
+            </Button>
+            <Button onClick={AcceptPayment}>
+                Aceptar
+            </Button>
+        </Box>
     </Box>
   )
 }
