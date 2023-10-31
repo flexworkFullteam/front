@@ -137,6 +137,7 @@ export const CreateProject = ({ handleClose, callProjects }) => {
               </TextField>
               <InputLabel>Idiomas</InputLabel>
               <Select
+                fullWidth
                 id='languages'
                 multiple
                 value={selectedLanguages}
@@ -193,6 +194,7 @@ export const CreateProject = ({ handleClose, callProjects }) => {
 
               <InputLabel>Habilidades</InputLabel>
               <Select
+                fullWidth
                 id='itskill'
                 multiple
                 value={selectedSkills}
@@ -231,6 +233,25 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                 })}
               />
               {errors.lapse && <p className={styles.errors}>{errors.lapse.message}</p>}
+
+              <InputLabel>Link de Calendly</InputLabel>
+              <TextField
+                placeholder='Calendly'
+                id='calendly'
+                type='text'
+                fullWidth
+                {...register("calendly", {
+                  required: {
+                    value: true,
+                    message: "Es un campo obligatorio",
+                  },
+                  pattern: {
+                    value: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
+                    message: "Ingresa un link válido",
+                  },
+                })}
+              />
+              {errors.calendly && <p className={styles.errors}>{errors.calendly.message}</p>}
             </Grid>
           </Grid>
         </Stack>
