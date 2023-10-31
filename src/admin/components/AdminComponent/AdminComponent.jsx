@@ -5,7 +5,7 @@ import PlaceIcon from "@mui/icons-material/Place";
 import styles from "./AdminComponent.module.css";
 
 export const AdminComponent = () => {
-  const [professionals, setProfessionals] = useState();
+  const [professionals, setProfessionals] = useState([]);
   const [projects, setProjects] = useState();
   const [selectedOption, setSelectedOption] = useState("professionals");
   const [page, setPage] = useState(1);
