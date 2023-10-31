@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Container, Stack, TextField, InputAdornment, Typography, InputLabel, MenuItem } from "@mui/material";
+import { Button, Container, Stack, TextField, InputAdornment, Typography, InputLabel, MenuItem, FormControlLabel, Checkbox } from "@mui/material";
 import { Google, LinkedIn } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -11,6 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { onLogin } from "../../../store/auth/authSlice";
+import { projectAPI } from "../../../api/projectAPI";
 
 const RegisterUser = () => {
   const { startRegister, user } = useAuthStore();
@@ -46,8 +47,8 @@ const RegisterUser = () => {
       await loginWithPopup(); // This will open a popup for Auth0 login
       const tokenClaims = await getIdTokenClaims(); // Get token claims after successful login
       // Sending the tokenClaims object to the backend
-      const response = await axios.post("http://localhost:3001/user/auth0/loginOrSignup", tokenClaims);
-      console.log(response.data.user);
+      const response = await projectAPI.post("/user/auth0/loginOrSignup", tokenClaims);
+      // console.log(response.data.user);
       dispatch(onLogin(response.data.user));
       // Logging the response from the backend
     } catch (error) {
@@ -133,6 +134,21 @@ const RegisterUser = () => {
             }}
           />
           {errors.contraseña && <p className={style.errorsP}>{errors.contraseña.message}</p>}
+
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="aceptaTerminos"
+                {...register("aceptaTerminos", {
+                  required: "Acepta los términos y condiciones",
+                })}
+              />
+            }
+            label="Acepto los términos y condiciones"
+          />
+          {errors.aceptaTerminos && (
+            <p className={style.errors}>{errors.aceptaTerminos.message}</p>
+          )}
 
           <div style={{ display: "flex", gap: "1%", marginTop: "1.5%" }}>
             <Button variant='contained' color='pear' type='submit' sx={{ width: "15%" }}>

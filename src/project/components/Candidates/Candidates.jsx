@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent, Typography, Box, Pagination, Button } from "@mui/material";
+import { Card, CardContent, Typography, Box, Pagination, Button, Modal } from "@mui/material";
 import { CheckRounded as CheckRoundedIcon, CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
 import styles from "./Candidates.module.css";
 import { getCandidateByProjectId, acceptCandidate, refuseCandidate } from "../../../helpers/candidatesAsync";
 import { startPayment } from "../../../helpers/startPayment";
-// import { useAuthStore } from "../../../hooks/useAuthStore";
+import { PaymentConfirmation } from "../Payment/PaymentConfirmation";
 
-export const Candidates = ({ handleClose, id, title, salary, user }) => {
+export const Candidates = ({ handleClose, id, title, salary, user, pagado }) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(7);
   const [candidates, setCandidates] = useState();
   const [visibleCandidates, setVisibleCandidates] = useState();
   const [pressedButton, setPressedButton] = useState("postulate");
-  // const {user} = useAuthStore();
+  const [open, setOpen] = useState(false);
+  //const { user } = useAuthStore();
+
+  const onClose = () => {
+    setOpen(false);
+  };
 
   const handlePageChange = (event, value) => {
+
     setPage(value);
   };
 
@@ -33,16 +39,20 @@ export const Candidates = ({ handleClose, id, title, salary, user }) => {
     setCandidates(data);
   };
 
+  const setPayment = async () => {
+    setOpen(true);
+    // await startPayment({
+    //   title: title,
+    //   unit_price: salary,
+    //   currency_id: "PEN",
+    //   from: user.id,
+    //   project: id
+    // });
+  }
+
   const accept = async (candidateId) => {
-    await startPayment({
-     title: title,
-     unit_price: salary,
-     currency_id: "PEN",
-     from: user.id,
-     to: candidateId,
-     project: id
-   });
     await acceptCandidate(id, candidateId);
+    // alert(candidateId);
     callCandidates();
   };
 
@@ -91,6 +101,13 @@ export const Candidates = ({ handleClose, id, title, salary, user }) => {
         </Typography>
 
         <div className={styles.postulateButtons}>
+          {setOpen && (
+            <Modal open={open} onClose={onClose}>
+              <div>
+                <PaymentConfirmation onClose={onClose} id={id} title={title} salary={salary} user={user} pagado={pagado}/>
+              </div>
+            </Modal>
+          )}
           <Button
             variant='contained'
             onClick={() => handleViewClick("postulate")}
@@ -98,6 +115,7 @@ export const Candidates = ({ handleClose, id, title, salary, user }) => {
               backgroundColor: pressedButton === "postulate" ? "persianBlue.main" : "pear.main",
               color: pressedButton === "postulate" ? "aliceblue" : "persianBlue.main",
             }}
+            disabled={!pagado}
           >
             <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Postulados
@@ -111,6 +129,7 @@ export const Candidates = ({ handleClose, id, title, salary, user }) => {
               backgroundColor: pressedButton === "accepted" ? "persianBlue.main" : "pear.main",
               color: pressedButton === "accepted" ? "aliceblue" : "persianBlue.main",
             }}
+            disabled={!pagado}
           >
             <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Aceptados
@@ -124,9 +143,16 @@ export const Candidates = ({ handleClose, id, title, salary, user }) => {
               backgroundColor: pressedButton === "rejected" ? "persianBlue.main" : "pear.main",
               color: pressedButton === "rejected" ? "aliceblue" : "persianBlue.main",
             }}
+            disabled={!pagado}
           >
             <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
               Rechazados
+            </Typography>
+          </Button>
+          
+          <Button variant='contained' onClick={setPayment} disabled={pagado} >
+            <Typography variant='body2' fontFamily='Nunito Sans' fontWeight='400'>
+              Realizar Pago
             </Typography>
           </Button>
         </div>
@@ -141,11 +167,17 @@ export const Candidates = ({ handleClose, id, title, salary, user }) => {
                 </Typography>
                 <Typography color='textSecondary' sx={{ textTransform: "capitalize" }}></Typography>
               </div>
-
+              { pagado ? (
               <div className={styles.cardRight}>
                 <CloseRoundedIcon sx={{ cursor: "pointer" }} onClick={() => reject(candidate.id)} />
                 <CheckRoundedIcon sx={{ cursor: "pointer" }} onClick={() => accept(candidate.id)} />
               </div>
+              ) : (
+                <div className={styles.cardRight}>
+                  <CloseRoundedIcon sx={{ cursor: "pointer" }} onClick={() => alert('Debe realizar el pago')} />
+                <CheckRoundedIcon sx={{ cursor: "pointer" }} onClick={() => alert('Debe realizar el pago')} />
+                </div>
+              )}
             </CardContent>
           </Card>
         ))
