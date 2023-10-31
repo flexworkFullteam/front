@@ -79,13 +79,6 @@ export const SearchPage = () => {
     }
   }, [term]);
 
-  // useEffect(() => {
-  //   startLoadingProject();
-  //   getField();
-  //   getType();
-  //   getExp_req();
-  // }, []);
-
   return (
     <Box display='flex' flexDirection='row' padding={"3em"}>
       <Box
@@ -143,7 +136,8 @@ export const SearchPage = () => {
               }}
               sx={{ backgroundColor: "lightgray" }}
             >
-              {field.map((fieldOption) => (
+              {field?.map((fieldOption) => (
+
                 <MenuItem value={fieldOption.project_fields} key={fieldOption.id}>
                   {fieldOption.project_fields}
                 </MenuItem>
@@ -183,7 +177,8 @@ export const SearchPage = () => {
               }}
               sx={{ backgroundColor: "lightgray" }}
             >
-              {exp_req.map((expOption) => (
+              {exp_req?.map((expOption) => (
+
                 <MenuItem value={expOption.experienceLevel} key={expOption.id}>
                   {expOption.experienceLevel}
                 </MenuItem>
@@ -223,7 +218,7 @@ export const SearchPage = () => {
               }}
               sx={{ backgroundColor: "lightgray" }}
             >
-              {type.map((typeOption) => (
+              {type?.map((typeOption) => (
                 <MenuItem value={typeOption.project_type} key={typeOption.id}>
                   {typeOption.project_type}
                 </MenuItem>
@@ -255,7 +250,7 @@ export const SearchPage = () => {
         <Typography variant='h6' component='h1' sx={{ mb: "1rem" }}>
           {existingProjects.length} ofertas de proyectos para {term}
         </Typography>
-        {visibleProjects.map((project) => (
+        {visibleProjects?.map((project) => (
           <Card key={project.id} sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }} onClick={() => handleDetail(`/detail/${project.id}`)}>
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
               <div className={styles.cardLeft}>
