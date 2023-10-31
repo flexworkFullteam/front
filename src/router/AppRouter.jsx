@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Nav } from "../project/components/Nav/Nav";
 import { Footer } from "../project/components/Footer/Footer";
 import { AuthRoute } from "../auth/routes/AuthRoute";
@@ -11,11 +11,19 @@ import { UpdateTypePage } from "../project/pages/UpdateTypePage/UpdateTypePage";
 import { VerifyAccount } from "../project/components/VerifyAccount/VerifyAccount";
 import { LoadingComponent } from "../project/components/LoadingComponent/LoadingComponent";
 import { useDbTableStore } from "../hooks/useDbTableStore";
+import { PopUpPersonalData } from "../project/components/PopUpPersonalData/PopUpPersonalData";
+import { Modal } from "@mui/material";
 
 export const AppRouter = () => {
   const { projects, startLoadingProject } = useProjectStore();
   const { user, status, startLoginWithToken } = useAuthStore();
   const { getField, getType, getExp_req } = useDbTableStore();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {pathname} = useLocation();
+
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
 
   const getFields = () => {
     getField();
@@ -36,6 +44,11 @@ export const AppRouter = () => {
   }, []);
 
   // Aca deberia haber
+  useEffect(() => {
+    if (Object.keys(user).length > 0 && !user.data && !isModalOpen) {
+      setIsModalOpen(true);
+    }
+  }, [user, user.data, pathname]);
 
   if (status === "checking") {
     return <LoadingComponent />;
@@ -43,6 +56,13 @@ export const AppRouter = () => {
 
   return (
     <>
+      {user.type === 2 || user.type === 3 && 
+      <Modal open={isModalOpen} onClose={handleClose}>
+        <div>
+          <PopUpPersonalData handleClose={handleClose}/>
+        </div>
+      </Modal>
+      }
       <Nav />
       <Routes>
         {user.type !== 4 && user.type !== 1 ? <Route path='/*' element={<ProjectRoute status={status} />} /> : null}
