@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, Checkbox, FormControlLabel, FormControl, Select, } from "@mui/material";
+import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, Checkbox, FormControlLabel, FormControl, Select } from "@mui/material";
 import style from "./generalStyles.module.css";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
@@ -58,8 +58,8 @@ const ProfessionalComponent = () => {
   if (image) {
     console.log("image", image);
   }
-  if(user.image && !image){
-    setImage(user.image)
+  if (user.image && !image) {
+    setImage(user.image);
   }
 
   let idSkills = itSkills?.filter((item) => item.it_skill == user.itskills);
@@ -74,13 +74,8 @@ const ProfessionalComponent = () => {
   }, []);
 
   return (
-    <Container sx={{ mt: 5, mr: 5 }}>
-      <Typography
-        variant="h4"
-        sx={{ mb: 4 }}
-        fontWeight="semi bold"
-        color="persianBlue.main"
-      >
+    <Container sx={{ mt: 5, ml: "auto" }}>
+      <Typography variant='h4' sx={{ mb: 4 }} fontWeight='semi bold' color='persianBlue.main'>
         Información Profesional
       </Typography>
 
@@ -89,15 +84,15 @@ const ProfessionalComponent = () => {
           <Grid container spacing={2}>
             <Grid item xs={5}>
               <div className={style.divExperiencia}>
-                <Typography variant="h6" fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
+                <Typography variant='h6' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
                   Datos generales
                 </Typography>
                 <InputLabel sx={{ ml: 3 }}>Nombre</InputLabel>
                 <TextField
-                  placeholder="Nombre"
-                  id="name"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Nombre'
+                  id='name'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("data.name", {
                     pattern: {
                       value: /^(?!\s)[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]+/,
@@ -106,14 +101,14 @@ const ProfessionalComponent = () => {
                   })}
                   defaultValue={user.data ? user.data.name : ""}
                 />
-                {errors.data?.name && (<p className={style.errors}>{errors.data?.name.message}</p>)}
+                {errors.data?.name && <p className={style.errors}>{errors.data?.name.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Apellido</InputLabel>
                 <TextField
-                  placeholder="Apellido"
-                  id="lastname"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Apellido'
+                  id='lastname'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("data.lastname", {
                     pattern: {
                       value: /^(?!\s)[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]+/,
@@ -122,14 +117,14 @@ const ProfessionalComponent = () => {
                   })}
                   defaultValue={user.data ? user.data.lastname : ""}
                 />
-                {errors.data?.lastname && (<p className={style.errors}>{errors.data?.lastname.message}</p>)}
+                {errors.data?.lastname && <p className={style.errors}>{errors.data?.lastname.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Edad</InputLabel>
                 <TextField
-                  placeholder="Edad"
-                  id="age"
-                  type="number"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Edad'
+                  id='age'
+                  type='number'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("data.age", {
                     required: {
                       value: true,
@@ -137,19 +132,19 @@ const ProfessionalComponent = () => {
                     },
                     pattern: {
                       value: /^\d+$/,
-                      message: "Ingresa solo números"
-                    }
+                      message: "Ingresa solo números",
+                    },
                   })}
                   defaultValue={user.data ? user.data.age : ""}
                 />
-                {errors.data?.age && (<p className={style.errors}>{errors.data?.age.message}</p>)}
+                {errors.data?.age && <p className={style.errors}>{errors.data?.age.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>DNI</InputLabel>
                 <TextField
-                  placeholder="DNI"
-                  id="dni"
-                  type="number"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='DNI'
+                  id='dni'
+                  type='number'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("data.dni", {
                     required: {
                       value: true,
@@ -157,19 +152,19 @@ const ProfessionalComponent = () => {
                     },
                     pattern: {
                       value: /^\S{8}$/,
-                      message: "Debe contener 8 carácteres"
-                    }
+                      message: "Debe contener 8 carácteres",
+                    },
                   })}
                   defaultValue={user.data ? user.data.dni : ""}
                 />
-                {errors.data?.dni && (<p className={style.errors}>{errors.data?.dni.message}</p>)}
+                {errors.data?.dni && <p className={style.errors}>{errors.data?.dni.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>CCI</InputLabel>
                 <TextField
-                  placeholder="CCI"
-                  id="cci"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='CCI'
+                  id='cci'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("cci", {
                     required: {
                       value: true,
@@ -177,21 +172,21 @@ const ProfessionalComponent = () => {
                     },
                     pattern: {
                       value: /^\S{11}$/,
-                      message: "Debe contener 11 carácteres"
-                    }
+                      message: "Debe contener 11 carácteres",
+                    },
                   })}
                   defaultValue={user.cci || ""}
                 />
-                {errors.cci && (<p className={style.errors}>{errors.cci.message}</p>)}
+                {errors.cci && <p className={style.errors}>{errors.cci.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Nacionalidad</InputLabel>
-                <FormControl sx={{width:'90%', ml:3}}>
+                <FormControl sx={{ width: "90%", ml: 3 }}>
                   <Select
                     {...register("nationality", {
                       required: "Este campo es requerido",
                     })}
                     error={errors.nationality}
-                    defaultValue={idNacionality?.[0]?.id || ''}
+                    defaultValue={idNacionality?.[0]?.id || ""}
                   >
                     {nationality.map((item) => (
                       <MenuItem key={item.id} value={item.id}>
@@ -199,17 +194,17 @@ const ProfessionalComponent = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                  {errors.nationality && (<p className={style.errors}>{errors.nationality.message}</p>)}
+                  {errors.nationality && <p className={style.errors}>{errors.nationality.message}</p>}
                 </FormControl>
 
                 <InputLabel sx={{ ml: 3 }}>Idiomas</InputLabel>
-                <FormControl sx={{width:'90%', ml:3}}>
+                <FormControl sx={{ width: "90%", ml: 3 }}>
                   <Select
                     {...register("languages.0", {
                       required: "Este campo es requerido",
                     })}
                     error={errors.languages?.[0]}
-                    defaultValue={idLenguages?.[0]?.id || ''}
+                    defaultValue={idLenguages?.[0]?.id || ""}
                   >
                     {language.map((item) => (
                       <MenuItem key={item.id} value={item.id}>
@@ -217,21 +212,17 @@ const ProfessionalComponent = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                  {errors.languages?.[0] && (
-                    <p className={style.errors}>
-                      {errors.languages?.[0].message}
-                    </p>
-                  )}
+                  {errors.languages?.[0] && <p className={style.errors}>{errors.languages?.[0].message}</p>}
                 </FormControl>
 
                 <InputLabel sx={{ ml: 3 }}>Habilidades de desarrollo</InputLabel>
-                <FormControl sx={{width:'90%', ml:3}}>
+                <FormControl sx={{ width: "90%", ml: 3 }}>
                   <Select
                     {...register("itskill.0", {
                       required: "Este campo es requerido",
                     })}
                     error={errors.itskill?.[0]}
-                    defaultValue={idSkills?.[0]?.id || ''}
+                    defaultValue={idSkills?.[0]?.id || ""}
                   >
                     {itSkills.map((item) => (
                       <MenuItem key={item.id} value={item.id}>
@@ -239,15 +230,15 @@ const ProfessionalComponent = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                  {errors.itskill?.[0] && (<p className={style.errors}>{errors.itskill?.[0].message}</p>)}
+                  {errors.itskill?.[0] && <p className={style.errors}>{errors.itskill?.[0].message}</p>}
                 </FormControl>
 
                 <InputLabel sx={{ ml: 3 }}>Información adicional</InputLabel>
                 <TextField
-                  placeholder="Información adicional"
-                  id="extra_information"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Información adicional'
+                  id='extra_information'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("extra_information", {
                     required: {
                       value: true,
@@ -256,14 +247,14 @@ const ProfessionalComponent = () => {
                   })}
                   defaultValue={user.extra_information || ""}
                 />
-                {errors.extra_information && (<p className={style.errors}>{errors.extra_information.message}</p>)}
+                {errors.extra_information && <p className={style.errors}>{errors.extra_information.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Portfolio</InputLabel>
                 <TextField
-                  placeholder="Portfolio"
-                  id="portfolio"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Portfolio'
+                  id='portfolio'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("portfolio", {
                     required: {
                       value: true,
@@ -272,22 +263,22 @@ const ProfessionalComponent = () => {
                   })}
                   defaultValue={user.portfolio || ""}
                 />
-                {errors.portfolio && (<p className={style.errors}>{errors.portfolio.message}</p>)}
+                {errors.portfolio && <p className={style.errors}>{errors.portfolio.message}</p>}
               </div>
             </Grid>
-            <Grid item xs={.6}></Grid>
+            <Grid item xs={0.6}></Grid>
 
             <Grid item xs={5}>
               <div className={style.divExperiencia}>
-                <Typography variant="h6" fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
+                <Typography variant='h6' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
                   Educación
                 </Typography>
                 <InputLabel sx={{ ml: 3 }}>Titulo</InputLabel>
                 <TextField
-                  placeholder="Titulo"
-                  id="degree"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Titulo'
+                  id='degree'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("education.0.degree", {
                     required: {
                       value: true,
@@ -300,15 +291,14 @@ const ProfessionalComponent = () => {
                   })}
                   defaultValue={user.education?.[0]?.degree || ""}
                 />
-                {errors.education?.[0]?.degree && (
-                  <p className={style.errors}> {errors.education?.[0]?.degree.message}</p>)}
+                {errors.education?.[0]?.degree && <p className={style.errors}> {errors.education?.[0]?.degree.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Institucion</InputLabel>
                 <TextField
-                  placeholder="Institucion"
-                  id="institution"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Institucion'
+                  id='institution'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("education.0.institution", {
                     required: {
                       value: true,
@@ -321,15 +311,14 @@ const ProfessionalComponent = () => {
                   })}
                   defaultValue={user.education?.[0]?.institution || ""}
                 />
-                {errors.education?.[0]?.institution && (
-                  <p className={style.errors}> {errors.education?.[0]?.institution.message}</p>)}
+                {errors.education?.[0]?.institution && <p className={style.errors}> {errors.education?.[0]?.institution.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Año de finalización</InputLabel>
                 <TextField
-                  placeholder="Año de Fin"
-                  id="year_end"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Año de Fin'
+                  id='year_end'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("education.0.year_end", {
                     required: {
                       value: true,
@@ -342,79 +331,62 @@ const ProfessionalComponent = () => {
                   })}
                   defaultValue={user.education?.[0]?.year_end || ""}
                 />
-                {errors.education?.[0]?.year_end && (
-                  <p className={style.errors}> {errors.education?.[0]?.year_end.message}</p>)}
+                {errors.education?.[0]?.year_end && <p className={style.errors}> {errors.education?.[0]?.year_end.message}</p>}
               </div>
               <div className={style.divExperiencia}>
-                <Typography variant="h6" fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
+                <Typography variant='h6' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
                   Experiencia previa
                 </Typography>
                 <InputLabel sx={{ ml: 3 }}>Empresa</InputLabel>
                 <TextField
-                  placeholder="Empresa"
-                  id="company"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Empresa'
+                  id='company'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("experience.0.company", {
                     required: "Este campo es requerido",
                   })}
                   defaultValue={user.experience?.[0]?.company || ""}
                 />
-                {errors.experience?.[0]?.company && (
-                  <p className={style.errors}>
-                    {errors.experience?.[0]?.company.message}
-                  </p>
-                )}
+                {errors.experience?.[0]?.company && <p className={style.errors}>{errors.experience?.[0]?.company.message}</p>}
                 <InputLabel sx={{ ml: 3 }}>Descripción del puesto</InputLabel>
                 <TextField
-                  placeholder="Descripción"
-                  id="description"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Descripción'
+                  id='description'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("experience.0.description", {
                     required: "Este campo es requerido",
                   })}
                   defaultValue={user.experience?.[0]?.description || ""}
                 />
-                {errors.experience?.[0]?.description && (
-                  <p className={style.errors}>
-                    {errors.experience?.[0]?.description.message}
-                  </p>
-                )}
+                {errors.experience?.[0]?.description && <p className={style.errors}>{errors.experience?.[0]?.description.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Fecha de inicio</InputLabel>
                 <TextField
-                  placeholder="Fecha de inicio"
-                  id="date_start"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Fecha de inicio'
+                  id='date_start'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("experience.0.date_start", {
                     required: "Este campo es requerido",
                   })}
                   defaultValue={user.experience?.[0]?.date_start || ""}
                 />
-                {errors.experience?.[0]?.date_start && (
-                  <p className={style.errors}>
-                    {errors.experience?.[0]?.date_start.message}
-                  </p>
-                )}
+                {errors.experience?.[0]?.date_start && <p className={style.errors}>{errors.experience?.[0]?.date_start.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Fecha de fin</InputLabel>
                 <TextField
-                  placeholder="Fecha de fin"
-                  id="date_end"
-                  type="text"
-                  sx={{width:'90%', ml:3}}
+                  placeholder='Fecha de fin'
+                  id='date_end'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("experience.0.date_end", {
                     required: "Este campo es requerido",
                   })}
                   defaultValue={user.experience?.[0]?.date_end || ""}
                 />
-                {errors.experience?.[0]?.date_end && (
-                  <p className={style.errors}>
-                    {errors.experience?.[0]?.date_end.message}
-                  </p>
-                )}
+                {errors.experience?.[0]?.date_end && <p className={style.errors}>{errors.experience?.[0]?.date_end.message}</p>}
               </div>
 
               <InputLabel sx={{ mt: 5 }}>Imagen</InputLabel>
@@ -430,28 +402,15 @@ const ProfessionalComponent = () => {
                   Subir
                 </Typography>
               </Button>
-              <div className={style.divImg}>
-                {image && <img src={image} alt="perfil" className={style.imgPerfil} />}
-              </div>
-
+              <div className={style.divImg}>{image && <img src={image} alt='perfil' className={style.imgPerfil} />}</div>
             </Grid>
           </Grid>
 
           {/* Añade otros campos, como experiencia, educación, idiomas, habilidades, etc. */}
         </Stack>
 
-        <Button
-          variant="contained"
-          color="pear"
-          type="submit"
-          sx={{ ml: "1.5%", mt: "1%", mb: "4%" }}
-          disabled={isFormEmpty ||!image }
-        >
-          <Typography
-            fontFamily="Nunito Sans"
-            fontWeight="bold"
-            color="persianBlue.main"
-          >
+        <Button variant='contained' color='pear' type='submit' sx={{ ml: "1.5%", mt: "1%", mb: "4%" }} disabled={isFormEmpty || !image}>
+          <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
             Enviar
           </Typography>
         </Button>
