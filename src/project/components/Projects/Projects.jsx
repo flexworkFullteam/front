@@ -148,31 +148,33 @@ export const Projects = () => {
         }}
       >
         <Typography variant='h4'>Proyectos</Typography>
-
-      <div>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={checkedFinalizado}
-              onChange={handleCheckboxChange}
-              name="finalizado"
-              color="primary"
-            />
-          }
-          label="Finalizado"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={checkedNoFinalizado}
-              onChange={handleCheckboxChange}
-              name="noFinalizado"
-              color="primary"
-            />
-          }
-          label="No Finalizado"
-        />
-      </div>
+      {
+        companyProjects && 
+        <div>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={checkedFinalizado}
+                onChange={handleCheckboxChange}
+                name="finalizado"
+                color="primary"
+              />
+            }
+            label="Finalizado"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={checkedNoFinalizado}
+                onChange={handleCheckboxChange}
+                name="noFinalizado"
+                color="primary"
+              />
+            }
+            label="No Finalizado"
+          />
+        </div>
+      }
 
 
         <Button variant='contained' color='persianBlue' onClick={() => setCreateOpen(true)} disabled={!user.typevalid}>
@@ -215,7 +217,9 @@ export const Projects = () => {
           </Card>
         ))
       ) : (
-        <p>Cargando candidatos...</p>
+        user.typevalid ? <Typography sx={{ display: "flex", justifyContent: "center"}}>Cargando proyectos...</Typography> 
+        : <Typography sx={{ display: "flex", justifyContent: "center"}}
+        >Debe llenar la seccion de datos personales y aguardar la verificacion su cuenta para poder crear proyectos</Typography>
       )}
       <Box mt={3} mb={3} display='flex' justifyContent='center'>
         <Pagination count={pageCount} page={page} onChange={handlePageChange} />
