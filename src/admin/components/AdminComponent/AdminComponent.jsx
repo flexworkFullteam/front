@@ -56,10 +56,10 @@ export const AdminComponent = () => {
       {selectedOption === "professionals" && professionals && professionals.length > 0
         ? professionals.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((professional) => (
             <Card key={professional.id} className={styles.card}>
-              <CardContent onClick={() => handleDetail(`/user/detail/${professional.id}`)} sx={{ cursor: "pointer" }}>
+              <CardContent>
                 <Grid container spacing={2}>
                   <Grid item xs={8}>
-                    <Typography variant='h5' component='div'>
+                    <Typography variant='h5' component='span' onClick={() => handleDetail(`/user/detail/${professional.id}`)} sx={{ cursor: "pointer" }}>
                       {professional.data.name} {professional.data.lastname}
                     </Typography>
                     <Typography variant='body2' color='text.secondary'>
