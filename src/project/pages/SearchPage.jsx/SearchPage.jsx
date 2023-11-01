@@ -87,7 +87,7 @@ export const SearchPage = () => {
           top: "2%",
           padding: theme.spacing(3),
           width: "30%",
-          height: "62vh",
+          height: "90vh",
           borderRadius: "5px",
           backgroundColor: "white",
           mt: 3,
