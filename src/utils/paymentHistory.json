@@ -1,0 +1,110 @@
+[
+  {
+    "op_id": "1a3e5b7f",
+    "from": {
+      "id": "123456",
+      "name": "juan"
+    },
+    "to": "789012",
+    "project": {
+      "id": "123456",
+      "name": "juan"
+    },
+    "transaction_amount": 1000,
+    "net_received_amount": 950,
+    "payment_date": "2023-10-30",
+    "approved_date": "2023-10-31",
+    "status": "approved",
+    "description": "Payment for services rendered"
+  },
+  {
+    "op_id": "2b4d6f8h",
+    "from": {
+      "id": "234567",
+      "name": "maria"
+    },
+    "to": "890123",
+    "project": {
+      "id": "234567",
+      "name": "maria"
+    },
+    "transaction_amount": 1500,
+    "net_received_amount": 1425,
+    "payment_date": "2023-11-01",
+    "approved_date": "2023-11-02",
+    "status": "approved",
+    "description": "Payment for completed tasks"
+  },
+  {
+    "op_id": "3c5e7g9i",
+    "from": {
+      "id": "345678",
+      "name": "pedro"
+    },
+    "to": "901234",
+    "project": {
+      "id": "345678",
+      "name": "pedro"
+    },
+    "transaction_amount": 800,
+    "net_received_amount": 760,
+    "payment_date": "2023-11-03",
+    "approved_date": "2023-11-04",
+    "status": "approved",
+    "description": "Payment for delivered goods"
+  },
+  {
+    "op_id": "4d6f8h0j",
+    "from": {
+      "id": "456789",
+      "name": "laura"
+    },
+    "to": "012345",
+    "project": {
+      "id": "456789",
+      "name": "laura"
+    },
+    "transaction_amount": 2000,
+    "net_received_amount": 1900,
+    "payment_date": "2023-11-05",
+    "approved_date": "2023-11-06",
+    "status": "approved",
+    "description": "Payment for consulting services"
+  },
+  {
+    "op_id": "5e7g9i1k",
+    "from": {
+      "id": "567890",
+      "name": "ana"
+    },
+    "to": "123450",
+    "project": {
+      "id": "567890",
+      "name": "ana"
+    },
+    "transaction_amount": 3000,
+    "net_received_amount": 2850,
+    "payment_date": "2023-11-07",
+    "approved_date": "2023-11-08",
+    "status": "approved",
+    "description": "Payment for marketing campaign"
+  },
+  {
+    "op_id": "6g8i0j2l",
+    "from": {
+      "id": "678901",
+      "name": "carlos"
+    },
+    "to": "234501",
+    "project": {
+      "id": "678901",
+      "name": "carlos"
+    },
+    "transaction_amount": 1200,
+    "net_received_amount": 1140,
+    "payment_date": "2023-11-09",
+    "approved_date": "2023-11-10",
+    "status": "approved",
+    "description": "Payment for software development"
+  }
+]
