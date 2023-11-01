@@ -20,11 +20,13 @@ export const Projects = () => {
   const [perPage, setPerPage] = useState(10);
   const [id, setId] = useState(1);
   const [companyProjects, setCompanyProjects] = useState();
+  const [allCompanyProjects, setAllCompanyProjects ] = useState([]);
   const [title, setTitle] = useState("");
   const [salary, setSalary] = useState(0);
   const [pagado, setPagado] = useState(false); 
   const [checkedFinalizado, setCheckedFinalizado] = useState(false);
   const [checkedNoFinalizado, setCheckedNoFinalizado] = useState(false);
+  
 
   const { user } = useAuthStore();
 
@@ -32,27 +34,33 @@ export const Projects = () => {
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
-  
+    
     if (name === 'finalizado') {
       setCheckedFinalizado(checked);
     } else if (name === 'noFinalizado') {
       setCheckedNoFinalizado(checked);
     }
   
-    filterProjects();
+    // Restablecer los proyectos a 'allCompanyProjects' si ambos checkboxes están desmarcados
+    if (!checkedFinalizado && !checkedNoFinalizado) {
+      setCompanyProjects(allCompanyProjects);
+    }
   };
+  
   
   const filterProjects = () => {
     let filteredProjects = companyProjects;
   
     if (checkedFinalizado) {
-      filteredProjects = filteredProjects.filter(project => project.finalizado === true);
+      filteredProjects = companyProjects.filter((project) => project.finalizado === true)
     }
   
     if (checkedNoFinalizado) {
-      filteredProjects = filteredProjects.filter(project => project.finalizado === false);
+      filteredProjects = companyProjects.filter((project) => project.finalizado === false)
     }
-  
+    
+    // console.log(filteredProjects);
+
     setCompanyProjects(filteredProjects);
   };
 
@@ -100,12 +108,19 @@ export const Projects = () => {
   const callProjects = async () => {
     const data = await getCompanyProjects(user.company_id);
     setCompanyProjects(data);
+    setAllCompanyProjects(data);
   };
   useEffect(() => {
     if (user && user.company_id) {
       callProjects();
     }
   }, [user]);
+
+
+  useEffect(() => {
+    // Llamada a la función de filtro cuando cambian los estados de los checkboxes
+    filterProjects();
+  }, [checkedFinalizado, checkedNoFinalizado]);
 
   return (
     <div>
@@ -193,7 +208,7 @@ export const Projects = () => {
                 {project.state ? <DeleteIcon onClick={() => handleDelete(project.id)} /> : <ReplayRoundedIcon onClick={() => handleDelete(project.id)} />}
                 <Button
                   onClick={() => handleFinishProject(project.id)}
-                  disabled={!project.pagado}
+                  disabled={!project.pagado || project.finalizado}
                 >Finalizar Proyecto</Button>
               </div>
             </CardContent>
