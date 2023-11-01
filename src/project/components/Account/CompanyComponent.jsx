@@ -6,10 +6,13 @@ import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { onLogin } from "../../../store/auth/authSlice";
 
 export const CompanyComponent = () => {
   const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } = useAuthStore();
   const [imagen, setImagen] = useState();
+  const dispatch = useDispatch();
 
   // console.log("inicio:", user);
 
@@ -49,7 +52,7 @@ export const CompanyComponent = () => {
       startUpdateCompany({ ...rest, data: newData, userId: user.id, imagen: imagen });
     } else {
       startCreateCompany({ ...rest, data: newData, userId: user.id, imagen: imagen });
-      startCreateCompany({ ...rest, data: newData, userId: user.id, imagen: imagen });
+      dispatch(onLogin({ ...user, ...rest, data: newData, userId: user.id, imagen: imagen, valid: true }));
     }
     // reset();
   });

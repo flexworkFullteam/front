@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, Checkbox, FormControlLabel, FormControl, Select } from "@mui/material";
 import style from "./generalStyles.module.css";
@@ -6,10 +7,12 @@ import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
+import { onLogin } from "../../../store/auth/authSlice";
 
 const ProfessionalComponent = () => {
   const { user, startCreateProfessional, startUploadingFiles, startUpdateProfessional } = useAuthStore();
   const [image, setImage] = useState();
+  const dispatch = useDispatch();
 
   const { nationality, language, itSkills } = useDbTableStore();
   const { getExp_req, getNationality, getItSkills } = useDbTableStore();
@@ -38,6 +41,7 @@ const ProfessionalComponent = () => {
       startUpdateProfessional({ ...data, user: user.id, image: image }, id);
     } else {
       startCreateProfessional({ ...data, user: user.id, image: image });
+      dispatch(onLogin({ ...user, image: image, valid: true }));
     }
     //  reset(); //! Esto limpia el formulario (opcional).
   });
@@ -73,10 +77,9 @@ const ProfessionalComponent = () => {
     getExp_req();
   }, []);
 
-
   if (user.image && !user.typevalid) {
     return (
-      <Container sx={{ mt: 5, ml:15 }}>
+      <Container sx={{ mt: 5, ml: 15 }}>
         <Typography variant='h4' sx={{ mb: 4 }} fontWeight='semi bold' color='persianBlue.main'>
           Información Profesional
         </Typography>
@@ -84,11 +87,11 @@ const ProfessionalComponent = () => {
           Por favor, espere a que un administrador valide su cuenta.
         </Typography>
       </Container>
-    )
+    );
   }
 
   return (
-    <Container sx={{ mt: 5, ml:15 }}>
+    <Container sx={{ mt: 5, ml: 15 }}>
       <Typography variant='h4' sx={{ mb: 4 }} fontWeight='semi bold' color='persianBlue.main'>
         Información Profesional
       </Typography>
