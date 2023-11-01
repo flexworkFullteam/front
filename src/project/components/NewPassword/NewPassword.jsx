@@ -59,7 +59,7 @@ const NewPassword = () => {
             sx={{ width: "90%" }}
             placeholder='Contraseña'
             variant='outlined'
-            type={showPassword1 ? "text" : "password"}
+            type={showPassword1 ? "password" : "text"}
             {...register("currentPassword", {
               required: {
                 value: true,
@@ -84,7 +84,7 @@ const NewPassword = () => {
             sx={{ width: "90%" }}
             placeholder='Contraseña'
             variant='outlined'
-            type={showPassword2 ? "text" : "password"}
+            type={showPassword2 ? "password" : "text"}
             {...register("newPassword", {
               required: {
                 value: true,
