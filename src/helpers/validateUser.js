@@ -3,7 +3,7 @@ import { projectAPI } from "../api/projectAPI";
 export const validateUser = async (id) => {
   try {
     await projectAPI.post(`/admin/valid/${id}`);
-    return alert("Usuario Validado");
+    return;
   } catch (error) {
     alert(error.message);
   }

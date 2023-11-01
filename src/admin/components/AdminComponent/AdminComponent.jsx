@@ -34,6 +34,7 @@ export const AdminComponent = () => {
   };
   const validate = async (id) => {
     await validateUser(id);
+    callData();
   };
 
   const handleChange = (event) => {
@@ -66,8 +67,8 @@ export const AdminComponent = () => {
                     </Typography>
                   </Grid>
                   <Grid item xs={4} container justifyContent='flex-end' alignItems='center'>
-                    <Button color='persianBlue' onClick={() => validate(professional.id)}>
-                      Validar
+                    <Button color='persianBlue' onClick={() => validate(professional.id, professional.valid)}>
+                      {professional.valid ? "Desvalidar" : "Validar"}
                     </Button>
                     <PlaceIcon sx={{ fontSize: 30, marginRight: 1 }} />
                     <Typography variant='body2' color='text.secondary'>
@@ -91,8 +92,8 @@ export const AdminComponent = () => {
                     </Typography>
                   </Grid>
                   <Grid item xs={4} container justifyContent='flex-end' alignItems='center'>
-                    <Button color='persianBlue' onClick={() => validate(company.id)}>
-                      Validar
+                    <Button color='persianBlue' onClick={() => validate(company.id, company.valid)}>
+                      {company.valid ? "Desvalidar" : "Validar"}
                     </Button>
                     <PlaceIcon sx={{ fontSize: 30, marginRight: 1 }} />
                     <Typography variant='body2' color='text.secondary'>
