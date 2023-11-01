@@ -6,8 +6,8 @@ import adminData from "../../utils/admin.json";
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    status: "authenticated", // checking, authenticated
-    user: profesionalData, //{}, profesionalData
+    status: "not-authenticated", // checking, authenticated
+    user: {}, //{}, profesionalData
     errorMessage: undefined,
   },
   reducers: {
