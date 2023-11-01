@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Paper, Typography, Pagination } from "@mui/material";
+import { Paper, Typography, Pagination, Card, CardContent } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { getCompanyById } from "../../../helpers/getCompanyById";
 import { getCompanyProjects } from "../../../helpers/projectsAsync";
@@ -24,9 +24,14 @@ export const CompanyDetail = () => {
     setPage(value);
   };
 
+  const handleDetail = (url) => {
+    const base_url = window.location.origin;
+    const newTab = window.open("", "_blank");
+    newTab.location.href = `${base_url}/${url}`;
+  };
+
   useEffect(() => {
     callCompany();
-    console.log(company);
   }, []);
 
   return (
@@ -80,22 +85,26 @@ export const CompanyDetail = () => {
           </div>
           <div className={styles.rightContent}>
             <Typography variant='h6'>Proyectos</Typography>
-            {projects.projects.map((project) => (
-              <Card sx={{ width: "100%", mb: "6px" }} key={project.id}>
-                <CardContent onClick={() => handleDetail(`project/detail/${project.id}`)} sx={{ cursor: "pointer" }}>
-                  <Typography variant='subtitle1' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main'>
-                    {project.title}
-                  </Typography>
-                  <Typography variant='body2' fontWeight='400' fontFamily='Nunito Sans' color='persianBlue.main'>
-                    {project.company} - Estado: {project.state}
-                  </Typography>
-                  <Typography variant='body2' fontWeight='400' fontFamily='Nunito Sans' color='persianBlue.main'>
-                    {project.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            ))}
-            <Pagination count={Math.ceil(projects.projects.length / projectsPerPage)} page={page} onChange={handlePageChange} className={styles.pagination} />
+            {projects && projects.length > 0 ? (
+              <>
+                {projects.map((project) => (
+                  <Card sx={{ width: "100%", mb: "6px" }} key={project.id}>
+                    <CardContent onClick={() => handleDetail(`project/detail/${project.id}`)} sx={{ cursor: "pointer" }}>
+                      <Typography variant='subtitle1' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main'>
+                        {project.title}
+                      </Typography>
+                      <Typography variant='body2' fontWeight='400' fontFamily='Nunito Sans' color='persianBlue.main'>
+                        {project.id_company} - Estado: {project.finalizado ? "Finalizado" : "En progreso"}
+                      </Typography>
+                      <Typography variant='body2' fontWeight='400' fontFamily='Nunito Sans' color='persianBlue.main'>
+                        {project.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                ))}
+                <Pagination count={Math.ceil(projects.length / projectsPerPage)} page={page} onChange={handlePageChange} className={styles.pagination} />
+              </>
+            ) : null}
           </div>
         </Paper>
       )}
