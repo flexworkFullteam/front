@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, Checkbox, FormControlLabel, FormControl, Select } from "@mui/material";
+import { Grid, Typography, Button, Container, Stack, TextField, InputLabel, MenuItem, Checkbox, FormControlLabel, FormControl, Select, CircularProgress } from "@mui/material";
 import style from "./generalStyles.module.css";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
@@ -12,6 +12,7 @@ import { onLogin } from "../../../store/auth/authSlice";
 const ProfessionalComponent = () => {
   const { user, startCreateProfessional, startUploadingFiles, startUpdateProfessional } = useAuthStore();
   const [image, setImage] = useState();
+  const [disabledButton, setDisabledButton] = useState(false);
   const dispatch = useDispatch();
 
   const { nationality, language, itSkills } = useDbTableStore();
@@ -26,7 +27,13 @@ const ProfessionalComponent = () => {
     reset,
   } = useForm();
 
+  const disableClick = (e) => {
+    setImage(e.target.files[0]);
+    setDisabledButton(!disabledButton);
+  };
+
   const onClick = async () => {
+    setDisabledButton(!disabledButton);
     const cloudResp = await startUploadingFiles(image);
     setImage(cloudResp);
     console.log(cloudResp);
@@ -41,7 +48,7 @@ const ProfessionalComponent = () => {
       startUpdateProfessional({ ...data, user: user.id, image: image }, id);
     } else {
       startCreateProfessional({ ...data, user: user.id, image: image });
-      dispatch(onLogin({ ...user, image: image, valid: true }));
+      // dispatch(onLogin({ ...user, image: image, valid: true }));
     }
     //  reset(); //! Esto limpia el formulario (opcional).
   });
@@ -412,14 +419,14 @@ const ProfessionalComponent = () => {
                 <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
                   Eliga una imagen
                 </Typography>
-                <VisuallyHiddenInput type='file' onChange={(e) => setImage(e.target.files[0])} placeholder='Imagen' id='image' />
+                <VisuallyHiddenInput type='file' onChange={disableClick} placeholder='Imagen' id='image' />
               </Button>
-              <Button variant='contained' color='pear' type='button' sx={{ margin: 2 }} onClick={onClick}>
+              <Button variant='contained' color='pear' type='button' sx={{ margin: 2 }} onClick={onClick} disabled={!disabledButton}>
                 <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
                   Subir
                 </Typography>
               </Button>
-              <div className={style.divImg}>{image && <img src={image} alt='perfil' className={style.imgPerfil} />}</div>
+              <div className={style.divImg}>{typeof image === "string" ? <img src={image} alt='perfil' className={style.imgPerfil} /> : image && <CircularProgress />}</div>
             </Grid>
           </Grid>
 
