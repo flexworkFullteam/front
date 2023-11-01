@@ -426,7 +426,7 @@ const ProfessionalComponent = () => {
                   Subir
                 </Typography>
               </Button>
-              <div className={style.divImg}>{typeof image === "string" ? <img src={image} alt='perfil' className={style.imgPerfil} /> : image && <CircularProgress />}</div>
+              <div className={style.divImg}>{typeof image === "string" ? <img src={image} alt='perfil' className={style.imgPerfil} /> : (image && !disabledButton) && <CircularProgress />}</div>
             </Grid>
           </Grid>
 
