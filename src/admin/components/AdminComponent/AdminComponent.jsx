@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { GetAllCompanies, GetAllProfessionals, GetAllProjects } from "../../../helpers/adminGetData";
 import { Select, MenuItem, Pagination, Card, CardContent, Grid, Typography, Button } from "@mui/material";
 import PlaceIcon from "@mui/icons-material/Place";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 import styles from "./AdminComponent.module.css";
 import { validateUser } from "../../../helpers/validateUser";
 
@@ -56,10 +58,10 @@ export const AdminComponent = () => {
       {selectedOption === "professionals" && professionals && professionals.length > 0
         ? professionals.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((professional) => (
             <Card key={professional.id} className={styles.card}>
-              <CardContent onClick={() => handleDetail(`/user/detail/${professional.id}`)} sx={{ cursor: "pointer" }}>
+              <CardContent>
                 <Grid container spacing={2}>
                   <Grid item xs={8}>
-                    <Typography variant='h5' component='div'>
+                    <Typography variant='h5' component='span' onClick={() => handleDetail(`/user/detail/${professional.id}`)} sx={{ cursor: "pointer" }}>
                       {professional.data.name} {professional.data.lastname}
                     </Typography>
                     <Typography variant='body2' color='text.secondary'>
@@ -113,8 +115,8 @@ export const AdminComponent = () => {
             <CardContent onClick={() => handleDetail(`/project/detail/${project.id}`)} sx={{ cursor: "pointer" }}>
               <Grid container spacing={2}>
                 <Grid item xs={8}>
-                  <Typography variant='h5' component='div'>
-                    {project.title}
+                  <Typography variant='h5' component='div' sx={{ display: "flex", alignItems: "center" }}>
+                    {project.title} - Finalizado: {project.finalizado ? <CheckCircleRoundedIcon /> : <CancelRoundedIcon />}
                   </Typography>
                   <Typography variant='body2' color='text.secondary'>
                     {project.id_company}

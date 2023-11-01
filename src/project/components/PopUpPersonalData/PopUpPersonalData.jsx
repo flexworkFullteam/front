@@ -8,7 +8,7 @@ export const PopUpPersonalData = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%",
+        height: "25%",
         width: "75%",
         padding: "2% 0 1% 0",
         backgroundColor: "white",

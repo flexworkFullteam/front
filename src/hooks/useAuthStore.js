@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { projectAPI } from "../api/projectAPI";
 import { onAddPersonalData, onChecking, onClearEvents, onLogin, onLogout, onRegister } from "../store/auth/authSlice";
 import { fileUpload } from "../helpers/fileUpload";
@@ -21,7 +21,6 @@ export const useAuthStore = () => {
       });
       localStorage.setItem("token", data.token);
 
-      console.log(data);
       const { userMapped } = data;
 
       if (userMapped) {
@@ -35,12 +34,12 @@ export const useAuthStore = () => {
       }
     } catch (error) {
       Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.errorMessage,
+        position: "top-center",
+        icon: "error",
+        title: "E-mail o contraseña incorrectos",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
       dispatch(onLogout("Error al iniciar sesión"));
     }
   };
@@ -59,22 +58,22 @@ export const useAuthStore = () => {
       if (data.id) {
         // dispatch(onRegister(data)); //Todo: Cambiar por un loading distinto, este te redirije al home
         Swal.fire({
-          position: 'top-center',
-          icon: 'success',
-          title: 'Usuario registrado',
+          position: "top-center",
+          icon: "success",
+          title: "Usuario registrado",
           showConfirmButton: false,
-          timer: 1500
-        })
+          timer: 1500,
+        });
         navigate("/auth/login");
       }
     } catch (error) {
       Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.errorMessage,
+        position: "top-center",
+        icon: "error",
+        title: "Error al registrar usuario",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
       console.error("Error en el registro:", error);
       dispatch(onLogout("Error al registrar usuario"));
     }
@@ -91,23 +90,23 @@ export const useAuthStore = () => {
       // dispatch(setLoadingAccount(true));
       const { data } = await projectAPI.post("/professional", professional);
       console.log("Creado", data);
-      dispatch(onAddPersonalData(data));
+      dispatch(onAddPersonalData({ ...data, valid: true }));
       // dispatch(setLoadingAccount(false));
       Swal.fire({
-        position: 'top-center',
-        icon: 'success',
-        title: 'Datos personales guardados',
+        position: "top-center",
+        icon: "success",
+        title: "Datos personales guardados",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
     } catch (error) {
       Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.errorMessage,
+        position: "top-center",
+        icon: "error",
+        title: "Error al llenar los datos personales",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
       console.log(error);
       // dispatch(onLogout("Error al crear profesional"));
     }
@@ -119,21 +118,21 @@ export const useAuthStore = () => {
       console.log("Prof actualizado", data);
       console.log(id);
       Swal.fire({
-        position: 'top-center',
-        icon: 'success',
-        title: 'Cambios guardados',
+        position: "top-center",
+        icon: "success",
+        title: "Cambios guardados",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
     } catch (error) {
       console.log(error);
       Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.message,
+        position: "top-center",
+        icon: "error",
+        title: "Error al actualizar los datos personales",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
     }
   };
 
@@ -144,24 +143,24 @@ export const useAuthStore = () => {
       // console.log(company);
       const { data } = await projectAPI.post("/company", company);
       console.log("Creado", data);
-      dispatch(onAddPersonalData(data));
+      dispatch(onAddPersonalData({ ...data, valid: true }));
       // dispatch(setLoadingAccount(false));
       Swal.fire({
-        position: 'top-center',
-        icon: 'success',
-        title: 'Datos de empresa guardados',
+        position: "top-center",
+        icon: "success",
+        title: "Datos de empresa guardados",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
     } catch (error) {
       console.log(error);
       Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.errorMessage,
+        position: "top-center",
+        icon: "error",
+        title: "Error al llenar los datos personales",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
       // dispatch(onLogout("Error al crear empresa"));
     }
   };
@@ -172,21 +171,21 @@ export const useAuthStore = () => {
       const { data } = await projectAPI.put(`/company/${id}`, company);
       console.log("Actualizando", data);
       Swal.fire({
-        position: 'top-center',
-        icon: 'success',
-        title: 'Cambios guardados',
+        position: "top-center",
+        icon: "success",
+        title: "Cambios guardados",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
     } catch (error) {
       console.log(error);
       Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.message,
+        position: "top-center",
+        icon: "error",
+        title: "Error al actualizar los datos personales",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
     }
   };
 
@@ -199,15 +198,7 @@ export const useAuthStore = () => {
       const { data } = await projectAPI.get(`/user/${userId}`);
       // console.log(data.userMapped)
       dispatch(onLogin(data.userMapped));
-    } catch (error) {
-      Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.message,
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }
+    } catch (error) {}
   };
 
   const startUploadingFiles = async (files) => {
