@@ -11,7 +11,7 @@ export const CompanyComponent = () => {
   const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } = useAuthStore();
   const [imagen, setImagen] = useState();
 
-  console.log("inicio:", user);
+  // console.log("inicio:", user);
 
   const { nationality, language } = useDbTableStore();
   const { getExp_req, getNationality } = useDbTableStore();
@@ -21,13 +21,7 @@ export const CompanyComponent = () => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      data: {
-        telefono: 995598899,
-      },
-    },
-  });
+  } = useForm({});
 
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -46,15 +40,17 @@ export const CompanyComponent = () => {
     setImagen(cloudResp);
   };
 
-  const onSubmit = handleSubmit((data) => {
-    console.log("DataCompany", data);
+  const onSubmit = handleSubmit(({ telefono, ...rest }) => {
+    // console.log("DataCompany", rest);
+    const parsedTelefono = parseInt(telefono, 10);
+  
     if (user.id && user.company_id) {
-      startUpdateCompany({ ...data, userId: user.id, imagen: imagen });
+      startUpdateCompany({ ...rest, telefono: parsedTelefono, userId: user.id, imagen: imagen });
     } else {
-      startCreateCompany({ ...data, userId: user.id, imagen: imagen });
-      startCreateCompany({ ...data, userId: user.id, imagen: imagen });
+      startCreateCompany({ ...rest, telefono: parsedTelefono, userId: user.id, imagen: imagen });
+      startCreateCompany({ ...rest, telefono: parsedTelefono, userId: user.id, imagen: imagen });
     }
-    reset();
+    // reset();
   });
   const isFormEmpty = Object.keys(errors).length >= 1;
 
@@ -73,6 +69,21 @@ export const CompanyComponent = () => {
     getNationality();
     getExp_req();
   }, []);
+
+
+  
+  if (user.image && !user.typevalid) {
+    return (
+      <Container sx={{ mt: 5, ml:15 }}>
+        <Typography variant='h4' sx={{ mb: 4 }} fontWeight='semi bold' color='persianBlue.main'>
+          Información Empresarial
+        </Typography>
+        <Typography variant='h6' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
+          Por favor, espere a que un administrador valide su cuenta.
+        </Typography>
+      </Container>
+    )
+  }
 
   return (
     <Container sx={{ mt: 5, ml: 15.8 }} >
