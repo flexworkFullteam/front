@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, CardContent, Typography, Modal, Pagination, Box } from "@mui/material";
+import { Button, Card, CardContent, Typography, Modal, Pagination, Box, Checkbox, FormControlLabel} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 import { Candidates } from "../Candidates/Candidates";
@@ -10,6 +10,7 @@ import { CreateProject } from "../CreateProject/CreateProject";
 import { getCompanyProjects } from "../../../helpers/projectsAsync";
 import styles from "./Project.module.css";
 import { finishProject } from "../../../helpers/finishProject";
+
 
 export const Projects = () => {
   const { deleteProject } = useProjectStore();
@@ -21,12 +22,39 @@ export const Projects = () => {
   const [companyProjects, setCompanyProjects] = useState();
   const [title, setTitle] = useState("");
   const [salary, setSalary] = useState(0);
-  const [pagado, setPagado] = useState(false);
-
+  const [pagado, setPagado] = useState(false); 
+  const [checkedFinalizado, setCheckedFinalizado] = useState(false);
+  const [checkedNoFinalizado, setCheckedNoFinalizado] = useState(false);
 
   const { user } = useAuthStore();
 
   const navigate = useNavigate();
+
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+  
+    if (name === 'finalizado') {
+      setCheckedFinalizado(checked);
+    } else if (name === 'noFinalizado') {
+      setCheckedNoFinalizado(checked);
+    }
+  
+    filterProjects();
+  };
+  
+  const filterProjects = () => {
+    let filteredProjects = companyProjects;
+  
+    if (checkedFinalizado) {
+      filteredProjects = filteredProjects.filter(project => project.finalizado === true);
+    }
+  
+    if (checkedNoFinalizado) {
+      filteredProjects = filteredProjects.filter(project => project.finalizado === false);
+    }
+  
+    setCompanyProjects(filteredProjects);
+  };
 
   const handleOpen = (id, title, salary, pagado) => {
     setId(id);
@@ -106,7 +134,33 @@ export const Projects = () => {
       >
         <Typography variant='h4'>Proyectos</Typography>
 
-        <Button variant='contained' color='persianBlue' onClick={() => setCreateOpen(true)} disabled={!user.id_nationality}>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={checkedFinalizado}
+              onChange={handleCheckboxChange}
+              name="finalizado"
+              color="primary"
+            />
+          }
+          label="Finalizado"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={checkedNoFinalizado}
+              onChange={handleCheckboxChange}
+              name="noFinalizado"
+              color="primary"
+            />
+          }
+          label="No Finalizado"
+        />
+      </div>
+
+
+        <Button variant='contained' color='persianBlue' onClick={() => setCreateOpen(true)} disabled={!user.typevalid}>
           <Typography fontFamily='Nunito Sans' fontWeight='400' color='aliceblue'>
             Crear proyectos
           </Typography>
