@@ -9,6 +9,7 @@ import { useProjectStore } from "../../../hooks/useProjectStore";
 import { CreateProject } from "../CreateProject/CreateProject";
 import { getCompanyProjects } from "../../../helpers/projectsAsync";
 import styles from "./Project.module.css";
+import { finishProject } from "../../../helpers/finishProject";
 
 export const Projects = () => {
   const { deleteProject } = useProjectStore();
@@ -38,6 +39,10 @@ export const Projects = () => {
     setOpen(false);
     setCreateOpen(false);
     callProjects();
+  };
+
+  const handleFinishProject = async(id) => {
+    await finishProject(id);
   };
 
   const handleDelete = async (id) => {
@@ -101,7 +106,7 @@ export const Projects = () => {
       >
         <Typography variant='h4'>Proyectos</Typography>
 
-        <Button variant='contained' color='persianBlue' onClick={() => setCreateOpen(true)} disabled={!user.data}>
+        <Button variant='contained' color='persianBlue' onClick={() => setCreateOpen(true)} disabled={!user.id_nationality}>
           <Typography fontFamily='Nunito Sans' fontWeight='400' color='aliceblue'>
             Crear proyectos
           </Typography>
@@ -132,6 +137,10 @@ export const Projects = () => {
                 <Button onClick={() => handleOpen(project.id, project.title, project.salary, project.pagado)}>Ver postulantes</Button>
 
                 {project.state ? <DeleteIcon onClick={() => handleDelete(project.id)} /> : <ReplayRoundedIcon onClick={() => handleDelete(project.id)} />}
+                <Button
+                  onClick={() => handleFinishProject(project.id)}
+                  disabled={!project.pagado}
+                >Finalizar Proyecto</Button>
               </div>
             </CardContent>
           </Card>
