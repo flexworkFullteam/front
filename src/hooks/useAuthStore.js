@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
+import Swal from 'sweetalert2';
 import { projectAPI } from "../api/projectAPI";
 import { onAddPersonalData, onChecking, onClearEvents, onLogin, onLogout, onRegister } from "../store/auth/authSlice";
 import { fileUpload } from "../helpers/fileUpload";
@@ -33,7 +34,13 @@ export const useAuthStore = () => {
         dispatch(onLogout());
       }
     } catch (error) {
-      alert(error.errorMessage);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.errorMessage,
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch(onLogout("Error al iniciar sesión"));
     }
   };
@@ -51,12 +58,24 @@ export const useAuthStore = () => {
       // console.log(data)
       if (data.id) {
         // dispatch(onRegister(data)); //Todo: Cambiar por un loading distinto, este te redirije al home
-        alert("Usuario registrado");
+        Swal.fire({
+          position: 'top-center',
+          icon: 'success',
+          title: 'Usuario registrado',
+          showConfirmButton: false,
+          timer: 1500
+        })
         navigate("/auth/login");
       }
     } catch (error) {
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.errorMessage,
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.error("Error en el registro:", error);
-      alert(error.message);
       dispatch(onLogout("Error al registrar usuario"));
     }
   };
@@ -74,10 +93,22 @@ export const useAuthStore = () => {
       console.log("Creado", data);
       dispatch(onAddPersonalData(data));
       // dispatch(setLoadingAccount(false));
-      alert("Datos personales guardados");
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Datos personales guardados',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } catch (error) {
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.errorMessage,
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log(error);
-      // alert(error.errorMessage);
       // dispatch(onLogout("Error al crear profesional"));
     }
   };
@@ -87,10 +118,22 @@ export const useAuthStore = () => {
       const { data } = await projectAPI.put(`/professional/${id}`, professional);
       console.log("Prof actualizado", data);
       console.log(id);
-      alert("Cambios guardados");
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Cambios guardados',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   };
 
@@ -103,10 +146,22 @@ export const useAuthStore = () => {
       console.log("Creado", data);
       dispatch(onAddPersonalData(data));
       // dispatch(setLoadingAccount(false));
-      alert("Datos de empresa guardados");
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Datos de empresa guardados',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } catch (error) {
       console.log(error);
-      // alert(error.errorMessage);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.errorMessage,
+        showConfirmButton: false,
+        timer: 1500
+      })
       // dispatch(onLogout("Error al crear empresa"));
     }
   };
@@ -116,10 +171,22 @@ export const useAuthStore = () => {
       const id = user.company_id;
       const { data } = await projectAPI.put(`/company/${id}`, company);
       console.log("Actualizando", data);
-      alert("Cambios guardados");
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Cambios guardados',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   };
 
@@ -133,7 +200,13 @@ export const useAuthStore = () => {
       // console.log(data.userMapped)
       dispatch(onLogin(data.userMapped));
     } catch (error) {
-      // alert(error.errorMessage)
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   };
 

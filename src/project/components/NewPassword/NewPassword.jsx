@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 import { Button, Container, InputAdornment, InputLabel, Stack, TextField, Typography } from '@mui/material'
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -27,10 +28,22 @@ const NewPassword = () => {
     try {
       console.log("Me llega:",dataUser);
       const { data } = await projectAPI.post(`/user/password`, dataUser);
-      alert("Contraseña actualizada con éxito");
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Contraseña actualizada con éxito',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } catch (error) {
       console.log(error);
-      alert(error.response.data.message);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.response.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   };
 
