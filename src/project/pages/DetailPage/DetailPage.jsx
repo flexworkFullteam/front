@@ -18,7 +18,6 @@ export const DetailPage = () => {
 
   const handleApply = () => {
     applyCandidate(user.professional_id, id);
-    alert("tu postulacion ha sido enviada");
   };
 
   const callProject = async () => {
@@ -31,7 +30,7 @@ export const DetailPage = () => {
     setDetail(detail);
     callProject();
   }, []);
-  if (detail) console.log(detail);
+  // if (detail) console.log(detail);
   return (
     <Grid container>
       <Grid className={styles.infoCompany} item display='flex' justifyContent='space-between' sx={{}}>
