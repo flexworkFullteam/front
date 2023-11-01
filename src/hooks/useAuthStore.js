@@ -90,7 +90,7 @@ export const useAuthStore = () => {
       // dispatch(setLoadingAccount(true));
       const { data } = await projectAPI.post("/professional", professional);
       console.log("Creado", data);
-      dispatch(onAddPersonalData(data));
+      dispatch(onAddPersonalData({ ...data, valid: true }));
       // dispatch(setLoadingAccount(false));
       Swal.fire({
         position: "top-center",
@@ -143,7 +143,7 @@ export const useAuthStore = () => {
       // console.log(company);
       const { data } = await projectAPI.post("/company", company);
       console.log("Creado", data);
-      dispatch(onAddPersonalData(data));
+      dispatch(onAddPersonalData({ ...data, valid: true }));
       // dispatch(setLoadingAccount(false));
       Swal.fire({
         position: "top-center",

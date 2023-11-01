@@ -41,7 +41,7 @@ const ProfessionalComponent = () => {
       startUpdateProfessional({ ...data, user: user.id, image: image }, id);
     } else {
       startCreateProfessional({ ...data, user: user.id, image: image });
-      dispatch(onLogin({ ...user, image: image, valid: true }));
+      // dispatch(onLogin({ ...user, image: image, valid: true }));
     }
     //  reset(); //! Esto limpia el formulario (opcional).
   });
