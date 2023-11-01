@@ -36,7 +36,7 @@ export const useAuthStore = () => {
       Swal.fire({
         position: "top-center",
         icon: "error",
-        title: error.errorMessage,
+        title: "E-mail o contraseña incorrectos",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -70,7 +70,7 @@ export const useAuthStore = () => {
       Swal.fire({
         position: "top-center",
         icon: "error",
-        title: error.errorMessage,
+        title: "Error al registrar usuario",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -103,7 +103,7 @@ export const useAuthStore = () => {
       Swal.fire({
         position: "top-center",
         icon: "error",
-        title: error.errorMessage,
+        title: "Error al llenar los datos personales",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -129,7 +129,7 @@ export const useAuthStore = () => {
       Swal.fire({
         position: "top-center",
         icon: "error",
-        title: error.message,
+        title: "Error al actualizar los datos personales",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -157,7 +157,7 @@ export const useAuthStore = () => {
       Swal.fire({
         position: "top-center",
         icon: "error",
-        title: error.errorMessage,
+        title: "Error al llenar los datos personales",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -182,7 +182,7 @@ export const useAuthStore = () => {
       Swal.fire({
         position: "top-center",
         icon: "error",
-        title: error.message,
+        title: "Error al actualizar los datos personales",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -198,15 +198,7 @@ export const useAuthStore = () => {
       const { data } = await projectAPI.get(`/user/${userId}`);
       // console.log(data.userMapped)
       dispatch(onLogin(data.userMapped));
-    } catch (error) {
-      //   Swal.fire({
-      //     position: "top-center",
-      //     icon: "error",
-      //     title: error.message,
-      //     showConfirmButton: false,
-      //     timer: 1500,
-      //   });
-    }
+    } catch (error) {}
   };
 
   const startUploadingFiles = async (files) => {
