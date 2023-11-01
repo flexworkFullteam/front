@@ -18,6 +18,7 @@ export const PaymentHistory = () => {
     callData();
   }, []);
 
+  console.log(paymentData);
   const handleDetail = (url) => {
     const newTab = window.open("", "_blank");
     newTab.location.href = url;

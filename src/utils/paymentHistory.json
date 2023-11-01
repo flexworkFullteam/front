@@ -1,110 +1,53 @@
 [
   {
-    "op_id": "1a3e5b7f",
+    "id": "bd706820-9a05-4325-9789-73c9840a0e4d",
+    "op_id": 1319278507,
     "from": {
-      "id": "123456",
-      "name": "juan"
+      "id": "8414a392-760f-4242-aae8-482f20980823",
+      "name": "EmpresaB"
     },
-    "to": "789012",
+    "to": "f00d8ff1-c13e-4f6a-b1dd-984742f1b7ba",
     "project": {
-      "id": "123456",
-      "name": "juan"
+      "id": "f0b222d5-fa43-4c56-b357-869c21eeb6b0",
+      "name": "Juliaca"
     },
-    "transaction_amount": 1000,
-    "net_received_amount": 950,
-    "payment_date": "2023-10-30",
-    "approved_date": "2023-10-31",
+    "transaction_amount": 1742,
+    "net_received_amount": 1658.77,
     "status": "approved",
-    "description": "Payment for services rendered"
+    "description": "Mineria de Oro"
   },
   {
-    "op_id": "2b4d6f8h",
+    "id": "a0c27ac8-b96d-4b0f-965e-2b34c9d00a70",
+    "op_id": 1319284415,
     "from": {
-      "id": "234567",
-      "name": "maria"
+      "id": "8414a392-760f-4242-aae8-482f20980823",
+      "name": "EmpresaB"
     },
-    "to": "890123",
+    "to": "f00d8ff1-c13e-4f6a-b1dd-984742f1b7ba",
     "project": {
-      "id": "234567",
-      "name": "maria"
+      "id": "6ba68e0e-6df6-4cca-a958-d1f182485e7a",
+      "name": "Trujillo"
     },
-    "transaction_amount": 1500,
-    "net_received_amount": 1425,
-    "payment_date": "2023-11-01",
-    "approved_date": "2023-11-02",
+    "transaction_amount": 1742,
+    "net_received_amount": 1658.77,
     "status": "approved",
-    "description": "Payment for completed tasks"
+    "description": "Mineria de Oro"
   },
   {
-    "op_id": "3c5e7g9i",
+    "id": "b3e55af4-a7bd-47eb-80c0-c45617f60ad1",
+    "op_id": 1319280581,
     "from": {
-      "id": "345678",
-      "name": "pedro"
+      "id": "8414a392-760f-4242-aae8-482f20980823",
+      "name": "EmpresaB"
     },
-    "to": "901234",
+    "to": "f00d8ff1-c13e-4f6a-b1dd-984742f1b7ba",
     "project": {
-      "id": "345678",
-      "name": "pedro"
+      "id": "dfea8d62-c710-4e4e-90f4-76f808d1376f",
+      "name": "Lima"
     },
-    "transaction_amount": 800,
-    "net_received_amount": 760,
-    "payment_date": "2023-11-03",
-    "approved_date": "2023-11-04",
+    "transaction_amount": 1742,
+    "net_received_amount": 1658.77,
     "status": "approved",
-    "description": "Payment for delivered goods"
-  },
-  {
-    "op_id": "4d6f8h0j",
-    "from": {
-      "id": "456789",
-      "name": "laura"
-    },
-    "to": "012345",
-    "project": {
-      "id": "456789",
-      "name": "laura"
-    },
-    "transaction_amount": 2000,
-    "net_received_amount": 1900,
-    "payment_date": "2023-11-05",
-    "approved_date": "2023-11-06",
-    "status": "approved",
-    "description": "Payment for consulting services"
-  },
-  {
-    "op_id": "5e7g9i1k",
-    "from": {
-      "id": "567890",
-      "name": "ana"
-    },
-    "to": "123450",
-    "project": {
-      "id": "567890",
-      "name": "ana"
-    },
-    "transaction_amount": 3000,
-    "net_received_amount": 2850,
-    "payment_date": "2023-11-07",
-    "approved_date": "2023-11-08",
-    "status": "approved",
-    "description": "Payment for marketing campaign"
-  },
-  {
-    "op_id": "6g8i0j2l",
-    "from": {
-      "id": "678901",
-      "name": "carlos"
-    },
-    "to": "234501",
-    "project": {
-      "id": "678901",
-      "name": "carlos"
-    },
-    "transaction_amount": 1200,
-    "net_received_amount": 1140,
-    "payment_date": "2023-11-09",
-    "approved_date": "2023-11-10",
-    "status": "approved",
-    "description": "Payment for software development"
+    "description": "Mineria de Oro"
   }
 ]

@@ -6,10 +6,15 @@ import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useDbTableStore } from "../../../hooks/useDbTableStore";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { onLogin } from "../../../store/auth/authSlice";
+import { CircularProgress } from "@mui/material";
 
 export const CompanyComponent = () => {
   const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } = useAuthStore();
   const [imagen, setImagen] = useState();
+  const [disabledButton, setDisabledButton] = useState(false);
+  const dispatch = useDispatch();
 
   // console.log("inicio:", user);
 
@@ -36,8 +41,14 @@ export const CompanyComponent = () => {
   });
 
   const onClick = async () => {
+    setDisabledButton(!disabledButton);
     const cloudResp = await startUploadingFiles(imagen);
     setImagen(cloudResp);
+  };
+
+  const disableClick = (e) => {
+    setImagen(e.target.files[0]);
+    setDisabledButton(!disabledButton);
   };
 
   const onSubmit = handleSubmit(({ data, ...rest }) => {
@@ -49,7 +60,7 @@ export const CompanyComponent = () => {
       startUpdateCompany({ ...rest, data: newData, userId: user.id, imagen: imagen });
     } else {
       startCreateCompany({ ...rest, data: newData, userId: user.id, imagen: imagen });
-      startCreateCompany({ ...rest, data: newData, userId: user.id, imagen: imagen });
+      // dispatch(onLogin({ ...user, ...rest, data: newData, userId: user.id, imagen: imagen, valid: true }));
     }
     // reset();
   });
@@ -379,14 +390,18 @@ export const CompanyComponent = () => {
                   Eliga una imagen
                 </Typography>
 
-                <VisuallyHiddenInput type='file' onChange={(e) => setImagen(e.target.files[0])} placeholder='Imagen' id='image' />
+                <VisuallyHiddenInput type='file' onChange={disableClick} placeholder='Imagen' id='image' />
               </Button>
-              <Button variant='contained' color='pear' type='button' sx={{ margin: 2 }} onClick={onClick}>
+              <Button variant='contained' color='pear' type='button' sx={{ margin: 2 }} onClick={onClick} disabled={!disabledButton}>
                 <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
                   Subir
                 </Typography>
               </Button>
-              <div className={style.divImg}>{imagen && <img src={imagen} alt='perfil' className={style.imgPerfil} />}</div>
+              <div className={style.divImg}>
+                {typeof imagen === "string" ? 
+                  <img src={imagen} alt='perfil' className={style.imgPerfil} /> 
+                : (imagen && !disabledButton) && <CircularProgress />}
+                </div>
             </Grid>
           </Grid>
         </Stack>

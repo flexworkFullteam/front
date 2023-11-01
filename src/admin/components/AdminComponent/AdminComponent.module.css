@@ -33,3 +33,7 @@
   text-decoration: none !important;
   color: #0541c9;
 }
+
+.finalizado{
+  display: flex;
+}
