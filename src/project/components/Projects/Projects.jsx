@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, CardContent, Typography, Modal, Pagination, Box } from "@mui/material";
+import { Button, Card, CardContent, Typography, Modal, Pagination, Box, Checkbox, FormControlLabel} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 import { Candidates } from "../Candidates/Candidates";
@@ -9,6 +9,8 @@ import { useProjectStore } from "../../../hooks/useProjectStore";
 import { CreateProject } from "../CreateProject/CreateProject";
 import { getCompanyProjects } from "../../../helpers/projectsAsync";
 import styles from "./Project.module.css";
+import { finishProject } from "../../../helpers/finishProject";
+
 
 export const Projects = () => {
   const { deleteProject } = useProjectStore();
@@ -18,14 +20,49 @@ export const Projects = () => {
   const [perPage, setPerPage] = useState(10);
   const [id, setId] = useState(1);
   const [companyProjects, setCompanyProjects] = useState();
+  const [allCompanyProjects, setAllCompanyProjects ] = useState([]);
   const [title, setTitle] = useState("");
   const [salary, setSalary] = useState(0);
-  const [pagado, setPagado] = useState(false);
-
+  const [pagado, setPagado] = useState(false); 
+  const [checkedFinalizado, setCheckedFinalizado] = useState(false);
+  const [checkedNoFinalizado, setCheckedNoFinalizado] = useState(false);
+  
 
   const { user } = useAuthStore();
 
   const navigate = useNavigate();
+
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    
+    if (name === 'finalizado') {
+      setCheckedFinalizado(checked);
+    } else if (name === 'noFinalizado') {
+      setCheckedNoFinalizado(checked);
+    }
+  
+    // Restablecer los proyectos a 'allCompanyProjects' si ambos checkboxes están desmarcados
+    if (!checkedFinalizado && !checkedNoFinalizado) {
+      setCompanyProjects(allCompanyProjects);
+    }
+  };
+  
+  
+  const filterProjects = () => {
+    let filteredProjects = companyProjects;
+  
+    if (checkedFinalizado) {
+      filteredProjects = companyProjects.filter((project) => project.finalizado === true)
+    }
+  
+    if (checkedNoFinalizado) {
+      filteredProjects = companyProjects.filter((project) => project.finalizado === false)
+    }
+    
+    // console.log(filteredProjects);
+
+    setCompanyProjects(filteredProjects);
+  };
 
   const handleOpen = (id, title, salary, pagado) => {
     setId(id);
@@ -38,6 +75,10 @@ export const Projects = () => {
     setOpen(false);
     setCreateOpen(false);
     callProjects();
+  };
+
+  const handleFinishProject = async(id) => {
+    await finishProject(id);
   };
 
   const handleDelete = async (id) => {
@@ -67,12 +108,19 @@ export const Projects = () => {
   const callProjects = async () => {
     const data = await getCompanyProjects(user.company_id);
     setCompanyProjects(data);
+    setAllCompanyProjects(data);
   };
   useEffect(() => {
     if (user && user.company_id) {
       callProjects();
     }
   }, [user]);
+
+
+  useEffect(() => {
+    // Llamada a la función de filtro cuando cambian los estados de los checkboxes
+    filterProjects();
+  }, [checkedFinalizado, checkedNoFinalizado]);
 
   return (
     <div>
@@ -101,7 +149,33 @@ export const Projects = () => {
       >
         <Typography variant='h4'>Proyectos</Typography>
 
-        <Button variant='contained' color='persianBlue' onClick={() => setCreateOpen(true)}>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={checkedFinalizado}
+              onChange={handleCheckboxChange}
+              name="finalizado"
+              color="primary"
+            />
+          }
+          label="Finalizado"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={checkedNoFinalizado}
+              onChange={handleCheckboxChange}
+              name="noFinalizado"
+              color="primary"
+            />
+          }
+          label="No Finalizado"
+        />
+      </div>
+
+
+        <Button variant='contained' color='persianBlue' onClick={() => setCreateOpen(true)} disabled={!user.typevalid}>
           <Typography fontFamily='Nunito Sans' fontWeight='400' color='aliceblue'>
             Crear proyectos
           </Typography>
@@ -132,6 +206,10 @@ export const Projects = () => {
                 <Button onClick={() => handleOpen(project.id, project.title, project.salary, project.pagado)}>Ver postulantes</Button>
 
                 {project.state ? <DeleteIcon onClick={() => handleDelete(project.id)} /> : <ReplayRoundedIcon onClick={() => handleDelete(project.id)} />}
+                <Button
+                  onClick={() => handleFinishProject(project.id)}
+                  disabled={!project.pagado || project.finalizado}
+                >Finalizar Proyecto</Button>
               </div>
             </CardContent>
           </Card>

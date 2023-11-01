@@ -3,6 +3,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { DetailUserPage } from "../pages/DetailUserPage";
 import { UserDetail } from "../components/UserDetail/UserDetail";
 import { DetailPage } from "../../project/pages/DetailPage/DetailPage";
+import { CompanyDetail } from "../components/CompanyDetail/CompanyDetail";
 
 export const AdminRoute = () => {
   return (
@@ -12,6 +13,7 @@ export const AdminRoute = () => {
       <Route path='/user/detail/:id' element={<UserDetail />} />
 
       <Route path='/project/detail/:id' element={<DetailPage />} />
+      <Route path='/company/detail/:id' element={<CompanyDetail />} />
     </Routes>
   );
 };

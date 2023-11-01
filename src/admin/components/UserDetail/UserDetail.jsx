@@ -32,10 +32,9 @@ export const UserDetail = () => {
   };
 
   const handleDetail = (url) => {
-    const projectId = url.substring(url.lastIndexOf("/") + 1);
-    const newUrl = `/project/detail/${projectId}`;
+    const base_url = window.location.origin;
     const newTab = window.open("", "_blank");
-    newTab.location.href = newUrl;
+    newTab.location.href = `${base_url}/${url}`;
   };
 
   useEffect(() => {
