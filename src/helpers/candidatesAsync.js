@@ -50,7 +50,7 @@ export const applyCandidate = async (professionalID, projectID) => {
     });
 
   } catch (error) {
-    alert(error.response.data.message);
+    // alert(error.response.data.message);
     // console.log(error.response.data.message);
     Swal.fire({
       position: 'top-center',

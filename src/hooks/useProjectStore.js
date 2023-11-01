@@ -31,22 +31,10 @@ export const useProjectStore = () => {
       dispatch(onLoadingProjects());
       const { data } = await projectAPI.post(`/project`, project);
       dispatch(onAddProject(data));
-      Swal.fire({
-        position: 'top-center',
-        icon: 'success',
-        title: 'Proyecto creado',
-        showConfirmButton: false,
-        timer: 1500
-      })
+      alert('Proyecto creado')
     } catch (error) {
       // console.error(error);
-      Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.message,
-        showConfirmButton: false,
-        timer: 1500
-      })
+      alert('Error al crear el proyecto')
     }
   };
 

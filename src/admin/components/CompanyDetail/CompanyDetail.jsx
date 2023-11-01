@@ -36,7 +36,7 @@ export const CompanyDetail = () => {
 
   return (
     <>
-      {company && projects && (
+      {company && (
         <Paper className={styles.container}>
           <div className={styles.leftContent}>
             <img className={styles.professionalImage} src={company.image} alt={company.id}></img>
