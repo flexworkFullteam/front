@@ -92,6 +92,10 @@ export const Candidates = ({ handleClose, id, title, salary, user, pagado }) => 
     callCandidates();
   }, []);
 
+
+  
+
+
   return (
     <div className={styles.candidatesContainer}>
       <div className={styles.topContainer}>
