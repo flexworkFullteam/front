@@ -1,4 +1,5 @@
 import { projectAPI } from "../api/projectAPI";
+import Swal from 'sweetalert2';
 
 export const getProjectByProfessional = async (id) => {
   try {
@@ -21,9 +22,21 @@ export const getProjectById = async (id) => {
 export const postProject = async (data) => {
   try {
     await projectAPI.post(`/project`, data);
-    return alert("Proyecto creado satisfactoriamente");
+    return Swal.fire({
+      position: 'top-center',
+      icon: 'success',
+      title: 'Proyecto creado satisfactoriamente',
+      showConfirmButton: false,
+      timer: 1500
+    })
   } catch (error) {
-    alert(error.message);
+    Swal.fire({
+      position: 'top-center',
+      icon: 'error',
+      title: error.message,
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 };
 

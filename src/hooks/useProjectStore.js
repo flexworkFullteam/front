@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import Swal from 'sweetalert2';
 import { onLoadingProjects, onGetAllProjects, onAddProject, onSetActiveEvent } from "../store/project/projectSlice";
 import { projectAPI } from "../api/projectAPI";
 import { onChecking } from "../store/auth/authSlice";
@@ -15,7 +16,13 @@ export const useProjectStore = () => {
       dispatch(onGetAllProjects(data));
     } catch (error) {
       console.error(error);
-      // alert(error.message);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   };
 
@@ -24,10 +31,22 @@ export const useProjectStore = () => {
       dispatch(onLoadingProjects());
       const { data } = await projectAPI.post(`/project`, project);
       dispatch(onAddProject(data));
-      alert("Proyecto creado");
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Proyecto creado',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } catch (error) {
       // console.error(error);
-      alert(error.message);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   };
 
@@ -37,6 +56,13 @@ export const useProjectStore = () => {
       dispatch(onSetActiveEvent(data));
     } catch (error) {
       console.error(error.message);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   };
 
@@ -44,7 +70,13 @@ export const useProjectStore = () => {
     try {
       await projectAPI.delete(`/project/${id}`);
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: error.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   };
 

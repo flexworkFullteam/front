@@ -16,8 +16,8 @@ export const VerifyAccount = () => {
     }, [])
 
   return (
-    <Box>
-        <Typography>Cuenta Verificada, muchas gracias</Typography>
+    <Box sx={{ textAlign: 'center', mt:20, mb:20}}>
+        <Typography variant="h3" >Cuenta Verificada, muchas gracias!!</Typography>
     </Box>
   )
 }
