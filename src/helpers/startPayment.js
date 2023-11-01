@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { projectAPI } from "../api/projectAPI";
 
 export const startPayment = async (paymentData) => {
@@ -9,7 +10,13 @@ export const startPayment = async (paymentData) => {
     //alert("Pago realizado");
   } catch (error) {
     console.log(error);
-    alert(error.message);
+    Swal.fire({
+      position: 'top-center',
+      icon: 'error',
+      title: error.message,
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 }
 
