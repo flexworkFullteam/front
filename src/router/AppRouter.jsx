@@ -19,7 +19,7 @@ export const AppRouter = () => {
   const { user, status, startLoginWithToken } = useAuthStore();
   const { getField, getType, getExp_req, getNationality, getLanguage, getItSkills } = useDbTableStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
   const handleClose = () => {
     setIsModalOpen(false);
@@ -59,14 +59,11 @@ export const AppRouter = () => {
 
   return (
     <>
-      {user.type === 2 || user.type === 3 ?
-      <Modal open={isModalOpen} onClose={handleClose}>
-        <div>
-          <PopUpPersonalData handleClose={handleClose}/>
-        </div>
-      </Modal>
-      : null
-      }
+      {user.type === 2 || user.type === 3 ? (
+        <Modal open={isModalOpen} onClose={handleClose} disableEnforceFocus aria-hidden='true'>
+          <PopUpPersonalData />
+        </Modal>
+      ) : null}
       <Nav />
       <Routes>
         {user.type !== 4 && user.type !== 1 ? <Route path='/*' element={<ProjectRoute status={status} />} /> : null}

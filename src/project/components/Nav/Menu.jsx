@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Grow, Paper, Popper, MenuItem, MenuList, ClickAwayListener } from "@mui/material/";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -34,7 +34,7 @@ export const Menu = () => {
       navigate("/myaccount");
     }
 
-    if (value === "perfil") {
+    if (value === "perfil" && user.type === 2) {
       if (user.data) {
         navigate(`/professional/${user.professional_id}`);
       }
@@ -76,8 +76,8 @@ export const Menu = () => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id='composition-menu' aria-labelledby='composition-button' onKeyDown={handleListKeyDown}>
-                  <MenuItem onClick={() => handleClose("perfil")}>Perfil</MenuItem>
-                  <MenuItem onClick={() => handleClose("myaccount")}>Mi Cuenta</MenuItem>
+                  {user.type === 2 && <MenuItem onClick={() => handleClose("perfil")}>Perfil</MenuItem>}
+                  {user.type !== 1 && <MenuItem onClick={() => handleClose("myaccount")}>Mi Cuenta</MenuItem>}
                   <MenuItem onClick={() => handleClose("logout")}>Cerrar Sesión</MenuItem>
                 </MenuList>
               </ClickAwayListener>
