@@ -44,36 +44,36 @@ export const AdminComponent = () => {
         <MenuItem value='projects'>Proyectos</MenuItem>
       </Select>
 
-      {selectedOption === "professionals" &&
-        professionals &&
-        professionals.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((professional) => (
-          <Card key={professional.id} className={styles.card}>
-            <CardContent onClick={() => handleDetail(`/user/detail/${professional.id}`)} sx={{ cursor: "pointer" }}>
-              <Grid container spacing={2}>
-                <Grid item xs={8}>
-                  <Typography variant='h5' component='div'>
-                    {professional.data.name} {professional.data.lastname}
-                  </Typography>
-                  <Typography variant='body2' color='text.secondary'>
-                    {professional.extra_information}
-                  </Typography>
+      {selectedOption === "professionals" && professionals && professionals.length > 0
+        ? professionals.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((professional) => (
+            <Card key={professional.id} className={styles.card}>
+              <CardContent onClick={() => handleDetail(`/user/detail/${professional.id}`)} sx={{ cursor: "pointer" }}>
+                <Grid container spacing={2}>
+                  <Grid item xs={8}>
+                    <Typography variant='h5' component='div'>
+                      {professional.data.name} {professional.data.lastname}
+                    </Typography>
+                    <Typography variant='body2' color='text.secondary'>
+                      {professional.extra_information}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={4} container justifyContent='flex-end' alignItems='center'>
+                    <PlaceIcon sx={{ fontSize: 30, marginRight: 1 }} />
+                    <Typography variant='body2' color='text.secondary'>
+                      {professional.nationality}
+                    </Typography>
+                  </Grid>
                 </Grid>
-                <Grid item xs={4} container justifyContent='flex-end' alignItems='center'>
-                  <PlaceIcon sx={{ fontSize: 30, marginRight: 1 }} />
-                  <Typography variant='body2' color='text.secondary'>
-                    {professional.nationality}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))
+        : null}
 
       {selectedOption === "projects" &&
         projects &&
         projects.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((project) => (
           <Card key={project.id} className={styles.card}>
-            <CardContent onClick={() => handleDetail(`/user/detail/${project.id}`)} sx={{ cursor: "pointer" }}>
+            <CardContent onClick={() => handleDetail(`/project/detail/${project.id}`)} sx={{ cursor: "pointer" }}>
               <Grid container spacing={2}>
                 <Grid item xs={8}>
                   <Typography variant='h5' component='div'>

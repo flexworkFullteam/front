@@ -36,7 +36,7 @@ export const Menu = () => {
 
     if (value === "perfil") {
       if (user.data) {
-        navigate(`/professional/${user.id}`);
+        navigate(`/professional/${user.professional_id}`);
       }
     }
     setOpen(false);
