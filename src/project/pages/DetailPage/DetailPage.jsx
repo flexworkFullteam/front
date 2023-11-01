@@ -49,7 +49,7 @@ export const DetailPage = () => {
         </Box>
 
         <Box display='flex' sx={{ boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)", mr: "2% " }}>
-          {status === "authenticated" && (
+          {status === "authenticated" || user.type === 1 && (
             <Button variant='contained' color='pear' onClick={handleApply} disabled={!user.typevalid && user.data }>
               <Typography fontFamily='Nunito Sans' fontWeight='400' color='persianBlue.main'>
                 Postularme
