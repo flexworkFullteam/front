@@ -14,6 +14,10 @@ export const NavCompany = () => {
     dispatch(setComponent("datos personales"));
   };
 
+  const handlePassword = () => {
+    dispatch(setComponent("cambiar contraseña"))
+  }
+
   return (
     <div>
       <AppBar position="static" color="verdigris">
@@ -38,6 +42,15 @@ export const NavCompany = () => {
               color="aliceblue"
             >
               Datos personales
+            </Typography>
+          </Button>
+          <Button variant="contained" color="persianBlue" onClick={handlePassword}>
+            <Typography
+              fontFamily="Nunito Sans"
+              fontWeight="400"
+              color="aliceblue"
+            >
+              Cambiar contraseña
             </Typography>
           </Button>
         </Toolbar>
