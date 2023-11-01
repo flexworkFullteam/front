@@ -169,8 +169,13 @@ export const Candidates = ({ handleClose, id, title, salary, user, pagado }) => 
               </div>
               { pagado ? (
               <div className={styles.cardRight}>
-                <CloseRoundedIcon sx={{ cursor: "pointer" }} onClick={() => reject(candidate.id)} />
-                <CheckRoundedIcon sx={{ cursor: "pointer" }} onClick={() => accept(candidate.id)} />
+                {
+                  pressedButton === "postulate" && (
+                    <>
+                      <CloseRoundedIcon sx={{ cursor: "pointer" }} onClick={() => reject(candidate.id)} />
+                      <CheckRoundedIcon sx={{ cursor: "pointer" }} onClick={() => accept(candidate.id)} />
+                    </>
+                )}
               </div>
               ) : (
                 <div className={styles.cardRight}>

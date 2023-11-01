@@ -87,7 +87,7 @@ export const SearchPage = () => {
           top: "2%",
           padding: theme.spacing(3),
           width: "30%",
-          height: "62vh",
+          height: "90vh",
           borderRadius: "5px",
           backgroundColor: "white",
           mt: 3,
@@ -137,7 +137,6 @@ export const SearchPage = () => {
               sx={{ backgroundColor: "lightgray" }}
             >
               {field?.map((fieldOption) => (
-
                 <MenuItem value={fieldOption.project_fields} key={fieldOption.id}>
                   {fieldOption.project_fields}
                 </MenuItem>
@@ -178,7 +177,6 @@ export const SearchPage = () => {
               sx={{ backgroundColor: "lightgray" }}
             >
               {exp_req?.map((expOption) => (
-
                 <MenuItem value={expOption.experienceLevel} key={expOption.id}>
                   {expOption.experienceLevel}
                 </MenuItem>

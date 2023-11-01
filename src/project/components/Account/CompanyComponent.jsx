@@ -11,7 +11,7 @@ export const CompanyComponent = () => {
   const { startUploadingFiles, startUpdateCompany, startCreateCompany, user } = useAuthStore();
   const [imagen, setImagen] = useState();
 
-  console.log("inicio:", user);
+  // console.log("inicio:", user);
 
   const { nationality, language } = useDbTableStore();
   const { getExp_req, getNationality } = useDbTableStore();
@@ -21,13 +21,7 @@ export const CompanyComponent = () => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      data: {
-        telefono: 995598899,
-      },
-    },
-  });
+  } = useForm({});
 
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -46,15 +40,18 @@ export const CompanyComponent = () => {
     setImagen(cloudResp);
   };
 
-  const onSubmit = handleSubmit((data) => {
-    console.log("DataCompany", data);
+  const onSubmit = handleSubmit(({ data, ...rest }) => {
+    const parsedTf = +data.telefono;
+
+    const newData = { ...data, telefono: parsedTf };
+    console.log(newData);
     if (user.id && user.company_id) {
-      startUpdateCompany({ ...data, userId: user.id, imagen: imagen });
+      startUpdateCompany({ ...rest, data: newData, userId: user.id, imagen: imagen });
     } else {
-      startCreateCompany({ ...data, userId: user.id, imagen: imagen });
-      startCreateCompany({ ...data, userId: user.id, imagen: imagen });
+      startCreateCompany({ ...rest, data: newData, userId: user.id, imagen: imagen });
+      startCreateCompany({ ...rest, data: newData, userId: user.id, imagen: imagen });
     }
-    reset();
+    // reset();
   });
   const isFormEmpty = Object.keys(errors).length >= 1;
 
@@ -62,7 +59,7 @@ export const CompanyComponent = () => {
     console.log("imagen", imagen);
   }
   if (user.image && !imagen) {
-    setImagen(user.image)
+    setImagen(user.image);
   }
 
   let idNacionality = nationality?.filter((item) => item.nationality == user.id_nationality);
@@ -74,8 +71,21 @@ export const CompanyComponent = () => {
     getExp_req();
   }, []);
 
+  if (user.image && !user.typevalid) {
+    return (
+      <Container sx={{ mt: 5, ml: 15 }}>
+        <Typography variant='h4' sx={{ mb: 4 }} fontWeight='semi bold' color='persianBlue.main'>
+          Información Empresarial
+        </Typography>
+        <Typography variant='h6' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
+          Por favor, espere a que un administrador valide su cuenta.
+        </Typography>
+      </Container>
+    );
+  }
+
   return (
-    <Container sx={{ mt: 5, ml: 15.8 }} >
+    <Container sx={{ mt: 5, ml: 15.8 }}>
       <Typography variant='h4' sx={{ mb: 5, mt: 5 }} fontWeight='semi bold' color='pear.main'>
         Mi cuenta
       </Typography>
@@ -93,7 +103,7 @@ export const CompanyComponent = () => {
                   placeholder='Nombre de la empresa'
                   id='businessName'
                   type='text'
-                  sx={{ width: '90%', ml: 3 }}
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("businessName", {
                     required: {
                       value: true,
@@ -113,7 +123,7 @@ export const CompanyComponent = () => {
                   placeholder='Industria'
                   id='activityType'
                   type='text'
-                  sx={{ width: '90%', ml: 3 }}
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("activityType", {
                     required: {
                       value: true,
@@ -129,15 +139,16 @@ export const CompanyComponent = () => {
                 {errors.activityType && <p className={style.errors}>{errors.activityType.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Fecha de inicio</InputLabel>
-                <TextField placeholder='Fecha de inicio'
-                  id='startDate' sx={{ width: '90%', ml: 3 }}
+                <TextField
+                  placeholder='Fecha de inicio'
+                  id='startDate'
+                  sx={{ width: "90%", ml: 3 }}
                   type='text'
                   {...register("startDate", {
                     required: {
                       value: true,
                       message: "Este campo es requerido",
                     },
-
                   })}
                   defaultValue={user.startDate || ""}
                 />
@@ -148,7 +159,7 @@ export const CompanyComponent = () => {
                   placeholder='fiscalAddress'
                   id='fiscalAddress'
                   type='text'
-                  sx={{ width: '90%', ml: 3 }}
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("fiscalAddress", {
                     required: {
                       value: true,
@@ -168,7 +179,7 @@ export const CompanyComponent = () => {
                   placeholder='Representante Legal'
                   id='legalRepresentative'
                   type='text'
-                  sx={{ width: '90%', ml: 3 }}
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("legalRepresentative", {
                     required: {
                       value: true,
@@ -190,7 +201,7 @@ export const CompanyComponent = () => {
                   placeholder='Cuenta de banco'
                   id='bankAccount'
                   type='text'
-                  sx={{ width: '90%', ml: 3 }}
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("bankAccount", {
                     required: {
                       value: true,
@@ -198,21 +209,21 @@ export const CompanyComponent = () => {
                     },
                     pattern: {
                       value: /^\S{8}$/,
-                      message: "Debe contener 8 carácteres"
-                    }
+                      message: "Debe contener 8 carácteres",
+                    },
                   })}
                   defaultValue={user.bankAccount || ""}
                 />
                 {errors.bankAccount && <p className={style.errors}>{errors.bankAccount.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Nacionalidad</InputLabel>
-                <FormControl sx={{ width: '90%', ml: 3 }}>
+                <FormControl sx={{ width: "90%", ml: 3 }}>
                   <Select
                     {...register("nationalityId", {
                       required: "Este campo es requerido",
                     })}
                     error={errors.id_nationality}
-                    defaultValue={idNacionality?.[0]?.id || ''}
+                    defaultValue={idNacionality?.[0]?.id || ""}
                   >
                     {nationality.map((item) => (
                       <MenuItem key={item.id} value={item.id}>
@@ -224,13 +235,13 @@ export const CompanyComponent = () => {
                 </FormControl>
 
                 <InputLabel sx={{ ml: 3 }}>Idiomas</InputLabel>
-                <FormControl sx={{ width: '90%', ml: 3 }}>
+                <FormControl sx={{ width: "90%", ml: 3 }}>
                   <Select
                     {...register("languages.0", {
                       required: "Este campo es requerido",
                     })}
                     error={errors.languages?.[0]}
-                    defaultValue={idLenguages?.[0]?.id || ''}
+                    defaultValue={idLenguages?.[0]?.id || ""}
                   >
                     {language.map((item) => (
                       <MenuItem key={item.id} value={item.id}>
@@ -246,7 +257,7 @@ export const CompanyComponent = () => {
                   placeholder='RUC'
                   id='ruc'
                   type='number'
-                  sx={{ width: '90%', ml: 3 }}
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("ruc", {
                     required: {
                       value: true,
@@ -254,8 +265,8 @@ export const CompanyComponent = () => {
                     },
                     pattern: {
                       value: /^\S{11}$/,
-                      message: "Debe contener 11 carácteres"
-                    }
+                      message: "Debe contener 11 carácteres",
+                    },
                   })}
                   defaultValue={user.ruc || ""}
                 />
@@ -267,14 +278,14 @@ export const CompanyComponent = () => {
 
             <Grid item xs={4}>
               <div className={style.divExperiencia}>
-                <Typography variant="h6" fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
+                <Typography variant='h6' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
                   Datos de contacto
                 </Typography>
                 <InputLabel sx={{ ml: 3 }}>Nombre</InputLabel>
                 <TextField
                   placeholder='Nombre'
                   type='text'
-                  sx={{ width: '90%', ml: 3 }}
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("data.nombre", {
                     required: {
                       value: true,
@@ -288,14 +299,14 @@ export const CompanyComponent = () => {
                   })}
                   defaultValue={user.contactData ? user.contactData.nombre : ""}
                 />
-                {errors.data?.nombre && (<p className={style.errors}>{errors.data?.nombre.message}</p>)}
+                {errors.data?.nombre && <p className={style.errors}>{errors.data?.nombre.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Teléfono</InputLabel>
                 <TextField
                   placeholder='Teléfono'
                   id='telefono'
-                  type='number' //! Tipo Number
-                  sx={{ width: '90%', ml: 3 }}
+                  type='text' //! Tipo Number
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("data.telefono", {
                     required: {
                       value: true,
@@ -308,14 +319,14 @@ export const CompanyComponent = () => {
                   })}
                   defaultValue={user.contactData ? user.contactData.telefono : ""}
                 />
-                {errors.data?.telefono && (<p className={style.errors}>{errors.data?.telefono.message}</p>)}
+                {errors.data?.telefono && <p className={style.errors}>{errors.data?.telefono.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Email</InputLabel>
                 <TextField
                   placeholder='Email'
                   id='email'
                   type='email'
-                  sx={{ width: '90%', ml: 3 }}
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("data.email", {
                     required: {
                       value: true,
@@ -328,12 +339,15 @@ export const CompanyComponent = () => {
                   })}
                   defaultValue={user.contactData ? user.contactData.email : ""}
                 />
-                {errors.data?.email && (<p className={style.errors}>{errors.data?.email.message}</p>)}
+                {errors.data?.email && <p className={style.errors}>{errors.data?.email.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Horario</InputLabel>
-                <TextField placeholder='Horario'
-                  id='horario' type='text'
-                  sx={{ width: '90%', ml: 3 }} {...register("data.horario", {
+                <TextField
+                  placeholder='Horario'
+                  id='horario'
+                  type='text'
+                  sx={{ width: "90%", ml: 3 }}
+                  {...register("data.horario", {
                     required: {
                       value: true,
                       message: "Es un campo obligatorio",
@@ -341,14 +355,14 @@ export const CompanyComponent = () => {
                   })}
                   defaultValue={user.contactData ? user.contactData.horario : "9-6pm"}
                 />
-                {errors.data?.horario && (<p className={style.errors}>{errors.data?.horario.message}</p>)}
+                {errors.data?.horario && <p className={style.errors}>{errors.data?.horario.message}</p>}
 
                 <InputLabel sx={{ ml: 3 }}>Contacto</InputLabel>
                 <TextField
                   placeholder='Contacto'
                   id='contacto'
                   type='text'
-                  sx={{ width: '90%', ml: 3 }}
+                  sx={{ width: "90%", ml: 3 }}
                   {...register("data.contacto", {
                     required: {
                       value: true,
@@ -357,7 +371,7 @@ export const CompanyComponent = () => {
                   })}
                   defaultValue={user.contactData ? user.contactData.contacto : ""}
                 />
-                {errors.data?.contacto && (<p className={style.errors}>{errors.data?.contacto.message}</p>)}
+                {errors.data?.contacto && <p className={style.errors}>{errors.data?.contacto.message}</p>}
               </div>
               <InputLabel sx={{ mt: 4 }}>Imagen</InputLabel>
               <Button component='label' variant='contained' color='pear' endIcon={<CloudUploadIcon />}>
@@ -366,16 +380,13 @@ export const CompanyComponent = () => {
                 </Typography>
 
                 <VisuallyHiddenInput type='file' onChange={(e) => setImagen(e.target.files[0])} placeholder='Imagen' id='image' />
-
               </Button>
               <Button variant='contained' color='pear' type='button' sx={{ margin: 2 }} onClick={onClick}>
                 <Typography fontFamily='Nunito Sans' fontWeight='bold' color='persianBlue.main'>
                   Subir
                 </Typography>
               </Button>
-              <div className={style.divImg}>
-                {imagen && <img src={imagen} alt="perfil" className={style.imgPerfil} />}
-              </div>
+              <div className={style.divImg}>{imagen && <img src={imagen} alt='perfil' className={style.imgPerfil} />}</div>
             </Grid>
           </Grid>
         </Stack>

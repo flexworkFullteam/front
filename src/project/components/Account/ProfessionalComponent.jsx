@@ -73,6 +73,20 @@ const ProfessionalComponent = () => {
     getExp_req();
   }, []);
 
+
+  if (user.image && !user.typevalid) {
+    return (
+      <Container sx={{ mt: 5, ml:15 }}>
+        <Typography variant='h4' sx={{ mb: 4 }} fontWeight='semi bold' color='persianBlue.main'>
+          Información Profesional
+        </Typography>
+        <Typography variant='h6' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main' gutterBottom sx={{ mb: 2.5 }}>
+          Por favor, espere a que un administrador valide su cuenta.
+        </Typography>
+      </Container>
+    )
+  }
+
   return (
     <Container sx={{ mt: 5, ml:15 }}>
       <Typography variant='h4' sx={{ mb: 4 }} fontWeight='semi bold' color='persianBlue.main'>

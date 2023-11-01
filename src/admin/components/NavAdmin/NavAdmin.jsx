@@ -14,6 +14,10 @@ export const NavAdmin = () => {
     dispatch(setComponent("pagos"));
   };
 
+  const handleFields = () => {
+    dispatch(setComponent("campos"));
+  };
+
   return (
     <div>
       <AppBar position='static' color='verdigris'>
@@ -26,6 +30,11 @@ export const NavAdmin = () => {
           <Button variant='contained' color='persianBlue' onClick={handlePagos}>
             <Typography fontFamily='Nunito Sans' fontWeight='400' color='aliceblue'>
               Historial de pagos
+            </Typography>
+          </Button>
+          <Button variant='contained' color='persianBlue' onClick={handleFields}>
+            <Typography fontFamily='Nunito Sans' fontWeight='400' color='aliceblue'>
+              Crear Campos
             </Typography>
           </Button>
         </Toolbar>

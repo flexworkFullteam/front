@@ -28,7 +28,10 @@ export const refuseCandidate = async (projectID, professionalID) => {
 export const applyCandidate = async (professionalID, projectID) => {
   try {
     await projectAPI.put(`/professional/${professionalID}/${projectID}`);
+    alert("tu postulacion esta siendo enviada")
   } catch (error) {
-    alert(error.message);
+    alert(error.response.data.message);
+    console.log(error.response.data.message);
+
   }
 };
