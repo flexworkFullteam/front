@@ -48,10 +48,14 @@ export const AppRouter = () => {
 
   // Aca deberia haber
   useEffect(() => {
-    if (Object.keys(user).length > 0 && !user.image && !isModalOpen) {
+    if (!user.professional_id && !isModalOpen) {
+      setIsModalOpen(true); 
+    }
+
+    if (!user.id_company && !isModalOpen) {
       setIsModalOpen(true);
     }
-  }, [user, user.image, pathname]);
+  }, []);
 
   if (status === "checking") {
     return <LoadingComponent />;

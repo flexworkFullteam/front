@@ -70,7 +70,7 @@ export const AdminComponent = () => {
                   </Grid>
                   <Grid item xs={4} container justifyContent='flex-end' alignItems='center'>
                     <Button color='persianBlue' onClick={() => validate(professional.id, professional.valid)}>
-                      {professional.valid ? "Desvalidar" : "Validar"}
+                      {professional.valid ? "Invalidar" : "Validar"}
                     </Button>
                     <PlaceIcon sx={{ fontSize: 30, marginRight: 1 }} />
                     <Typography variant='body2' color='text.secondary'>
@@ -95,7 +95,7 @@ export const AdminComponent = () => {
                   </Grid>
                   <Grid item xs={4} container justifyContent='flex-end' alignItems='center'>
                     <Button color='persianBlue' onClick={() => validate(company.id, company.valid)}>
-                      {company.valid ? "Desvalidar" : "Validar"}
+                      {company.valid ? "Invalidar" : "Validar"}
                     </Button>
                     <PlaceIcon sx={{ fontSize: 30, marginRight: 1 }} />
                     <Typography variant='body2' color='text.secondary'>

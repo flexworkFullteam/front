@@ -42,6 +42,8 @@ const RegisterProfesional = () => {
             const response = await projectAPI.post("/user/auth0/loginOrSignup",
               tokenClaims
             );
+
+            
             // console.log(response.data); // Logging the response from the backend
         } catch (error) {
             console.error("An error occurred during login:", error);
