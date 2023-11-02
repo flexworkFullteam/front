@@ -76,7 +76,7 @@ export const Menu = () => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id='composition-menu' aria-labelledby='composition-button' onKeyDown={handleListKeyDown}>
-                  {user.type === 2 && <MenuItem onClick={() => handleClose("perfil")}>Perfil</MenuItem>}
+                  {user.data && <MenuItem onClick={() => handleClose("perfil")}>Perfil</MenuItem>}
                   {user.type !== 1 && <MenuItem onClick={() => handleClose("myaccount")}>Mi Cuenta</MenuItem>}
                   <MenuItem onClick={() => handleClose("logout")}>Cerrar Sesión</MenuItem>
                 </MenuList>

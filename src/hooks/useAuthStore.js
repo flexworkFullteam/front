@@ -24,9 +24,9 @@ export const useAuthStore = () => {
       const { userMapped } = data;
 
       if (userMapped) {
-        setTimeout(() => {
+        // setTimeout(() => {
           dispatch(onLogin(userMapped));
-        }, 1000);
+        // }, 1000);
 
         navigate("/home");
       } else {

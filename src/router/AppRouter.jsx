@@ -47,11 +47,13 @@ export const AppRouter = () => {
   }, []);
 
   // Aca deberia haber
-  useEffect(() => {
-    if (Object.keys(user).length > 0 && !user.image && !isModalOpen) {
-      setIsModalOpen(true);
-    }
-  }, [user, user.image, pathname]);
+
+  // useEffect(() => {
+  //   if (Object.keys(user).length > 7 && !isModalOpen) {
+  //     setIsModalOpen(true); 
+  //   }
+  // }, [user.image]);
+
 
   if (status === "checking") {
     return <LoadingComponent />;

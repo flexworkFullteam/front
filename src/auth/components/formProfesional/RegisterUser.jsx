@@ -12,9 +12,11 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { onLogin } from "../../../store/auth/authSlice";
 import { projectAPI } from "../../../api/projectAPI";
+import { useNavigate } from "react-router-dom";
 
 const RegisterUser = () => {
   const { startRegister, user } = useAuthStore();
+  const navigate = useNavigate();
   const {
     register,
     reset,
@@ -50,6 +52,7 @@ const RegisterUser = () => {
       const response = await projectAPI.post("/user/auth0/loginOrSignup", tokenClaims);
       // console.log(response.data.user);
       dispatch(onLogin(response.data.user));
+      navigate('/');
       // Logging the response from the backend
     } catch (error) {
       console.error("An error occurred during login:", error);
