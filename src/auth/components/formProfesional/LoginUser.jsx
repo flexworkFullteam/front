@@ -16,6 +16,8 @@ import { projectAPI } from "../../../api/projectAPI";
 
 const LoginUser = () => {
   const { startLogin, user, status, errorMessage } = useAuthStore();
+  const navigate = useNavigate();
+  
   const {
     register,
     reset,
@@ -56,7 +58,9 @@ const LoginUser = () => {
       const response = await projectAPI.post("/user/auth0/loginOrSignup", tokenClaims);
 
       // console.log(response.data);
-      dispatch(onLogin(response.data.user)); // Logging the response from the backend
+      dispatch(onLogin(response.data.user)); 
+      navigate('/');
+      // Logging the response from the backend
     } catch (error) {
       console.error("An error occurred during login:", error);
     }

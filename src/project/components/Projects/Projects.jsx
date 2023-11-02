@@ -79,6 +79,7 @@ export const Projects = () => {
 
   const handleFinishProject = async(id) => {
     await finishProject(id);
+    callProjects();
   };
 
   const handleDelete = async (id) => {
@@ -110,6 +111,11 @@ export const Projects = () => {
     setCompanyProjects(data);
     setAllCompanyProjects(data);
   };
+
+
+  const filteredVisibleProjects = visibleProjects?.filter((project) => project.state === true);
+
+
   useEffect(() => {
     if (user && user.company_id) {
       callProjects();
@@ -184,7 +190,7 @@ export const Projects = () => {
         </Button>
       </div>
       {companyProjects ? (
-        visibleProjects.map((project) => (
+        filteredVisibleProjects.map((project) => (
           <Card
             key={project.id}
             sx={{
