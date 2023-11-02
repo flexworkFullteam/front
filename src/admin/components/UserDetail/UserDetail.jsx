@@ -32,9 +32,14 @@ export const UserDetail = () => {
   };
 
   const handleDetail = (url) => {
+    const add_url = "detail/";
     const base_url = window.location.origin;
     const newTab = window.open("", "_blank");
-    newTab.location.href = `${base_url}/${url}`;
+    if (!id) {
+      newTab.location.href = `${base_url}/${url}`;
+    } else {
+      newTab.location.href = `${add_url}/${url}`;
+    }
   };
 
   useEffect(() => {
@@ -107,7 +112,7 @@ export const UserDetail = () => {
             <Typography variant='h6'>Postulaciones a proyectos</Typography>
             {projects.projects.map((project) => (
               <Card sx={{ width: "100%", mb: "6px" }} key={project.id}>
-                <CardContent onClick={() => handleDetail(`project/detail/${project.id}`)} sx={{ cursor: "pointer" }}>
+                <CardContent onClick={() => handleDetail(`${project.id}`)} sx={{ cursor: "pointer" }}>
                   <Typography variant='subtitle1' fontWeight='600' fontFamily='Nunito Sans' color='persianBlue.main'>
                     {project.title}
                   </Typography>
