@@ -73,10 +73,6 @@ export const SearchPage = () => {
   const pageCount = Math.ceil(existingProjects.length / perPage);
   const visibleProjects = existingProjects.slice(startIndex, endIndex);
 
-  // const filteredVisibleProjects = visibleProjects?.filter((project) => project.state !== true);
-  // const newFilteredPj = filteredVisibleProjects?.filter((project) => project.finalizado !== true);
-
-
   useEffect(() => {
     if (!term === false) {
       dispatch(onFilterProjectsByTerm(term));
