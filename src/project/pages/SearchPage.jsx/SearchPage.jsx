@@ -73,6 +73,10 @@ export const SearchPage = () => {
   const pageCount = Math.ceil(existingProjects.length / perPage);
   const visibleProjects = existingProjects.slice(startIndex, endIndex);
 
+  const filteredVisibleProjects = visibleProjects?.filter((project) => project.state === true);
+  const newFilteredPj = filteredVisibleProjects?.filter((project) => project.finalizado === true);
+
+
   useEffect(() => {
     if (!term === false) {
       dispatch(onFilterProjectsByTerm(term));
@@ -248,7 +252,7 @@ export const SearchPage = () => {
         <Typography variant='h6' component='h1' sx={{ mb: "1rem" }}>
           {existingProjects.length} ofertas de proyectos para {term}
         </Typography>
-        {visibleProjects?.map((project) => (
+        {newFilteredPj?.map((project) => (
           <Card key={project.id} sx={{ mb: "1rem", ":hover": { cursor: "pointer" } }} onClick={() => handleDetail(`/detail/${project.id}`)}>
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
               <div className={styles.cardLeft}>
