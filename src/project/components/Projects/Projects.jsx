@@ -179,6 +179,17 @@ export const Projects = () => {
             }
             label="No Finalizado"
           />
+          <FormControlLabel 
+            control={
+              <Checkbox
+                checked={checkedNoFinalizado && checkedFinalizado}
+                onChange={() => callProjects()}
+                name="todos"
+                color="primary"
+              />
+            }
+            label="Todos"
+          />
         </div>
       }
 
