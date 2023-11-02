@@ -23,11 +23,11 @@ export const DetailPage = () => {
   const callProject = async () => {
     const projectData = await getProjectById(id);
     setDetail(projectData);
+    console.log(detail);
   };
 
   useEffect(() => {
     const detail = JSON.parse(localStorage.getItem("detail"));
-    setDetail(detail);
     callProject();
   }, []);
   // if (detail) console.log(detail);
@@ -49,8 +49,10 @@ export const DetailPage = () => {
         </Box>
 
         <Box display='flex' sx={{ boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)", mr: "2% " }}>
-          {status === "authenticated" || user.type === 1 && (
-            <Button variant='contained' color='pear' onClick={handleApply} disabled={!user.typevalid && user.data }>
+
+          {status === "authenticated" && (
+            <Button variant='contained' color='pear' onClick={handleApply} disabled={!user.typevalid && user.data}>
+
               <Typography fontFamily='Nunito Sans' fontWeight='400' color='persianBlue.main'>
                 Postularme
               </Typography>
@@ -59,14 +61,7 @@ export const DetailPage = () => {
         </Box>
       </Grid>
       <div className={styles.infoContainer}>
-        <Card
-          sx={{
-            mb: "1rem",
-            width: "59%",
-            ":hover": { cursor: "pointer" },
-            minHeight: "51vh",
-          }}
-        >
+        <Card sx={{ width: "100%", height: "100%", mb: -50 }}>
           <CardContent display='flex' sx={{ width: "90%", m: "0 auto" }}>
             <Typography color='textSecondary' fontFamily='Nunito Sans' fontWeight='400'>
               Ubicación: {detail?.nation_id}
@@ -88,26 +83,6 @@ export const DetailPage = () => {
                 Tipo: {detail?.type}
               </Typography>
             </div>
-          </CardContent>
-        </Card>
-
-        <Card sx={{ mb: "1rem", width: "39%", ":hover": { cursor: "pointer" } }}>
-          <CardContent display='flex' sx={{ width: "90%", m: "0 auto" }}>
-            <Typography variant='h5' component='h2' fontFamily='Nunito Sans' fontWeight='600'>
-              {detail?.id_company}
-            </Typography>
-            <Typography color='textSecondary' fontFamily='Nunito Sans' fontWeight='400'>
-              {/* {detail?.company.email}
-            </Typography>
-            <Typography
-              variant="h5"
-              component="h2"
-              sx={{ mt: "2%" }}
-              fontFamily="Nunito Sans"
-              fontWeight="600"
-            > */}
-              Reseñas de la empresa
-            </Typography>
           </CardContent>
         </Card>
       </div>
