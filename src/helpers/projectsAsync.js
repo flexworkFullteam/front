@@ -22,21 +22,23 @@ export const getProjectById = async (id) => {
 export const postProject = async (data) => {
   try {
     await projectAPI.post(`/project`, data);
-    return Swal.fire({
-      position: 'top-center',
-      icon: 'success',
-      title: 'Proyecto creado satisfactoriamente',
-      showConfirmButton: false,
-      timer: 1500
-    })
+    alert("Proyecto creado satisfactoriamente");
+    // return Swal.fire({
+    //   position: 'top-center',
+    //   icon: 'success',
+    //   title: 'Proyecto creado satisfactoriamente',
+    //   showConfirmButton: false,
+    //   timer: 1500
+    // })
   } catch (error) {
-    Swal.fire({
-      position: 'top-center',
-      icon: 'error',
-      title: error.message,
-      showConfirmButton: false,
-      timer: 1500
-    })
+    alert("Error al crear el proyecto");
+    // Swal.fire({
+    //   position: 'top-center',
+    //   icon: 'error',
+    //   title: error.message,
+    //   showConfirmButton: false,
+    //   timer: 1500
+    // })
   }
 };
 
