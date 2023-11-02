@@ -47,17 +47,13 @@ export const AppRouter = () => {
   }, []);
 
   // Aca deberia haber
-  useEffect(() => {
-    setTimeout(() => {
-      if (!user.professional_id && !isModalOpen) {
-        setIsModalOpen(true); 
-      }
 
-      if (!user.id_company && !isModalOpen) {
-        setIsModalOpen(true);
-      }
-    }  , 1000);
-  }, []);
+  // useEffect(() => {
+  //   if (Object.keys(user).length > 7 && !isModalOpen) {
+  //     setIsModalOpen(true); 
+  //   }
+  // }, [user.image]);
+
 
   if (status === "checking") {
     return <LoadingComponent />;
