@@ -48,13 +48,15 @@ export const AppRouter = () => {
 
   // Aca deberia haber
   useEffect(() => {
-    if (!user.professional_id && !isModalOpen) {
-      setIsModalOpen(true); 
-    }
+    setTimeout(() => {
+      if (!user.professional_id && !isModalOpen) {
+        setIsModalOpen(true); 
+      }
 
-    if (!user.id_company && !isModalOpen) {
-      setIsModalOpen(true);
-    }
+      if (!user.id_company && !isModalOpen) {
+        setIsModalOpen(true);
+      }
+    }  , 1000);
   }, []);
 
   if (status === "checking") {
