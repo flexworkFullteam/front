@@ -24,7 +24,7 @@ export const Nav = () => {
         {pathname.startsWith("/auth") && (
           <Button variant='contained' color='pear' sx={{ ml: -15 }} startIcon={<ArrowBackIosNewRoundedIcon sx={{ color: "persianBlue.main" }} />} onClick={handleGoBack}>
             <Typography fontFamily='Nunito Sans' fontWeight='400' color='persianBlue.main'>
-              Go Back
+              Volver
             </Typography>
           </Button>
         )}
