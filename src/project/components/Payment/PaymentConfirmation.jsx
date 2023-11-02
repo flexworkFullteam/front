@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material"
 import { CheckRounded as CheckRoundedIcon, CloseRounded as CloseRoundedIcon } from "@mui/icons-material/";
+import { startPayment } from "../../../helpers/startPayment";
 
 
 export const PaymentConfirmation = ({onClose, id, title, salary, user }) => {

@@ -20,7 +20,7 @@ export const finishProject = async(id) => {
             title: error.message,
             showConfirmButton: false,
             timer: 1500
-          })
+        })
     }
 
 }

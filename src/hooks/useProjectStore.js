@@ -16,13 +16,13 @@ export const useProjectStore = () => {
       dispatch(onGetAllProjects(data));
     } catch (error) {
       console.error(error);
-      Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.message,
-        showConfirmButton: false,
-        timer: 1500
-      })
+      // Swal.fire({
+      //   position: 'top-center',
+      //   icon: 'error',
+      //   title: error.message,
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // })
     }
   };
 
@@ -31,22 +31,10 @@ export const useProjectStore = () => {
       dispatch(onLoadingProjects());
       const { data } = await projectAPI.post(`/project`, project);
       dispatch(onAddProject(data));
-      Swal.fire({
-        position: 'top-center',
-        icon: 'success',
-        title: 'Proyecto creado',
-        showConfirmButton: false,
-        timer: 1500
-      })
+      alert('Proyecto creado')
     } catch (error) {
       // console.error(error);
-      Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.message,
-        showConfirmButton: false,
-        timer: 1500
-      })
+      alert('Error al crear el proyecto')
     }
   };
 
@@ -56,24 +44,31 @@ export const useProjectStore = () => {
       dispatch(onSetActiveEvent(data));
     } catch (error) {
       console.error(error.message);
-      Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: error.message,
-        showConfirmButton: false,
-        timer: 1500
-      })
+      // Swal.fire({
+      //   position: 'top-center',
+      //   icon: 'error',
+      //   title: error.message,
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // })
     }
   };
 
   const deleteProject = async (id) => {
     try {
       await projectAPI.delete(`/project/${id}`);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Proyecto eliminado',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } catch (error) {
       Swal.fire({
         position: 'top-center',
         icon: 'error',
-        title: error.message,
+        title: "Error al eliminar el proyecto",
         showConfirmButton: false,
         timer: 1500
       })

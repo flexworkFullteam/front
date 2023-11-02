@@ -215,7 +215,7 @@ export const CreateProject = ({ handleClose, callProjects }) => {
                 ))}
               </Select>
 
-              <InputLabel>Lapso</InputLabel>
+              <InputLabel>Lapso (dias)</InputLabel>
               <TextField
                 placeholder='Lapso'
                 id='lapse'
