@@ -18,7 +18,7 @@ export const UserDetail = () => {
     let userID = id;
 
     if (!id) {
-      userID = user.id;
+      userID = user.professional_id;
     }
     const professionalData = await getProfessionalById(userID);
     const projectsData = await getProjectByProfessional(userID);
