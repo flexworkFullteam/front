@@ -50,7 +50,8 @@ const RegisterUser = () => {
       const tokenClaims = await getIdTokenClaims(); // Get token claims after successful login
       // Sending the tokenClaims object to the backend
       const response = await projectAPI.post("/user/auth0/loginOrSignup", tokenClaims);
-      // console.log(response.data.user);
+      console.log("RegU" ,response.data.user);
+      localStorage.setItem("token", response.data.token);
       dispatch(onLogin(response.data.user));
       navigate('/');
       // Logging the response from the backend
