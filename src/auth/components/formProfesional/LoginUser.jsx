@@ -58,7 +58,8 @@ const LoginUser = () => {
       // Sending the tokenClaims object to the backend
       const response = await projectAPI.post("/user/auth0/loginOrSignup", tokenClaims);
 
-      // console.log(response.data);
+      console.log("LoginU", response.data);
+      localStorage.setItem("token", response.data.token);
       dispatch(onLogin(response.data.user)); 
       navigate('/');
       // Logging the response from the backend

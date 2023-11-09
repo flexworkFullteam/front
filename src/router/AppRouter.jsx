@@ -25,6 +25,12 @@ export const AppRouter = () => {
     setIsModalOpen(false);
   };
 
+  const setOpenModal = () => {
+    if (Object.keys(user).length > 7) {
+      setIsModalOpen(Object.keys(user).length > 16 ? false : true);
+    }
+  }
+
   const getFields = () => {
     getField();
     getType();
@@ -46,13 +52,9 @@ export const AppRouter = () => {
     getFields();
   }, []);
 
-  // Aca deberia haber
-
-  // useEffect(() => {
-  //   if (Object.keys(user).length > 7 && !isModalOpen) {
-  //     setIsModalOpen(true); 
-  //   }
-  // }, [user.image]);
+  useEffect(() => {
+    setOpenModal();
+  }, [user]); 
 
 
   if (status === "checking") {

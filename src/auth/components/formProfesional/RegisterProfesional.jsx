@@ -44,7 +44,7 @@ const RegisterProfesional = () => {
             );
 
             
-            // console.log(response.data); // Logging the response from the backend
+            console.log("RegisterProf" ,response.data); // Logging the response from the backend
         } catch (error) {
             console.error("An error occurred during login:", error);
         }

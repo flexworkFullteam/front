@@ -6,15 +6,17 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store.js';
+import { getEnvVariables } from './helpers/getEnvVariables.js';
 
+const {VITE_CLIENT_AUTH0, VITE_DOMAIN_AUTH0, VITE_AUDIENCE_AUTH0} = getEnvVariables();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Auth0Provider
-      domain = "https://dev-jbrduvmec788q7yw.us.auth0.com"
-      clientId = "14GVJBR2Ib3kQ5TA8yggxoOdmy0Y8NeY"
+      domain={VITE_DOMAIN_AUTH0}
+      clientId={VITE_CLIENT_AUTH0}
       redirectUri={window.location.origin}
-      audience = "https://dev-jbrduvmec788q7yw.us.auth0.com/api/v2/"
+      audience ={VITE_AUDIENCE_AUTH0}
     >
       <Provider store={store}>
         <BrowserRouter>
