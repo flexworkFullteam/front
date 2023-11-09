@@ -26,7 +26,7 @@ export const AppRouter = () => {
   };
 
   const setOpenModal = () => {
-    if (Object.keys(user).length > 7) {
+    if (Object.keys(user).length > 3) {
       setIsModalOpen(Object.keys(user).length > 16 ? false : true);
     }
   }
